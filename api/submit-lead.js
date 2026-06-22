@@ -9,40 +9,28 @@ export default async function handler(req, res) {
     const { firstName, lastName, email, phone } = req.body;
     const ip = req.headers['x-forwarded-for']?.split(',')[0]?.trim() || req.socket.remoteAddress || '127.0.0.1';
 
-    const postData = {
-      email,
-      firstName,
-      lastName,
-      password: 'Lh23s3',
-      ip,
-      phone,
-      offerName: 'ClientCentral-Site',
-    };
+    const postData = { email, firstName, lastName, password: 'Lh23s3', ip, phone, offerName: 'ClientCentral-Site' };
+
+    console.log('Sending to AffilixAPI:', JSON.stringify(postData));
 
     const response = await fetch('https://affilixapi.com/api/v2/leads', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'accept': 'application/json',
-        'Api-Key': '5C7C919C-F69A-7590-5F67-E8D22ECB5617',
-      },
+      headers: { 'Content-Type': 'application/json', 'accept': 'application/json', 'Api-Key': '5C7C919C-F69A-7590-5F67-E8D22ECB5617' },
       body: JSON.stringify(postData),
     });
 
     const data = await response.json();
+    console.log('AffilixAPI response:', JSON.stringify(data));
 
     if (data && data.details) {
-      return res.json({
-        status: 'success',
-        redirectUrl: data.details.redirect?.url || '',
-      });
+      return res.json({ status: 'success', redirectUrl: data.details.redirect?.url || '' });
     }
 
-    return res.json({
-      status: 'error',
-      message: data?.errors?.[0]?.message || 'Submission failed',
-    });
+    // Return actual error message from API
+    const errMsg = data?.errors?.[0]?.message || data?.message || 'Submission failed. Please try again.';
+    return res.json({ status: 'error', message: errMsg });
   } catch (err) {
-    return res.status(500).json({ status: 'error', message: err.message });
+    console.error('API Error:', err);
+    return res.status(500).json({ status: 'error', message: 'Server error. Please try again later.' });
   }
 }

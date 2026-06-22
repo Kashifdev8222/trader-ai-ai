@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { HiArrowRight, HiChevronDown, HiSun, HiMoon, HiUserGroup, HiGlobe, HiChartBar, HiStar } from 'react-icons/hi';
 import { Link, useLocation } from 'react-router-dom';
-import { HERO_CONTENT, FORM_CONTENT, ABOUT_CONTENT, FEATURES, HOW_IT_WORKS, WHY_AI, MARKETS, WHO_IS_IT_FOR, APP_SECTION, WHY_CHOOSE_US, THINGS_TO_KEEP_IN_MIND, FAQ_ITEMS, FOOTER_CONTENT } from '../data/content';
+import { HERO_CONTENT, FORM_CONTENT, ABOUT_CONTENT, FEATURES, HOW_IT_WORKS, WHY_AI, MARKETS, WHO_IS_IT_FOR, APP_SECTION, WHY_CHOOSE_US, THINGS_TO_KEEP_IN_MIND, FAQ_ITEMS } from '../data/content';
 
 /* ============================================================
    ALL CONTENT from traderai.ai
@@ -69,6 +69,25 @@ function CountrySelect({ value, onChange }) {
   );
 }
 
+function phoneFmt(code) { const c=code.replace('+','');const n='0123456789';return c.length===1?'('+n.slice(0,3)+') '+n.slice(0,3)+'-'+n.slice(0,4):c.length===2?n.slice(0,2)+' '+n.slice(0,4)+' '+n.slice(0,4):c.length===3?n.slice(0,3)+' '+n.slice(0,7):n.slice(0,4)+' '+n.slice(0,6); }
+function Bg({ variant = 'default', dark }) {
+  if (!dark) {
+    switch (variant) {
+      case 'hero': return (<><div className="absolute inset-0 bg-gradient-to-b from-[#f8fafc] via-[#f8fafc] to-[#f1f5f9]"/><div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[#FC6612]/[0.04] rounded-full blur-3xl pointer-events-none"/></>);
+      case 'green': return (<><div className="absolute inset-0 bg-gradient-to-br from-[#f0fdf4] via-[#f8fafc] to-[#ecfdf5]"/><div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#11643F]/[0.03] rounded-full blur-3xl pointer-events-none"/></>);
+      case 'warm': return (<><div className="absolute inset-0 bg-gradient-to-br from-[#fff7ed] via-[#f8fafc] to-[#fffbeb]"/><div className="absolute top-0 right-0 w-[400px] h-[400px] bg-[#FC6612]/[0.03] rounded-full blur-3xl pointer-events-none"/></>);
+      case 'blue': return (<><div className="absolute inset-0 bg-gradient-to-br from-[#eff6ff] via-[#f8fafc] to-[#eef2ff]"/><div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-[#6366f1]/[0.03] rounded-full blur-3xl pointer-events-none"/></>);
+      default: return (<><div className="absolute inset-0 bg-[var(--bg)]"/><div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-[#11643F]/[0.02] rounded-full blur-3xl pointer-events-none"/></>);
+    }
+  }
+  switch (variant) {
+    case 'hero': return (<><div className="absolute inset-0 bg-gradient-to-b from-[#0A0D14] via-[#080A0F] to-[#080A0F]"/><div className="absolute top-0 right-0 w-[700px] h-[700px] bg-[#FC6612]/[0.05] rounded-full blur-3xl pointer-events-none"/><div className="absolute bottom-0 left-1/3 w-[500px] h-[500px] bg-[#11643F]/[0.03] rounded-full blur-3xl pointer-events-none"/></>);
+    case 'green': return (<><div className="absolute inset-0 bg-gradient-to-br from-[#0A0E0D] via-[#0A0C0B] to-[#0A0D0C]"/><div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#11643F]/[0.02] rounded-full blur-3xl pointer-events-none"/></>);
+    case 'warm': return (<><div className="absolute inset-0 bg-gradient-to-br from-[#0C0C0A] via-[#0B0B09] to-[#0B0B0C]"/><div className="absolute top-0 right-0 w-[400px] h-[400px] bg-[#FC6612]/[0.015] rounded-full blur-3xl pointer-events-none"/></>);
+    case 'blue': return (<><div className="absolute inset-0 bg-gradient-to-br from-[#0A0C11] via-[#0A0B10] to-[#0A0C12]"/><div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-[#6366f1]/[0.01] rounded-full blur-3xl pointer-events-none"/></>);
+    default: return (<><div className="absolute inset-0 bg-[var(--bg)]"/><div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-[#11643F]/[0.01] rounded-full blur-3xl pointer-events-none"/></>);
+  }
+}
 function Sec({ children, id, className = '' }) {
   return <section id={id} className={`relative border-t border-[var(--border)] reveal ${className}`}>{children}</section>;
 }
@@ -105,24 +124,17 @@ const NAV = [
 export default function HomePage() {
   const loc = useLocation();
   const [dark, setDark] = useState(true);
-  const [form, setForm] = useState({ firstName: '', lastName: '', email: '', phone: '', phoneCode: '+1' });
-
-  // Auto-detect country from browser locale + timezone
-  useEffect(() => {
+  const [formStatus, setFormStatus] = useState('idle');
+  // Auto-detect country code from timezone
+  const defaultCode = (() => {
     try {
       const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
-      const cc = (navigator.language||'').split('-')[1]?.toUpperCase();
-      // Timezone-based mapping for better accuracy
-      const tzMap = { 'Asia/Karachi':'+92','Asia/Kolkata':'+91','Asia/Dhaka':'+880','Asia/Colombo':'+94','Asia/Kathmandu':'+977','Asia/Dubai':'+971','Asia/Riyadh':'+966','Asia/Tokyo':'+81','Asia/Shanghai':'+86','Asia/Seoul':'+82','Asia/Bangkok':'+66','Asia/Kuala_Lumpur':'+60','Asia/Jakarta':'+62','Asia/Manila':'+63','Asia/Taipei':'+886','Europe/London':'+44','Europe/Berlin':'+49','Europe/Paris':'+33','Europe/Rome':'+39','Europe/Madrid':'+34','Europe/Amsterdam':'+31','Europe/Stockholm':'+46','Europe/Zurich':'+41','Europe/Warsaw':'+48','Europe/Moscow':'+7','Europe/Istanbul':'+90','America/New_York':'+1','America/Chicago':'+1','America/Los_Angeles':'+1','America/Toronto':'+1','America/Sao_Paulo':'+55','America/Mexico_City':'+52','Australia/Sydney':'+61','Pacific/Auckland':'+64','Africa/Lagos':'+234','Africa/Cairo':'+20','Africa/Johannesburg':'+27' };
-      let code = tzMap[tz];
-      if (!code && cc) {
-        const langMap = { US:'+1',GB:'+44',IN:'+91',AU:'+61',CN:'+86',DE:'+49',FR:'+33',JP:'+81',RU:'+7',BR:'+55',IT:'+39',ES:'+34',NL:'+31',SE:'+46',CH:'+41',PL:'+48',PK:'+92',PH:'+63',MX:'+52',AE:'+971',NG:'+234',SA:'+966',EG:'+20',ZA:'+27',KR:'+82',VN:'+84',TH:'+66',MY:'+60',ID:'+62',TR:'+90',CA:'+1' };
-        code = langMap[cc];
-      }
-      if (code) setForm(p=>({...p, phoneCode: code}));
-    } catch(e) {}
-  }, []);
-  const [formStatus, setFormStatus] = useState('idle');
+      const tzMap = { 'Asia/Karachi':'+92','Asia/Kolkata':'+91','Asia/Dubai':'+971','Asia/Riyadh':'+966','Asia/Tokyo':'+81','Asia/Shanghai':'+86','Asia/Seoul':'+82','Asia/Bangkok':'+66','Asia/Kuala_Lumpur':'+60','Asia/Jakarta':'+62','Asia/Manila':'+63','Europe/London':'+44','Europe/Berlin':'+49','Europe/Paris':'+33','Europe/Rome':'+39','Europe/Madrid':'+34','Europe/Amsterdam':'+31','Europe/Stockholm':'+46','Europe/Zurich':'+41','Europe/Warsaw':'+48','Europe/Moscow':'+7','Europe/Istanbul':'+90','America/New_York':'+1','America/Chicago':'+1','America/Los_Angeles':'+1','America/Toronto':'+1','America/Sao_Paulo':'+55','America/Mexico_City':'+52','Australia/Sydney':'+61','Pacific/Auckland':'+64','Africa/Lagos':'+234','Africa/Cairo':'+20','Africa/Johannesburg':'+27','Asia/Kathmandu':'+977','Asia/Colombo':'+94','Asia/Dhaka':'+880','Asia/Taipei':'+886' };
+      return tzMap[tz] || '+1';
+    } catch { return '+1'; }
+  })();
+  const [form, setForm] = useState({ firstName: '', lastName: '', email: '', phone: '', phoneCode: defaultCode });
+  const [errorMsg, setErrorMsg] = useState('');
   const hc = (e) => setForm((p) => ({ ...p, [e.target.name]: e.target.value }));
 
   useEffect(() => {
@@ -138,30 +150,8 @@ export default function HomePage() {
     return () => observer.disconnect();
   }, []);
 
-  // Section background with light/dark variants
-  function Bg({ variant = 'default' }) {
-    if (!dark) {
-      // Light mode backgrounds
-      switch (variant) {
-        case 'hero': return (<><div className="absolute inset-0 bg-gradient-to-b from-[#f8fafc] via-[#f8fafc] to-[#f1f5f9]"/><div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[#FC6612]/[0.04] rounded-full blur-3xl pointer-events-none"/></>);
-        case 'green': return (<><div className="absolute inset-0 bg-gradient-to-br from-[#f0fdf4] via-[#f8fafc] to-[#ecfdf5]"/><div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#11643F]/[0.03] rounded-full blur-3xl pointer-events-none"/></>);
-        case 'warm': return (<><div className="absolute inset-0 bg-gradient-to-br from-[#fff7ed] via-[#f8fafc] to-[#fffbeb]"/><div className="absolute top-0 right-0 w-[400px] h-[400px] bg-[#FC6612]/[0.03] rounded-full blur-3xl pointer-events-none"/></>);
-        case 'blue': return (<><div className="absolute inset-0 bg-gradient-to-br from-[#eff6ff] via-[#f8fafc] to-[#eef2ff]"/><div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-[#6366f1]/[0.03] rounded-full blur-3xl pointer-events-none"/></>);
-        default: return (<><div className="absolute inset-0 bg-[var(--bg)]"/><div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-[#11643F]/[0.02] rounded-full blur-3xl pointer-events-none"/></>);
-      }
-    }
-    // Dark mode backgrounds
-    switch (variant) {
-      case 'hero': return (<><div className="absolute inset-0 bg-gradient-to-b from-[#0A0D14] via-[#080A0F] to-[#080A0F]"/><div className="absolute top-0 right-0 w-[700px] h-[700px] bg-[#FC6612]/[0.05] rounded-full blur-3xl pointer-events-none"/><div className="absolute bottom-0 left-1/3 w-[500px] h-[500px] bg-[#11643F]/[0.03] rounded-full blur-3xl pointer-events-none"/></>);
-      case 'green': return (<><div className="absolute inset-0 bg-gradient-to-br from-[#0A0E0D] via-[#0A0C0B] to-[#0A0D0C]"/><div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#11643F]/[0.02] rounded-full blur-3xl pointer-events-none"/></>);
-      case 'warm': return (<><div className="absolute inset-0 bg-gradient-to-br from-[#0C0C0A] via-[#0B0B09] to-[#0B0B0C]"/><div className="absolute top-0 right-0 w-[400px] h-[400px] bg-[#FC6612]/[0.015] rounded-full blur-3xl pointer-events-none"/></>);
-      case 'blue': return (<><div className="absolute inset-0 bg-gradient-to-br from-[#0A0C11] via-[#0A0B10] to-[#0A0C12]"/><div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-[#6366f1]/[0.01] rounded-full blur-3xl pointer-events-none"/></>);
-      default: return (<><div className="absolute inset-0 bg-[var(--bg)]"/><div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-[#11643F]/[0.01] rounded-full blur-3xl pointer-events-none"/></>);
-    }
-  }
-
   const submitForm = async (e) => {
-    e.preventDefault(); setFormStatus('loading');
+    e.preventDefault(); setFormStatus('loading'); setErrorMsg('');
     try {
       const res = await fetch('/api/submit-lead', {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
@@ -169,8 +159,8 @@ export default function HomePage() {
       });
       const data = await res.json();
       if (data.status === 'success') { window.location.href = '/thank-you'; }
-      else { setFormStatus('error'); }
-    } catch (err) { setFormStatus('error'); }
+      else { setFormStatus('error'); setErrorMsg(data.message || 'Submission failed'); }
+    } catch (err) { setFormStatus('error'); setErrorMsg('Network error. Please try again.'); }
   };
 
   return (
@@ -203,7 +193,7 @@ export default function HomePage() {
       </header>
 
       {/* ====== HERO ====== */}
-      <section id="reg-form" className="relative pt-20 pb-0 lg:pt-28 lg:pb-0"><Bg variant="hero" /><Con>
+      <section id="reg-form" className="relative pt-20 pb-0 lg:pt-28 lg:pb-0"><Bg dark={dark} variant="hero" /><Con>
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           {/* LEFT — Text + Trust */}
           <div className="text-center lg:text-left">
@@ -261,7 +251,7 @@ export default function HomePage() {
                         {f.name === 'phone' ? (
                           <div className="flex rounded-xl bg-[var(--bg)] border border-[var(--border-strong)] focus-within:border-[#FC6612]/50 focus-within:ring-2 focus-within:ring-[#FC6612]/10 transition-all">
                             <CountrySelect value={form.phoneCode} onChange={(code)=>setForm(p=>({...p,phoneCode:code}))}/>
-                            <input name="phone" type="tel" value={form.phone} onChange={hc} required placeholder={form.phoneCode === '+1' ? '(555) 000-0000' : form.phoneCode === '+44' ? '7911 123456' : form.phoneCode === '+91' ? '98765 43210' : form.phoneCode === '+61' ? '4 1234 5678' : form.phoneCode === '+92' ? '300 1234567' : 'Phone number'} className="flex-1 px-3 py-3 bg-transparent text-[var(--text)] text-sm placeholder-[var(--text-secondary)] outline-none"/>
+                            <input name="phone" type="tel" value={form.phone} onChange={hc} required placeholder={phoneFmt(form.phoneCode)} className="flex-1 px-3 py-3 bg-transparent text-[var(--text)] text-sm placeholder-[var(--text-secondary)] outline-none"/>
                           </div>
                         ) : (
                           <input name={f.name} type={f.type} value={form[f.name]} onChange={hc} required placeholder={`Enter your ${f.label.toLowerCase()}`} className="w-full px-4 py-3 rounded-xl bg-[var(--bg)] border border-[var(--border-strong)] text-[var(--text)] text-sm placeholder-[var(--text-secondary)] focus:outline-none focus:border-[#FC6612]/50 focus:ring-2 focus:ring-[#FC6612]/10 transition-all"/>
@@ -269,6 +259,7 @@ export default function HomePage() {
                       </div>
                     ))}
                     <button type="submit" disabled={formStatus==='loading'} style={{background:'linear-gradient(135deg, #FC6612, #11643F)'}} className="w-full py-4 rounded-xl hover:brightness-90 text-white font-bold text-[15px] transition-all shadow-lg shadow-[#FC6612]/25 hover:shadow-[#FC6612]/40 flex items-center justify-center gap-2 mt-2">{formStatus==='loading'?'Processing...':<>{FORM_CONTENT.submitText}<HiArrowRight className="w-5 h-5"/></>}</button>
+                    {errorMsg && <p className="text-center text-sm text-red-400 bg-red-400/5 rounded-lg py-2">{errorMsg}</p>}
                     <p className="text-center text-xs text-[var(--text-secondary)]">{FORM_CONTENT.footnote2}</p>
                   </form>
                 )}
@@ -299,7 +290,7 @@ export default function HomePage() {
       </section>
 
       {/* ====== ABOUT ====== */}
-      <Sec><Bg variant="green" /><Con>
+      <Sec><Bg dark={dark} variant="green" /><Con>
         <div className="max-w-[1440px]">
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[var(--text)] text-center mb-4">{ABOUT_CONTENT.headline}</h2>
           <p className="text-[var(--text-secondary)] text-base lg:text-lg leading-relaxed text-center mb-10">{ABOUT_CONTENT.description}</p>
@@ -340,16 +331,16 @@ export default function HomePage() {
       </Con></Sec>
 
       {/* ====== VIDEO DEMO ====== */}
-      <Sec id="demo"><Bg /><Con><Head headline="See The AI Trader in Action" subheadline="Watch how our AI analyzes markets, spots opportunities, and helps you trade smarter." /><div className="max-w-4xl mx-auto"><div className="rounded-2xl overflow-hidden border border-[var(--border)] shadow-2xl shadow-black/40 bg-[var(--bg-card)]"><div className="flex items-center gap-2 px-4 py-3 border-b border-[var(--border)]"><div className="w-3 h-3 rounded-full bg-red-500/60"/><div className="w-3 h-3 rounded-full bg-amber-400/60"/><div className="w-3 h-3 rounded-full bg-green-400/60"/><span className="ml-3 text-[11px] text-[var(--text-secondary)]">theaitrader.ai</span></div><div className="aspect-video"><YouTubeEmbed /></div></div></div></Con></Sec>
+      <Sec id="demo"><Bg dark={dark} /><Con><Head headline="See The AI Trader in Action" subheadline="Watch how our AI analyzes markets, spots opportunities, and helps you trade smarter." /><div className="max-w-4xl mx-auto"><div className="rounded-2xl overflow-hidden border border-[var(--border)] shadow-2xl shadow-black/40 bg-[var(--bg-card)]"><div className="flex items-center gap-2 px-4 py-3 border-b border-[var(--border)]"><div className="w-3 h-3 rounded-full bg-red-500/60"/><div className="w-3 h-3 rounded-full bg-amber-400/60"/><div className="w-3 h-3 rounded-full bg-green-400/60"/><span className="ml-3 text-[11px] text-[var(--text-secondary)]">theaitrader.ai</span></div><div className="aspect-video"><YouTubeEmbed /></div></div></div></Con></Sec>
 
       {/* ====== FEATURES ====== */}
-      <Sec><Bg variant="warm" /><Con><Head headline="What You Get with The AI Trader" subheadline="Here's what makes us different from old-school trading tools." /><div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">{FEATURES.map((f,i)=>(<Card key={i} className="p-5"><div className="w-10 h-10 rounded-xl bg-[#11643F]/10 flex items-center justify-center mb-3"><span className="text-lg">{f.icon}</span></div><h3 className="text-[15px] font-semibold text-[var(--text)] mb-2">{f.title}</h3><p className="text-[var(--text-secondary)] text-[13px] leading-relaxed">{f.description}</p></Card>))}</div></Con></Sec>
+      <Sec><Bg dark={dark} variant="warm" /><Con><Head headline="What You Get with The AI Trader" subheadline="Here's what makes us different from old-school trading tools." /><div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">{FEATURES.map((f,i)=>(<Card key={i} className="p-5"><div className="w-10 h-10 rounded-xl bg-[#11643F]/10 flex items-center justify-center mb-3"><span className="text-lg">{f.icon}</span></div><h3 className="text-[15px] font-semibold text-[var(--text)] mb-2">{f.title}</h3><p className="text-[var(--text-secondary)] text-[13px] leading-relaxed">{f.description}</p></Card>))}</div></Con></Sec>
 
       {/* ====== HOW IT WORKS ====== */}
-      <Sec><Bg /><Con><Head headline={HOW_IT_WORKS.headline} subheadline={HOW_IT_WORKS.subheadline} /><div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-10">{HOW_IT_WORKS.steps.map((s,i)=>(<Card key={i} className="p-5 text-center"><div className="w-12 h-12 rounded-xl bg-[#11643F]/10 text-[#11643F] flex items-center justify-center text-lg font-bold mx-auto mb-4">{s.step}</div><h3 className="text-[15px] font-semibold text-[var(--text)] mb-2">{s.title}</h3><p className="text-[var(--text-secondary)] text-[13px] leading-relaxed">{s.description}</p></Card>))}</div><div className="text-center"><a href="#reg-form"><Btn size="lg">Register Now <HiArrowRight className="w-4 h-4"/></Btn></a></div></Con></Sec>
+      <Sec><Bg dark={dark} /><Con><Head headline={HOW_IT_WORKS.headline} subheadline={HOW_IT_WORKS.subheadline} /><div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-10">{HOW_IT_WORKS.steps.map((s,i)=>(<Card key={i} className="p-5 text-center"><div className="w-12 h-12 rounded-xl bg-[#11643F]/10 text-[#11643F] flex items-center justify-center text-lg font-bold mx-auto mb-4">{s.step}</div><h3 className="text-[15px] font-semibold text-[var(--text)] mb-2">{s.title}</h3><p className="text-[var(--text-secondary)] text-[13px] leading-relaxed">{s.description}</p></Card>))}</div><div className="text-center"><a href="#reg-form"><Btn size="lg">Register Now <HiArrowRight className="w-4 h-4"/></Btn></a></div></Con></Sec>
 
       {/* ====== WHY AI + MARKETS ====== */}
-      <Sec><Bg variant="blue" /><Con>
+      <Sec><Bg dark={dark} variant="blue" /><Con>
         <div className="grid lg:grid-cols-[1fr_1.3fr] gap-12 lg:gap-16">
           {/* Left: Why AI */}
           <div className="flex flex-col justify-center">
@@ -383,7 +374,7 @@ export default function HomePage() {
 
 
       {/* ====== WHO IS IT FOR ====== */}
-      <Sec><Bg variant="warm" /><Con>
+      <Sec><Bg dark={dark} variant="warm" /><Con>
         <Head headline={WHO_IS_IT_FOR.headline} subheadline={WHO_IS_IT_FOR.subheadline} />
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-10">
           {WHO_IS_IT_FOR.personas.map((p,i)=>(
@@ -400,7 +391,7 @@ export default function HomePage() {
       </Con></Sec>
 
       {/* ====== APP SECTION ====== */}
-      <Sec><Bg /><Con>
+      <Sec><Bg dark={dark} /><Con>
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           {/* Left: Device */}
           <div className="flex justify-center order-2 lg:order-1 relative">
@@ -435,7 +426,7 @@ export default function HomePage() {
       </Con></Sec>
 
       {/* ====== WHY CHOOSE US ====== */}
-      <Sec><Bg variant="blue" /><Con>
+      <Sec><Bg dark={dark} variant="blue" /><Con>
         <Head headline={WHY_CHOOSE_US.headline} subheadline={WHY_CHOOSE_US.subheadline} />
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-10">
           {WHY_CHOOSE_US.items.map((item,i)=>(
@@ -456,7 +447,7 @@ export default function HomePage() {
       </Con></Sec>
 
       {/* ====== THINGS TO KNOW ====== */}
-      <Sec><Bg /><Con>
+      <Sec><Bg dark={dark} /><Con>
         <Head headline={THINGS_TO_KEEP_IN_MIND.headline} />
         <div className="max-w-3xl mx-auto space-y-4">
           {THINGS_TO_KEEP_IN_MIND.items.map((item,i)=>(
@@ -472,7 +463,7 @@ export default function HomePage() {
       </Con></Sec>
 
       {/* ====== FAQ ====== */}
-      <Sec><Bg variant="green" /><Con>
+      <Sec><Bg dark={dark} variant="green" /><Con>
         <Head headline="Frequently Asked Questions" subheadline="Everything you need to know about The AI Trader" />
         <div className="max-w-3xl mx-auto space-y-3">
           {FAQ_ITEMS.map((item,i)=>(<FaqItem key={i} {...item} open={i===0}/>))}
@@ -480,7 +471,7 @@ export default function HomePage() {
       </Con></Sec>
 
       {/* ====== BOTTOM REGISTRATION FORM ====== */}
-      <Sec id="start-form"><Bg variant="warm" /><Con>
+      <Sec id="start-form"><Bg dark={dark} variant="warm" /><Con>
         <div className="max-w-lg mx-auto">
           <div className="rounded-2xl bg-[var(--bg-card)] border border-[var(--border-strong)] p-7 sm:p-10 shadow-2xl shadow-black/10 dark:shadow-black/40">
             <div className="text-center mb-7">
@@ -502,13 +493,14 @@ export default function HomePage() {
                   f.name === 'phone' ? (
                     <div key={f.id} className="flex rounded-xl bg-[var(--bg)] border border-[var(--border-strong)] focus-within:border-[#FC6612]/50 focus-within:ring-2 focus-within:ring-[#FC6612]/10 transition-all">
                       <CountrySelect value={form.phoneCode} onChange={(code)=>setForm(p=>({...p,phoneCode:code}))}/>
-                      <input name="phone" type="tel" value={form.phone} onChange={hc} required placeholder={form.phoneCode === '+1' ? '(555) 000-0000' : form.phoneCode === '+44' ? '7911 123456' : form.phoneCode === '+91' ? '98765 43210' : form.phoneCode === '+61' ? '4 1234 5678' : form.phoneCode === '+92' ? '300 1234567' : 'Phone number'} className="flex-1 px-3 py-3.5 bg-transparent text-[var(--text)] text-sm placeholder-[var(--text-secondary)] outline-none"/>
+                      <input name="phone" type="tel" value={form.phone} onChange={hc} required placeholder={phoneFmt(form.phoneCode)} className="flex-1 px-3 py-3.5 bg-transparent text-[var(--text)] text-sm placeholder-[var(--text-secondary)] outline-none"/>
                     </div>
                   ) : (
                     <input key={f.id} name={f.name} type={f.type} value={form[f.name]} onChange={hc} required placeholder={f.label} className="w-full px-4 py-3.5 rounded-xl bg-[var(--bg)] border border-[var(--border-strong)] text-[var(--text)] text-sm placeholder-[var(--text-secondary)] focus:outline-none focus:border-[#FC6612]/50 transition-colors"/>
                   )
                 ))}
                 <button type="submit" disabled={formStatus==='loading'} style={{background:'linear-gradient(135deg, #FC6612, #11643F)'}} className="w-full py-4 rounded-xl hover:brightness-90 text-white font-bold text-sm transition-all shadow-lg shadow-[#FC6612]/25 hover:shadow-[#FC6612]/40 flex items-center justify-center gap-2">{formStatus==='loading'?'Creating Account...':<>Create Account For Free<HiArrowRight className="w-4 h-4"/></>}</button>
+                {errorMsg && <p className="text-center text-sm text-red-400 bg-red-400/5 rounded-lg py-2">{errorMsg}</p>}
                 <p className="text-center text-xs text-[var(--text-muted)]">I have read and agree to the Privacy Policy and Terms & Conditions.</p>
               </form>
             )}
@@ -517,7 +509,7 @@ export default function HomePage() {
       </Con></Sec>
 
       {/* ====== CTA ====== */}
-      <Sec><Bg /><Con><div className="rounded-3xl bg-[var(--bg-card)] border border-[var(--border)] p-10 sm:p-14 lg:p-16 text-center"><div className="flex items-center justify-center gap-2 mb-4"><span className="text-amber-400 text-lg">★★★★★</span><span className="text-[var(--text-secondary)] text-sm">Rated 4.8/5 · by 2,400+ users</span></div><h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[var(--text)] mb-3">Ready to Trade Smarter?</h2><p className="text-[var(--text-secondary)] text-lg max-w-lg mx-auto mb-8">Join 100,000+ traders across 50+ countries.</p><a href="#start-form"><Btn size="xl">Create Free Account <HiArrowRight className="w-4 h-4"/></Btn></a><p className="mt-4 text-[13px] text-[var(--text-secondary)]">Free to start. $250 minimum deposit. No hidden fees.</p></div></Con></Sec>
+      <Sec><Bg dark={dark} /><Con><div className="rounded-3xl bg-[var(--bg-card)] border border-[var(--border)] p-10 sm:p-14 lg:p-16 text-center"><div className="flex items-center justify-center gap-2 mb-4"><span className="text-amber-400 text-lg">★★★★★</span><span className="text-[var(--text-secondary)] text-sm">Rated 4.8/5 · by 2,400+ users</span></div><h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[var(--text)] mb-3">Ready to Trade Smarter?</h2><p className="text-[var(--text-secondary)] text-lg max-w-lg mx-auto mb-8">Join 100,000+ traders across 50+ countries.</p><a href="#start-form"><Btn size="xl">Create Free Account <HiArrowRight className="w-4 h-4"/></Btn></a><p className="mt-4 text-[13px] text-[var(--text-secondary)]">Free to start. $250 minimum deposit. No hidden fees.</p></div></Con></Sec>
 
       {/* ====== FOOTER ====== */}
       <footer className="border-t-2 border-[var(--border-strong)] bg-[var(--bg-alt)]">
