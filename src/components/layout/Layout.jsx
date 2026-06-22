@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { HiSun, HiMoon } from 'react-icons/hi';
 import { Link, useLocation } from 'react-router-dom';
 
@@ -15,9 +15,8 @@ function Logo() {
 }
 
 const NAV = [
-  { label: 'Home', to: '/' },{ label: 'Invest', to: '/invest' },{ label: 'Market', to: '/market' },
-  { label: 'How it Works', to: '/how-it-works' },{ label: 'Automated Trading', to: '/automated-trading' },
-  { label: 'News', to: '/crypto-news' },{ label: 'Blog', to: '/blog' },{ label: 'Contact Us', to: '/contact-us' },
+  { label: 'Home', to: '/' },{ label: 'About Us', to: '/about-us' },
+  { label: 'Blog', to: '/blog' },{ label: 'Contact Us', to: '/contact-us' },
 ];
 
 const SOCIAL_LINKS = [
@@ -38,10 +37,10 @@ export default function Layout({ children }) {
       <header className="fixed top-0 left-0 right-0 z-50 bg-[var(--bg-alt)]/95 backdrop-blur-xl border-b-2 border-[var(--border-strong)]">
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-[68px]">
           <Logo />
-          <nav className="hidden lg:flex items-center gap-1">
+          <nav className="hidden lg:flex items-center gap-2">
             {NAV.map(link => {
               const active = loc.pathname === link.to;
-              return <Link key={link.to} to={link.to} className={`px-3 py-2 text-[13px] font-medium rounded-lg transition-colors ${active?'text-[#FC6612] bg-[#FC6612]/[0.08]':'text-[var(--text-secondary)] hover:text-[var(--text)] hover:bg-white/[0.03]'}`}>{link.label}</Link>;
+              return <Link key={link.to} to={link.to} className={`px-4 py-2 text-[14px] font-medium rounded-lg transition-colors ${active?'text-[#FC6612] bg-[#FC6612]/[0.08]':'text-[var(--text-secondary)] hover:text-[var(--text)] hover:bg-white/[0.03]'}`}>{link.label}</Link>;
             })}
             <button onClick={()=>setDark(!dark)} className="ml-2 w-9 h-9 rounded-lg border border-[var(--border-strong)] flex items-center justify-center text-[var(--text-secondary)] hover:text-[#FC6612] transition-colors">{dark?<HiSun className="w-4 h-4"/>:<HiMoon className="w-4 h-4"/>}</button>
           </nav>

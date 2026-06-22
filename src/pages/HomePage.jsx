@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { HiArrowRight, HiChevronDown, HiSun, HiMoon, HiUserGroup, HiGlobe, HiChartBar, HiStar } from 'react-icons/hi';
 import { Link, useLocation } from 'react-router-dom';
 import { HERO_CONTENT, FORM_CONTENT, ABOUT_CONTENT, FEATURES, HOW_IT_WORKS, WHY_AI, MARKETS, WHO_IS_IT_FOR, APP_SECTION, WHY_CHOOSE_US, THINGS_TO_KEEP_IN_MIND, FAQ_ITEMS, FOOTER_CONTENT } from '../data/content';
@@ -29,18 +29,32 @@ const COUNTRIES = [
 
 function CountrySelect({ value, onChange }) {
   const [open, setOpen] = useState(false);
+  const [ddStyle, setDdStyle] = useState({});
+  const btnRef = useRef(null);
   const selected = COUNTRIES.find(c=>c.code===value) || COUNTRIES[0];
+  const handleOpen = (e) => {
+    e.stopPropagation();
+    if (!open && btnRef.current) {
+      const r = btnRef.current.getBoundingClientRect();
+      if (window.innerHeight - r.bottom < 320) {
+        setDdStyle({ bottom: window.innerHeight - r.top + 4, left: r.left });
+      } else {
+        setDdStyle({ top: r.bottom + 4, left: r.left });
+      }
+    }
+    setOpen(!open);
+  };
   return (
     <div className="relative flex-shrink-0">
-      <button type="button" onClick={(e)=>{e.stopPropagation();setOpen(!open);}} className="flex items-center gap-1.5 py-3 pl-4 pr-2 text-sm text-[var(--text)] cursor-pointer whitespace-nowrap border-r border-[var(--border)]">
+      <button ref={btnRef} type="button" onClick={handleOpen} className="flex items-center gap-1.5 py-3 pl-4 pr-2 text-sm text-[var(--text)] cursor-pointer whitespace-nowrap border-r border-[var(--border)]">
         <span>{selected.flag}</span>
         <span className="font-medium">{selected.code}</span>
         <svg className={`w-3 h-3 text-[var(--text-muted)] transition-transform ${open?'rotate-180':''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7"/></svg>
       </button>
       {open && (
         <>
-          <div className="fixed inset-0 z-40" onClick={()=>setOpen(false)}/>
-          <div className="absolute top-full left-0 mt-1 z-50 w-64 max-h-72 overflow-y-auto rounded-xl bg-[#181B24] border border-[#2a3040] shadow-2xl py-1">
+          <div className="fixed inset-0 z-[9998]" onClick={()=>setOpen(false)}/>
+          <div className="fixed z-[9999] w-64 max-h-72 overflow-y-auto rounded-xl bg-[#181B24] border border-[#2a3040] shadow-2xl py-1" style={ddStyle}>
             {COUNTRIES.map(c=>(
               <button key={c.code} type="button" onClick={()=>{onChange(c.code);setOpen(false);}} className={`w-full flex items-center gap-3 px-4 py-2.5 text-sm hover:bg-white/[0.05] transition-colors ${c.code===value?'bg-white/[0.05] text-[#FC6612] font-semibold':'text-[#cbd5e1]'}`}>
                 <span className="text-base">{c.flag}</span>
@@ -83,11 +97,7 @@ function Card({ children, className = '', delay = 0 }) {
 // Menu items matching traderai.ai + Home
 const NAV = [
   { label: 'Home', to: '/' },
-  { label: 'Invest', to: '/invest' },
-  { label: 'Market', to: '/market' },
-  { label: 'How it Works', to: '/how-it-works' },
-  { label: 'Automated Trading', to: '/automated-trading' },
-  { label: 'News', to: '/crypto-news' },
+  { label: 'About Us', to: '/about-us' },
   { label: 'Blog', to: '/blog' },
   { label: 'Contact Us', to: '/contact-us' },
 ];
@@ -157,7 +167,7 @@ export default function HomePage() {
       <header className="fixed top-0 left-0 right-0 z-50 bg-[var(--bg-alt)]/95 backdrop-blur-xl border-b-2 border-[var(--border-strong)]">
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-[68px]">
           <Logo />
-          <nav className="hidden lg:flex items-center gap-1">
+          <nav className="hidden lg:flex items-center gap-2">
             {NAV.map(link => {
               const active = loc.pathname === link.to;
               return (
@@ -494,7 +504,7 @@ export default function HomePage() {
       </Con></Sec>
 
       {/* ====== CTA ====== */}
-      <Sec><Bg /><Con><div className="rounded-3xl bg-[var(--bg-card)] border border-[var(--border)] p-10 sm:p-14 lg:p-16 text-center"><div className="flex items-center gap-2 mb-4"><span className="text-amber-400 text-lg">★★★★★</span><span className="text-[var(--text-secondary)] text-sm">Rated 4.8/5 · by 2,400+ users</span></div><h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[var(--text)] mb-3">Ready to Trade Smarter?</h2><p className="text-[var(--text-secondary)] text-lg max-w-lg mx-auto mb-8">Join 100,000+ traders across 50+ countries.</p><a href="#start-form"><Btn size="xl">Create Free Account <HiArrowRight className="w-4 h-4"/></Btn></a><p className="mt-4 text-[13px] text-[var(--text-secondary)]">Free to start. $250 minimum deposit. No hidden fees.</p></div></Con></Sec>
+      <Sec><Bg /><Con><div className="rounded-3xl bg-[var(--bg-card)] border border-[var(--border)] p-10 sm:p-14 lg:p-16 text-center"><div className="flex items-center justify-center gap-2 mb-4"><span className="text-amber-400 text-lg">★★★★★</span><span className="text-[var(--text-secondary)] text-sm">Rated 4.8/5 · by 2,400+ users</span></div><h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[var(--text)] mb-3">Ready to Trade Smarter?</h2><p className="text-[var(--text-secondary)] text-lg max-w-lg mx-auto mb-8">Join 100,000+ traders across 50+ countries.</p><a href="#start-form"><Btn size="xl">Create Free Account <HiArrowRight className="w-4 h-4"/></Btn></a><p className="mt-4 text-[13px] text-[var(--text-secondary)]">Free to start. $250 minimum deposit. No hidden fees.</p></div></Con></Sec>
 
       {/* ====== FOOTER ====== */}
       <footer className="border-t-2 border-[var(--border-strong)] bg-[var(--bg-alt)]">
