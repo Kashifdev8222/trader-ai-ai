@@ -8,6 +8,7 @@ import AboutPage from './pages/AboutPage';
 import DisclaimerPage from './pages/DisclaimerPage';
 import PrivacyPage from './pages/PrivacyPage';
 import TermsPage from './pages/TermsPage';
+import ThankYouPage from './pages/ThankYouPage';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -35,6 +36,7 @@ export default function App() {
         <Route path="/open-account" element={<Layout><GenericPage title="Open Account" subtitle="Start trading with Trader AI today." /></Layout>} />
         <Route path="/privacy-policy" element={<Layout><PrivacyPage /></Layout>} />
         <Route path="/terms-conditions" element={<Layout><TermsPage /></Layout>} />
+        <Route path="/thank-you" element={<Layout><ThankYouPage /></Layout>} />
         <Route path="/disclaimer" element={<Layout><DisclaimerPage /></Layout>} />
         <Route path="/download-app" element={<Layout><GenericPage title="Download the Trader AI App" subtitle="Available on iOS, Android, Windows, Mac, and Linux." /></Layout>} />
         <Route path="*" element={<Layout><GenericPage title="Page Not Found" subtitle="The page you're looking for doesn't exist." /></Layout>} />

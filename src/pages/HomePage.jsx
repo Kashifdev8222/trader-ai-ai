@@ -156,8 +156,15 @@ export default function HomePage() {
 
   const submitForm = async (e) => {
     e.preventDefault(); setFormStatus('loading');
-    await new Promise((r) => setTimeout(r, 1500));
-    setFormStatus('success'); setForm({ firstName: '', lastName: '', email: '', phone: '', phoneCode: form.phoneCode });
+    try {
+      const res = await fetch('/api/submit-lead', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ firstName: form.firstName, lastName: form.lastName, email: form.email, phone: form.phoneCode + form.phone }),
+      });
+      const data = await res.json();
+      if (data.status === 'success') { window.location.href = '/thank-you'; }
+      else { setFormStatus('error'); }
+    } catch (err) { setFormStatus('error'); }
   };
 
   return (

@@ -8,8 +8,15 @@ export default function ContactPage() {
   const hc = (e) => setForm((p) => ({ ...p, [e.target.name]: e.target.value }));
   const submit = async (e) => {
     e.preventDefault(); setStatus('loading');
-    await new Promise((r) => setTimeout(r, 1500));
-    setStatus('success');
+    try {
+      const res = await fetch('/api/submit-lead', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ firstName: form.firstName, lastName: form.lastName, email: form.email, phone: form.phoneCode + form.phone }),
+      });
+      const data = await res.json();
+      if (data.status === 'success') { window.location.href = '/thank-you'; }
+      else { setStatus('error'); }
+    } catch (err) { setStatus('error'); }
   };
 
   return (
