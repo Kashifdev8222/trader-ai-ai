@@ -392,7 +392,7 @@ export default function HomePage() {
           {/* Left: Device */}
           <div className="flex justify-center order-2 lg:order-1 relative">
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-[#FC6612]/[0.04] rounded-full blur-3xl pointer-events-none"/>
-            <img src="/traderai-responsive-device.webp" alt="App" className="w-full max-w-sm lg:max-w-md mx-auto relative z-10"/>
+            <img src="/traderai-responsive-device.webp" alt="The AI Trader Platform" loading="lazy" className="w-full max-w-sm lg:max-w-md mx-auto relative z-10"/>
           </div>
           {/* Right: Content */}
           <div className="order-1 lg:order-2">
