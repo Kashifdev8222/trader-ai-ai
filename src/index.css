@@ -1,5 +1,11 @@
 @import "tailwindcss";
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+@layer base {
+  *, *::before, *::after { box-sizing: border-box; }
+  html { overflow-x: hidden; width: 100%; }
+  body { overflow-x: hidden; width: 100%; max-width: 100vw; }
+  img { max-width: 100%; height: auto; }
+}
 
 @custom-variant dark (&:where(.dark, .dark *));
 

@@ -45,7 +45,7 @@ export default function Layout({ children }) {
             <button onClick={()=>setDark(!dark)} className="ml-2 w-9 h-9 rounded-lg border border-[var(--border-strong)] flex items-center justify-center text-[var(--text-secondary)] hover:text-[#FC6612] transition-colors">{dark?<HiSun className="w-4 h-4"/>:<HiMoon className="w-4 h-4"/>}</button>
           </nav>
           <a href="/#start-form" className="hidden lg:inline-flex px-5 py-2.5 text-[14px] font-semibold rounded-lg text-white shadow-lg shadow-[#FC6612]/20" style={{background:'linear-gradient(135deg, #FC6612, #11643F)'}}>Start Trading</a>
-          <button className="lg:hidden p-2 text-[var(--text-secondary)]"><svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+          <button className="lg:hidden p-2 text-[var(--text-secondary)]" aria-label="Open menu"><svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16"/></svg></button>
         </div>
       </header>
 
