@@ -1,0 +1,97 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ====== THEME: Light (default) ====== */
+:root {
+  --bg: #ffffff;
+  --bg-alt: #f8fafc;
+  --bg-card: #f1f5f9;
+  --bg-elevated: #ffffff;
+  --text: #0f172a;
+  --text-secondary: #334155;
+  --text-muted: #64748b;
+  --border: rgba(0,0,0,0.06);
+  --border-strong: rgba(0,0,0,0.10);
+  --accent: #FC6612;
+  --green: #11643F;
+}
+
+/* ====== THEME: Dark ====== */
+.dark {
+  --bg: #080A0F;
+  --bg-alt: #0C0F17;
+  --bg-card: #11131A;
+  --bg-elevated: #181B24;
+  --text: #ffffff;
+  --text-secondary: rgba(255,255,255,0.7);
+  --text-muted: rgba(255,255,255,0.45);
+  --border: rgba(255,255,255,0.04);
+  --border-strong: rgba(255,255,255,0.08);
+  --accent: #FC6612;
+  --green: #11643F;
+}
+
+html { scroll-behavior: smooth; color-scheme: dark; }
+html.dark { color-scheme: dark; }
+
+body {
+  margin: 0;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background 0.3s, color 0.3s;
+}
+
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--text-muted); border-radius: 3px; }
+
+/* ====== SCROLL ANIMATIONS ====== */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+.reveal-scale {
+  opacity: 0;
+  transform: scale(0.92);
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+.reveal-scale.visible { opacity: 1; transform: scale(1); }
+
+/* Stagger delays */
+.delay-1 { transition-delay: 0.06s; }
+.delay-2 { transition-delay: 0.12s; }
+.delay-3 { transition-delay: 0.18s; }
+.delay-4 { transition-delay: 0.24s; }
+.delay-5 { transition-delay: 0.30s; }
+.delay-6 { transition-delay: 0.36s; }
+.delay-7 { transition-delay: 0.42s; }
+.delay-8 { transition-delay: 0.48s; }
+.delay-9 { transition-delay: 0.54s; }
+.delay-10 { transition-delay: 0.60s; }
+
+/* Smooth transitions */
+*, *::before, *::after { transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); }
+a, button { transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1); }
+
+/* Phone Input - match other form fields */
+.phone-field.PhoneInput {
+  border-radius:12px!important; background:var(--bg)!important;
+  border:1px solid var(--border-strong)!important; padding:0!important;
+}
+.phone-field.PhoneInput:focus-within { border-color:#FC6612!important; }
+.phone-field .PhoneInputCountry { padding:12px 8px 12px 14px!important; margin:0!important; }
+.phone-field .PhoneInputCountrySelect { opacity:0!important; position:absolute!important; inset:0!important; }
+.phone-field .PhoneInputCountrySelectArrow { opacity:1!important; width:auto!important; height:auto!important; border:none!important; color:var(--text-muted)!important; margin-left:2px!important; }
+.phone-field .PhoneInputInput { padding:12px 14px 12px 4px!important; border:none!important; background:transparent!important; color:var(--text)!important; font-size:14px!important; outline:none!important; }
+.phone-field .PhoneInputInput::placeholder { color:var(--text-secondary)!important; }
+
