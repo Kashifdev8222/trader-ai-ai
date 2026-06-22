@@ -185,7 +185,7 @@ export default function HomePage() {
           <div className="hidden lg:block">
             <a href="#start-form" className="cursor-pointer inline-flex px-5 py-2.5 text-[14px] font-semibold rounded-lg text-white transition-all shadow-lg shadow-[#FC6612]/20" style={{background:'linear-gradient(135deg, #FC6612, #11643F)'}}>Start Trading</a>
           </div>
-          <button className="lg:hidden p-2 text-[var(--text-secondary)]"><svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+          <button className="lg:hidden p-2 text-[var(--text-secondary)]" aria-label="Open menu"><svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16"/></svg></button>
         </div>
       </header>
 
@@ -327,7 +327,7 @@ export default function HomePage() {
       </Con></Sec>
 
       {/* ====== VIDEO DEMO ====== */}
-      <Sec id="demo"><Bg /><Con><Head headline="See The AI Trader in Action" subheadline="Watch how our AI analyzes markets, spots opportunities, and helps you trade smarter." /><div className="max-w-4xl mx-auto"><div className="rounded-2xl overflow-hidden border border-[var(--border)] shadow-2xl shadow-black/40 bg-[var(--bg-card)]"><div className="flex items-center gap-2 px-4 py-3 border-b border-[var(--border)]"><div className="w-3 h-3 rounded-full bg-red-500/60"/><div className="w-3 h-3 rounded-full bg-amber-400/60"/><div className="w-3 h-3 rounded-full bg-green-400/60"/><span className="ml-3 text-[11px] text-[var(--text-secondary)]">theaitrader.ai</span></div><div className="aspect-video"><iframe src="https://www.youtube.com/embed/u3T7fLT4qGQ" title="The AI Trader" className="w-full h-full" allowFullScreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" loading="lazy"/></div></div></div></Con></Sec>
+      <Sec id="demo"><Bg /><Con><Head headline="See The AI Trader in Action" subheadline="Watch how our AI analyzes markets, spots opportunities, and helps you trade smarter." /><div className="max-w-4xl mx-auto"><div className="rounded-2xl overflow-hidden border border-[var(--border)] shadow-2xl shadow-black/40 bg-[var(--bg-card)]"><div className="flex items-center gap-2 px-4 py-3 border-b border-[var(--border)]"><div className="w-3 h-3 rounded-full bg-red-500/60"/><div className="w-3 h-3 rounded-full bg-amber-400/60"/><div className="w-3 h-3 rounded-full bg-green-400/60"/><span className="ml-3 text-[11px] text-[var(--text-secondary)]">theaitrader.ai</span></div><div className="aspect-video"><YouTubeEmbed /></div></div></div></Con></Sec>
 
       {/* ====== FEATURES ====== */}
       <Sec><Bg variant="warm" /><Con><Head headline="What You Get with The AI Trader" subheadline="Here's what makes us different from old-school trading tools." /><div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">{FEATURES.map((f,i)=>(<Card key={i} className="p-5"><div className="w-10 h-10 rounded-xl bg-[#11643F]/10 flex items-center justify-center mb-3"><span className="text-lg">{f.icon}</span></div><h3 className="text-[15px] font-semibold text-[var(--text)] mb-2">{f.title}</h3><p className="text-[var(--text-secondary)] text-[13px] leading-relaxed">{f.description}</p></Card>))}</div></Con></Sec>
@@ -516,7 +516,7 @@ export default function HomePage() {
               <p className="text-[var(--text-secondary)] text-sm mt-4 leading-relaxed max-w-sm">The AI Trader makes ai trading easier and smarter. Analyze markets in real-time, automate strategies safely, stay fully in control.</p>
             </div>
             <div>
-              <h4 className="text-xs font-semibold text-[var(--text)] uppercase tracking-wider mb-4">Contact</h4>
+              <h3 className="text-xs font-semibold text-[var(--text)] uppercase tracking-wider mb-4">Contact</h3>
               <div className="space-y-2.5">
                 <p className="text-[var(--text-secondary)] text-sm flex items-center gap-2">
                   <svg className="w-4 h-4 text-[#11643F] flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
@@ -533,7 +533,7 @@ export default function HomePage() {
               </div>
             </div>
             <div>
-              <h4 className="text-xs font-semibold text-[var(--text)] uppercase tracking-wider mb-4">Follow Us</h4>
+              <h3 className="text-xs font-semibold text-[var(--text)] uppercase tracking-wider mb-4">Follow Us</h3>
               <div className="flex items-center gap-3">
                 {[
                   {n:'Facebook',d:'M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z'},
@@ -566,6 +566,20 @@ export default function HomePage() {
         </div>
       </footer>
     </div>
+  );
+}
+
+function YouTubeEmbed() {
+  const [load, setLoad] = useState(false);
+  return load ? (
+    <iframe src="https://www.youtube.com/embed/u3T7fLT4qGQ?autoplay=1" title="The AI Trader" className="w-full h-full" allowFullScreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"/>
+  ) : (
+    <button onClick={()=>setLoad(true)} className="w-full h-full relative bg-black/50 flex items-center justify-center group cursor-pointer">
+      <div className="w-16 h-16 lg:w-20 lg:h-20 rounded-full bg-[#FC6612] flex items-center justify-center shadow-2xl shadow-[#FC6612]/50 group-hover:scale-110 transition-transform">
+        <svg className="w-7 h-7 lg:w-9 lg:h-9 text-white ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+      </div>
+      <p className="absolute bottom-4 text-white/60 text-sm">Click to watch video</p>
+    </button>
   );
 }
 
