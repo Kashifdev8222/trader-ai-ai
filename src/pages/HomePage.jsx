@@ -107,13 +107,19 @@ export default function HomePage() {
   const [dark, setDark] = useState(true);
   const [form, setForm] = useState({ firstName: '', lastName: '', email: '', phone: '', phoneCode: '+1' });
 
-  // Auto-detect country from browser locale
+  // Auto-detect country from browser locale + timezone
   useEffect(() => {
     try {
+      const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
       const cc = (navigator.language||'').split('-')[1]?.toUpperCase();
-      const map = {US:'+1',GB:'+44',IN:'+91',AU:'+61',CN:'+86',DE:'+49',FR:'+33',JP:'+81',RU:'+7',BR:'+55',IT:'+39',ES:'+34',NL:'+31',SE:'+46',CH:'+41',PL:'+48',PK:'+92',PH:'+63',MX:'+52',AE:'+971',NG:'+234',SA:'+966',EG:'+20',ZA:'+27',KR:'+82',VN:'+84',TH:'+66',MY:'+60',ID:'+62',TR:'+90',CA:'+1'};
-      const code = map[cc];
-      if(code) setForm(p=>({...p, phoneCode: code}));
+      // Timezone-based mapping for better accuracy
+      const tzMap = { 'Asia/Karachi':'+92','Asia/Kolkata':'+91','Asia/Dhaka':'+880','Asia/Colombo':'+94','Asia/Kathmandu':'+977','Asia/Dubai':'+971','Asia/Riyadh':'+966','Asia/Tokyo':'+81','Asia/Shanghai':'+86','Asia/Seoul':'+82','Asia/Bangkok':'+66','Asia/Kuala_Lumpur':'+60','Asia/Jakarta':'+62','Asia/Manila':'+63','Asia/Taipei':'+886','Europe/London':'+44','Europe/Berlin':'+49','Europe/Paris':'+33','Europe/Rome':'+39','Europe/Madrid':'+34','Europe/Amsterdam':'+31','Europe/Stockholm':'+46','Europe/Zurich':'+41','Europe/Warsaw':'+48','Europe/Moscow':'+7','Europe/Istanbul':'+90','America/New_York':'+1','America/Chicago':'+1','America/Los_Angeles':'+1','America/Toronto':'+1','America/Sao_Paulo':'+55','America/Mexico_City':'+52','Australia/Sydney':'+61','Pacific/Auckland':'+64','Africa/Lagos':'+234','Africa/Cairo':'+20','Africa/Johannesburg':'+27' };
+      let code = tzMap[tz];
+      if (!code && cc) {
+        const langMap = { US:'+1',GB:'+44',IN:'+91',AU:'+61',CN:'+86',DE:'+49',FR:'+33',JP:'+81',RU:'+7',BR:'+55',IT:'+39',ES:'+34',NL:'+31',SE:'+46',CH:'+41',PL:'+48',PK:'+92',PH:'+63',MX:'+52',AE:'+971',NG:'+234',SA:'+966',EG:'+20',ZA:'+27',KR:'+82',VN:'+84',TH:'+66',MY:'+60',ID:'+62',TR:'+90',CA:'+1' };
+        code = langMap[cc];
+      }
+      if (code) setForm(p=>({...p, phoneCode: code}));
     } catch(e) {}
   }, []);
   const [formStatus, setFormStatus] = useState('idle');
@@ -255,7 +261,7 @@ export default function HomePage() {
                         {f.name === 'phone' ? (
                           <div className="flex rounded-xl bg-[var(--bg)] border border-[var(--border-strong)] focus-within:border-[#FC6612]/50 focus-within:ring-2 focus-within:ring-[#FC6612]/10 transition-all">
                             <CountrySelect value={form.phoneCode} onChange={(code)=>setForm(p=>({...p,phoneCode:code}))}/>
-                            <input name="phone" type="tel" value={form.phone} onChange={hc} required placeholder="Phone number" className="flex-1 px-3 py-3 bg-transparent text-[var(--text)] text-sm placeholder-[var(--text-secondary)] outline-none"/>
+                            <input name="phone" type="tel" value={form.phone} onChange={hc} required placeholder={form.phoneCode === '+1' ? '(555) 000-0000' : form.phoneCode === '+44' ? '7911 123456' : form.phoneCode === '+91' ? '98765 43210' : form.phoneCode === '+61' ? '4 1234 5678' : form.phoneCode === '+92' ? '300 1234567' : 'Phone number'} className="flex-1 px-3 py-3 bg-transparent text-[var(--text)] text-sm placeholder-[var(--text-secondary)] outline-none"/>
                           </div>
                         ) : (
                           <input name={f.name} type={f.type} value={form[f.name]} onChange={hc} required placeholder={`Enter your ${f.label.toLowerCase()}`} className="w-full px-4 py-3 rounded-xl bg-[var(--bg)] border border-[var(--border-strong)] text-[var(--text)] text-sm placeholder-[var(--text-secondary)] focus:outline-none focus:border-[#FC6612]/50 focus:ring-2 focus:ring-[#FC6612]/10 transition-all"/>
@@ -496,7 +502,7 @@ export default function HomePage() {
                   f.name === 'phone' ? (
                     <div key={f.id} className="flex rounded-xl bg-[var(--bg)] border border-[var(--border-strong)] focus-within:border-[#FC6612]/50 focus-within:ring-2 focus-within:ring-[#FC6612]/10 transition-all">
                       <CountrySelect value={form.phoneCode} onChange={(code)=>setForm(p=>({...p,phoneCode:code}))}/>
-                      <input name="phone" type="tel" value={form.phone} onChange={hc} required placeholder="Phone number" className="flex-1 px-3 py-3.5 bg-transparent text-[var(--text)] text-sm placeholder-[var(--text-secondary)] outline-none"/>
+                      <input name="phone" type="tel" value={form.phone} onChange={hc} required placeholder={form.phoneCode === '+1' ? '(555) 000-0000' : form.phoneCode === '+44' ? '7911 123456' : form.phoneCode === '+91' ? '98765 43210' : form.phoneCode === '+61' ? '4 1234 5678' : form.phoneCode === '+92' ? '300 1234567' : 'Phone number'} className="flex-1 px-3 py-3.5 bg-transparent text-[var(--text)] text-sm placeholder-[var(--text-secondary)] outline-none"/>
                     </div>
                   ) : (
                     <input key={f.id} name={f.name} type={f.type} value={form[f.name]} onChange={hc} required placeholder={f.label} className="w-full px-4 py-3.5 rounded-xl bg-[var(--bg)] border border-[var(--border-strong)] text-[var(--text)] text-sm placeholder-[var(--text-secondary)] focus:outline-none focus:border-[#FC6612]/50 transition-colors"/>
