@@ -5,21 +5,21 @@ export default function AboutPage() {
     <div className="pt-28 pb-20">
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
         {/* Hero Section */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-10">
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[var(--text)] mb-4">About The AI Trader</h1>
           <p className="text-lg text-[var(--text-secondary)] max-w-3xl mx-auto leading-relaxed">{ABOUT_CONTENT.description}</p>
         </div>
 
         {/* Inflation / Value Section */}
-        <div className="max-w-4xl mx-auto mb-16">
-          <div className="rounded-2xl bg-[var(--bg-card)] border border-[var(--border)] p-8 lg:p-10 reveal">
+        <div className="mb-10">
+          <div className="rounded-2xl bg-[var(--bg-card)] border border-[var(--border)] p-8 lg:p-10">
             <h2 className="text-2xl font-bold text-[var(--text)] mb-4">{ABOUT_CONTENT.inflation_headline}</h2>
             <p className="text-[var(--text-secondary)] leading-relaxed whitespace-pre-line">{ABOUT_CONTENT.inflation_text}</p>
           </div>
         </div>
 
         {/* What We Offer */}
-        <div className="mb-16">
+        <div className="mb-10">
           <h2 className="text-2xl sm:text-3xl font-extrabold text-[var(--text)] text-center mb-10">What You Get with The AI Trader</h2>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
             {FEATURES.map((f, i) => (
@@ -33,7 +33,7 @@ export default function AboutPage() {
         </div>
 
         {/* Why AI */}
-        <div className="max-w-3xl mx-auto mb-16">
+        <div className="max-w-3xl mx-auto mb-10">
           <h2 className="text-2xl sm:text-3xl font-extrabold text-[var(--text)] text-center mb-8">{WHY_AI.headline}</h2>
           <div className="space-y-4 text-center">
             <p className="text-[var(--text-secondary)] text-lg leading-relaxed">{WHY_AI.description}</p>
@@ -43,7 +43,7 @@ export default function AboutPage() {
         </div>
 
         {/* How It Works */}
-        <div className="mb-16">
+        <div className="mb-10">
           <h2 className="text-2xl sm:text-3xl font-extrabold text-[var(--text)] text-center mb-10">{HOW_IT_WORKS.headline}</h2>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {HOW_IT_WORKS.steps.map((s, i) => (
