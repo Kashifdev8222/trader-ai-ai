@@ -232,7 +232,7 @@ export default function HomePage() {
               <div className="relative rounded-2xl bg-[var(--bg-card)] border border-[var(--border-strong)] p-7 sm:p-8 shadow-2xl shadow-black/20 dark:shadow-black/50">
                 {/* Glow behind card */}
                 <div className="absolute -top-10 right-10 w-40 h-40 bg-[#FC6612]/[0.06] dark:bg-[#FC6612]/[0.04] rounded-full blur-2xl pointer-events-none"/>
-                <h3 className="text-xl font-bold text-[var(--text)] text-center mb-1">{FORM_CONTENT.headline}</h3>
+                <h2 className="text-xl font-bold text-[var(--text)] text-center mb-1">{FORM_CONTENT.headline}</h2>
                 <p className="text-sm text-[var(--text-secondary)] text-center mb-6">{FORM_CONTENT.subheadline}</p>
                 {formStatus==='success'?(
                   <div className="text-center py-8">
@@ -327,7 +327,7 @@ export default function HomePage() {
       </Con></Sec>
 
       {/* ====== VIDEO DEMO ====== */}
-      <Sec id="demo"><Bg /><Con><Head headline="See The AI Trader in Action" subheadline="Watch how our AI analyzes markets, spots opportunities, and helps you trade smarter." /><div className="max-w-4xl mx-auto"><div className="rounded-2xl overflow-hidden border border-[var(--border)] shadow-2xl shadow-black/40 bg-[var(--bg-card)]"><div className="flex items-center gap-2 px-4 py-3 border-b border-[var(--border)]"><div className="w-3 h-3 rounded-full bg-red-500/60"/><div className="w-3 h-3 rounded-full bg-amber-400/60"/><div className="w-3 h-3 rounded-full bg-green-400/60"/><span className="ml-3 text-[11px] text-[var(--text-secondary)]">theaitrader.ai</span></div><div className="aspect-video"><iframe src="https://www.youtube.com/embed/u3T7fLT4qGQ" title="The AI Trader" className="w-full h-full" allowFullScreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"/></div></div></div></Con></Sec>
+      <Sec id="demo"><Bg /><Con><Head headline="See The AI Trader in Action" subheadline="Watch how our AI analyzes markets, spots opportunities, and helps you trade smarter." /><div className="max-w-4xl mx-auto"><div className="rounded-2xl overflow-hidden border border-[var(--border)] shadow-2xl shadow-black/40 bg-[var(--bg-card)]"><div className="flex items-center gap-2 px-4 py-3 border-b border-[var(--border)]"><div className="w-3 h-3 rounded-full bg-red-500/60"/><div className="w-3 h-3 rounded-full bg-amber-400/60"/><div className="w-3 h-3 rounded-full bg-green-400/60"/><span className="ml-3 text-[11px] text-[var(--text-secondary)]">theaitrader.ai</span></div><div className="aspect-video"><iframe src="https://www.youtube.com/embed/u3T7fLT4qGQ" title="The AI Trader" className="w-full h-full" allowFullScreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" loading="lazy"/></div></div></div></Con></Sec>
 
       {/* ====== FEATURES ====== */}
       <Sec><Bg variant="warm" /><Con><Head headline="What You Get with The AI Trader" subheadline="Here's what makes us different from old-school trading tools." /><div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">{FEATURES.map((f,i)=>(<Card key={i} className="p-5"><div className="w-10 h-10 rounded-xl bg-[#11643F]/10 flex items-center justify-center mb-3"><span className="text-lg">{f.icon}</span></div><h3 className="text-[15px] font-semibold text-[var(--text)] mb-2">{f.title}</h3><p className="text-[var(--text-secondary)] text-[13px] leading-relaxed">{f.description}</p></Card>))}</div></Con></Sec>
@@ -450,7 +450,7 @@ export default function HomePage() {
             <div key={i} className="flex items-start gap-5 p-5 rounded-2xl bg-[var(--bg-card)] border border-[var(--border)] hover:border-[var(--border-strong)] transition-all">
               <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#FC6612]/20 to-[#11643F]/20 flex items-center justify-center text-sm font-bold text-[var(--text)] flex-shrink-0">{i+1}</div>
               <div>
-                <h4 className="text-base font-bold text-[var(--text)] mb-1">{item.title}</h4>
+                <h3 className="text-base font-bold text-[var(--text)] mb-1">{item.title}</h3>
                 <p className="text-[var(--text-secondary)] text-sm leading-relaxed">{item.desc}</p>
               </div>
             </div>

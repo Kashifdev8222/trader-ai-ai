@@ -61,7 +61,7 @@ export default function Layout({ children }) {
               <p className="text-[var(--text-secondary)] text-sm mt-4 leading-relaxed max-w-sm">The AI Trader makes ai trading easier and smarter. Analyze markets in real-time, automate strategies safely, stay fully in control.</p>
             </div>
             <div>
-              <h4 className="text-xs font-semibold text-[var(--text)] uppercase tracking-wider mb-4">Contact</h4>
+              <h3 className="text-xs font-semibold text-[var(--text)] uppercase tracking-wider mb-4">Contact</h3>
               <div className="space-y-2.5">
                 <p className="text-[var(--text-secondary)] text-sm flex items-center gap-2"><svg className="w-4 h-4 text-[#11643F] flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>AU +61 284 889 800</p>
                 <p className="text-[var(--text-secondary)] text-sm flex items-center gap-2"><svg className="w-4 h-4 text-[#11643F] flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>UK +44 203 927 2999</p>
@@ -69,7 +69,7 @@ export default function Layout({ children }) {
               </div>
             </div>
             <div>
-              <h4 className="text-xs font-semibold text-[var(--text)] uppercase tracking-wider mb-4">Follow Us</h4>
+              <h3 className="text-xs font-semibold text-[var(--text)] uppercase tracking-wider mb-4">Follow Us</h3>
               <div className="flex items-center gap-3">
                 {SOCIAL_LINKS.map(s=>(<a key={s.n} href="#" className="w-10 h-10 rounded-xl bg-[#FC6612]/10 hover:bg-[#FC6612] flex items-center justify-center text-[#FC6612] hover:text-white transition-all hover:scale-110" title={s.n}><svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d={s.d}/></svg></a>))}
               </div>
