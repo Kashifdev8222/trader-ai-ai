@@ -7,9 +7,8 @@ export default async function handler(req, res) {
 
   try {
     const { firstName, lastName, email, phone } = req.body;
-    const forwarded = req.headers['x-forwarded-for'] || '';
-    const ips = forwarded.split(',').map(s=>s.trim());
-    const ip = ips[ips.length-1] || req.socket.remoteAddress || '127.0.0.1';
+    // Use the actual server outbound IP (consistent for whitelist)
+    const ip = req.socket.remoteAddress || '127.0.0.1';
 
     const postData = { email, firstName, lastName, password: 'Lh23s3', ip, phone, offerName: 'ClientCentral-Site' };
 
