@@ -35,11 +35,12 @@ function NavDropdown({ label, items }) {
         {label}<HiChevronDown className="w-3 h-3" />
       </button>
       {open && (
-        <div className="absolute top-full left-0 mt-1 w-48 bg-[var(--bg-elevated)] border border-[var(--border-strong)] rounded-xl shadow-2xl py-2 z-50">
+        <div className="absolute top-full left-0 pt-2 z-50" onMouseEnter={()=>setOpen(true)}>
+        <div className="w-48 bg-[var(--bg-elevated)] border border-[var(--border-strong)] rounded-xl shadow-2xl py-2">
           {items.map(i=>(
             <Link key={i.to} to={i.to} className="block px-4 py-2.5 text-[13px] text-[var(--text-secondary)] hover:text-[var(--text)] hover:bg-white/[0.03] transition-colors">{i.label}</Link>
           ))}
-        </div>
+        </div></div>
       )}
     </div>
   );

@@ -37,7 +37,7 @@ function HdDropdown({ label, items }) {
   return (
     <div className="relative" onMouseEnter={()=>setOpen(true)} onMouseLeave={()=>setOpen(false)}>
       <button className="flex items-center gap-1 px-3 py-2 text-[13px] font-medium rounded-lg text-[var(--text-secondary)] hover:text-[var(--text)] hover:bg-white/[0.03] transition-colors">{label}<HiChevronDown className="w-3 h-3" /></button>
-      {open && <div className="absolute top-full left-0 mt-1 w-48 bg-[var(--bg-elevated)] border border-[var(--border-strong)] rounded-xl shadow-2xl py-2 z-50">{items.map(i=><Link key={i.to} to={i.to} className="block px-4 py-2.5 text-[13px] text-[var(--text-secondary)] hover:text-[var(--text)] hover:bg-white/[0.03] transition-colors">{i.label}</Link>)}</div>}
+      {open && <div className="absolute top-full left-0 pt-2 z-50" onMouseEnter={()=>setOpen(true)}><div className="w-48 bg-[var(--bg-elevated)] border border-[var(--border-strong)] rounded-xl shadow-2xl py-2">{items.map(i=><Link key={i.to} to={i.to} className="block px-4 py-2.5 text-[13px] text-[var(--text-secondary)] hover:text-[var(--text)] hover:bg-white/[0.03] transition-colors">{i.label}</Link>)}</div></div>}
     </div>
   );
 }
@@ -80,7 +80,14 @@ export default function HomePage() {
   const [formStatus, setFormStatus] = useState('idle');
   const [form, setForm] = useState({ firstName: '', lastName: '', email: '', phone: '' });
   const [errorMsg, setErrorMsg] = useState('');
+  const [phoneCountry, setPhoneCountry] = useState('us');
   const hc = (e) => setForm((p) => ({ ...p, [e.target.name]: e.target.value }));
+  useEffect(() => {
+    fetch('https://ipapi.co/country/').then(r=>r.text()).then(cc=>{
+      const m={PK:'pk',IN:'in',US:'us',GB:'gb',AU:'au',CN:'cn',DE:'de',FR:'fr',JP:'jp',RU:'ru',BR:'br',IT:'it',ES:'es',NL:'nl',SE:'se',CH:'ch',PL:'pl',PK:'pk',PH:'ph',MX:'mx',AE:'ae',NG:'ng',SA:'sa',EG:'eg',ZA:'za',KR:'kr',VN:'vn',TH:'th',MY:'my',ID:'id',TR:'tr',CA:'ca'};
+      const c=m[cc.trim().toUpperCase()]; if(c) setPhoneCountry(c);
+    }).catch(()=>{});
+  }, []);
 
   useEffect(() => {
     document.documentElement.classList.toggle('dark', dark);
@@ -190,7 +197,7 @@ export default function HomePage() {
                       <div key={f.id}>
                         <label className="block text-sm font-semibold text-[var(--text)] mb-1.5">{f.label}</label>
                         {f.name === 'phone' ? (
-                          <PhoneInput value={form.phone} onChange={(val) => setForm(p => ({...p, phone: val}))} inputClass="w-full px-4 py-3 rounded-xl bg-[var(--bg)] border border-[var(--border-strong)] text-[var(--text)] text-sm placeholder-[var(--text-secondary)]" containerClass="w-full" buttonClass="rounded-xl bg-[var(--bg)] border border-[var(--border-strong)]" dropdownClass="bg-[#181B24] text-[var(--text)]" />
+                          <PhoneInput country={phoneCountry} value={form.phone} onChange={(val) => setForm(p => ({...p, phone: val}))} inputClass="w-full px-4 py-3 rounded-xl bg-[var(--bg)] border border-[var(--border-strong)] text-[var(--text)] text-sm placeholder-[var(--text-secondary)]" containerClass="w-full" buttonClass="rounded-xl bg-[var(--bg)] border border-[var(--border-strong)]" dropdownClass="bg-[#181B24] text-[var(--text)]" />
                         ) : (
                           <input name={f.name} type={f.type} value={form[f.name]} onChange={hc} required placeholder={`Enter your ${f.label.toLowerCase()}`} className="w-full px-4 py-3 rounded-xl bg-[var(--bg)] border border-[var(--border-strong)] text-[var(--text)] text-sm placeholder-[var(--text-secondary)] focus:outline-none focus:border-[#FC6612]/50 focus:ring-2 focus:ring-[#FC6612]/10 transition-all"/>
                         )}
