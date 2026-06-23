@@ -1,7 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
-import { HiArrowRight, HiChevronDown, HiSun, HiMoon, HiUserGroup, HiGlobe, HiChartBar, HiStar } from 'react-icons/hi';
-import PhoneInput from 'react-phone-input-2';
+import { HiArrowRight, HiChevronDown, HiSun, HiMoon, HiUserGroup, HiGlobe, HiChartBar, HiStar, HiTrendingUp, HiCurrencyDollar, HiGlobeAlt, HiSparkles, HiShieldCheck, HiLightBulb, HiCode, HiEmojiHappy, HiCube, HiPlay, HiUserAdd, HiLightningBolt, HiDesktopComputer, HiPuzzle, HiOfficeBuilding, HiKey, HiCash, HiLockClosed } from 'react-icons/hi';
+import PhoneInputLib from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
+const PhoneInput = PhoneInputLib.default || PhoneInputLib;
 import { Link, useLocation } from 'react-router-dom';
 import { HERO_CONTENT, FORM_CONTENT, ABOUT_CONTENT, FEATURES, HOW_IT_WORKS, WHY_AI, MARKETS, WHO_IS_IT_FOR, APP_SECTION, WHY_CHOOSE_US, THINGS_TO_KEEP_IN_MIND, FAQ_ITEMS } from '../data/content';
 
@@ -13,18 +14,24 @@ import { HERO_CONTENT, FORM_CONTENT, ABOUT_CONTENT, FEATURES, HOW_IT_WORKS, WHY_
 function Logo() {
   return (
     <Link to="/" className="flex items-center gap-3 flex-shrink-0 group">
-      <div className="relative w-10 h-10 rounded-xl bg-gradient-to-br from-[#11643F] to-[#0e5434] flex items-center justify-center shadow-lg shadow-[#11643F]/30 group-hover:shadow-[#11643F]/40 group-hover:scale-105 transition-all duration-300">
-        <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-white/10 to-transparent" />
-        <svg className="w-5 h-5 text-white relative z-10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+      <div className="w-10 h-10 rounded-xl bg-[#FC6612] flex items-center justify-center shadow-lg shadow-[#FC6612]/25 group-hover:shadow-[#FC6612]/40 group-hover:scale-105 transition-all duration-300">
+        <svg className="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.3" strokeLinecap="round" strokeLinejoin="round">
           <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
-          <line x1="12" y1="3" x2="12" y2="21" strokeWidth="1" stroke="white" opacity="0.3" />
         </svg>
       </div>
-      <span className="text-lg font-extrabold text-[var(--text)] group-hover:text-[var(--text)] transition-colors">The AI <span className="text-[#FC6612]">Trader</span></span>
+      <span className="text-lg font-extrabold text-[var(--text)] tracking-tight">The AI <span className="text-[#FC6612]">Trader</span></span>
     </Link>
   );
 }
 
+function Bg({ variant = 'default', dark }) {
+  const d = dark;
+  if (variant === 'hero') return d ? (<><div className="absolute inset-0 bg-gradient-to-b from-[#0A0D14] via-[#080A0F] to-[#080A0F]"/><div className="absolute top-0 right-0 w-[700px] h-[700px] bg-[#FC6612]/[0.05] rounded-full blur-3xl pointer-events-none"/><div className="absolute bottom-0 left-1/3 w-[500px] h-[500px] bg-[#FC6612]/[0.03] rounded-full blur-3xl pointer-events-none"/></>) : (<><div className="absolute inset-0 bg-gradient-to-b from-[#f8fafc] via-[#f8fafc] to-[#f1f5f9]"/><div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[#FC6612]/[0.04] rounded-full blur-3xl pointer-events-none"/></>);
+  if (variant === 'green') return d ? (<><div className="absolute inset-0 bg-gradient-to-br from-[#0A0E0D] via-[#0A0C0B] to-[#0A0D0C]"/><div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#FC6612]/[0.02] rounded-full blur-3xl pointer-events-none"/></>) : (<><div className="absolute inset-0 bg-gradient-to-br from-[#f0fdf4] via-[#f8fafc] to-[#ecfdf5]"/><div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#FC6612]/[0.03] rounded-full blur-3xl pointer-events-none"/></>);
+  if (variant === 'warm') return d ? (<><div className="absolute inset-0 bg-gradient-to-br from-[#0C0C0A] via-[#0B0B09] to-[#0B0B0C]"/><div className="absolute top-0 right-0 w-[400px] h-[400px] bg-[#FC6612]/[0.015] rounded-full blur-3xl pointer-events-none"/></>) : (<><div className="absolute inset-0 bg-gradient-to-br from-[#fff7ed] via-[#f8fafc] to-[#fffbeb]"/><div className="absolute top-0 right-0 w-[400px] h-[400px] bg-[#FC6612]/[0.03] rounded-full blur-3xl pointer-events-none"/></>);
+  if (variant === 'blue') return d ? (<><div className="absolute inset-0 bg-gradient-to-br from-[#0A0C11] via-[#0A0B10] to-[#0A0C12]"/><div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-[#6366f1]/[0.01] rounded-full blur-3xl pointer-events-none"/></>) : (<><div className="absolute inset-0 bg-gradient-to-br from-[#eff6ff] via-[#f8fafc] to-[#eef2ff]"/><div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-[#6366f1]/[0.03] rounded-full blur-3xl pointer-events-none"/></>);
+  return (<><div className="absolute inset-0 bg-[var(--bg)]"/><div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-[#FC6612]/[0.02] rounded-full blur-3xl pointer-events-none"/></>);
+}
 function Sec({ children, id, className = '' }) {
   return <section id={id} className={`relative border-t border-[var(--border)] reveal ${className}`}>{children}</section>;
 }
@@ -43,11 +50,11 @@ function Btn({ children, variant = 'primary', size = 'md', className = '', ...p 
   const base = 'cursor-pointer inline-flex items-center justify-center gap-1.5 font-semibold transition-all duration-200 hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed';
   const sz = { sm: 'px-4 py-2 text-[13px] rounded-lg', md: 'px-5 py-2.5 text-[13px] rounded-lg', lg: 'px-6 py-3 text-sm rounded-xl', xl: 'px-8 py-3.5 text-[15px] rounded-xl' };
   if (variant === 'secondary') return <button className={`${base} bg-transparent hover:bg-white/[0.05] text-[var(--text)] border-2 border-white/20 hover:border-white/40 ${sz[size]} ${className}`} {...p}>{children}</button>;
-  if (variant === 'green') return <button className={`${base} bg-[#11643F] hover:bg-[#0e5434] text-white shadow-lg shadow-[#11643F]/20 ${sz[size]} ${className}`} {...p}>{children}</button>;
+  if (variant === 'green') return <button className={`${base} bg-[#FC6612] hover:bg-[#0e5434] text-white shadow-lg shadow-[#FC6612]/20 ${sz[size]} ${className}`} {...p}>{children}</button>;
   return <button className={`${base} bg-[#FC6612] hover:bg-[#e0550a] text-white shadow-lg shadow-[#FC6612]/20 ${sz[size]} ${className}`} {...p}>{children}</button>;
 }
 function Card({ children, className = '', delay = 0 }) {
-  return <div className={`rounded-2xl bg-[var(--bg-card)] border border-[var(--border)] hover:border-[var(--border-strong)] transition-all duration-300 hover:-translate-y-1 reveal ${delay ? `delay-${delay}` : ''} ${className}`}>{children}</div>;
+  return <div className={`rounded-2xl bg-[var(--bg-card)] border border-[var(--border)] shadow-sm hover:shadow-xl hover:shadow-black/10 hover:border-[var(--border-strong)] transition-all duration-300 hover:-translate-y-1 reveal ${delay ? `delay-${delay}` : ''} ${className}`}>{children}</div>;
 }
 
 // Menu items matching traderai.ai + Home
@@ -115,7 +122,7 @@ export default function HomePage() {
             </button>
           </nav>
           <div className="hidden lg:block">
-            <a href="#start-form" className="cursor-pointer inline-flex px-5 py-2.5 text-[14px] font-semibold rounded-lg text-white transition-all shadow-lg shadow-[#FC6612]/20" className="cursor-pointer inline-flex px-5 py-2.5 text-[14px] font-semibold rounded-lg bg-[#FC6612] hover:bg-[#e0550a] text-white transition-all shadow-lg shadow-[#FC6612]/20">Start Trading</a>
+            <a href="#reg-form" className="cursor-pointer inline-flex px-5 py-2.5 text-[14px] font-semibold rounded-lg text-white transition-all shadow-lg shadow-[#FC6612]/20" className="cursor-pointer inline-flex px-5 py-2.5 text-[14px] font-semibold rounded-lg bg-[#FC6612] hover:bg-[#e0550a] text-white transition-all shadow-lg shadow-[#FC6612]/20">Start Trading</a>
           </div>
           <button className="lg:hidden p-2 text-[var(--text-secondary)]" aria-label="Open menu"><svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16"/></svg></button>
         </div>
@@ -124,10 +131,10 @@ export default function HomePage() {
       {/* ====== HERO ====== */}
       <section id="reg-form" className="relative pt-20 pb-0 lg:pt-28 lg:pb-0"><Bg dark={dark} variant="hero" /><Con>
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-          {/* LEFT — Text + Trust */}
+          {/* LEFT - Text + Trust */}
           <div className="text-center lg:text-left">
             <h1 className="text-[1.75rem] sm:text-[2.2rem] lg:text-[2.8rem] xl:text-[3.2rem] font-extrabold tracking-[-0.02em] leading-[1.12] text-[var(--text)] mb-5">
-              Trader AI — Where Smart Traders Turn Market Moves{' '}
+              Trader AI - Where Smart Traders Turn Market Moves{' '}
               <span className="text-[#FC6612]">Into Real Returns</span>
             </h1>
             <p className="text-[var(--text-secondary)] text-base lg:text-lg leading-relaxed mb-6 max-w-[540px] lg:max-w-none">
@@ -135,9 +142,9 @@ export default function HomePage() {
             </p>
             {/* Trust badges */}
             <div className="flex flex-wrap items-center gap-3 mb-7">
-              {[{icon:'🚀',t:'Free Sign UP'},{icon:'🔒',t:'Secure Connection'},{icon:'💳',t:'Withdraw Anytime'}].map((s,i)=>(
+              {[{Icon:HiSparkles,t:'Free Sign UP'},{Icon:HiShieldCheck,t:'Secure Connection'},{Icon:HiCash,t:'Withdraw Anytime'}].map((s,i)=>(
                 <span key={i} className="inline-flex items-center gap-2 text-xs sm:text-sm font-medium text-[var(--text-secondary)] bg-[var(--bg-card)] border border-[var(--border)] rounded-full px-4 py-2">
-                  <span className="text-sm">{s.icon}</span>{s.t}
+                  <s.Icon className="w-4 h-4 text-[#FC6612]" />{s.t}
                 </span>
               ))}
             </div>
@@ -158,7 +165,7 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* RIGHT — Form Card (larger, more prominent) */}
+          {/* RIGHT - Form Card (larger, more prominent) */}
           <div className="flex justify-center lg:justify-end">
             <div className="w-full max-w-[420px]">
               <div className="relative rounded-2xl bg-[var(--bg-card)] border border-[var(--border-strong)] p-7 sm:p-8 shadow-2xl shadow-black/20 dark:shadow-black/50">
@@ -168,7 +175,7 @@ export default function HomePage() {
                 <p className="text-sm text-[var(--text-secondary)] text-center mb-6">{FORM_CONTENT.subheadline}</p>
                 {formStatus==='success'?(
                   <div className="text-center py-8">
-                    <div className="w-16 h-16 rounded-2xl bg-[#11643F]/10 flex items-center justify-center mx-auto mb-4"><svg className="w-8 h-8 text-[#11643F]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7"/></svg></div>
+                    <div className="w-16 h-16 rounded-2xl bg-[#FC6612]/10 flex items-center justify-center mx-auto mb-4"><svg className="w-8 h-8 text-[#FC6612]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7"/></svg></div>
                     <h4 className="text-lg font-bold text-[var(--text)] mb-1">Registration Successful!</h4>
                     <p className="text-sm text-[var(--text-secondary)]">Welcome to The AI Trader. Check your email.</p>
                   </div>
@@ -197,13 +204,13 @@ export default function HomePage() {
       </Con></section>
 
       {/* ====== STATS BAR ====== */}
-      <section className="relative bg-[#11643F]/[0.04] dark:bg-[#11643F]/[0.06] border-y border-[var(--border)]">
+      <section className="relative bg-[#FC6612]/[0.04] dark:bg-[#FC6612]/[0.06] border-y border-[var(--border)]">
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-14">
           <div className="flex flex-wrap justify-center gap-14 sm:gap-20 lg:gap-32">
             {[{v:'100,000+',l:'Active Traders',icon:HiUserGroup},{v:'50+',l:'Countries',icon:HiGlobe},{v:'24/7',l:'AI Market Scanning',icon:HiChartBar},{v:'4.8 ★',l:'User Rating',icon:HiStar}].map((s,i)=>(
               <div key={i} className="flex items-center gap-4">
-                <div className="w-10 h-10 lg:w-12 lg:h-12 rounded-xl bg-[#11643F]/10 flex items-center justify-center flex-shrink-0">
-                  <s.icon className="w-5 h-5 lg:w-6 lg:h-6 text-[#11643F]" />
+                <div className="w-10 h-10 lg:w-12 lg:h-12 rounded-xl bg-[#FC6612]/10 flex items-center justify-center flex-shrink-0">
+                  <s.icon className="w-5 h-5 lg:w-6 lg:h-6 text-[#FC6612]" />
                 </div>
                 <div>
                   <div className="text-[1.2rem] sm:text-[1.4rem] lg:text-[1.6rem] font-bold text-[var(--text)] tracking-[-0.01em]">{s.v}</div>
@@ -231,7 +238,7 @@ export default function HomePage() {
                 <div className="text-sm font-medium text-[var(--text-secondary)] mt-1">Real value lost</div>
               </div>
               <div className="text-center p-5 rounded-xl bg-[var(--bg)] border border-[var(--border)]">
-                <div className="text-[1.75rem] sm:text-[2rem] font-extrabold text-[#11643F]">+400%</div>
+                <div className="text-[1.75rem] sm:text-[2rem] font-extrabold text-[#FC6612]">+400%</div>
                 <div className="text-sm font-medium text-[var(--text-secondary)] mt-1">Nasdaq 100 growth</div>
               </div>
               <div className="text-center p-5 rounded-xl bg-[var(--bg)] border border-[var(--border)]">
@@ -244,9 +251,9 @@ export default function HomePage() {
 
           {/* Market cards + CTA */}
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {[{n:'Stocks',d:'NYSE, NASDAQ, LSE',c:'📈'},{n:'Crypto',d:'BTC, ETH & altcoins',c:'₿'},{n:'Forex',d:'60+ currency pairs',c:'💱'},{n:'Commodities',d:'Gold, Oil, Gas',c:'🥇'}].map((item,i)=>(
-              <div key={i} className="group p-5 rounded-xl bg-[var(--bg-card)] border border-[var(--border)] hover:border-[#11643F]/30 hover:-translate-y-1 transition-all text-center">
-                <div className="w-11 h-11 rounded-xl bg-[#11643F]/10 flex items-center justify-center text-xl mx-auto mb-3">{item.c}</div>
+            {[{n:'Stocks',d:'NYSE, NASDAQ, LSE',Icon:HiTrendingUp},{n:'Crypto',d:'BTC, ETH & altcoins',Icon:HiCurrencyDollar},{n:'Forex',d:'60+ currency pairs',Icon:HiGlobeAlt},{n:'Commodities',d:'Gold, Oil, Gas',Icon:HiSparkles}].map((item,i)=>(
+              <div key={i} className="group p-5 rounded-xl bg-[var(--bg-card)] border border-[var(--border)] hover:border-[#FC6612]/30 hover:-translate-y-1 transition-all text-center">
+                <div className="w-11 h-11 rounded-xl bg-[#FC6612]/10 flex items-center justify-center mx-auto mb-3"><item.Icon className="w-7 h-7 text-[#FC6612]" /></div>
                 <h4 className="text-sm font-bold text-[var(--text)] mb-1">{item.n}</h4>
                 <p className="text-[12px] text-[var(--text-secondary)]">{item.d}</p>
               </div>
@@ -260,10 +267,10 @@ export default function HomePage() {
       <Sec id="demo"><Bg dark={dark} /><Con><Head headline="See The AI Trader in Action" subheadline="Watch how our AI analyzes markets, spots opportunities, and helps you trade smarter." /><div className="max-w-4xl mx-auto"><div className="rounded-2xl overflow-hidden border border-[var(--border)] shadow-2xl shadow-black/40 bg-[var(--bg-card)]"><div className="flex items-center gap-2 px-4 py-3 border-b border-[var(--border)]"><div className="w-3 h-3 rounded-full bg-red-500/60"/><div className="w-3 h-3 rounded-full bg-amber-400/60"/><div className="w-3 h-3 rounded-full bg-green-400/60"/><span className="ml-3 text-[11px] text-[var(--text-secondary)]">theaitrader.ai</span></div><div className="aspect-video"><YouTubeEmbed /></div></div></div></Con></Sec>
 
       {/* ====== FEATURES ====== */}
-      <Sec><Bg dark={dark} variant="warm" /><Con><Head headline="What You Get with The AI Trader" subheadline="Here's what makes us different from old-school trading tools." /><div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">{FEATURES.map((f,i)=>(<Card key={i} className="p-5"><div className="w-10 h-10 rounded-xl bg-[#11643F]/10 flex items-center justify-center mb-3"><span className="text-lg">{f.icon}</span></div><h3 className="text-[15px] font-semibold text-[var(--text)] mb-2">{f.title}</h3><p className="text-[var(--text-secondary)] text-[13px] leading-relaxed">{f.description}</p></Card>))}</div></Con></Sec>
+      <Sec><Bg dark={dark} variant="warm" /><Con><Head headline="What You Get with The AI Trader" subheadline="Here's what makes us different from old-school trading tools." /><div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">{FEATURES.map((f,i)=>(<Card key={i} className="p-5"><div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#FC6612]/10 to-[#FC6612]/5 flex items-center justify-center mb-4">{(()=>{const ico={ChartBar:<HiChartBar className="w-7 h-7 text-[#FC6612]"/>,Chip:<HiPuzzle className="w-7 h-7 text-[#FC6612]"/>,ViewGrid:<HiCube className="w-7 h-7 text-[#FC6612]"/>,ShieldCheck:<HiShieldCheck className="w-7 h-7 text-[#FC6612]"/>,Beaker:<HiLightBulb className="w-7 h-7 text-[#FC6612]"/>,DeviceMobile:<HiDesktopComputer className="w-7 h-7 text-[#FC6612]"/>,LockClosed:<HiLockClosed className="w-7 h-7 text-[#FC6612]"/>,Support:<HiEmojiHappy className="w-7 h-7 text-[#FC6612]"/>,UserGroup:<HiUserGroup className="w-7 h-7 text-[#FC6612]"/>,DesktopComputer:<HiDesktopComputer className="w-7 h-7 text-[#FC6612]"/>};return ico[f.icon]||<HiSparkles className="w-7 h-7 text-[#FC6612]"/>})()}</div><h3 className="text-[15px] font-semibold text-[var(--text)] mb-2">{f.title}</h3><p className="text-[var(--text-secondary)] text-[13px] leading-relaxed">{f.description}</p></Card>))}</div></Con></Sec>
 
       {/* ====== HOW IT WORKS ====== */}
-      <Sec><Bg dark={dark} /><Con><Head headline={HOW_IT_WORKS.headline} subheadline={HOW_IT_WORKS.subheadline} /><div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-10">{HOW_IT_WORKS.steps.map((s,i)=>(<Card key={i} className="p-5 text-center"><div className="w-12 h-12 rounded-xl bg-[#11643F]/10 text-[#11643F] flex items-center justify-center text-lg font-bold mx-auto mb-4">{s.step}</div><h3 className="text-[15px] font-semibold text-[var(--text)] mb-2">{s.title}</h3><p className="text-[var(--text-secondary)] text-[13px] leading-relaxed">{s.description}</p></Card>))}</div><div className="text-center"><a href="#reg-form"><Btn size="lg">Register Now <HiArrowRight className="w-4 h-4"/></Btn></a></div></Con></Sec>
+      <Sec><Bg dark={dark} /><Con><Head headline={HOW_IT_WORKS.headline} subheadline={HOW_IT_WORKS.subheadline} /><div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-10">{HOW_IT_WORKS.steps.map((s,i)=>(<Card key={i} className="p-5 text-center"><div className="w-12 h-12 rounded-xl bg-[#FC6612]/10 text-[#FC6612] flex items-center justify-center text-lg font-bold mx-auto mb-4">{s.step}</div><h3 className="text-[15px] font-semibold text-[var(--text)] mb-2">{s.title}</h3><p className="text-[var(--text-secondary)] text-[13px] leading-relaxed">{s.description}</p></Card>))}</div><div className="text-center"><a href="#reg-form"><Btn size="lg">Register Now <HiArrowRight className="w-4 h-4"/></Btn></a></div></Con></Sec>
 
       {/* ====== WHY AI + MARKETS ====== */}
       <Sec><Bg dark={dark} variant="blue" /><Con>
@@ -283,9 +290,9 @@ export default function HomePage() {
             <p className="text-[var(--text-secondary)] text-sm leading-relaxed mb-5">{MARKETS.subheadline}</p>
             <div className="space-y-2.5">
               {MARKETS.items.map((m,i)=>(
-                <div key={i} className="flex items-center gap-4 p-4 rounded-xl bg-[var(--bg-card)] border border-[var(--border)] hover:border-[#11643F]/20 hover:-translate-y-0.5 transition-all">
-                  <div className="w-14 h-14 rounded-xl bg-[#11643F]/10 flex items-center justify-center text-3xl flex-shrink-0">
-                    {i===0?'📈':i===1?'📊':i===2?'₿':i===3?'💱':'🥇'}
+                <div key={i} className="flex items-center gap-4 p-4 rounded-xl bg-[var(--bg-card)] border border-[var(--border)] hover:border-[#FC6612]/20 hover:-translate-y-0.5 transition-all">
+                  <div className="w-14 h-14 rounded-xl bg-[#FC6612]/10 flex items-center justify-center text-3xl flex-shrink-0">
+                    {i===0?<HiTrendingUp className="w-7 h-7 text-[#FC6612]" />:i===1?<HiChartBar className="w-7 h-7 text-[#FC6612]" />:i===2?<HiCurrencyDollar className="w-7 h-7 text-[#FC6612]" />:i===3?<HiGlobeAlt className="w-7 h-7 text-[#FC6612]" />:<HiSparkles className="w-7 h-7 text-[#FC6612]" />}
                   </div>
                   <div>
                     <h4 className="text-base font-bold text-[var(--text)] mb-1">{m.name}</h4>
@@ -305,8 +312,8 @@ export default function HomePage() {
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-10">
           {WHO_IS_IT_FOR.personas.map((p,i)=>(
             <Card key={i} className="p-6 text-center group">
-              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#FC6612]/15 to-[#11643F]/15 flex items-center justify-center text-3xl mx-auto mb-4 group-hover:scale-110 transition-transform">
-                {['🌱','⚡','💻','🏦'][i]}
+              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#FC6612]/15 to-[#FC6612]/15 flex items-center justify-center text-3xl mx-auto mb-4 group-hover:scale-110 transition-transform">
+                {i===0?<HiUserAdd className="w-7 h-7 text-[#FC6612]" />:i===1?<HiLightningBolt className="w-7 h-7 text-[#FC6612]" />:i===2?<HiCode className="w-7 h-7 text-[#FC6612]" />:<HiDesktopComputer className="w-7 h-7 text-[#FC6612]" />}
               </div>
               <h3 className="text-base font-bold text-[var(--text)] mb-2">{p.title}</h3>
               <p className="text-[var(--text-secondary)] text-[13px] leading-relaxed">{p.description}</p>
@@ -331,7 +338,7 @@ export default function HomePage() {
             <ul className="space-y-3 mb-8">
               {APP_SECTION.features.map((f,i)=>(
                 <li key={i} className="flex items-start gap-3">
-                  <div className="w-6 h-6 rounded-full bg-[#11643F] flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <div className="w-6 h-6 rounded-full bg-[#FC6612] flex items-center justify-center flex-shrink-0 mt-0.5">
                     <svg className="w-3.5 h-3.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7"/></svg>
                   </div>
                   <span className="text-sm text-[var(--text-secondary)]">{f}</span>
@@ -358,8 +365,8 @@ export default function HomePage() {
           {WHY_CHOOSE_US.items.map((item,i)=>(
             <Card key={i} className="p-6 group">
               <div className="flex items-start gap-4">
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#FC6612]/15 to-[#11643F]/15 flex items-center justify-center flex-shrink-0 mt-0.5">
-                  <span className="text-lg">{['🤖','👤','📦','🎮','⚠️','💎'][i]}</span>
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#FC6612]/15 to-[#FC6612]/15 flex items-center justify-center flex-shrink-0 mt-0.5">
+                  {i===0?<HiPuzzle className="w-7 h-7 text-[#FC6612]" />:i===1?<HiEmojiHappy className="w-7 h-7 text-[#FC6612]" />:i===2?<HiCube className="w-7 h-7 text-[#FC6612]" />:i===3?<HiPlay className="w-7 h-7 text-[#FC6612]" />:i===4?<HiShieldCheck className="w-7 h-7 text-[#FC6612]" />:<HiSparkles className="w-7 h-7 text-[#FC6612]" />}
                 </div>
                 <div>
                   <h3 className="text-[15px] font-bold text-[var(--text)] mb-1.5">{item.title}</h3>
@@ -375,14 +382,14 @@ export default function HomePage() {
       {/* ====== THINGS TO KNOW ====== */}
       <Sec><Bg dark={dark} /><Con>
         <Head headline={THINGS_TO_KEEP_IN_MIND.headline} />
-        <div className="max-w-3xl mx-auto space-y-4">
+        <div className="grid sm:grid-cols-3 gap-5">
           {THINGS_TO_KEEP_IN_MIND.items.map((item,i)=>(
-            <div key={i} className="flex items-start gap-5 p-5 rounded-2xl bg-[var(--bg-card)] border border-[var(--border)] hover:border-[var(--border-strong)] transition-all">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#FC6612]/20 to-[#11643F]/20 flex items-center justify-center text-sm font-bold text-[var(--text)] flex-shrink-0">{i+1}</div>
-              <div>
-                <h3 className="text-base font-bold text-[var(--text)] mb-1">{item.title}</h3>
-                <p className="text-[var(--text-secondary)] text-sm leading-relaxed">{item.desc}</p>
+            <div key={i} className="group p-6 rounded-2xl bg-[var(--bg-card)] border border-[var(--border)] hover:border-[var(--border-strong)] hover:-translate-y-1 transition-all text-center">
+              <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#FC6612]/10 to-[#FC6612]/10 flex items-center justify-center mx-auto mb-5 group-hover:scale-110 transition-transform">
+                {i===0?<HiTrendingUp className="w-8 h-8 text-[#FC6612]" />:i===1?<HiChartBar className="w-8 h-8 text-[#FC6612]" />:<HiShieldCheck className="w-8 h-8 text-[#FC6612]" />}
               </div>
+              <h3 className="text-base font-bold text-[var(--text)] mb-2">{item.title}</h3>
+              <p className="text-[var(--text-secondary)] text-sm leading-relaxed">{item.desc}</p>
             </div>
           ))}
         </div>
@@ -396,43 +403,8 @@ export default function HomePage() {
         </div>
       </Con></Sec>
 
-      {/* ====== BOTTOM REGISTRATION FORM ====== */}
-      <Sec id="start-form"><Bg dark={dark} variant="warm" /><Con>
-        <div className="max-w-lg mx-auto">
-          <div className="rounded-2xl bg-[var(--bg-card)] border border-[var(--border-strong)] p-7 sm:p-10 shadow-2xl shadow-black/10 dark:shadow-black/40">
-            <div className="text-center mb-7">
-              <div className="w-14 h-14 rounded-2xl bg-[#FC6612]/10 flex items-center justify-center mx-auto mb-4">
-                <svg className="w-7 h-7 text-[#FC6612]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-              </div>
-              <h2 className="text-2xl sm:text-3xl font-extrabold text-[var(--text)] mb-2">Start Trading Today</h2>
-              <p className="text-[var(--text-secondary)]">Create your free account and begin your journey with AI-powered trading.</p>
-            </div>
-            {formStatus==='success' ? (
-              <div className="text-center py-8">
-                <div className="w-16 h-16 rounded-2xl bg-[#11643F]/10 flex items-center justify-center mx-auto mb-4"><svg className="w-8 h-8 text-[#11643F]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7"/></svg></div>
-                <h3 className="text-xl font-bold text-[var(--text)] mb-2">You're All Set!</h3>
-                <p className="text-[var(--text-secondary)]">Welcome to The AI Trader. Check your email for next steps.</p>
-              </div>
-            ) : (
-              <form onSubmit={submitForm} autoComplete="off" className="space-y-4">
-                {FORM_CONTENT.fields.map((f)=>(
-                  f.name === 'phone' ? (
-                    <PhoneInput key={f.id} country="us" value={form.phone} onChange={(val) => setForm(p => ({...p, phone: val}))} inputClass="w-full px-4 py-3.5 rounded-xl bg-[var(--bg)] border border-[var(--border-strong)] text-[var(--text)] text-sm placeholder-[var(--text-secondary)]" containerClass="w-full" buttonClass="rounded-xl bg-[var(--bg)] border border-[var(--border-strong)]" dropdownClass="bg-[#181B24] text-[var(--text)]" />
-                  ) : (
-                    <input key={f.id} name={f.name} type={f.type} value={form[f.name]} onChange={hc} required placeholder={f.label} className="w-full px-4 py-3.5 rounded-xl bg-[var(--bg)] border border-[var(--border-strong)] text-[var(--text)] text-sm placeholder-[var(--text-secondary)] focus:outline-none focus:border-[#FC6612]/50 transition-colors"/>
-                  )
-                ))}
-                <button type="submit" disabled={formStatus==='loading'} className="w-full py-4 rounded-xl bg-[#FC6612] hover:bg-[#e0550a] text-white font-bold text-sm transition-all shadow-lg shadow-[#FC6612]/25 hover:shadow-[#FC6612]/40 flex items-center justify-center gap-2">{formStatus==='loading'?'Creating Account...':<>Create Account For Free<HiArrowRight className="w-4 h-4"/></>}</button>
-                {errorMsg && <p className="text-center text-sm text-red-400 bg-red-400/5 rounded-lg py-2">{errorMsg}</p>}
-                <p className="text-center text-xs text-[var(--text-muted)]">I have read and agree to the Privacy Policy and Terms & Conditions.</p>
-              </form>
-            )}
-          </div>
-        </div>
-      </Con></Sec>
-
       {/* ====== CTA ====== */}
-      <Sec><Bg dark={dark} /><Con><div className="rounded-3xl bg-[var(--bg-card)] border border-[var(--border)] p-10 sm:p-14 lg:p-16 text-center"><div className="flex items-center justify-center gap-2 mb-4"><span className="text-amber-400 text-lg">★★★★★</span><span className="text-[var(--text-secondary)] text-sm">Rated 4.8/5 · by 2,400+ users</span></div><h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[var(--text)] mb-3">Ready to Trade Smarter?</h2><p className="text-[var(--text-secondary)] text-lg max-w-lg mx-auto mb-8">Join 100,000+ traders across 50+ countries.</p><a href="#start-form"><Btn size="xl">Create Free Account <HiArrowRight className="w-4 h-4"/></Btn></a><p className="mt-4 text-[13px] text-[var(--text-secondary)]">Free to start. $250 minimum deposit. No hidden fees.</p></div></Con></Sec>
+      <Sec><Bg dark={dark} /><Con><div className="rounded-3xl bg-[var(--bg-card)] border border-[var(--border)] p-10 sm:p-14 lg:p-16 text-center"><div className="flex items-center justify-center gap-2 mb-4"><span className="text-amber-400 text-lg">★★★★★</span><span className="text-[var(--text-secondary)] text-sm">Rated 4.8/5 · by 2,400+ users</span></div><h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[var(--text)] mb-3">Ready to Trade Smarter?</h2><p className="text-[var(--text-secondary)] text-lg max-w-lg mx-auto mb-8">Join 100,000+ traders across 50+ countries.</p><a href="#reg-form"><Btn size="xl">Create Free Account <HiArrowRight className="w-4 h-4"/></Btn></a><p className="mt-4 text-[13px] text-[var(--text-secondary)]">Free to start. $250 minimum deposit. No hidden fees.</p></div></Con></Sec>
 
       {/* ====== FOOTER ====== */}
       <footer className="border-t-2 border-[var(--border-strong)] bg-[var(--bg-alt)]">
@@ -447,15 +419,15 @@ export default function HomePage() {
               <h3 className="text-xs font-semibold text-[var(--text)] uppercase tracking-wider mb-4">Contact</h3>
               <div className="space-y-2.5">
                 <p className="text-[var(--text-secondary)] text-sm flex items-center gap-2">
-                  <svg className="w-4 h-4 text-[#11643F] flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+                  <svg className="w-4 h-4 text-[#FC6612] flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
                   AU +61 284 889 800
                 </p>
                 <p className="text-[var(--text-secondary)] text-sm flex items-center gap-2">
-                  <svg className="w-4 h-4 text-[#11643F] flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+                  <svg className="w-4 h-4 text-[#FC6612] flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
                   UK +44 203 927 2999
                 </p>
-                <p className="text-[#FC6612] text-sm font-medium flex items-center gap-2">
-                  <svg className="w-4 h-4 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                <p className="text-[var(--text-secondary)] text-sm flex items-center gap-2">
+                  <svg className="w-4 h-4 text-[#FC6612] flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
                   info@traderai.ai
                 </p>
               </div>

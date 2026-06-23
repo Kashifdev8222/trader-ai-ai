@@ -7,7 +7,7 @@ export const SITE_TITLE = 'The AI Trader ™ | Official & Updated Website【2026
 export const SITE_DESCRIPTION =
   'Trader AI makes ai trading easier and smarter. Analyze markets in real-time, automate strategies safely, stay fully in control. Explore with FREE registration!';
 
-// NAVIGATION — EXACT from traderai.ai header
+// NAVIGATION - EXACT from traderai.ai header
 export const NAV_LINKS = [
   {
     label: 'Invest',
@@ -58,89 +58,89 @@ export const LANGUAGES = [
   { code: 'it', label: 'IT' },
 ];
 
-// HERO — EXACT text
+// HERO - EXACT text
 export const HERO_CONTENT = {
-  headline: 'Trader AI — Where Smart Traders Turn Market Moves Into Real Returns',
+  headline: 'Trader AI - Where Smart Traders Turn Market Moves Into Real Returns',
   description:
-    'Every second, the market creates opportunities. Most traders miss them—too slow, too tired, too late. Trader AI never misses. It watches every price shift, every news break, and every signal—and acts at the exact right moment. Stocks, crypto, forex, commodities. One platform. Built to help your money work harder than you do.',
+    'Every second, the market creates opportunities. Most traders miss them-too slow, too tired, too late. Trader AI never misses. It watches every price shift, every news break, and every signal-and acts at the exact right moment. Stocks, crypto, forex, commodities. One platform. Built to help your money work harder than you do.',
   trustBar: 'Trusted by 100000+ traders across 50+ countries · Available on iOS, Android & Web · Start Trading in Seconds',
 };
 
-// ABOUT — EXACT text
+// ABOUT - EXACT text
 export const ABOUT_CONTENT = {
   headline: 'What Is Trader AI?',
   description:
     'Trader AI is an AI trading platform that helps you buy and sell stocks, forex, crypto, and commodities. It employs sophisticated computer models to analyze the market in real time, find good trade ideas, and even place trades for you if you want to. Trader AI arms you with the tools to make better choices, faster. Whether you trade once a week or every hour.',
   inflation_headline: 'Do you know how much your money is really worth today compared to ten years ago?',
   inflation_text:
-    'If you had £100,000 sitting in the bank back then, it would only buy about £80,000 worth of goods today — that\'s a 20% loss in real value due to inflation. Now, while bank savings accounts paid less than 1% interest per year, inflation averaged around 2.5–3%, meaning your money was silently losing value year after year. But here\'s the real kicker — during that same decade, the Nasdaq 100 index grew by almost 400%. In other words, money invested in the market didn\'t just hold its value — it multiplied nearly five times. And while most people trusted their banks to \'keep their money safe\', the banks and professional traders were using that very same money to make those returns for themselves. So while your money sleeps, someone else is making it work — for them. It\'s time to take control and make your money work for you instead.',
+    'If you had £100,000 sitting in the bank back then, it would only buy about £80,000 worth of goods today - that\'s a 20% loss in real value due to inflation. Now, while bank savings accounts paid less than 1% interest per year, inflation averaged around 2.5-3%, meaning your money was silently losing value year after year. But here\'s the real kicker - during that same decade, the Nasdaq 100 index grew by almost 400%. In other words, money invested in the market didn\'t just hold its value - it multiplied nearly five times. And while most people trusted their banks to \'keep their money safe\', the banks and professional traders were using that very same money to make those returns for themselves. So while your money sleeps, someone else is making it work - for them. It\'s time to take control and make your money work for you instead.',
 };
 
-// FEATURES — EXACT text
+// FEATURES - EXACT text
 export const FEATURES = [
   {
-    icon: '📡',
+    icon: 'ChartBar',
     title: 'Real-Time Data',
     description:
-      'The AI sniffs out the market 24/7 and pings you the second it sees a good trade. Every signal includes a clear rationale—so you always know the \'why\' behind your trades, not just the \'what.\'',
+      'The AI sniffs out the market 24/7 and pings you the second it sees a good trade. Every signal includes a clear rationale-so you always know the \'why\' behind your trades, not just the \'what.\'',
   },
   {
-    icon: '🤖',
+    icon: 'Chip',
     title: 'Set It and Forget It',
     description:
       'Start the AI trading bot and let it do the heavy lifting. It follows your rules, takes the trades, and stops when things get risky. Perfect for busy lives.',
   },
   {
-    icon: '📊',
+    icon: 'ViewGrid',
     title: 'See the Whole Market in One Place',
     description:
       'Stocks. Crypto. Forex. Commodities. All on one screen. No switching tabs. No missing a move.',
   },
   {
-    icon: '🛡️',
+    icon: 'ShieldCheck',
     title: 'Built-In Safety',
     description:
       'AI places a stop loss for you. It controls the amount you risk on each trade. It never bets the whole farm. Smart rules protect your money every single time.',
   },
   {
-    icon: '🧪',
+    icon: 'Beaker',
     title: 'Test Before You Trade',
     description:
       'Test any strategy over years of historical market data first. You\'ll see how it would have done before risking a single dollar.',
   },
   {
-    icon: '📱',
+    icon: 'DeviceMobile',
     title: 'Trade From Your Pocket',
     description:
       'The Trader AI app puts it all on your phone. Android or iOS, same rate. Same strength.',
   },
   {
-    icon: '🔒',
+    icon: 'LockClosed',
     title: 'User Data Security',
     description:
       'The most important factor a user looks for in a trading app is the security of data and funds. The AI trader app provides security for its users\' data and funds.',
   },
   {
-    icon: '🎧',
+    icon: 'Support',
     title: 'Customer Support',
     description:
       'Our customer service team is devoted to assisting traders with their concerns. They are there 24/7 and will entertain your query in no time!',
   },
   {
-    icon: '👥',
+    icon: 'UserGroup',
     title: 'All levels of traders',
     description:
       'This AI trading software can be used by traders of all levels to improve their trading with feature personalization.',
   },
   {
-    icon: '🖥️',
+    icon: 'DesktopComputer',
     title: 'User-friendly Interface',
     description:
       'This application has a simple interface for all traders to use. Trader AI\'s intuitive design makes it easy for users to understand their trading performance; no need for extensive financial knowledge.',
   },
 ];
 
-// HOW IT WORKS — EXACT text
+// HOW IT WORKS - EXACT text
 export const HOW_IT_WORKS = {
   headline: 'How Trader AI Works in 4 Simple Steps',
   subheadline: 'Getting started is easy. You don\'t need to be a market expert.',
@@ -171,7 +171,7 @@ export const HOW_IT_WORKS = {
   ],
 };
 
-// WHY AI — EXACT text
+// WHY AI - EXACT text
 export const WHY_AI = {
   headline: 'Why Does AI Beat Manual Trading?',
   description:
@@ -182,7 +182,7 @@ export const WHY_AI = {
     'This isn\'t about taking over you. It\'s about giving you superpowers. You determine the strategy and objectives. AI gives you speed, focus, and discipline.',
 };
 
-// MARKETS — EXACT text
+// MARKETS - EXACT text
 export const MARKETS = {
   headline: 'Markets You Can Trade',
   subheadline: 'Trader AI works across the markets that matter most.',
@@ -215,7 +215,7 @@ export const MARKETS = {
   ],
 };
 
-// WHO IS IT FOR — EXACT text
+// WHO IS IT FOR - EXACT text
 export const WHO_IS_IT_FOR = {
   headline: 'Who Is Trader AI For?',
   subheadline: 'Different traders. Same powerful tool.',
@@ -243,13 +243,13 @@ export const WHO_IS_IT_FOR = {
   ],
 };
 
-// APP SECTION — EXACT text
+// APP SECTION - EXACT text
 export const APP_SECTION = {
-  headline: 'The Trader AI App — Your Market in Your Pocket',
+  headline: 'The Trader AI App - Your Market in Your Pocket',
   subheadline: 'The world is moving. Why be stuck to a screen? The AI trader app puts everything the desktop has on your phone.',
   features: [
     'Get push alerts the second the AI spots a trade',
-    'Tap once to take the trade—or let the bot do it',
+    'Tap once to take the trade-or let the bot do it',
     'Check your portfolio anytime, anywhere',
     'Log in safely with Face ID or fingerprint',
     'Stay synced with the web version, always',
@@ -262,7 +262,7 @@ export const APP_SECTION = {
   ],
 };
 
-// WHY CHOOSE US — EXACT text
+// WHY CHOOSE US - EXACT text
 export const WHY_CHOOSE_US = {
   headline: 'Why Traders Choose Us Over Other Tools',
   subheadline:
@@ -295,17 +295,17 @@ export const WHY_CHOOSE_US = {
   ],
 };
 
-// THINGS TO KEEP IN MIND — EXACT text
+// THINGS TO KEEP IN MIND - EXACT text
 export const THINGS_TO_KEEP_IN_MIND = {
   headline: 'Things to Keep in Mind',
   items: [
-    { title: 'Markets Are Unpredictable', desc: 'No tool — human or AI — can predict the market with certainty. Conditions can change without warning.' },
+    { title: 'Markets Are Unpredictable', desc: 'No tool - human or AI - can predict the market with certainty. Conditions can change without warning.' },
     { title: 'Past Performance Isn\'t a Guarantee', desc: 'How a strategy performed before doesn\'t promise the same results going forward. Every trade has its own risk.' },
-    { title: 'You\'re always in control', desc: 'Trader AI provides signals and tools — not financial advice. Final decisions are always yours to make.' },
+    { title: 'You\'re always in control', desc: 'Trader AI provides signals and tools - not financial advice. Final decisions are always yours to make.' },
   ],
 };
 
-// FAQ — EXACT from schema
+// FAQ - EXACT from schema
 export const FAQ_ITEMS = [
   {
     question: 'How do I start AI trading?',
