@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { HiArrowRight } from 'react-icons/hi';
 import PhoneInputLib from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
@@ -6,6 +6,13 @@ const PhoneInput = PhoneInputLib.default || PhoneInputLib;
 
 export default function ContactPage() {
   const [form, setForm] = useState({ firstName: '', lastName: '', email: '', phone: '' });
+  const [phoneCountry, setPhoneCountry] = useState('us');
+  useEffect(() => {
+    fetch('https://ipapi.co/country/').then(r=>r.text()).then(cc=>{
+      const m={PK:'pk',IN:'in',US:'us',GB:'gb',AU:'au',CN:'cn',DE:'de',FR:'fr',JP:'jp',RU:'ru',BR:'br',IT:'it',ES:'es',NL:'nl',SE:'se',CH:'ch',PL:'pl',PH:'ph',MX:'mx',AE:'ae',NG:'ng',SA:'sa',EG:'eg',ZA:'za',KR:'kr',VN:'vn',TH:'th',MY:'my',ID:'id',TR:'tr',CA:'ca'};
+      const c=m[cc.trim().toUpperCase()]; if(c) setPhoneCountry(c);
+    }).catch(()=>{});
+  }, []);
   const [status, setStatus] = useState('idle');
   const hc = (e) => setForm((p) => ({ ...p, [e.target.name]: e.target.value }));
   const submit = async (e) => {
@@ -50,7 +57,7 @@ export default function ContactPage() {
                 ))}
                 <div>
                   <label className="block text-sm font-semibold text-[var(--text)] mb-1.5">Phone Number</label>
-                  <PhoneInput value={form.phone} onChange={(val) => setForm(p => ({...p, phone: val}))} />
+                  <PhoneInput country={phoneCountry} value={form.phone} onChange={(val) => setForm(p => ({...p, phone: val}))} />
                 </div>
                 <button type="submit" disabled={status === 'loading'} className="w-full py-4 rounded-xl bg-[#FC6612] hover:bg-[#e0550a] text-white font-bold text-sm transition-all shadow-lg shadow-[#FC6612]/20 hover:shadow-[#FC6612]/40 flex items-center justify-center gap-2">
                   {status === 'loading' ? 'Sending...' : <>Send Message<HiArrowRight className="w-4 h-4"/></>}
