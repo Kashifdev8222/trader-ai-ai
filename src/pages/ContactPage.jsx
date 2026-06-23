@@ -50,7 +50,7 @@ export default function ContactPage() {
                 ))}
                 <div>
                   <label className="block text-sm font-semibold text-[var(--text)] mb-1.5">Phone Number</label>
-                  <PhoneInput country="us" value={form.phone} onChange={(val) => setForm(p => ({...p, phone: val}))} />
+                  <PhoneInput value={form.phone} onChange={(val) => setForm(p => ({...p, phone: val}))} />
                 </div>
                 <button type="submit" disabled={status === 'loading'} className="w-full py-4 rounded-xl bg-[#FC6612] hover:bg-[#e0550a] text-white font-bold text-sm transition-all shadow-lg shadow-[#FC6612]/20 hover:shadow-[#FC6612]/40 flex items-center justify-center gap-2">
                   {status === 'loading' ? 'Sending...' : <>Send Message<HiArrowRight className="w-4 h-4"/></>}

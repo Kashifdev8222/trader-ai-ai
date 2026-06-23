@@ -32,6 +32,15 @@ function Bg({ variant = 'default', dark }) {
   if (variant === 'blue') return d ? (<><div className="absolute inset-0 bg-gradient-to-br from-[#0A0C11] via-[#0A0B10] to-[#0A0C12]"/><div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-[#6366f1]/[0.01] rounded-full blur-3xl pointer-events-none"/></>) : (<><div className="absolute inset-0 bg-gradient-to-br from-[#eff6ff] via-[#f8fafc] to-[#eef2ff]"/><div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-[#6366f1]/[0.03] rounded-full blur-3xl pointer-events-none"/></>);
   return (<><div className="absolute inset-0 bg-[var(--bg)]"/><div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-[#FC6612]/[0.02] rounded-full blur-3xl pointer-events-none"/></>);
 }
+function HdDropdown({ label, items }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div className="relative" onMouseEnter={()=>setOpen(true)} onMouseLeave={()=>setOpen(false)}>
+      <button className="flex items-center gap-1 px-3 py-2 text-[13px] font-medium rounded-lg text-[var(--text-secondary)] hover:text-[var(--text)] hover:bg-white/[0.03] transition-colors">{label}<HiChevronDown className="w-3 h-3" /></button>
+      {open && <div className="absolute top-full left-0 mt-1 w-48 bg-[var(--bg-elevated)] border border-[var(--border-strong)] rounded-xl shadow-2xl py-2 z-50">{items.map(i=><Link key={i.to} to={i.to} className="block px-4 py-2.5 text-[13px] text-[var(--text-secondary)] hover:text-[var(--text)] hover:bg-white/[0.03] transition-colors">{i.label}</Link>)}</div>}
+    </div>
+  );
+}
 function Sec({ children, id, className = '' }) {
   return <section id={id} className={`relative border-t border-[var(--border)] reveal ${className}`}>{children}</section>;
 }
@@ -47,11 +56,10 @@ function Head({ headline, subheadline }) {
   );
 }
 function Btn({ children, variant = 'primary', size = 'md', className = '', ...p }) {
-  const base = 'cursor-pointer inline-flex items-center justify-center gap-1.5 font-semibold transition-all duration-200 hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed';
+  const base = 'cursor-pointer inline-flex items-center justify-center gap-1.5 font-semibold transition-all duration-300 hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed';
   const sz = { sm: 'px-4 py-2 text-[13px] rounded-lg', md: 'px-5 py-2.5 text-[13px] rounded-lg', lg: 'px-6 py-3 text-sm rounded-xl', xl: 'px-8 py-3.5 text-[15px] rounded-xl' };
-  if (variant === 'secondary') return <button className={`${base} bg-transparent hover:bg-white/[0.05] text-[var(--text)] border-2 border-white/20 hover:border-white/40 ${sz[size]} ${className}`} {...p}>{children}</button>;
-  if (variant === 'green') return <button className={`${base} bg-[#FC6612] hover:bg-[#0e5434] text-white shadow-lg shadow-[#FC6612]/20 ${sz[size]} ${className}`} {...p}>{children}</button>;
-  return <button className={`${base} bg-[#FC6612] hover:bg-[#e0550a] text-white shadow-lg shadow-[#FC6612]/20 ${sz[size]} ${className}`} {...p}>{children}</button>;
+  if (variant === 'secondary') return <button className={`${base} bg-transparent hover:bg-white/[0.04] text-[var(--text)] border border-[var(--border-strong)] hover:border-white/30 ${sz[size]} ${className}`} {...p}>{children}</button>;
+  return <button className={`${base} bg-[#FC6612] hover:bg-[#e0550a] text-white shadow-md shadow-[#FC6612]/25 hover:shadow-lg hover:shadow-[#FC6612]/35 ${sz[size]} ${className}`} {...p}>{children}</button>;
 }
 function Card({ children, className = '', delay = 0 }) {
   return <div className={`rounded-2xl bg-[var(--bg-card)] border border-[var(--border)] shadow-sm hover:shadow-xl hover:shadow-black/10 hover:border-[var(--border-strong)] transition-all duration-300 hover:-translate-y-1 reveal ${delay ? `delay-${delay}` : ''} ${className}`}>{children}</div>;
@@ -62,6 +70,7 @@ const NAV = [
   { label: 'Home', to: '/' },
   { label: 'About Us', to: '/about-us' },
   { label: 'Blog', to: '/blog' },
+  { label: 'News', to: '#', children: [{ label: 'Crypto News', to: '/crypto-news' },{ label: 'Stock News', to: '/stock-news' },{ label: 'Forex News', to: '/forex-news' }] },
   { label: 'Contact Us', to: '/contact-us' },
 ];
 
@@ -106,16 +115,12 @@ export default function HomePage() {
       <header className="fixed top-0 left-0 right-0 z-50 bg-[var(--bg-alt)]/95 backdrop-blur-xl border-b-2 border-[var(--border-strong)]">
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-[68px]">
           <Logo />
-          <nav className="hidden lg:flex items-center gap-2">
-            {NAV.map(link => {
-              const active = loc.pathname === link.to;
-              return (
-                <Link key={link.to} to={link.to}
-                  className={`px-4 py-2 text-[14px] font-medium rounded-lg transition-colors ${
-                    active ? 'text-[#FC6612] bg-[#FC6612]/[0.08]' : 'text-[var(--text-secondary)] hover:text-[var(--text)] hover:bg-white/[0.03]'
-                  }`}>{link.label}</Link>
-              );
-            })}
+          <nav className="hidden lg:flex items-center gap-1">
+            {NAV.map(link => link.children ? (
+              <HdDropdown key={link.label} label={link.label} items={link.children} />
+            ) : (
+              <Link key={link.to} to={link.to} className={`px-3 py-2 text-[13px] font-medium rounded-lg transition-colors ${loc.pathname===link.to?'text-[#FC6612] bg-[#FC6612]/[0.08]':'text-[var(--text-secondary)] hover:text-[var(--text)] hover:bg-white/[0.03]'}`}>{link.label}</Link>
+            ))}
             <button onClick={() => setDark(!dark)} title="Toggle theme"
               className="ml-2 w-9 h-9 rounded-lg border border-[var(--border-strong)] flex items-center justify-center text-[var(--text-secondary)] hover:text-[#FC6612] hover:border-[#FC6612]/20 transition-colors">
               {dark ? <HiSun className="w-4 h-4" /> : <HiMoon className="w-4 h-4" />}
@@ -185,7 +190,7 @@ export default function HomePage() {
                       <div key={f.id}>
                         <label className="block text-sm font-semibold text-[var(--text)] mb-1.5">{f.label}</label>
                         {f.name === 'phone' ? (
-                          <PhoneInput country="us" value={form.phone} onChange={(val) => setForm(p => ({...p, phone: val}))} inputClass="w-full px-4 py-3 rounded-xl bg-[var(--bg)] border border-[var(--border-strong)] text-[var(--text)] text-sm placeholder-[var(--text-secondary)]" containerClass="w-full" buttonClass="rounded-xl bg-[var(--bg)] border border-[var(--border-strong)]" dropdownClass="bg-[#181B24] text-[var(--text)]" />
+                          <PhoneInput value={form.phone} onChange={(val) => setForm(p => ({...p, phone: val}))} inputClass="w-full px-4 py-3 rounded-xl bg-[var(--bg)] border border-[var(--border-strong)] text-[var(--text)] text-sm placeholder-[var(--text-secondary)]" containerClass="w-full" buttonClass="rounded-xl bg-[var(--bg)] border border-[var(--border-strong)]" dropdownClass="bg-[#181B24] text-[var(--text)]" />
                         ) : (
                           <input name={f.name} type={f.type} value={form[f.name]} onChange={hc} required placeholder={`Enter your ${f.label.toLowerCase()}`} className="w-full px-4 py-3 rounded-xl bg-[var(--bg)] border border-[var(--border-strong)] text-[var(--text)] text-sm placeholder-[var(--text-secondary)] focus:outline-none focus:border-[#FC6612]/50 focus:ring-2 focus:ring-[#FC6612]/10 transition-all"/>
                         )}

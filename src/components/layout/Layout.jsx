@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { HiSun, HiMoon } from 'react-icons/hi';
+import { HiSun, HiMoon, HiChevronDown } from 'react-icons/hi';
 import { Link, useLocation } from 'react-router-dom';
 
 function Logo() {
@@ -15,7 +15,9 @@ function Logo() {
 
 const NAV = [
   { label: 'Home', to: '/' },{ label: 'About Us', to: '/about-us' },
-  { label: 'Blog', to: '/blog' },{ label: 'Contact Us', to: '/contact-us' },
+  { label: 'Blog', to: '/blog' },
+  { label: 'News', to: '#', children: [{ label: 'Crypto News', to: '/crypto-news' },{ label: 'Stock News', to: '/stock-news' },{ label: 'Forex News', to: '/forex-news' }] },
+  { label: 'Contact Us', to: '/contact-us' },
 ];
 
 const SOCIAL_LINKS = [
@@ -24,6 +26,24 @@ const SOCIAL_LINKS = [
   {n:'YouTube',d:'M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z'},
   {n:'X',d:'M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z'},
 ];
+
+function NavDropdown({ label, items }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div className="relative" onMouseEnter={()=>setOpen(true)} onMouseLeave={()=>setOpen(false)}>
+      <button className="flex items-center gap-1 px-3 py-2 text-[13px] font-medium rounded-lg text-[var(--text-secondary)] hover:text-[var(--text)] hover:bg-white/[0.03] transition-colors">
+        {label}<HiChevronDown className="w-3 h-3" />
+      </button>
+      {open && (
+        <div className="absolute top-full left-0 mt-1 w-48 bg-[var(--bg-elevated)] border border-[var(--border-strong)] rounded-xl shadow-2xl py-2 z-50">
+          {items.map(i=>(
+            <Link key={i.to} to={i.to} className="block px-4 py-2.5 text-[13px] text-[var(--text-secondary)] hover:text-[var(--text)] hover:bg-white/[0.03] transition-colors">{i.label}</Link>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
 
 export default function Layout({ children }) {
   const loc = useLocation();
@@ -36,11 +56,12 @@ export default function Layout({ children }) {
       <header className="fixed top-0 left-0 right-0 z-50 bg-[var(--bg-alt)]/95 backdrop-blur-xl border-b-2 border-[var(--border-strong)]">
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-[68px]">
           <Logo />
-          <nav className="hidden lg:flex items-center gap-2">
-            {NAV.map(link => {
-              const active = loc.pathname === link.to;
-              return <Link key={link.to} to={link.to} className={`px-4 py-2 text-[14px] font-medium rounded-lg transition-colors ${active?'text-[#FC6612] bg-[#FC6612]/[0.08]':'text-[var(--text-secondary)] hover:text-[var(--text)] hover:bg-white/[0.03]'}`}>{link.label}</Link>;
-            })}
+          <nav className="hidden lg:flex items-center gap-1">
+            {NAV.map(link => link.children ? (
+              <NavDropdown key={link.label} label={link.label} items={link.children} />
+            ) : (
+              <Link key={link.to} to={link.to} className={`px-3 py-2 text-[13px] font-medium rounded-lg transition-colors ${loc.pathname===link.to?'text-[#FC6612] bg-[#FC6612]/[0.08]':'text-[var(--text-secondary)] hover:text-[var(--text)] hover:bg-white/[0.03]'}`}>{link.label}</Link>
+            ))}
             <button onClick={()=>setDark(!dark)} className="ml-2 w-9 h-9 rounded-lg border border-[var(--border-strong)] flex items-center justify-center text-[var(--text-secondary)] hover:text-[#FC6612] transition-colors">{dark?<HiSun className="w-4 h-4"/>:<HiMoon className="w-4 h-4"/>}</button>
           </nav>
           <a href="/#reg-form" className="hidden lg:inline-flex px-5 py-2.5 text-[14px] font-semibold rounded-lg bg-[#FC6612] hover:bg-[#e0550a] text-white shadow-lg shadow-[#FC6612]/20 transition-all">Start Trading</a>

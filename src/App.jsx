@@ -9,6 +9,7 @@ import DisclaimerPage from './pages/DisclaimerPage';
 import PrivacyPage from './pages/PrivacyPage';
 import TermsPage from './pages/TermsPage';
 import ThankYouPage from './pages/ThankYouPage';
+import NewsPage from './pages/NewsPage';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -29,9 +30,9 @@ export default function App() {
         <Route path="/market" element={<Layout><GenericPage title="Market" subtitle="Markets you can trade with Trader AI." /></Layout>} />
         <Route path="/how-it-works" element={<Layout><GenericPage title="How it Works" subtitle="Getting started with Trader AI is simple." /></Layout>} />
         <Route path="/automated-trading" element={<Layout><GenericPage title="Automated Trading" subtitle="Let AI handle the heavy lifting 24/7." /></Layout>} />
-        <Route path="/crypto-news" element={<Layout><GenericPage title="Crypto News Traderai" subtitle="Latest cryptocurrency news and updates." /></Layout>} />
-        <Route path="/forex-news" element={<Layout><GenericPage title="Forex News Traderai" subtitle="Latest forex market news and analysis." /></Layout>} />
-        <Route path="/stock-news" element={<Layout><GenericPage title="Stock News Traderai" subtitle="Latest stock market news and insights." /></Layout>} />
+        <Route path="/crypto-news" element={<Layout><NewsPage type="crypto" /></Layout>} />
+        <Route path="/forex-news" element={<Layout><NewsPage type="forex" /></Layout>} />
+        <Route path="/stock-news" element={<Layout><NewsPage type="stock" /></Layout>} />
         <Route path="/blog" element={<Layout><GenericPage title="Blog" subtitle="Trading guides, market analysis, and AI insights." /></Layout>} />
         <Route path="/open-account" element={<Layout><GenericPage title="Open Account" subtitle="Start trading with Trader AI today." /></Layout>} />
         <Route path="/privacy-policy" element={<Layout><PrivacyPage /></Layout>} />
