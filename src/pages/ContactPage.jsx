@@ -8,14 +8,10 @@ export default function ContactPage() {
   const [form, setForm] = useState({ firstName: '', lastName: '', email: '', phone: '' });
   const [phoneCountry, setPhoneCountry] = useState('us');
   useEffect(() => {
-    fetch('https://ipapi.co/country/').then(r=>r.text()).then(cc=>{
-      const m={PK:'pk',IN:'in',US:'us',GB:'gb',AU:'au',CN:'cn',DE:'de',FR:'fr',JP:'jp',RU:'ru',BR:'br',IT:'it',ES:'es',NL:'nl',SE:'se',CH:'ch',PL:'pl',PH:'ph',MX:'mx',AE:'ae',NG:'ng',SA:'sa',EG:'eg',ZA:'za',KR:'kr',VN:'vn',TH:'th',MY:'my',ID:'id',TR:'tr',CA:'ca'};
-      const c=m[cc.trim().toUpperCase()]; if(c) setPhoneCountry(c);
-    }).catch(()=>{
-      const l=navigator.language||''; const cc=l.split('-')[1]?.toLowerCase();
-      const m={pk:'pk',in:'in',us:'us',gb:'gb',au:'au',cn:'cn',de:'de',fr:'fr',jp:'jp',ru:'ru',br:'br',it:'it',es:'es',nl:'nl',se:'se',ch:'ch',pl:'pl',ph:'ph',mx:'mx',ae:'ae',ng:'ng',sa:'sa',eg:'eg',za:'za',kr:'kr',vn:'vn',th:'th',my:'my',id:'id',tr:'tr',ca:'ca'};
-      if(cc&&m[cc]) setPhoneCountry(m[cc]);
-    });
+    const l = navigator.language || '';
+    const cc = l.split('-')[1]?.toLowerCase() || l.split('-')[0]?.toLowerCase();
+    const map = { pk:'pk', in:'in', us:'us', gb:'gb', au:'au', cn:'cn', de:'de', fr:'fr', jp:'jp', ru:'ru', br:'br', it:'it', es:'es', nl:'nl', se:'se', ch:'ch', pl:'pl', ph:'ph', mx:'mx', ae:'ae', ng:'ng', sa:'sa', eg:'eg', za:'za', kr:'kr', vn:'vn', th:'th', my:'my', id:'id', tr:'tr', ca:'ca' };
+    if (map[cc]) setPhoneCountry(map[cc]);
   }, []);
   const [status, setStatus] = useState('idle');
   const hc = (e) => setForm((p) => ({ ...p, [e.target.name]: e.target.value }));

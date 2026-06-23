@@ -83,16 +83,10 @@ export default function HomePage() {
   const [phoneCountry, setPhoneCountry] = useState('us');
   const hc = (e) => setForm((p) => ({ ...p, [e.target.name]: e.target.value }));
   useEffect(() => {
-    // Try IP detection first
-    fetch('https://ipapi.co/country/').then(r=>r.text()).then(cc=>{
-      const m={PK:'pk',IN:'in',US:'us',GB:'gb',AU:'au',CN:'cn',DE:'de',FR:'fr',JP:'jp',RU:'ru',BR:'br',IT:'it',ES:'es',NL:'nl',SE:'se',CH:'ch',PL:'pl',PH:'ph',MX:'mx',AE:'ae',NG:'ng',SA:'sa',EG:'eg',ZA:'za',KR:'kr',VN:'vn',TH:'th',MY:'my',ID:'id',TR:'tr',CA:'ca'};
-      const c=m[cc.trim().toUpperCase()]; if(c) setPhoneCountry(c);
-    }).catch(()=>{
-      // Fallback: browser language
-      const l=navigator.language||''; const cc=l.split('-')[1]?.toLowerCase();
-      const m={pk:'pk',in:'in',us:'us',gb:'gb',au:'au',cn:'cn',de:'de',fr:'fr',jp:'jp',ru:'ru',br:'br',it:'it',es:'es',nl:'nl',se:'se',ch:'ch',pl:'pl',ph:'ph',mx:'mx',ae:'ae',ng:'ng',sa:'sa',eg:'eg',za:'za',kr:'kr',vn:'vn',th:'th',my:'my',id:'id',tr:'tr',ca:'ca'};
-      if(cc&&m[cc]) setPhoneCountry(m[cc]);
-    });
+    const l = navigator.language || '';
+    const cc = l.split('-')[1]?.toLowerCase() || l.split('-')[0]?.toLowerCase();
+    const map = { pk:'pk', in:'in', us:'us', gb:'gb', au:'au', cn:'cn', de:'de', fr:'fr', jp:'jp', ru:'ru', br:'br', it:'it', es:'es', nl:'nl', se:'se', ch:'ch', pl:'pl', ph:'ph', mx:'mx', ae:'ae', ng:'ng', sa:'sa', eg:'eg', za:'za', kr:'kr', vn:'vn', th:'th', my:'my', id:'id', tr:'tr', ca:'ca' };
+    if (map[cc]) setPhoneCountry(map[cc]);
   }, []);
 
   useEffect(() => {
@@ -285,7 +279,7 @@ export default function HomePage() {
       <Sec id="demo"><Bg dark={dark} /><Con><Head headline="See The AI Trader in Action" subheadline="Watch how our AI analyzes markets, spots opportunities, and helps you trade smarter." /><div className="max-w-4xl mx-auto"><div className="rounded-2xl overflow-hidden border border-[var(--border)] shadow-2xl shadow-black/40 bg-[var(--bg-card)]"><div className="flex items-center gap-2 px-4 py-3 border-b border-[var(--border)]"><div className="w-3 h-3 rounded-full bg-red-500/60"/><div className="w-3 h-3 rounded-full bg-amber-400/60"/><div className="w-3 h-3 rounded-full bg-green-400/60"/><span className="ml-3 text-[11px] text-[var(--text-secondary)]">theaitrader.ai</span></div><div className="aspect-video"><YouTubeEmbed /></div></div></div></Con></Sec>
 
       {/* ====== FEATURES ====== */}
-      <Sec><Bg dark={dark} variant="warm" /><Con><Head headline="What You Get with The AI Trader" subheadline="Here's what makes us different from old-school trading tools." /><div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">{FEATURES.map((f,i)=>(<Card key={i} className="p-5"><div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#FC6612]/10 to-[#FC6612]/5 flex items-center justify-center mb-4">{(()=>{const ico={ChartBar:<HiChartBar className="w-7 h-7 text-[#FC6612]"/>,Chip:<HiPuzzle className="w-7 h-7 text-[#FC6612]"/>,ViewGrid:<HiCube className="w-7 h-7 text-[#FC6612]"/>,ShieldCheck:<HiShieldCheck className="w-7 h-7 text-[#FC6612]"/>,Beaker:<HiLightBulb className="w-7 h-7 text-[#FC6612]"/>,DeviceMobile:<HiDesktopComputer className="w-7 h-7 text-[#FC6612]"/>,LockClosed:<HiLockClosed className="w-7 h-7 text-[#FC6612]"/>,Support:<HiEmojiHappy className="w-7 h-7 text-[#FC6612]"/>,UserGroup:<HiUserGroup className="w-7 h-7 text-[#FC6612]"/>,DesktopComputer:<HiDesktopComputer className="w-7 h-7 text-[#FC6612]"/>};return ico[f.icon]||<HiSparkles className="w-7 h-7 text-[#FC6612]"/>})()}</div><h3 className="text-[15px] font-semibold text-[var(--text)] mb-2">{f.title}</h3><p className="text-[var(--text-secondary)] text-[13px] leading-relaxed">{f.description}</p></Card>))}</div></Con></Sec>
+      <Sec><Bg dark={dark} variant="warm" /><Con><Head headline="What You Get with The AI Trader" subheadline="Here's what makes us different from old-school trading tools." /><div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">{FEATURES.map((f,i)=>(<Card key={i} className="p-5"><div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#FC6612]/10 to-[#FC6612]/5 flex items-center justify-center mb-4">{(()=>{const ico={ChartBar:<HiChartBar className="w-7 h-7 text-[#FC6612]"/>,Chip:<HiPuzzle className="w-7 h-7 text-[#FC6612]"/>,ViewGrid:<HiCube className="w-7 h-7 text-[#FC6612]"/>,ShieldCheck:<HiShieldCheck className="w-7 h-7 text-[#FC6612]"/>,Beaker:<HiLightBulb className="w-7 h-7 text-[#FC6612]"/>,DeviceMobile:<HiDesktopComputer className="w-7 h-7 text-[#FC6612]"/>,LockClosed:<HiLockClosed className="w-7 h-7 text-[#FC6612]"/>,Support:<HiEmojiHappy className="w-7 h-7 text-[#FC6612]"/>,UserGroup:<HiUserGroup className="w-7 h-7 text-[#FC6612]"/>,DesktopComputer:<HiDesktopComputer className="w-7 h-7 text-[#FC6612]"/>};return ico[f.icon]||<HiSparkles className="w-7 h-7 text-[#FC6612]"/>})()}</div><h3 className="text-[15px] font-semibold text-[var(--text)] mb-2">{f.title}</h3><p className="text-[var(--text-secondary)] text-[13px] leading-relaxed">{f.description}</p></Card>))}</div></Con></Sec>
 
       {/* ====== HOW IT WORKS ====== */}
       <Sec><Bg dark={dark} /><Con><Head headline={HOW_IT_WORKS.headline} subheadline={HOW_IT_WORKS.subheadline} /><div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-10">{HOW_IT_WORKS.steps.map((s,i)=>(<Card key={i} className="p-5 text-center"><div className="w-12 h-12 rounded-xl bg-[#FC6612]/10 text-[#FC6612] flex items-center justify-center text-lg font-bold mx-auto mb-4">{s.step}</div><h3 className="text-[15px] font-semibold text-[var(--text)] mb-2">{s.title}</h3><p className="text-[var(--text-secondary)] text-[13px] leading-relaxed">{s.description}</p></Card>))}</div><div className="text-center"><a href="#reg-form"><Btn size="lg">Register Now <HiArrowRight className="w-4 h-4"/></Btn></a></div></Con></Sec>
@@ -428,7 +422,7 @@ export default function HomePage() {
       <footer className="border-t-2 border-[var(--border-strong)] bg-[var(--bg-alt)]">
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-16">
           {/* Top: Logo + Contact + Follow */}
-          <div className="grid grid-cols-[40%_30%_30%] gap-8 lg:gap-12 pb-12 border-b border-[var(--border)]">
+          <div className="grid grid-cols-1 sm:grid-cols-[40%_30%_30%] gap-8 lg:gap-12 pb-12 border-b border-[var(--border)]">
             <div>
               <Logo />
               <p className="text-[var(--text-secondary)] text-sm mt-4 leading-relaxed max-w-sm">The AI Trader makes ai trading easier and smarter. Analyze markets in real-time, automate strategies safely, stay fully in control.</p>

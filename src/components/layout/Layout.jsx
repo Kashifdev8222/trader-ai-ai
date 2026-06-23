@@ -76,7 +76,7 @@ export default function Layout({ children }) {
       {/* FOOTER - same as HomePage */}
       <footer className="border-t-2 border-[var(--border-strong)] bg-[var(--bg-alt)]">
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <div className="grid grid-cols-[40%_30%_30%] gap-8 lg:gap-12 pb-12 border-b border-[var(--border)]">
+          <div className="grid grid-cols-1 sm:grid-cols-[40%_30%_30%] gap-8 lg:gap-12 pb-12 border-b border-[var(--border)]">
             <div>
               <Logo />
               <p className="text-[var(--text-secondary)] text-sm mt-4 leading-relaxed max-w-sm">The AI Trader makes ai trading easier and smarter. Analyze markets in real-time, automate strategies safely, stay fully in control.</p>
