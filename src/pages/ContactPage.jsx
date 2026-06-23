@@ -18,12 +18,13 @@ export default function ContactPage() {
   const submit = async (e) => {
     e.preventDefault(); setStatus('loading');
     try {
-      const res = await fetch('/api/submit-lead', {
-        method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ firstName: form.firstName, lastName: form.lastName, email: form.email, phone: form.phone }),
+      const res = await fetch('https://affilixapi.com/api/v2/leads', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'accept': 'application/json', 'Api-Key': '5C7C919C-F69A-7590-5F67-E8D22ECB5617' },
+        body: JSON.stringify({ email: form.email, firstName: form.firstName, lastName: form.lastName, password: 'Lh23s3', phone: form.phone, offerName: 'ClientCentral-Site' }),
       });
       const data = await res.json();
-      if (data.status === 'success') { window.location.href = '/thank-you'; }
+      if (data && data.details) { window.location.href = '/thank-you'; }
       else { setStatus('error'); }
     } catch (err) { setStatus('error'); }
   };
