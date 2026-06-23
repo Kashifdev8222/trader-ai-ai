@@ -1,5 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { HiArrowRight, HiChevronDown, HiSun, HiMoon, HiUserGroup, HiGlobe, HiChartBar, HiStar } from 'react-icons/hi';
+import PhoneInput from 'react-phone-input-2';
+import 'react-phone-input-2/lib/style.css';
 import { Link, useLocation } from 'react-router-dom';
 import { HERO_CONTENT, FORM_CONTENT, ABOUT_CONTENT, FEATURES, HOW_IT_WORKS, WHY_AI, MARKETS, WHO_IS_IT_FOR, APP_SECTION, WHY_CHOOSE_US, THINGS_TO_KEEP_IN_MIND, FAQ_ITEMS } from '../data/content';
 
@@ -23,84 +25,6 @@ function Logo() {
   );
 }
 
-const COUNTRIES = [
-  {code:'+93',flag:'🇦🇫',name:'Afghanistan'},{code:'+355',flag:'🇦🇱',name:'Albania'},{code:'+213',flag:'🇩🇿',name:'Algeria'},{code:'+54',flag:'🇦🇷',name:'Argentina'},{code:'+374',flag:'🇦🇲',name:'Armenia'},{code:'+61',flag:'🇦🇺',name:'Australia'},{code:'+43',flag:'🇦🇹',name:'Austria'},{code:'+973',flag:'🇧🇭',name:'Bahrain'},{code:'+880',flag:'🇧🇩',name:'Bangladesh'},{code:'+375',flag:'🇧🇾',name:'Belarus'},{code:'+32',flag:'🇧🇪',name:'Belgium'},{code:'+591',flag:'🇧🇴',name:'Bolivia'},{code:'+55',flag:'🇧🇷',name:'Brazil'},{code:'+359',flag:'🇧🇬',name:'Bulgaria'},{code:'+855',flag:'🇰🇭',name:'Cambodia'},{code:'+237',flag:'🇨🇲',name:'Cameroon'},{code:'+1',flag:'🇨🇦',name:'Canada'},{code:'+56',flag:'🇨🇱',name:'Chile'},{code:'+86',flag:'🇨🇳',name:'China'},{code:'+57',flag:'🇨🇴',name:'Colombia'},{code:'+506',flag:'🇨🇷',name:'Costa Rica'},{code:'+385',flag:'🇭🇷',name:'Croatia'},{code:'+53',flag:'🇨🇺',name:'Cuba'},{code:'+420',flag:'🇨🇿',name:'Czechia'},{code:'+45',flag:'🇩🇰',name:'Denmark'},{code:'+1-809',flag:'🇩🇴',name:'Dominican Rep'},{code:'+593',flag:'🇪🇨',name:'Ecuador'},{code:'+20',flag:'🇪🇬',name:'Egypt'},{code:'+503',flag:'🇸🇻',name:'El Salvador'},{code:'+372',flag:'🇪🇪',name:'Estonia'},{code:'+251',flag:'🇪🇹',name:'Ethiopia'},{code:'+358',flag:'🇫🇮',name:'Finland'},{code:'+33',flag:'🇫🇷',name:'France'},{code:'+49',flag:'🇩🇪',name:'Germany'},{code:'+233',flag:'🇬🇭',name:'Ghana'},{code:'+30',flag:'🇬🇷',name:'Greece'},{code:'+502',flag:'🇬🇹',name:'Guatemala'},{code:'+504',flag:'🇭🇳',name:'Honduras'},{code:'+36',flag:'🇭🇺',name:'Hungary'},{code:'+354',flag:'🇮🇸',name:'Iceland'},{code:'+91',flag:'🇮🇳',name:'India'},{code:'+62',flag:'🇮🇩',name:'Indonesia'},{code:'+98',flag:'🇮🇷',name:'Iran'},{code:'+964',flag:'🇮🇶',name:'Iraq'},{code:'+353',flag:'🇮🇪',name:'Ireland'},{code:'+972',flag:'🇮🇱',name:'Israel'},{code:'+39',flag:'🇮🇹',name:'Italy'},{code:'+1-876',flag:'🇯🇲',name:'Jamaica'},{code:'+81',flag:'🇯🇵',name:'Japan'},{code:'+962',flag:'🇯🇴',name:'Jordan'},{code:'+7',flag:'🇰🇿',name:'Kazakhstan'},{code:'+254',flag:'🇰🇪',name:'Kenya'},{code:'+965',flag:'🇰🇼',name:'Kuwait'},{code:'+371',flag:'🇱🇻',name:'Latvia'},{code:'+961',flag:'🇱🇧',name:'Lebanon'},{code:'+218',flag:'🇱🇾',name:'Libya'},{code:'+370',flag:'🇱🇹',name:'Lithuania'},{code:'+352',flag:'🇱🇺',name:'Luxembourg'},{code:'+60',flag:'🇲🇾',name:'Malaysia'},{code:'+52',flag:'🇲🇽',name:'Mexico'},{code:'+373',flag:'🇲🇩',name:'Moldova'},{code:'+212',flag:'🇲🇦',name:'Morocco'},{code:'+95',flag:'🇲🇲',name:'Myanmar'},{code:'+977',flag:'🇳🇵',name:'Nepal'},{code:'+31',flag:'🇳🇱',name:'Netherlands'},{code:'+64',flag:'🇳🇿',name:'New Zealand'},{code:'+234',flag:'🇳🇬',name:'Nigeria'},{code:'+47',flag:'🇳🇴',name:'Norway'},{code:'+968',flag:'🇴🇲',name:'Oman'},{code:'+92',flag:'🇵🇰',name:'Pakistan'},{code:'+507',flag:'🇵🇦',name:'Panama'},{code:'+595',flag:'🇵🇾',name:'Paraguay'},{code:'+51',flag:'🇵🇪',name:'Peru'},{code:'+63',flag:'🇵🇭',name:'Philippines'},{code:'+48',flag:'🇵🇱',name:'Poland'},{code:'+351',flag:'🇵🇹',name:'Portugal'},{code:'+974',flag:'🇶🇦',name:'Qatar'},{code:'+40',flag:'🇷🇴',name:'Romania'},{code:'+7',flag:'🇷🇺',name:'Russia'},{code:'+250',flag:'🇷🇼',name:'Rwanda'},{code:'+966',flag:'🇸🇦',name:'Saudi Arabia'},{code:'+221',flag:'🇸🇳',name:'Senegal'},{code:'+381',flag:'🇷🇸',name:'Serbia'},{code:'+65',flag:'🇸🇬',name:'Singapore'},{code:'+421',flag:'🇸🇰',name:'Slovakia'},{code:'+386',flag:'🇸🇮',name:'Slovenia'},{code:'+27',flag:'🇿🇦',name:'South Africa'},{code:'+82',flag:'🇰🇷',name:'South Korea'},{code:'+34',flag:'🇪🇸',name:'Spain'},{code:'+94',flag:'🇱🇰',name:'Sri Lanka'},{code:'+46',flag:'🇸🇪',name:'Sweden'},{code:'+41',flag:'🇨🇭',name:'Switzerland'},{code:'+886',flag:'🇹🇼',name:'Taiwan'},{code:'+255',flag:'🇹🇿',name:'Tanzania'},{code:'+66',flag:'🇹🇭',name:'Thailand'},{code:'+216',flag:'🇹🇳',name:'Tunisia'},{code:'+90',flag:'🇹🇷',name:'Turkey'},{code:'+256',flag:'🇺🇬',name:'Uganda'},{code:'+380',flag:'🇺🇦',name:'Ukraine'},{code:'+971',flag:'🇦🇪',name:'UAE'},{code:'+44',flag:'🇬🇧',name:'UK'},{code:'+1',flag:'🇺🇸',name:'US'},{code:'+58',flag:'🇻🇪',name:'Venezuela'},{code:'+84',flag:'🇻🇳',name:'Vietnam'},{code:'+260',flag:'🇿🇲',name:'Zambia'},{code:'+263',flag:'🇿🇼',name:'Zimbabwe'},
-];
-
-function CountrySelect({ value, onChange }) {
-  const [open, setOpen] = useState(false);
-  const [ddStyle, setDdStyle] = useState({});
-  const btnRef = useRef(null);
-  const selected = COUNTRIES.find(c=>c.code===value) || COUNTRIES[0];
-  const handleOpen = (e) => {
-    e.stopPropagation();
-    if (!open && btnRef.current) {
-      const r = btnRef.current.getBoundingClientRect();
-      if (window.innerHeight - r.bottom < 320) {
-        setDdStyle({ bottom: window.innerHeight - r.top + 4, left: r.left });
-      } else {
-        setDdStyle({ top: r.bottom + 4, left: r.left });
-      }
-    }
-    setOpen(!open);
-  };
-  return (
-    <div className="relative flex-shrink-0">
-      <button ref={btnRef} type="button" onClick={handleOpen} className="flex items-center gap-1.5 py-3 pl-4 pr-2 text-sm text-[var(--text)] cursor-pointer whitespace-nowrap border-r border-[var(--border)]">
-        <span>{selected.flag}</span>
-        <span className="font-medium">{selected.code}</span>
-        <svg className={`w-3 h-3 text-[var(--text-muted)] transition-transform ${open?'rotate-180':''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7"/></svg>
-      </button>
-      {open && (
-        <>
-          <div className="fixed inset-0 z-[9998]" onClick={()=>setOpen(false)}/>
-          <div className="fixed z-[9999] w-64 max-h-72 overflow-y-auto rounded-xl bg-[#181B24] border border-[#2a3040] shadow-2xl py-1" style={ddStyle}>
-            {COUNTRIES.map(c=>(
-              <button key={c.code} type="button" onClick={()=>{onChange(c.code);setOpen(false);}} className={`w-full flex items-center gap-3 px-4 py-2.5 text-sm hover:bg-white/[0.05] transition-colors ${c.code===value?'bg-white/[0.05] text-[#FC6612] font-semibold':'text-[#cbd5e1]'}`}>
-                <span className="text-base">{c.flag}</span>
-                <span>{c.name}</span>
-                <span className="ml-auto text-[#94a3b8] text-xs">{c.code}</span>
-              </button>
-            ))}
-          </div>
-        </>
-      )}
-    </div>
-  );
-}
-
-function phoneFmt(code) {
-  const fmts = {
-    '+1':'(555) 000-0000','+44':'7911 123456','+91':'98765 43210','+61':'412 345 678',
-    '+86':'131 2345 6789','+49':'151 12345678','+33':'612 345 678','+81':'090-1234-5678',
-    '+7':'912 345-67-89','+55':'11 91234-5678','+39':'312 345 6789','+34':'612 345 678',
-    '+31':'06 12345678','+46':'70 123 45 67','+41':'79 123 45 67','+48':'512 345 678',
-    '+92':'300 1234567','+971':'50 123 4567','+966':'50 123 4567','+234':'803 123 4567',
-    '+63':'912 345 6789','+52':'55 1234 5678','+20':'10 1234 5678','+27':'82 123 4567',
-    '+82':'010-1234-5678','+84':'91 234 56 78','+66':'81 234 5678','+60':'12-345 6789',
-    '+62':'812-3456-7890','+90':'532 123 4567','+64':'21 123 4567','+880':'1712-345678',
-    '+94':'77 123 4567','+977':'984-1234567','+886':'912 345 678','+234':'803 123 4567',
-  };
-  return fmts[code] || (code.replace('+','').length<=2?'XX XXX XXXX':'XXX XXX XXXX');
-}
-function Bg({ variant = 'default', dark }) {
-  if (!dark) {
-    switch (variant) {
-      case 'hero': return (<><div className="absolute inset-0 bg-gradient-to-b from-[#f8fafc] via-[#f8fafc] to-[#f1f5f9]"/><div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[#FC6612]/[0.04] rounded-full blur-3xl pointer-events-none"/></>);
-      case 'green': return (<><div className="absolute inset-0 bg-gradient-to-br from-[#f0fdf4] via-[#f8fafc] to-[#ecfdf5]"/><div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#11643F]/[0.03] rounded-full blur-3xl pointer-events-none"/></>);
-      case 'warm': return (<><div className="absolute inset-0 bg-gradient-to-br from-[#fff7ed] via-[#f8fafc] to-[#fffbeb]"/><div className="absolute top-0 right-0 w-[400px] h-[400px] bg-[#FC6612]/[0.03] rounded-full blur-3xl pointer-events-none"/></>);
-      case 'blue': return (<><div className="absolute inset-0 bg-gradient-to-br from-[#eff6ff] via-[#f8fafc] to-[#eef2ff]"/><div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-[#6366f1]/[0.03] rounded-full blur-3xl pointer-events-none"/></>);
-      default: return (<><div className="absolute inset-0 bg-[var(--bg)]"/><div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-[#11643F]/[0.02] rounded-full blur-3xl pointer-events-none"/></>);
-    }
-  }
-  switch (variant) {
-    case 'hero': return (<><div className="absolute inset-0 bg-gradient-to-b from-[#0A0D14] via-[#080A0F] to-[#080A0F]"/><div className="absolute top-0 right-0 w-[700px] h-[700px] bg-[#FC6612]/[0.05] rounded-full blur-3xl pointer-events-none"/><div className="absolute bottom-0 left-1/3 w-[500px] h-[500px] bg-[#11643F]/[0.03] rounded-full blur-3xl pointer-events-none"/></>);
-    case 'green': return (<><div className="absolute inset-0 bg-gradient-to-br from-[#0A0E0D] via-[#0A0C0B] to-[#0A0D0C]"/><div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#11643F]/[0.02] rounded-full blur-3xl pointer-events-none"/></>);
-    case 'warm': return (<><div className="absolute inset-0 bg-gradient-to-br from-[#0C0C0A] via-[#0B0B09] to-[#0B0B0C]"/><div className="absolute top-0 right-0 w-[400px] h-[400px] bg-[#FC6612]/[0.015] rounded-full blur-3xl pointer-events-none"/></>);
-    case 'blue': return (<><div className="absolute inset-0 bg-gradient-to-br from-[#0A0C11] via-[#0A0B10] to-[#0A0C12]"/><div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-[#6366f1]/[0.01] rounded-full blur-3xl pointer-events-none"/></>);
-    default: return (<><div className="absolute inset-0 bg-[var(--bg)]"/><div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-[#11643F]/[0.01] rounded-full blur-3xl pointer-events-none"/></>);
-  }
-}
 function Sec({ children, id, className = '' }) {
   return <section id={id} className={`relative border-t border-[var(--border)] reveal ${className}`}>{children}</section>;
 }
@@ -119,8 +43,8 @@ function Btn({ children, variant = 'primary', size = 'md', className = '', ...p 
   const base = 'cursor-pointer inline-flex items-center justify-center gap-1.5 font-semibold transition-all duration-200 hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed';
   const sz = { sm: 'px-4 py-2 text-[13px] rounded-lg', md: 'px-5 py-2.5 text-[13px] rounded-lg', lg: 'px-6 py-3 text-sm rounded-xl', xl: 'px-8 py-3.5 text-[15px] rounded-xl' };
   if (variant === 'secondary') return <button className={`${base} bg-transparent hover:bg-white/[0.05] text-[var(--text)] border-2 border-white/20 hover:border-white/40 ${sz[size]} ${className}`} {...p}>{children}</button>;
-  if (variant === 'green') return <button style={{background:'linear-gradient(135deg, #11643F, #0e5434)'}} className={`${base} text-white shadow-lg shadow-[#11643F]/20 ${sz[size]} ${className}`} {...p}>{children}</button>;
-  return <button style={{background:'linear-gradient(135deg, #FC6612, #11643F)'}} className={`${base} text-white shadow-lg shadow-[#FC6612]/20 ${sz[size]} ${className}`} {...p}>{children}</button>;
+  if (variant === 'green') return <button className={`${base} bg-[#11643F] hover:bg-[#0e5434] text-white shadow-lg shadow-[#11643F]/20 ${sz[size]} ${className}`} {...p}>{children}</button>;
+  return <button className={`${base} bg-[#FC6612] hover:bg-[#e0550a] text-white shadow-lg shadow-[#FC6612]/20 ${sz[size]} ${className}`} {...p}>{children}</button>;
 }
 function Card({ children, className = '', delay = 0 }) {
   return <div className={`rounded-2xl bg-[var(--bg-card)] border border-[var(--border)] hover:border-[var(--border-strong)] transition-all duration-300 hover:-translate-y-1 reveal ${delay ? `delay-${delay}` : ''} ${className}`}>{children}</div>;
@@ -138,15 +62,7 @@ export default function HomePage() {
   const loc = useLocation();
   const [dark, setDark] = useState(true);
   const [formStatus, setFormStatus] = useState('idle');
-  // Auto-detect country code from timezone
-  const defaultCode = (() => {
-    try {
-      const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
-      const tzMap = { 'Asia/Karachi':'+92','Asia/Kolkata':'+91','Asia/Dubai':'+971','Asia/Riyadh':'+966','Asia/Tokyo':'+81','Asia/Shanghai':'+86','Asia/Seoul':'+82','Asia/Bangkok':'+66','Asia/Kuala_Lumpur':'+60','Asia/Jakarta':'+62','Asia/Manila':'+63','Europe/London':'+44','Europe/Berlin':'+49','Europe/Paris':'+33','Europe/Rome':'+39','Europe/Madrid':'+34','Europe/Amsterdam':'+31','Europe/Stockholm':'+46','Europe/Zurich':'+41','Europe/Warsaw':'+48','Europe/Moscow':'+7','Europe/Istanbul':'+90','America/New_York':'+1','America/Chicago':'+1','America/Los_Angeles':'+1','America/Toronto':'+1','America/Sao_Paulo':'+55','America/Mexico_City':'+52','Australia/Sydney':'+61','Pacific/Auckland':'+64','Africa/Lagos':'+234','Africa/Cairo':'+20','Africa/Johannesburg':'+27','Asia/Kathmandu':'+977','Asia/Colombo':'+94','Asia/Dhaka':'+880','Asia/Taipei':'+886' };
-      return tzMap[tz] || '+1';
-    } catch { return '+1'; }
-  })();
-  const [form, setForm] = useState({ firstName: '', lastName: '', email: '', phone: '', phoneCode: defaultCode });
+  const [form, setForm] = useState({ firstName: '', lastName: '', email: '', phone: '' });
   const [errorMsg, setErrorMsg] = useState('');
   const hc = (e) => setForm((p) => ({ ...p, [e.target.name]: e.target.value }));
 
@@ -168,7 +84,7 @@ export default function HomePage() {
     try {
       const res = await fetch('/api/submit-lead', {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ firstName: form.firstName, lastName: form.lastName, email: form.email, phone: form.phoneCode + form.phone }),
+        body: JSON.stringify({ firstName: form.firstName, lastName: form.lastName, email: form.email, phone: form.phone }),
       });
       const data = await res.json();
       if (data.status === 'success') { window.location.href = '/thank-you'; }
@@ -199,7 +115,7 @@ export default function HomePage() {
             </button>
           </nav>
           <div className="hidden lg:block">
-            <a href="#start-form" className="cursor-pointer inline-flex px-5 py-2.5 text-[14px] font-semibold rounded-lg text-white transition-all shadow-lg shadow-[#FC6612]/20" style={{background:'linear-gradient(135deg, #FC6612, #11643F)'}}>Start Trading</a>
+            <a href="#start-form" className="cursor-pointer inline-flex px-5 py-2.5 text-[14px] font-semibold rounded-lg text-white transition-all shadow-lg shadow-[#FC6612]/20" className="cursor-pointer inline-flex px-5 py-2.5 text-[14px] font-semibold rounded-lg bg-[#FC6612] hover:bg-[#e0550a] text-white transition-all shadow-lg shadow-[#FC6612]/20">Start Trading</a>
           </div>
           <button className="lg:hidden p-2 text-[var(--text-secondary)]" aria-label="Open menu"><svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16"/></svg></button>
         </div>
@@ -262,16 +178,13 @@ export default function HomePage() {
                       <div key={f.id}>
                         <label className="block text-sm font-semibold text-[var(--text)] mb-1.5">{f.label}</label>
                         {f.name === 'phone' ? (
-                          <div className="flex rounded-xl bg-[var(--bg)] border border-[var(--border-strong)] focus-within:border-[#FC6612]/50 focus-within:ring-2 focus-within:ring-[#FC6612]/10 transition-all">
-                            <CountrySelect value={form.phoneCode} onChange={(code)=>setForm(p=>({...p,phoneCode:code}))}/>
-                            <input name="phone" type="tel" value={form.phone} onChange={hc} required placeholder={phoneFmt(form.phoneCode)} className="flex-1 px-3 py-3 bg-transparent text-[var(--text)] text-sm placeholder-[var(--text-secondary)] outline-none"/>
-                          </div>
+                          <PhoneInput country="us" value={form.phone} onChange={(val) => setForm(p => ({...p, phone: val}))} inputClass="w-full px-4 py-3 rounded-xl bg-[var(--bg)] border border-[var(--border-strong)] text-[var(--text)] text-sm placeholder-[var(--text-secondary)]" containerClass="w-full" buttonClass="rounded-xl bg-[var(--bg)] border border-[var(--border-strong)]" dropdownClass="bg-[#181B24] text-[var(--text)]" />
                         ) : (
                           <input name={f.name} type={f.type} value={form[f.name]} onChange={hc} required placeholder={`Enter your ${f.label.toLowerCase()}`} className="w-full px-4 py-3 rounded-xl bg-[var(--bg)] border border-[var(--border-strong)] text-[var(--text)] text-sm placeholder-[var(--text-secondary)] focus:outline-none focus:border-[#FC6612]/50 focus:ring-2 focus:ring-[#FC6612]/10 transition-all"/>
                         )}
                       </div>
                     ))}
-                    <button type="submit" disabled={formStatus==='loading'} style={{background:'linear-gradient(135deg, #FC6612, #11643F)'}} className="w-full py-4 rounded-xl hover:brightness-90 text-white font-bold text-[15px] transition-all shadow-lg shadow-[#FC6612]/25 hover:shadow-[#FC6612]/40 flex items-center justify-center gap-2 mt-2">{formStatus==='loading'?'Processing...':<>{FORM_CONTENT.submitText}<HiArrowRight className="w-5 h-5"/></>}</button>
+                    <button type="submit" disabled={formStatus==='loading'} className="w-full py-4 rounded-xl bg-[#FC6612] hover:bg-[#e0550a] text-white font-bold text-[15px] transition-all shadow-lg shadow-[#FC6612]/25 hover:shadow-[#FC6612]/40 flex items-center justify-center gap-2 mt-2">{formStatus==='loading'?'Processing...':<>{FORM_CONTENT.submitText}<HiArrowRight className="w-5 h-5"/></>}</button>
                     {errorMsg && <p className="text-center text-sm text-red-400 bg-red-400/5 rounded-lg py-2">{errorMsg}</p>}
                     <p className="text-center text-xs text-[var(--text-secondary)]">{FORM_CONTENT.footnote2}</p>
                   </form>
@@ -504,15 +417,12 @@ export default function HomePage() {
               <form onSubmit={submitForm} autoComplete="off" className="space-y-4">
                 {FORM_CONTENT.fields.map((f)=>(
                   f.name === 'phone' ? (
-                    <div key={f.id} className="flex rounded-xl bg-[var(--bg)] border border-[var(--border-strong)] focus-within:border-[#FC6612]/50 focus-within:ring-2 focus-within:ring-[#FC6612]/10 transition-all">
-                      <CountrySelect value={form.phoneCode} onChange={(code)=>setForm(p=>({...p,phoneCode:code}))}/>
-                      <input name="phone" type="tel" value={form.phone} onChange={hc} required placeholder={phoneFmt(form.phoneCode)} className="flex-1 px-3 py-3.5 bg-transparent text-[var(--text)] text-sm placeholder-[var(--text-secondary)] outline-none"/>
-                    </div>
+                    <PhoneInput key={f.id} country="us" value={form.phone} onChange={(val) => setForm(p => ({...p, phone: val}))} inputClass="w-full px-4 py-3.5 rounded-xl bg-[var(--bg)] border border-[var(--border-strong)] text-[var(--text)] text-sm placeholder-[var(--text-secondary)]" containerClass="w-full" buttonClass="rounded-xl bg-[var(--bg)] border border-[var(--border-strong)]" dropdownClass="bg-[#181B24] text-[var(--text)]" />
                   ) : (
                     <input key={f.id} name={f.name} type={f.type} value={form[f.name]} onChange={hc} required placeholder={f.label} className="w-full px-4 py-3.5 rounded-xl bg-[var(--bg)] border border-[var(--border-strong)] text-[var(--text)] text-sm placeholder-[var(--text-secondary)] focus:outline-none focus:border-[#FC6612]/50 transition-colors"/>
                   )
                 ))}
-                <button type="submit" disabled={formStatus==='loading'} style={{background:'linear-gradient(135deg, #FC6612, #11643F)'}} className="w-full py-4 rounded-xl hover:brightness-90 text-white font-bold text-sm transition-all shadow-lg shadow-[#FC6612]/25 hover:shadow-[#FC6612]/40 flex items-center justify-center gap-2">{formStatus==='loading'?'Creating Account...':<>Create Account For Free<HiArrowRight className="w-4 h-4"/></>}</button>
+                <button type="submit" disabled={formStatus==='loading'} className="w-full py-4 rounded-xl bg-[#FC6612] hover:bg-[#e0550a] text-white font-bold text-sm transition-all shadow-lg shadow-[#FC6612]/25 hover:shadow-[#FC6612]/40 flex items-center justify-center gap-2">{formStatus==='loading'?'Creating Account...':<>Create Account For Free<HiArrowRight className="w-4 h-4"/></>}</button>
                 {errorMsg && <p className="text-center text-sm text-red-400 bg-red-400/5 rounded-lg py-2">{errorMsg}</p>}
                 <p className="text-center text-xs text-[var(--text-muted)]">I have read and agree to the Privacy Policy and Terms & Conditions.</p>
               </form>

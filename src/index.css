@@ -101,3 +101,13 @@ a, button { transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1); }
 .phone-field .PhoneInputInput { padding:12px 14px 12px 4px!important; border:none!important; background:transparent!important; color:var(--text)!important; font-size:14px!important; outline:none!important; }
 .phone-field .PhoneInputInput::placeholder { color:var(--text-secondary)!important; }
 
+
+/* react-phone-input-2 dark theme */
+.react-tel-input .country-list { background: #181B24 !important; }
+.react-tel-input .country-list .country { color: #cbd5e1 !important; }
+.react-tel-input .country-list .country:hover { background: rgba(255,255,255,0.05) !important; }
+.react-tel-input .country-list .country.highlight { background: rgba(252,102,18,0.1) !important; color: #FC6612 !important; }
+.react-tel-input .flag-dropdown { background: var(--bg) !important; border-color: var(--border-strong) !important; }
+.react-tel-input .selected-flag:hover { background: rgba(255,255,255,0.03) !important; }
+.react-tel-input .form-control { background: var(--bg) !important; border-color: var(--border-strong) !important; color: var(--text) !important; }
+.react-tel-input .form-control:focus { border-color: #FC6612 !important; box-shadow: none !important; }
