@@ -8,8 +8,12 @@ import { HERO_CONTENT, FORM_CONTENT, ABOUT_CONTENT, FEATURES, HOW_IT_WORKS, WHY_
 import LiveTicker from '../components/ui/LiveTicker';
 import MarketOverview from '../components/ui/MarketOverview';
 import TradingChart from '../components/ui/TradingChart';
+import CompanyProfile from '../components/ui/CompanyProfile';
 import ForexRates from '../components/ui/ForexRates';
 import LiveStats from '../components/ui/LiveStats';
+import MarketDataProvider from '../components/ui/MarketDataProvider';
+import LiveAppStat from '../components/ui/LiveAppStat';
+import TVMiniChart from '../components/ui/TVMiniChart';
 
 /* ============================================================
    ALL CONTENT from traderai.ai
@@ -221,20 +225,25 @@ export default function HomePage() {
       </Con></section>
 
       {/* ====== LIVE MARKET STATS ====== */}
+      <MarketDataProvider>
       <LiveStats />
-
-      {/* ====== LIVE TICKER ====== */}
       <LiveTicker />
+      <MarketOverview />
 
-      {/* ====== TRADING CHART ====== */}
+      {/* ====== TRADING CHARTS ====== */}
       <Sec><Bg dark={dark} /><Con>
-        <Head headline="Live Trading Chart" subheadline="Real-time market data with advanced charting powered by TradingView." />
-        <TradingChart symbol="AAPL" />
+        <Head headline="Live Trading Charts" subheadline="Real-time candlestick charts with drawing tools and indicators. Click any symbol to switch." />
+        <TradingChart />
+        <div className="mt-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <TVMiniChart symbol="BINANCE:BTCUSDT" title="Bitcoin (BTC/USD)" />
+          <TVMiniChart symbol="BINANCE:ETHUSDT" title="Ethereum (ETH/USD)" />
+          <TVMiniChart symbol="SPY" title="S&P 500 (SPY)" />
+        </div>
+        <div className="mt-6"><CompanyProfile /></div>
       </Con></Sec>
 
       {/* ====== FOREX RATES ====== */}
       <ForexRates />
-
       {/* ====== ABOUT ====== */}
       <Sec><Bg dark={dark} variant="green" /><Con>
         <div className="max-w-[1440px]">
@@ -279,8 +288,6 @@ export default function HomePage() {
       {/* ====== VIDEO DEMO ====== */}
       <Sec id="demo"><Bg dark={dark} /><Con><Head headline="See The AI Trader in Action" subheadline="Watch how our AI analyzes markets, spots opportunities, and helps you trade smarter." /><div className="max-w-4xl mx-auto"><div className="rounded-2xl overflow-hidden border border-[var(--border)] shadow-2xl shadow-black/40 bg-[var(--bg-card)]"><div className="flex items-center gap-2 px-4 py-3 border-b border-[var(--border)]"><div className="w-3 h-3 rounded-full bg-red-500/60"/><div className="w-3 h-3 rounded-full bg-amber-400/60"/><div className="w-3 h-3 rounded-full bg-green-400/60"/><span className="ml-3 text-[11px] text-[var(--text-secondary)]">theaitrader.ai</span></div><div className="aspect-video"><YouTubeEmbed /></div></div></div></Con></Sec>
 
-      {/* ====== MARKET OVERVIEW ====== */}
-      <MarketOverview />
 
       {/* ====== FEATURES ====== */}
       <Sec><Bg dark={dark} variant="warm" /><Con><Head headline="What You Get with The AI Trader" subheadline="Here's what makes us different from old-school trading tools." /><div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">{FEATURES.map((f,i)=>(<Card key={i} className="p-5"><div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#10b981]/10 to-[#10b981]/5 flex items-center justify-center mb-4">{(()=>{const ico={ChartBar:<HiChartBar className="w-7 h-7 text-[#10b981]"/>,Chip:<HiPuzzle className="w-7 h-7 text-[#10b981]"/>,ViewGrid:<HiCube className="w-7 h-7 text-[#10b981]"/>,ShieldCheck:<HiShieldCheck className="w-7 h-7 text-[#10b981]"/>,Beaker:<HiLightBulb className="w-7 h-7 text-[#10b981]"/>,DeviceMobile:<HiDesktopComputer className="w-7 h-7 text-[#10b981]"/>,LockClosed:<HiLockClosed className="w-7 h-7 text-[#10b981]"/>,Support:<HiEmojiHappy className="w-7 h-7 text-[#10b981]"/>,UserGroup:<HiUserGroup className="w-7 h-7 text-[#10b981]"/>,DesktopComputer:<HiDesktopComputer className="w-7 h-7 text-[#10b981]"/>};return ico[f.icon]||<HiSparkles className="w-7 h-7 text-[#10b981]"/>})()}</div><h3 className="text-[15px] font-semibold text-[var(--text)] mb-2">{f.title}</h3><p className="text-[var(--text-secondary)] text-[13px] leading-relaxed">{f.description}</p></Card>))}</div></Con></Sec>
@@ -362,17 +369,13 @@ export default function HomePage() {
               ))}
             </ul>
             <div className="grid grid-cols-4 gap-4 mb-8">
-              {APP_SECTION.stats.map((s,i)=>(
-                <div key={i} className="text-center p-4 rounded-xl bg-[var(--bg-card)] border border-[var(--border)]">
-                  <div className="text-xl font-bold text-[var(--text)]">{s.value}</div>
-                  <div className="text-[11px] text-[var(--text-muted)] mt-1">{s.label}</div>
-                </div>
-              ))}
+              <LiveAppStat />
             </div>
             <a href="#reg-form"><Btn size="lg">Register Now <HiArrowRight className="w-4 h-4"/></Btn></a>
           </div>
         </div>
       </Con></Sec>
+      </MarketDataProvider>
 
       {/* ====== WHY CHOOSE US ====== */}
       <Sec><Bg dark={dark} variant="blue" /><Con>
