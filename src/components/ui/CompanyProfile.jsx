@@ -1,20 +1,30 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import { finnhubFetch } from '../../lib/finnhub';
 
-const TOKEN = 'd8shhd1r01qq7apvngggd8shhd1r01qq7apvngh0';
 const SYMBOLS = ['AAPL','MSFT','GOOGL','TSLA','NVDA','AMZN'];
 
 export default function CompanyProfile() {
   const [profiles, setProfiles] = useState({});
+  const mounted = useRef(true);
 
   useEffect(() => {
-    SYMBOLS.forEach((s,i) => {
-      setTimeout(() => {
-        fetch(`https://finnhub.io/api/v1/stock/profile2?symbol=${s}&token=${TOKEN}`)
-          .then(r=>r.json()).then(d=>{
-            if(d.name) setProfiles(prev=>({...prev,[s]:{n:d.name,logo:d.logo,mktCap:d.marketCapitalization,industry:d.finnhubIndustry}}));
-          }).catch(()=>{});
-      }, i * 300);
-    });
+    mounted.current = true;
+
+    const fetchAll = async () => {
+      for (const s of SYMBOLS) {
+        if (!mounted.current) return;
+        try {
+          const d = await finnhubFetch('stock/profile2', s);
+          if (!mounted.current) return;
+          if (d && d.name) {
+            setProfiles(prev => ({ ...prev, [s]: { n: d.name, logo: d.logo, mktCap: d.marketCapitalization, industry: d.finnhubIndustry } }));
+          }
+        } catch (e) { /* skip */ }
+      }
+    };
+    fetchAll();
+
+    return () => { mounted.current = false; };
   }, []);
 
   return (

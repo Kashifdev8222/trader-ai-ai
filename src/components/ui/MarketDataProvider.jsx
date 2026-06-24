@@ -1,51 +1,45 @@
-import { createContext, useContext, useState, useEffect } from 'react';
+import { createContext, useContext, useState, useEffect, useRef } from 'react';
+import { finnhubFetch } from '../../lib/finnhub';
 
-const TOKEN = 'd8shhd1r01qq7apvngggd8shhd1r01qq7apvngh0';
-const SYMBOLS = ['AAPL','MSFT','SPY','QQQ','BINANCE:BTCUSDT','BINANCE:ETHUSDT'];
-const CACHE_KEY = 'fn_quotes';
-const CACHE_TIME = 60000; // 60 seconds
+const SYMBOLS = [
+  // US Stocks
+  'AAPL','MSFT',
+  // Indices
+  'SPY','QQQ','DIA','IWM',
+  // Crypto
+  'BINANCE:BTCUSDT','BINANCE:ETHUSDT','BINANCE:BNBUSDT','BINANCE:SOLUSDT','BINANCE:XRPUSDT',
+];
+const POLL_MS = 120000; // 2 minutes
 const MarketContext = createContext({});
 export function useMarketData() { return useContext(MarketContext); }
 
 export default function MarketDataProvider({ children }) {
-  const [quotes, setQuotes] = useState(() => {
-    try {
-      const cached = localStorage.getItem(CACHE_KEY);
-      if (cached) { const d = JSON.parse(cached); if (Date.now() - d.ts < CACHE_TIME) return d.data; }
-    } catch(e) {}
-    return {};
-  });
+  const [quotes, setQuotes] = useState({});
+  const mounted = useRef(true);
 
   useEffect(() => {
-    let mounted = true;
-    const fetchAll = async () => {
-      // Check if cache is still fresh
-      try {
-        const cached = localStorage.getItem(CACHE_KEY);
-        if (cached) { const d = JSON.parse(cached); if (Date.now() - d.ts < CACHE_TIME) return; }
-      } catch(e) {}
+    mounted.current = true;
+    let timer;
 
+    const fetchAll = async () => {
       for (const s of SYMBOLS) {
-        if (!mounted) return;
+        if (!mounted.current) return;
         try {
-          const r = await fetch(`https://finnhub.io/api/v1/quote?symbol=${s}&token=${TOKEN}`);
-          if (!r.ok) continue;
-          const d = await r.clone().json();
-          if (!mounted) return;
+          const d = await finnhubFetch('quote', s);
+          if (!mounted.current) return;
           if (d && d.c !== undefined) {
-            setQuotes(prev => {
-              const next = { ...prev, [s]: { c: d.c, dp: d.dp, h: d.h, l: d.l, o: d.o } };
-              localStorage.setItem(CACHE_KEY, JSON.stringify({ data: next, ts: Date.now() }));
-              return next;
-            });
+            setQuotes(prev => ({ ...prev, [s]: { c: d.c, dp: d.dp, h: d.h, l: d.l, o: d.o } }));
           }
-        } catch(e) {}
-        await new Promise(r => setTimeout(r, 1000));
+        } catch (e) { /* skip failed symbol */ }
       }
     };
-    fetchAll();
-    const timer = setInterval(fetchAll, 120000); // 2 minutes
-    return () => { mounted = false; clearInterval(timer); };
+
+    // initial fetch
+    fetchAll().then(() => {
+      if (mounted.current) timer = setInterval(fetchAll, POLL_MS);
+    });
+
+    return () => { mounted.current = false; if (timer) clearInterval(timer); };
   }, []);
 
   return <MarketContext.Provider value={quotes}>{children}</MarketContext.Provider>;

@@ -1,7 +1,12 @@
 import { useMarketData } from './MarketDataProvider';
 
-const PAIRS = ['SPY','QQQ'];
-const NAMES = { SPY:'S&P 500', QQQ:'NASDAQ', DIA:'Dow Jones' };
+const INDICES = ['SPY','QQQ','DIA','IWM'];
+const NAMES = {
+  SPY: 'S&P 500',
+  QQQ: 'NASDAQ 100',
+  DIA: 'Dow Jones',
+  IWM: 'Russell 2000',
+};
 
 export default function ForexRates() {
   const quotes = useMarketData();
@@ -13,15 +18,22 @@ export default function ForexRates() {
           <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse"/>
           <h3 className="text-sm font-semibold text-[var(--text)]">Market Indices</h3>
         </div>
-        <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-          {PAIRS.map(s => {
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
+          {INDICES.map(s => {
             const d = quotes[s];
-            if (!d) return null;
+            if (!d) return (
+              <div key={s} className="p-4 rounded-xl bg-[var(--bg-card)] border border-[var(--border)] text-center">
+                <div className="text-xs font-semibold text-[var(--text)] mb-1">{NAMES[s]}</div>
+                <div className="text-lg font-bold text-[var(--text)]">---</div>
+              </div>
+            );
             return (
-              <div key={s} className="p-3 rounded-xl bg-[var(--bg-card)] border border-[var(--border)] text-center">
+              <div key={s} className="p-4 rounded-xl bg-[var(--bg-card)] border border-[var(--border)] text-center hover:border-[var(--border-strong)] hover:-translate-y-0.5 transition-all">
                 <div className="text-xs font-semibold text-[var(--text)] mb-1">{NAMES[s]}</div>
                 <div className="text-lg font-bold text-[var(--text)]">${d.c?.toFixed(2)}</div>
-                <div className={`text-xs font-semibold mt-1 ${d.dp>=0?'text-green-400':'text-red-400'}`}>{d.dp>=0?'▲':'▼'} {Math.abs(d.dp||0).toFixed(2)}%</div>
+                <div className={`text-xs font-semibold mt-1.5 ${d.dp>=0?'text-green-400':'text-red-400'}`}>
+                  {d.dp>=0?'▲':'▼'} {Math.abs(d.dp||0).toFixed(2)}%
+                </div>
               </div>
             );
           })}
