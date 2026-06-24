@@ -45,10 +45,10 @@ export default function NewsPage({ type = 'crypto' }) {
               </div>
               <div className="p-5">
                 <div className="flex items-center gap-2 mb-3">
-                  <span className="text-[11px] font-semibold text-[#FC6612] uppercase bg-[#FC6612]/10 px-2 py-0.5 rounded-md">{item.symbol || type.toUpperCase()}</span>
+                  <span className="text-[11px] font-semibold text-[#10b981] uppercase bg-[#10b981]/10 px-2 py-0.5 rounded-md">{item.symbol || type.toUpperCase()}</span>
                   <span className="text-[11px] text-[var(--text-muted)]">{item.site}</span>
                 </div>
-                <h3 className="text-[15px] font-bold text-[var(--text)] mb-2 line-clamp-2 group-hover:text-[#FC6612] transition-colors">{item.title}</h3>
+                <h3 className="text-[15px] font-bold text-[var(--text)] mb-2 line-clamp-2 group-hover:text-[#10b981] transition-colors">{item.title}</h3>
                 <p className="text-[var(--text-secondary)] text-[13px] leading-relaxed line-clamp-3 mb-3">{item.text}</p>
                 <div className="flex items-center justify-between text-[11px] text-[var(--text-muted)]">
                   <span>{item.publisher}</span>

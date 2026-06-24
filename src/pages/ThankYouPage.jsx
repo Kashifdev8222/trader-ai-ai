@@ -11,7 +11,7 @@ export default function ThankYouPage() {
           <h1 className="text-3xl sm:text-4xl font-extrabold text-[var(--text)] mb-3">Thank You!</h1>
           <p className="text-[var(--text-secondary)] text-lg mb-2">Your registration has been submitted successfully.</p>
           <p className="text-[var(--text-secondary)] text-sm mb-8">Our team will contact you shortly to get you started.</p>
-          <Link to="/" className="inline-flex px-6 py-3 rounded-xl bg-gradient-to-r from-[#FC6612] to-[#11643F] text-white font-semibold shadow-lg shadow-[#FC6612]/20 hover:shadow-[#FC6612]/40 transition-all">Back to Home</Link>
+          <Link to="/" className="inline-flex px-6 py-3 rounded-xl bg-gradient-to-r from-[#10b981] to-[#11643F] text-white font-semibold shadow-lg shadow-[#10b981]/20 hover:shadow-[#10b981]/40 transition-all">Back to Home</Link>
         </div>
       </div>
     </div>

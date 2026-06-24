@@ -5,10 +5,10 @@ import { Link, useLocation } from 'react-router-dom';
 function Logo() {
   return (
     <Link to="/" className="flex items-center gap-3 flex-shrink-0 group">
-      <div className="w-10 h-10 rounded-xl bg-[#FC6612] flex items-center justify-center shadow-lg shadow-[#FC6612]/25 group-hover:shadow-[#FC6612]/40 group-hover:scale-105 transition-all duration-300">
+      <div className="w-10 h-10 rounded-xl bg-[#10b981] flex items-center justify-center shadow-lg shadow-[#10b981]/25 group-hover:shadow-[#10b981]/40 group-hover:scale-105 transition-all duration-300">
         <svg className="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.3" strokeLinecap="round" strokeLinejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
       </div>
-      <span className="text-lg font-extrabold text-[var(--text)] tracking-tight">The AI <span className="text-[#FC6612]">Trader</span></span>
+      <span className="text-lg font-extrabold text-[var(--text)] tracking-tight">The AI <span className="text-[#10b981]">Trader</span></span>
     </Link>
   );
 }
@@ -31,7 +31,7 @@ function NavDropdown({ label, items, loc }) {
   const [open, setOpen] = useState(false);
   return (
     <div className="relative" onMouseEnter={()=>setOpen(true)} onMouseLeave={()=>setOpen(false)}>
-      <button className={`flex items-center gap-1 px-3 py-2 text-[13px] font-medium rounded-lg transition-colors ${items.some(i=>loc.pathname===i.to)?'text-[#FC6612] bg-[#FC6612]/[0.08]':'text-[var(--text-secondary)] hover:text-[var(--text)] hover:bg-white/[0.03]'}`}>
+      <button className={`flex items-center gap-1 px-3 py-2 text-[13px] font-medium rounded-lg transition-colors ${items.some(i=>loc.pathname===i.to)?'text-[#10b981] bg-[#10b981]/[0.08]':'text-[var(--text-secondary)] hover:text-[var(--text)] hover:bg-white/[0.03]'}`}>
         {label}<HiChevronDown className="w-3 h-3" />
       </button>
       {open && (
@@ -61,11 +61,11 @@ export default function Layout({ children }) {
             {NAV.map(link => link.children ? (
               <NavDropdown key={link.label} label={link.label} items={link.children} loc={loc} />
             ) : (
-              <Link key={link.to} to={link.to} className={`px-3 py-2 text-[13px] font-medium rounded-lg transition-colors ${loc.pathname===link.to?'text-[#FC6612] bg-[#FC6612]/[0.08]':'text-[var(--text-secondary)] hover:text-[var(--text)] hover:bg-white/[0.03]'}`}>{link.label}</Link>
+              <Link key={link.to} to={link.to} className={`px-3 py-2 text-[13px] font-medium rounded-lg transition-colors ${loc.pathname===link.to?'text-[#10b981] bg-[#10b981]/[0.08]':'text-[var(--text-secondary)] hover:text-[var(--text)] hover:bg-white/[0.03]'}`}>{link.label}</Link>
             ))}
-            <button onClick={()=>setDark(!dark)} className="ml-2 w-9 h-9 rounded-lg border border-[var(--border-strong)] flex items-center justify-center text-[var(--text-secondary)] hover:text-[#FC6612] transition-colors">{dark?<HiSun className="w-4 h-4"/>:<HiMoon className="w-4 h-4"/>}</button>
+            <button onClick={()=>setDark(!dark)} className="ml-2 w-9 h-9 rounded-lg border border-[var(--border-strong)] flex items-center justify-center text-[var(--text-secondary)] hover:text-[#10b981] transition-colors">{dark?<HiSun className="w-4 h-4"/>:<HiMoon className="w-4 h-4"/>}</button>
           </nav>
-          <a href="/#reg-form" className="hidden lg:inline-flex px-5 py-2.5 text-[14px] font-semibold rounded-lg bg-[#FC6612] hover:bg-[#e0550a] text-white shadow-lg shadow-[#FC6612]/20 transition-all">Start Trading</a>
+          <a href="/#reg-form" className="hidden lg:inline-flex px-5 py-2.5 text-[14px] font-semibold rounded-lg bg-[#10b981] hover:bg-[#059669] text-white shadow-lg shadow-[#10b981]/20 transition-all">Start Trading</a>
           <button className="lg:hidden p-2 text-[var(--text-secondary)]" aria-label="Open menu"><svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16"/></svg></button>
         </div>
       </header>
@@ -84,15 +84,15 @@ export default function Layout({ children }) {
             <div>
               <h3 className="text-xs font-semibold text-[var(--text)] uppercase tracking-wider mb-4">Contact</h3>
               <div className="space-y-2.5">
-                <p className="text-[var(--text-secondary)] text-sm flex items-center gap-2"><svg className="w-4 h-4 text-[#FC6612] flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>AU +61 284 889 800</p>
-                <p className="text-[var(--text-secondary)] text-sm flex items-center gap-2"><svg className="w-4 h-4 text-[#FC6612] flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>UK +44 203 927 2999</p>
-                <p className="text-[var(--text-secondary)] text-sm flex items-center gap-2"><svg className="w-4 h-4 text-[#FC6612] flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>info@traderai.ai</p>
+                <p className="text-[var(--text-secondary)] text-sm flex items-center gap-2"><svg className="w-4 h-4 text-[#10b981] flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>AU +61 284 889 800</p>
+                <p className="text-[var(--text-secondary)] text-sm flex items-center gap-2"><svg className="w-4 h-4 text-[#10b981] flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>UK +44 203 927 2999</p>
+                <p className="text-[var(--text-secondary)] text-sm flex items-center gap-2"><svg className="w-4 h-4 text-[#10b981] flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>info@traderai.ai</p>
               </div>
             </div>
             <div>
               <h3 className="text-xs font-semibold text-[var(--text)] uppercase tracking-wider mb-4">Follow Us</h3>
               <div className="flex items-center gap-3">
-                {SOCIAL_LINKS.map(s=>(<a key={s.n} href="#" className="w-10 h-10 rounded-xl bg-[#FC6612]/10 hover:bg-[#FC6612] flex items-center justify-center text-[#FC6612] hover:text-white transition-all hover:scale-110" title={s.n}><svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d={s.d}/></svg></a>))}
+                {SOCIAL_LINKS.map(s=>(<a key={s.n} href="#" className="w-10 h-10 rounded-xl bg-[#10b981]/10 hover:bg-[#10b981] flex items-center justify-center text-[#10b981] hover:text-white transition-all hover:scale-110" title={s.n}><svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d={s.d}/></svg></a>))}
               </div>
             </div>
           </div>

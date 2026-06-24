@@ -36,7 +36,7 @@ export default function CountrySelect({ value, onChange }) {
           <div className="fixed inset-0 z-[9998]" onClick={()=>setOpen(false)}/>
           <div className="fixed z-[9999] w-64 max-h-72 overflow-y-auto rounded-xl bg-[#181B24] border border-[#2a3040] shadow-2xl py-1" style={ddStyle}>
             {COUNTRIES.map(c=>(
-              <button key={c.code} type="button" onClick={()=>{onChange(c.code);setOpen(false);}} className={`w-full flex items-center gap-3 px-4 py-2.5 text-sm hover:bg-white/[0.05] transition-colors ${c.code===value?'bg-white/[0.05] text-[#FC6612] font-semibold':'text-[#cbd5e1]'}`}>
+              <button key={c.code} type="button" onClick={()=>{onChange(c.code);setOpen(false);}} className={`w-full flex items-center gap-3 px-4 py-2.5 text-sm hover:bg-white/[0.05] transition-colors ${c.code===value?'bg-white/[0.05] text-[#10b981] font-semibold':'text-[#cbd5e1]'}`}>
                 <span className="text-base">{c.flag}</span>
                 <span>{c.name}</span>
                 <span className="ml-auto text-[#94a3b8] text-xs">{c.code}</span>

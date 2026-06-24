@@ -27,7 +27,7 @@ export default function AboutPage() {
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
             {FEATURES.map((f, i) => (
               <div key={i} className="p-5 rounded-2xl bg-[var(--bg-card)] border border-[var(--border)] hover:border-[var(--border-strong)] transition-all hover:-translate-y-1">
-                <div className="w-12 h-12 rounded-xl bg-[#FC6612]/10 flex items-center justify-center mb-3">{(()=>{const I=icoMap[f.icon];return I?<I className="w-5 h-5 text-[#FC6612]"/>:<HiSparkles className="w-5 h-5 text-[#FC6612]"/>})()}</div>
+                <div className="w-12 h-12 rounded-xl bg-[#10b981]/10 flex items-center justify-center mb-3">{(()=>{const I=icoMap[f.icon];return I?<I className="w-5 h-5 text-[#10b981]"/>:<HiSparkles className="w-5 h-5 text-[#10b981]"/>})()}</div>
                 <h3 className="text-[15px] font-semibold text-[var(--text)] mb-2">{f.title}</h3>
                 <p className="text-[var(--text-secondary)] text-[13px] leading-relaxed">{f.description}</p>
               </div>
@@ -41,7 +41,7 @@ export default function AboutPage() {
           <div className="space-y-4 text-center">
             <p className="text-[var(--text-secondary)] text-lg leading-relaxed">{WHY_AI.description}</p>
             <p className="text-[var(--text-secondary)] text-lg leading-relaxed">{WHY_AI.description2}</p>
-            <p className="text-[#FC6612] text-lg font-semibold">{WHY_AI.description3}</p>
+            <p className="text-[#10b981] text-lg font-semibold">{WHY_AI.description3}</p>
           </div>
         </div>
 
@@ -51,7 +51,7 @@ export default function AboutPage() {
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {HOW_IT_WORKS.steps.map((s, i) => (
               <div key={i} className="p-5 text-center rounded-2xl bg-[var(--bg-card)] border border-[var(--border)] hover:border-[var(--border-strong)] transition-all hover:-translate-y-1">
-                <div className="w-12 h-12 rounded-xl bg-[#FC6612]/10 text-[#FC6612] flex items-center justify-center text-lg font-bold mx-auto mb-4">{s.step}</div>
+                <div className="w-12 h-12 rounded-xl bg-[#10b981]/10 text-[#10b981] flex items-center justify-center text-lg font-bold mx-auto mb-4">{s.step}</div>
                 <h3 className="text-[15px] font-semibold text-[var(--text)] mb-2">{s.title}</h3>
                 <p className="text-[var(--text-secondary)] text-[13px] leading-relaxed">{s.description}</p>
               </div>
