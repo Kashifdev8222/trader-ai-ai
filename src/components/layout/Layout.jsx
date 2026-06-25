@@ -73,26 +73,40 @@ export default function Layout({ children }) {
       {/* CONTENT */}
       <main>{children}</main>
 
-      {/* FOOTER - same as HomePage */}
-      <footer className="border-t-2 border-[var(--border-strong)] bg-[var(--bg-alt)]">
+      {/* FOOTER - premium matching HomePage */}
+      <footer className="border-t-2 border-[var(--border-strong)] bg-[var(--bg-alt)] relative">
+        <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-[#10b981]/30 to-transparent" />
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <div className="grid grid-cols-1 sm:grid-cols-[40%_30%_30%] gap-8 lg:gap-12 pb-12 border-b border-[var(--border)]">
+          <div className="grid grid-cols-1 sm:grid-cols-[40%_30%_30%] gap-10 lg:gap-14 pb-14 border-b border-[var(--border)]">
             <div>
               <Logo />
-              <p className="text-[var(--text-secondary)] text-sm mt-4 leading-relaxed max-w-sm">The AI Trader makes ai trading easier and smarter. Analyze markets in real-time, automate strategies safely, stay fully in control.</p>
-            </div>
-            <div>
-              <h3 className="text-xs font-semibold text-[var(--text)] uppercase tracking-wider mb-4">Contact</h3>
-              <div className="space-y-2.5">
-                <p className="text-[var(--text-secondary)] text-sm flex items-center gap-2"><svg className="w-4 h-4 text-[#10b981] flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>AU +61 284 889 800</p>
-                <p className="text-[var(--text-secondary)] text-sm flex items-center gap-2"><svg className="w-4 h-4 text-[#10b981] flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>UK +44 203 927 2999</p>
-                <p className="text-[var(--text-secondary)] text-sm flex items-center gap-2"><svg className="w-4 h-4 text-[#10b981] flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>info@traderai.ai</p>
+              <p className="text-[var(--text-secondary)] text-sm mt-5 leading-relaxed max-w-sm">The AI Trader makes ai trading easier and smarter. Analyze markets in real-time, automate strategies safely, stay fully in control.</p>
+              <div className="flex items-center gap-3 mt-5">
+                <span className="text-amber-400 text-sm">★★★★★</span>
+                <span className="text-[var(--text-muted)] text-xs">4.8/5 rated by 2,400+ traders</span>
               </div>
             </div>
             <div>
-              <h3 className="text-xs font-semibold text-[var(--text)] uppercase tracking-wider mb-4">Follow Us</h3>
+              <h3 className="text-xs font-semibold text-[var(--text)] uppercase tracking-wider mb-5">Contact</h3>
+              <div className="space-y-3">
+                {[
+                  {l:'AU +61 284 889 800',icon:'M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z'},
+                  {l:'UK +44 203 927 2999',icon:'M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z'},
+                  {l:'info@traderai.ai',icon:'M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z'},
+                ].map((item,i)=>(
+                  <p key={i} className="text-[var(--text-secondary)] text-sm flex items-center gap-3 group hover:text-[var(--text)] transition-colors">
+                    <span className="w-8 h-8 rounded-lg bg-[#10b981]/10 flex items-center justify-center flex-shrink-0 group-hover:bg-[#10b981] transition-colors">
+                      <svg className="w-4 h-4 text-[#10b981] group-hover:text-white transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={item.icon}/></svg>
+                    </span>
+                    {item.l}
+                  </p>
+                ))}
+              </div>
+            </div>
+            <div>
+              <h3 className="text-xs font-semibold text-[var(--text)] uppercase tracking-wider mb-5">Follow Us</h3>
               <div className="flex items-center gap-3">
-                {SOCIAL_LINKS.map(s=>(<a key={s.n} href="#" className="w-10 h-10 rounded-xl bg-[#10b981]/10 hover:bg-[#10b981] flex items-center justify-center text-[#10b981] hover:text-white transition-all hover:scale-110" title={s.n}><svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d={s.d}/></svg></a>))}
+                {SOCIAL_LINKS.map(s=>(<a key={s.n} href="#" className="w-10 h-10 rounded-xl bg-[#10b981]/10 hover:bg-[#10b981] flex items-center justify-center text-[#10b981] hover:text-white transition-all hover:scale-110 hover:shadow-lg hover:shadow-[#10b981]/20" title={s.n}><svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d={s.d}/></svg></a>))}
               </div>
             </div>
           </div>
@@ -101,10 +115,10 @@ export default function Layout({ children }) {
             <p className="text-[12px] text-[var(--text-secondary)] leading-relaxed"><strong className="text-[var(--text)] font-semibold">SITE RISK DISCLOSURE:</strong> traderai.ai does not accept any liability for loss or damage as a result of reliance on the information contained within this website; this includes education material, price quotes and charts, and analysis. Please be aware of and seek professional advice for the risks associated with trading the financial markets; never invest more money than you can risk losing. The risks involved in FX, CFDs and Cryptocurrencies may not be suitable for all investors. traderai.ai doesn't retain responsibility for any trading losses you might face as a result of using or inferring from the data hosted on this site.</p>
             <p className="text-[12px] text-[var(--text-secondary)] leading-relaxed"><strong className="text-[var(--text)] font-semibold">LEGAL RESTRICTIONS:</strong> Without limiting the above mentioned provisions, you understand that laws regarding financial activities vary throughout the world, and it is your responsibility to make sure you properly comply with any law, regulation or guideline in your country of residence regarding the use of the Site. To avoid any doubt, the ability to access our Site does not necessarily mean that our Services and/or your activities through the Site are legal under the laws, regulations or directives relevant to your country of residence. It is against the law to solicit US individuals to buy and sell commodity options, even if they are called 'prediction' contracts, unless they are listed for trading and traded on a CFTC-registered exchange unless legally exempt. The UK Financial Conduct Authority has issued a policy statement PS20/10, which prohibits the sale, promotion, and distribution of CFD on Crypto assets. It prohibits the dissemination of marketing materials relating to distribution of CFDs and other financial products based on Cryptocurrencies that addressed to UK residents. The provision of trading services involving any MiFID II financial instruments is prohibited in the EU, unless when authorized/licensed by the applicable authorities and/or regulator(s). Please note that we may receive advertising fees for users opted to open an account with our partner advertisers via advertisers' websites. We have placed cookies on your computer to help improve your experience when visiting this website. You can change cookie settings on your computer at any time. Use of this website indicates your acceptance of this website.</p>
           </div>
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-10">
-            <div className="flex items-center gap-5 text-[13px] text-[var(--text-secondary)]">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-10">
+            <div className="flex items-center gap-6 text-[13px] text-[var(--text-secondary)]">
               <Link to="/privacy-policy" className="hover:text-[var(--text)] transition-colors">Privacy Policy</Link>
-              <Link to="/terms-conditions" className="hover:text-[var(--text)] transition-colors">Terms & Conditions</Link>
+              <Link to="/terms-conditions" className="hover:text-[var(--text)] transition-colors">Terms &amp; Conditions</Link>
               <Link to="/disclaimer" className="hover:text-[var(--text)] transition-colors">Disclaimer</Link>
             </div>
             <p className="text-[12px] text-[var(--text-muted)]">Copyright © 2026 The AI Trader | All Rights Reserved.</p>

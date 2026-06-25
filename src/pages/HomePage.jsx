@@ -437,8 +437,8 @@ export default function HomePage() {
           <div className="flex justify-center order-2 lg:order-1 relative">
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-[#10b981]/[0.05] rounded-full blur-3xl pointer-events-none"/>
             <div className="absolute top-1/3 right-10 w-20 h-20 bg-[#10b981]/[0.08] rounded-full blur-2xl pointer-events-none"/>
-            <div className="relative z-10 bg-gradient-to-br from-[var(--bg-card)] to-[var(--bg-card)]/80 p-4 rounded-3xl border border-[var(--border)] shadow-2xl shadow-black/20">
-              <img src="/traderai-responsive-device.webp" alt="The AI Trader Platform" width="500" height="400" loading="lazy" className="w-full max-w-sm lg:max-w-md mx-auto rounded-2xl"/>
+            <div className="relative z-10 bg-gradient-to-br from-[var(--bg-card)] to-[var(--bg-card)]/80 p-2 sm:p-3 rounded-3xl border border-[var(--border)] shadow-2xl shadow-black/20">
+              <img src="/Trade AI.webp" alt="The AI Trader App - Trade From Your Pocket" loading="lazy" className="w-full h-auto rounded-2xl"/>
             </div>
           </div>
           {/* Right: Content */}
@@ -626,11 +626,13 @@ function YouTubeEmbed() {
   return load ? (
     <iframe src="https://www.youtube.com/embed/u3T7fLT4qGQ?autoplay=1" title="The AI Trader" className="w-full h-full" allowFullScreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"/>
   ) : (
-    <button onClick={()=>setLoad(true)} className="w-full h-full relative bg-black/50 flex items-center justify-center group cursor-pointer">
-      <div className="w-16 h-16 lg:w-20 lg:h-20 rounded-full bg-[#10b981] flex items-center justify-center shadow-2xl shadow-[#10b981]/50 group-hover:scale-110 transition-transform">
-        <svg className="w-7 h-7 lg:w-9 lg:h-9 text-white ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+    <button onClick={()=>setLoad(true)} className="w-full h-full relative bg-black flex items-center justify-center group cursor-pointer overflow-hidden">
+      <img src="/TRADER AI THUMBNAIL 3.webp" alt="The AI Trader - Watch Video" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+      <div className="absolute inset-0 bg-black/40 group-hover:bg-black/30 transition-colors flex items-center justify-center">
+        <div className="w-16 h-16 lg:w-20 lg:h-20 rounded-full bg-[#10b981] flex items-center justify-center shadow-2xl shadow-[#10b981]/50 group-hover:scale-110 transition-transform">
+          <svg className="w-7 h-7 lg:w-9 lg:h-9 text-white ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        </div>
       </div>
-      <p className="absolute bottom-4 text-white/60 text-sm">Click to watch video</p>
     </button>
   );
 }
