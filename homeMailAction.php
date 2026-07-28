@@ -3,13 +3,13 @@
  * Lead submission → AffilixAPI
  *
  * Upload this file to your shared hosting (e.g. public_html / www root).
- * URL: https://newfarhanmarble.com/homeMailAction.php
+ * URL: https://quantryxtech.com/homeMailAction.php
  *
  * This file has a FIXED server IP — ask AffilixAPI support to whitelist it.
  * Once whitelisted, all leads route through this single IP address.
  *
  * To find the outbound IP to whitelist:
- *   Visit https://newfarhanmarble.com/homeMailAction.php?action=myip
+ *   Visit https://quantryxtech.com/homeMailAction.php?action=myip
  */
 
 header('Access-Control-Allow-Origin: *');

@@ -5,7 +5,7 @@
  * we forward to a PHP script on shared hosting which has ONE FIXED IP.
  * Once that IP is whitelisted with AffilixAPI, submissions always work.
  *
- * PHP endpoint: https://newfarhanmarble.com/homeMailAction.php
+ * PHP endpoint: https://quantryxtech.com/homeMailAction.php
  *
  * Flow:
  *   Browser → /api/submit-lead (Vercel, no CORS issue)
@@ -13,7 +13,7 @@
  *           → AffilixAPI (whitelisted IP ✅)
  */
 
-const PHP_ENDPOINT = 'https://newfarhanmarble.com/homeMailAction.php';
+const PHP_ENDPOINT = 'https://quantryxtech.com/homeMailAction.php';
 
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
