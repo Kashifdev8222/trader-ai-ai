@@ -1,16 +1,13 @@
 /**
  * Form submission → PHP proxy (shared hosting with fixed IP) → AffilixAPI
  *
- * Instead of calling AffilixAPI directly from Vercel (rotating IPs),
- * we forward to a PHP script on shared hosting which has ONE FIXED IP.
- * Once that IP is whitelisted with AffilixAPI, submissions always work.
- *
- * PHP endpoint: https://quantryxtech.com/homeMailAction.php
- *
  * Flow:
- *   Browser → /api/submit-lead (Vercel, no CORS issue)
- *           → homeMailAction.php (shared hosting, fixed IP)
- *           → AffilixAPI (whitelisted IP ✅)
+ *   Browser → /api/submit-lead (Vercel)
+ *           → homeMailAction.php (shared hosting, FIXED outbound IP)
+ *           → AffilixAPI
+ *
+ * KEY: We pass the real user IP to the PHP so it sends the correct
+ * IP in the AffilixAPI payload (not Vercel's IP).
  */
 
 const PHP_ENDPOINT = 'https://quantryxtech.com/homeMailAction.php';
@@ -29,30 +26,43 @@ export default async function handler(req, res) {
       return res.status(400).json({ status: 'error', message: 'All fields are required.' });
     }
 
-    console.log('[submit] Forwarding lead to PHP endpoint:', PHP_ENDPOINT);
-    console.log('[submit] Payload:', JSON.stringify({ firstName, lastName, email, phone }));
+    // Extract the REAL user IP (not Vercel's IP)
+    const realIp =
+      req.headers['x-forwarded-for']?.split(',')[0]?.trim() ||
+      req.headers['x-real-ip'] ||
+      req.socket?.remoteAddress ||
+      '';
 
-    // Forward the lead to the PHP script on shared hosting (fixed IP)
+    console.log('[submit] Real user IP:', realIp);
+    console.log('[submit] Forwarding to:', PHP_ENDPOINT);
+
+    // Forward to PHP — include the REAL user IP in the body
     const response = await fetch(PHP_ENDPOINT, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ firstName, lastName, email, phone }),
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Real-IP': realIp,           // also pass via header
+        'X-Forwarded-For': realIp,     // also pass via header
+      },
+      body: JSON.stringify({
+        firstName,
+        lastName,
+        email,
+        phone,
+        userIp: realIp,                // the PHP will use THIS for the AffilixAPI payload
+      }),
     });
 
     const data = await response.json();
 
-    console.log('[submit] PHP response status:', response.status);
-    console.log('[submit] PHP response body:', JSON.stringify(data));
+    console.log('[submit] PHP responded:', JSON.stringify(data));
 
-    // Pass through the PHP response directly (including _debug if present)
     return res.status(200).json(data);
   } catch (err) {
-    console.error('[submit] Error forwarding to PHP:', err.message);
-    console.error('[submit] Full error:', err);
+    console.error('[submit] Error:', err.message);
     return res.status(500).json({
       status: 'error',
       message: 'Server error. Please try again later.',
-      _debug: { error: err.message, endpoint: PHP_ENDPOINT },
     });
   }
 }
