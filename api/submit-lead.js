@@ -29,6 +29,9 @@ export default async function handler(req, res) {
       return res.status(400).json({ status: 'error', message: 'All fields are required.' });
     }
 
+    console.log('[submit] Forwarding lead to PHP endpoint:', PHP_ENDPOINT);
+    console.log('[submit] Payload:', JSON.stringify({ firstName, lastName, email, phone }));
+
     // Forward the lead to the PHP script on shared hosting (fixed IP)
     const response = await fetch(PHP_ENDPOINT, {
       method: 'POST',
@@ -38,13 +41,18 @@ export default async function handler(req, res) {
 
     const data = await response.json();
 
-    // Pass through the PHP response directly
-    return res.status(response.ok ? 200 : response.status).json(data);
+    console.log('[submit] PHP response status:', response.status);
+    console.log('[submit] PHP response body:', JSON.stringify(data));
+
+    // Pass through the PHP response directly (including _debug if present)
+    return res.status(200).json(data);
   } catch (err) {
     console.error('[submit] Error forwarding to PHP:', err.message);
+    console.error('[submit] Full error:', err);
     return res.status(500).json({
       status: 'error',
       message: 'Server error. Please try again later.',
+      _debug: { error: err.message, endpoint: PHP_ENDPOINT },
     });
   }
 }
