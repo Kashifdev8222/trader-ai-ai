@@ -117,14 +117,40 @@ body {
 .delay-7 { transition-delay: 0.21s; } .delay-8 { transition-delay: 0.24s; }
 
 /* ── Replain Chat Widget ── */
-.replain-widget { z-index: 45 !important; }
+/* Force the chat bubble to use our accent color */
+[class*="replain"],
+[id*="replain"],
+div[style*="position: fixed"][style*="bottom"],
+div[style*="position:fixed"][style*="bottom"] {
+  /* target chat widget container */
+}
 #replain-button,
 [class*="replain"] button,
 [class*="replain"] [class*="button"],
-[data-replain] {
+[data-replain],
+[class*="replain"] [class*="chat"],
+[class*="replain"] [class*="bubble"],
+[class*="replain"] [class*="widget"] button,
+[class*="replain"] [class*="launcher"] {
   background: var(--accent) !important;
+  background-color: var(--accent) !important;
   border-radius: 12px !important;
   box-shadow: 0 4px 16px rgba(16,185,129,0.25) !important;
+}
+/* Target the chat button regardless of how Replain renders it */
+div[class*="replain"] {
+  --replain-bg: var(--accent);
+}
+div[class*="replain"] > button,
+div[class*="replain"] button[class*="trigger"],
+div[class*="replain"] button[class*="open"],
+div[class*="replain"] [role="button"] {
+  background: var(--accent) !important;
+  background-color: var(--accent) !important;
+}
+/* Override any white backgrounds on fixed bottom-right elements */
+body > div[style*="position"] button {
+  background-color: var(--accent) !important;
 }
 
 /* ── Phone Input ── */

@@ -110,9 +110,19 @@ export default function ContactPage() {
               <h3 className="text-lg font-bold text-[var(--text)] mb-2 relative z-10">We are here for you 24/5</h3>
               <p className="text-[var(--text-secondary)] text-sm mb-5 relative z-10">Our support team is available Monday to Friday, around the clock.</p>
               <button onClick={() => {
-                const btn = document.querySelector('#replain-button, [class*="replain"] button, [aria-label*="chat" i], [aria-label*="message" i]');
-                if (btn) { btn.click(); return; }
-                if (window.replain) { window.replain('open'); return; }
+                // Try every possible way to open the Replain chat
+                const btns = document.querySelectorAll('button, [role="button"], a, div[class*="replain"], div[id*="replain"], iframe');
+                for (const b of btns) {
+                  const text = (b.textContent || '').toLowerCase() + (b.getAttribute('aria-label') || '').toLowerCase();
+                  if (text.includes('chat') || text.includes('message') || text.includes('help') || text.includes('support')) {
+                    b.click(); return;
+                  }
+                }
+                // Fallback: try clicking anything Replain-related
+                const replain = document.querySelector('[class*="replain"], [id*="replain"], iframe[src*="replain"]');
+                if (replain) { if (replain.click) replain.click(); else replain.contentWindow?.document?.querySelector('button')?.click(); return; }
+                // Last resort
+                if (window.replain) { try { window.replain('open'); } catch(e) {} }
               }} className="relative z-10 inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white font-semibold text-sm transition-all">
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
                 Launch Live Chat
