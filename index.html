@@ -37,12 +37,27 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
-    <!-- Replain Live Chat — loaded after page render -->
+    <!-- Replain Live Chat -->
     <script>
       window.replainSettings = { id: 'c6366b02-2531-4ee7-b3e1-7cc6f93d7e57' };
       (function(u){var s=document.createElement('script');s.async=true;s.src=u;
       var x=document.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);
       })('https://widget.replain.cc/dist/client.js');
+
+      // Strip white background from Replain container
+      var fixBg = setInterval(function(){
+        var divs = document.querySelectorAll('body > div[style*="position"]');
+        for (var i=0; i<divs.length; i++) {
+          var d = divs[i];
+          var hasReplain = d.innerHTML.indexOf('replain') > -1 || (d.querySelector && d.querySelector('iframe[src*="replain"]'));
+          if (hasReplain) {
+            d.style.setProperty('background','transparent','important');
+            d.style.setProperty('background-color','transparent','important');
+            if (d.shadowRoot) d.shadowRoot.querySelectorAll('*').forEach(function(el){ el.style.setProperty('background','transparent','important'); });
+          }
+        }
+      }, 200);
+      setTimeout(function(){ clearInterval(fixBg); }, 8000);
     </script>
   </body>
 </html>

@@ -107,7 +107,7 @@ export default function ContactPage() {
             </div>
             <div className="rounded-2xl bg-gradient-to-br from-[#10b981]/5 to-[#10b981]/[0.02] border border-[#10b981]/10 p-7 sm:p-8 text-center relative overflow-hidden">
               <div className="absolute top-0 right-0 w-24 h-24 bg-[#10b981]/[0.04] rounded-full blur-2xl pointer-events-none" />
-              <h3 className="text-lg font-bold text-[var(--text)] mb-2 relative z-10">We are here for you 24/5</h3>
+              <h3 className="text-lg font-bold text-[var(--text)] mb-2 relative z-10">We are here for you 24/7</h3>
               <p className="text-[var(--text-secondary)] text-sm mb-5 relative z-10">Our support team is available Monday to Friday, around the clock.</p>
               <div className="relative z-10 text-center">
                 <p className="text-[var(--text-secondary)] text-sm mb-4">Need instant help? Our support team is ready to assist you.</p>
