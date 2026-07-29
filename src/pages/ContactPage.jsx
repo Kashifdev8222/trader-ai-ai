@@ -8,8 +8,8 @@ export default function ContactPage() {
   const [form, setForm] = useState({ firstName: '', lastName: '', email: '', phone: '' });
   const [phoneCountry, setPhoneCountry] = useState('us');
   useEffect(() => {
-    // Detect country by IP (works behind proxies/VPNs too)
-    fetch('https://ipapi.co/json/')
+    // Detect country by IP via our own API (no CORS, server-side geo)
+    fetch('/api/geo')
       .then(r => r.json())
       .then(d => {
         if (d.country_code) {
@@ -20,8 +20,7 @@ export default function ContactPage() {
         // Fallback to browser language
         const l = navigator.language || '';
         const cc = l.split('-')[1]?.toLowerCase() || l.split('-')[0]?.toLowerCase();
-        const map = { pk:'pk', in:'in', us:'us', gb:'gb', au:'au', cn:'cn', de:'de', fr:'fr', jp:'jp', ru:'ru', br:'br', it:'it', es:'es', nl:'nl', se:'se', ch:'ch', pl:'pl', ph:'ph', mx:'mx', ae:'ae', ng:'ng', sa:'sa', eg:'eg', za:'za', kr:'kr', vn:'vn', th:'th', my:'my', id:'id', tr:'tr', ca:'ca' };
-        if (map[cc]) setPhoneCountry(map[cc]);
+        if (cc) setPhoneCountry(cc);
       });
   }, []);
   const [status, setStatus] = useState('idle');
