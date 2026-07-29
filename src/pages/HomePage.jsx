@@ -325,16 +325,29 @@ export default function HomePage() {
 
       {/* ====== WHY AI + MARKETS ====== */}
       <Sec alt><Bg dark={dark} /><Con>
-        <div className="grid lg:grid-cols-2 gap-10 lg:gap-16">
+        <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
           <div>
             <h2 className="text-xl lg:text-2xl font-semibold text-[var(--text)] tracking-tight mb-4">{WHY_AI.headline}</h2>
-            <div className="space-y-3 mb-6">
+            <div className="space-y-3 mb-5">
               <p className="text-[var(--text-secondary)] text-[14px] leading-relaxed">{WHY_AI.description}</p>
               <p className="text-[var(--text-secondary)] text-[14px] leading-relaxed">{WHY_AI.description2}</p>
             </div>
-            <div className="flex items-start gap-3 p-4 rounded-lg bg-[var(--accent-light)] border border-[var(--accent-light)]">
-              <HiLightBulb className="w-4 h-4 text-[var(--accent)] mt-0.5 flex-shrink-0" />
-              <p className="text-[var(--text)] text-[13px] font-medium leading-relaxed">{WHY_AI.description3}</p>
+            <div className="space-y-2 mb-5">
+              {[
+                { icon: HiLightningBolt, t: 'Real-time scanning', d: 'Analyzes thousands of data points per second' },
+                { icon: HiShieldCheck, t: 'Disciplined execution', d: 'Never emotional, always data-driven' },
+                { icon: HiSparkles, t: 'Your superpower', d: 'Speed, focus, and precision at your command' },
+              ].map((b, i) => (
+                <div key={i} className="flex items-start gap-3 p-3 rounded-lg bg-[var(--bg-card)] border border-[var(--border)]">
+                  <div className="w-8 h-8 rounded-lg bg-[var(--accent-light)] flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <b.icon className="w-4 h-4 text-[var(--accent)]" />
+                  </div>
+                  <div>
+                    <h4 className="text-[13px] font-semibold text-[var(--text)]">{b.t}</h4>
+                    <p className="text-[12px] text-[var(--text-secondary)]">{b.d}</p>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
           <div>
