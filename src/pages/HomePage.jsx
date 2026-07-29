@@ -159,33 +159,44 @@ export default function HomePage() {
       </header>
 
       {/* ====== HERO ====== */}
-      <section id="reg-form" className="relative mt-16 py-16 lg:py-20">
-        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-[1fr_1fr] gap-6 lg:gap-10 items-start">
+      <section id="reg-form" className="relative mt-16 py-16 lg:py-20 overflow-hidden">
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[var(--accent)]/[0.03] rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-[var(--accent)]/[0.02] rounded-full blur-3xl pointer-events-none" />
+        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="grid lg:grid-cols-[1fr_1fr] gap-6 lg:gap-10 items-center">
           {/* LEFT — Headline */}
           <div className="text-center lg:text-left">
             <h1 className="text-[1.75rem] sm:text-[2.2rem] lg:text-[2.6rem] xl:text-[3rem] font-bold tracking-[-0.02em] leading-[1.15] text-[var(--text)] mb-4">
               Trader AI Where Smart Traders Turn Market Moves{' '}
               <span className="text-[var(--accent)]">Into Real Returns</span>
             </h1>
-            <p className="text-[15px] lg:text-base text-[var(--text-secondary)] leading-relaxed mb-8">
+            <p className="text-[15px] lg:text-base text-[var(--text-secondary)] leading-relaxed mb-6">
               {HERO_CONTENT.description}
             </p>
-            <div className="flex flex-wrap items-center gap-3 justify-center lg:justify-start mb-8">
+            <div className="flex flex-wrap items-center gap-2 justify-center lg:justify-start mb-5">
+              {[{Icon:HiShieldCheck,t:'Secure & Regulated'},{Icon:HiLightningBolt,t:'AI-Powered'},{Icon:HiCash,t:'Withdraw Anytime'}].map((s,i)=>(
+                <span key={i} className="inline-flex items-center gap-1.5 text-[12px] font-medium text-[var(--text-secondary)] bg-[var(--bg-card)] border border-[var(--border)] rounded-full px-3 py-1.5">
+                  <s.Icon className="w-3.5 h-3.5 text-[var(--accent)]" />{s.t}
+                </span>
+              ))}
+            </div>
+            <div className="flex flex-col sm:flex-row items-center gap-3 justify-center lg:justify-start mb-6">
               <a href="#reg-form"><Btn size="lg">Get Started Free<HiArrowRight className="w-4 h-4"/></Btn></a>
               <Btn variant="secondary" size="lg" onClick={()=>document.getElementById('demo')?.scrollIntoView({behavior:'smooth'})}>Watch Demo</Btn>
             </div>
-            <div className="flex items-center gap-6 justify-center lg:justify-start text-[13px] text-[var(--text-muted)]">
-              <span className="flex items-center gap-1.5"><span className="text-amber-500 text-sm">★★★★★</span> 4.8/5</span>
-              <span>100K+ traders</span>
-              <span>50+ countries</span>
+            <div className="flex items-center gap-5 justify-center lg:justify-start text-[13px] text-[var(--text-muted)]">
+              <span className="flex items-center gap-1.5"><span className="text-amber-500 text-sm">★★★★★</span><span className="font-medium text-[var(--text)]">4.8/5</span></span>
+              <span className="w-1 h-1 rounded-full bg-[var(--border)]" />
+              <span><span className="font-medium text-[var(--text)]">100K+</span> traders</span>
+              <span className="w-1 h-1 rounded-full bg-[var(--border)]" />
+              <span><span className="font-medium text-[var(--text)]">50+</span> countries</span>
             </div>
           </div>
 
           {/* RIGHT — Form */}
           <div className="flex justify-center lg:justify-end">
             <div className="w-full max-w-[420px]">
-              <div className="rounded-xl bg-[var(--bg-card)] border border-[var(--border)] p-6">
+              <div className="rounded-xl bg-[var(--bg-card)] border border-[var(--border)] shadow-[var(--shadow-md)] p-6">
                 <h3 className="text-lg font-semibold text-[var(--text)] text-center mb-1">{FORM_CONTENT.headline}</h3>
                 <p className="text-[13px] text-[var(--text-secondary)] text-center mb-5">{FORM_CONTENT.subheadline}</p>
                 {formStatus==='success'?(
@@ -546,6 +557,14 @@ export default function HomePage() {
           </div>
         </div>
       </footer>
+
+      {/* Back to Top */}
+      <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+        className="fixed bottom-6 right-6 z-50 w-10 h-10 rounded-lg bg-[var(--accent)] text-white flex items-center justify-center shadow-lg shadow-[var(--accent)]/25 hover:shadow-xl hover:shadow-[var(--accent)]/40 hover:-translate-y-0.5 transition-all">
+        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+        </svg>
+      </button>
     </div>
   );
 }

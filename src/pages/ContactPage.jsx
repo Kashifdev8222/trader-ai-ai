@@ -109,9 +109,9 @@ export default function ContactPage() {
               <div className="absolute top-0 right-0 w-24 h-24 bg-[#10b981]/[0.04] rounded-full blur-2xl pointer-events-none" />
               <h3 className="text-lg font-bold text-[var(--text)] mb-2 relative z-10">We are here for you 24/5</h3>
               <p className="text-[var(--text-secondary)] text-sm mb-5 relative z-10">Our support team is available Monday to Friday, around the clock.</p>
-              <button className="relative z-10 inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#10b981] hover:bg-[#059669] text-white font-semibold text-sm transition-all shadow-lg shadow-[#10b981]/20 hover:shadow-xl hover:shadow-[#10b981]/40">
+              <button onClick={() => window.replain && window.replain('open')} className="relative z-10 inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white font-semibold text-sm transition-all">
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
-                LAUNCH LIVE CHAT
+                Launch Live Chat
               </button>
             </div>
           </div>
