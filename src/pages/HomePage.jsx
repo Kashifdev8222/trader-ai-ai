@@ -159,16 +159,16 @@ export default function HomePage() {
       </header>
 
       {/* ====== HERO ====== */}
-      <section id="reg-form" className="relative"><Con wide>
-        <div className="py-16 lg:py-20">
-        <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-start">
+      <section id="reg-form" className="relative py-16 lg:py-20">
+        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid lg:grid-cols-[1.2fr_1fr] gap-8 lg:gap-12 items-start">
           {/* LEFT — Headline */}
-          <div className="text-center lg:text-left pt-0 lg:pt-4">
+          <div className="text-center lg:text-left">
             <h1 className="text-[1.75rem] sm:text-[2.2rem] lg:text-[2.6rem] xl:text-[3rem] font-bold tracking-[-0.02em] leading-[1.15] text-[var(--text)] mb-4">
-              Trader AI{' — '}Where Smart Traders Turn Market Moves{' '}
+              Trader AI Where Smart Traders Turn Market Moves{' '}
               <span className="text-[var(--accent)]">Into Real Returns</span>
             </h1>
-            <p className="text-[15px] lg:text-base text-[var(--text-secondary)] leading-relaxed mb-8 max-w-[520px] lg:max-w-none">
+            <p className="text-[15px] lg:text-base text-[var(--text-secondary)] leading-relaxed mb-8">
               {HERO_CONTENT.description}
             </p>
             <div className="flex flex-wrap items-center gap-3 justify-center lg:justify-start mb-8">
@@ -220,7 +220,7 @@ export default function HomePage() {
           </div>
         </div>
         </div>
-      </Con></section>
+      </section>
 
       {/* ====== LIVE MARKET STATS ====== */}
       <MarketDataProvider>
