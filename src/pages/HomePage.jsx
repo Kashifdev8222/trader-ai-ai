@@ -160,7 +160,7 @@ export default function HomePage() {
 
       {/* ====== HERO ====== */}
       <section id="reg-form" className="relative"><Con wide>
-        <div className="pt-16 lg:pt-20 pb-12 lg:pb-16">
+        <div className="py-16 lg:py-20">
         <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-start">
           {/* LEFT — Headline */}
           <div className="text-center lg:text-left pt-0 lg:pt-4">
