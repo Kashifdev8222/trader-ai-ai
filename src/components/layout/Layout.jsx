@@ -4,11 +4,11 @@ import { Link, useLocation } from 'react-router-dom';
 
 function Logo() {
   return (
-    <Link to="/" className="flex items-center gap-3 flex-shrink-0 group">
-      <div className="w-10 h-10 rounded-xl bg-[#10b981] flex items-center justify-center shadow-lg shadow-[#10b981]/25 group-hover:shadow-[#10b981]/40 group-hover:scale-105 transition-all duration-300">
-        <svg className="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.3" strokeLinecap="round" strokeLinejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+    <Link to="/" className="flex items-center gap-2.5 flex-shrink-0 group">
+      <div className="w-8 h-8 lg:w-9 lg:h-9 rounded-xl bg-[#10b981] flex items-center justify-center shadow-md shadow-[#10b981]/25 group-hover:shadow-[#10b981]/40 group-hover:scale-105 transition-all duration-200">
+        <svg className="w-4 h-4 lg:w-5 lg:h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.3" strokeLinecap="round" strokeLinejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
       </div>
-      <span className="text-lg font-extrabold text-[var(--text)] tracking-tight">The AI <span className="text-[#10b981]">Trader</span></span>
+      <span className="text-base lg:text-lg font-extrabold text-[var(--text)] tracking-tight">The AI <span className="text-[#10b981]">Trader</span></span>
     </Link>
   );
 }
@@ -54,8 +54,8 @@ export default function Layout({ children }) {
   return (
     <div className="bg-[var(--bg)] min-h-screen text-[var(--text)]">
       {/* HEADER */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-[var(--bg-alt)]/95 backdrop-blur-xl border-b-2 border-[var(--border-strong)]">
-        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-[68px]">
+      <header className="fixed top-0 left-0 right-0 z-50 bg-[var(--bg-alt)]/80 backdrop-blur-2xl border-b border-[var(--border)]">
+        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-[60px]">
           <Logo />
           <nav className="hidden lg:flex items-center gap-1">
             {NAV.map(link => link.children ? (
@@ -75,9 +75,9 @@ export default function Layout({ children }) {
 
       {/* FOOTER - premium matching HomePage */}
       <footer className="border-t-2 border-[var(--border-strong)] bg-[var(--bg-alt)] relative">
-        <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-[#10b981]/30 to-transparent" />
-        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <div className="grid grid-cols-1 sm:grid-cols-[40%_30%_30%] gap-10 lg:gap-14 pb-14 border-b border-[var(--border)]">
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#10b981]/30 to-transparent" />
+        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <div className="grid grid-cols-1 sm:grid-cols-[40%_30%_30%] gap-10 lg:gap-14 pb-12 border-b border-[var(--border)]">
             <div>
               <Logo />
               <p className="text-[var(--text-secondary)] text-sm mt-5 leading-relaxed max-w-sm">The AI Trader makes ai trading easier and smarter. Analyze markets in real-time, automate strategies safely, stay fully in control.</p>
@@ -110,12 +110,12 @@ export default function Layout({ children }) {
               </div>
             </div>
           </div>
-          <div className="py-10 border-b border-[var(--border)] space-y-4">
+          <div className="py-8 border-b border-[var(--border)] space-y-4">
             <p className="text-[12px] text-[var(--text-secondary)] leading-relaxed"><strong className="text-[var(--text)] font-semibold">HIGH RISK WARNING:</strong> Dealing or Trading FX, CFDs and Cryptocurrencies is highly speculative, carries a level of non-negligible risk and may not be suitable for all investors. You may lose some or all of your invested capital, therefore you should not speculate with capital that you cannot afford to lose. Please refer to the risk disclosure below. traderai.ai does not gain or lose profits based on your activity and operates as a services company. traderai.ai is not a financial services firm and is not eligible of providing financial advice. traderai.ai shall not be liable for any losses occurred via or in relation to this informational website.</p>
             <p className="text-[12px] text-[var(--text-secondary)] leading-relaxed"><strong className="text-[var(--text)] font-semibold">SITE RISK DISCLOSURE:</strong> traderai.ai does not accept any liability for loss or damage as a result of reliance on the information contained within this website; this includes education material, price quotes and charts, and analysis. Please be aware of and seek professional advice for the risks associated with trading the financial markets; never invest more money than you can risk losing. The risks involved in FX, CFDs and Cryptocurrencies may not be suitable for all investors. traderai.ai doesn't retain responsibility for any trading losses you might face as a result of using or inferring from the data hosted on this site.</p>
             <p className="text-[12px] text-[var(--text-secondary)] leading-relaxed"><strong className="text-[var(--text)] font-semibold">LEGAL RESTRICTIONS:</strong> Without limiting the above mentioned provisions, you understand that laws regarding financial activities vary throughout the world, and it is your responsibility to make sure you properly comply with any law, regulation or guideline in your country of residence regarding the use of the Site. To avoid any doubt, the ability to access our Site does not necessarily mean that our Services and/or your activities through the Site are legal under the laws, regulations or directives relevant to your country of residence. It is against the law to solicit US individuals to buy and sell commodity options, even if they are called 'prediction' contracts, unless they are listed for trading and traded on a CFTC-registered exchange unless legally exempt. The UK Financial Conduct Authority has issued a policy statement PS20/10, which prohibits the sale, promotion, and distribution of CFD on Crypto assets. It prohibits the dissemination of marketing materials relating to distribution of CFDs and other financial products based on Cryptocurrencies that addressed to UK residents. The provision of trading services involving any MiFID II financial instruments is prohibited in the EU, unless when authorized/licensed by the applicable authorities and/or regulator(s). Please note that we may receive advertising fees for users opted to open an account with our partner advertisers via advertisers' websites. We have placed cookies on your computer to help improve your experience when visiting this website. You can change cookie settings on your computer at any time. Use of this website indicates your acceptance of this website.</p>
           </div>
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-10">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-8">
             <div className="flex items-center gap-6 text-[13px] text-[var(--text-secondary)]">
               <Link to="/privacy-policy" className="hover:text-[var(--text)] transition-colors">Privacy Policy</Link>
               <Link to="/terms-conditions" className="hover:text-[var(--text)] transition-colors">Terms &amp; Conditions</Link>

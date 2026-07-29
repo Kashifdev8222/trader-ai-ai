@@ -22,13 +22,13 @@ import TVMiniChart from '../components/ui/TVMiniChart';
 
 function Logo() {
   return (
-    <Link to="/" className="flex items-center gap-3 flex-shrink-0 group">
-      <div className="w-10 h-10 rounded-xl bg-[#10b981] flex items-center justify-center shadow-lg shadow-[#10b981]/25 group-hover:shadow-[#10b981]/40 group-hover:scale-105 transition-all duration-300">
-        <svg className="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.3" strokeLinecap="round" strokeLinejoin="round">
+    <Link to="/" className="flex items-center gap-2.5 flex-shrink-0 group">
+      <div className="w-8 h-8 lg:w-9 lg:h-9 rounded-xl bg-[#10b981] flex items-center justify-center shadow-md shadow-[#10b981]/25 group-hover:shadow-[#10b981]/40 group-hover:scale-105 transition-all duration-200">
+        <svg className="w-4 h-4 lg:w-5 lg:h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.3" strokeLinecap="round" strokeLinejoin="round">
           <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
         </svg>
       </div>
-      <span className="text-lg font-extrabold text-[var(--text)] tracking-tight">The AI <span className="text-[#10b981]">Trader</span></span>
+      <span className="text-base lg:text-lg font-extrabold text-[var(--text)] tracking-tight">The AI <span className="text-[#10b981]">Trader</span></span>
     </Link>
   );
 }
@@ -54,33 +54,33 @@ function Sec({ children, id, className = '' }) {
   return <section id={id} className={`relative border-t border-[var(--border)] reveal ${className}`}>{children}</section>;
 }
 function Con({ children }) {
-  return <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20 relative z-10">{children}</div>;
+  return <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-14 lg:py-16 relative z-10">{children}</div>;
 }
 function Head({ headline, subheadline }) {
   return (
-    <div className="text-center mb-14">
-      <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[var(--text)] mb-4">{headline}</h2>
-      <div className="flex items-center justify-center gap-2 mb-4">
-        <div className="h-0.5 w-8 rounded-full bg-gradient-to-r from-transparent to-[#10b981]/60" />
-        <div className="h-1.5 w-1.5 rounded-full bg-[#10b981]" />
-        <div className="h-0.5 w-16 rounded-full bg-gradient-to-r from-[#10b981]/60 via-[#10b981] to-[#10b981]/60" />
-        <div className="h-1.5 w-1.5 rounded-full bg-[#10b981]" />
-        <div className="h-0.5 w-8 rounded-full bg-gradient-to-l from-transparent to-[#10b981]/60" />
+    <div className="text-center mb-10">
+      <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[var(--text)] mb-3">{headline}</h2>
+      <div className="flex items-center justify-center gap-1.5 mb-3">
+        <div className="h-px w-6 rounded-full bg-gradient-to-r from-transparent to-[#10b981]/40" />
+        <div className="h-1 w-1 rounded-full bg-[#10b981]" />
+        <div className="h-px w-12 rounded-full bg-gradient-to-r from-[#10b981]/40 via-[#10b981] to-[#10b981]/40" />
+        <div className="h-1 w-1 rounded-full bg-[#10b981]" />
+        <div className="h-px w-6 rounded-full bg-gradient-to-l from-transparent to-[#10b981]/40" />
       </div>
       {subheadline && <p className="text-base lg:text-lg text-[var(--text-secondary)] max-w-2xl mx-auto leading-relaxed">{subheadline}</p>}
     </div>
   );
 }
 function Btn({ children, variant = 'primary', size = 'md', className = '', ...p }) {
-  const base = 'cursor-pointer inline-flex items-center justify-center gap-1.5 font-semibold transition-all duration-300 hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed';
-  const sz = { sm: 'px-4 py-2 text-[13px] rounded-lg', md: 'px-5 py-2.5 text-[13px] rounded-lg', lg: 'px-6 py-3 text-sm rounded-xl', xl: 'px-8 py-3.5 text-[15px] rounded-xl' };
-  if (variant === 'secondary') return <button className={`${base} bg-transparent hover:bg-white/[0.04] text-[var(--text)] border border-[var(--border-strong)] hover:border-white/30 ${sz[size]} ${className}`} {...p}>{children}</button>;
+  const base = 'cursor-pointer inline-flex items-center justify-center gap-1.5 font-semibold transition-all duration-200 hover:-translate-y-0.5 active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed';
+  const sz = { sm: 'px-3.5 py-1.5 text-[13px] rounded-lg', md: 'px-4 py-2 text-[13px] rounded-lg', lg: 'px-5 py-2.5 text-sm rounded-xl', xl: 'px-7 py-3 text-[15px] rounded-xl' };
+  if (variant === 'secondary') return <button className={`${base} bg-transparent hover:bg-[var(--bg-overlay)] text-[var(--text)] border border-[var(--border)] hover:border-[var(--border-strong)] ${sz[size]} ${className}`} {...p}>{children}</button>;
   return <button className={`${base} bg-[#10b981] hover:bg-[#059669] text-white shadow-md shadow-[#10b981]/25 hover:shadow-lg hover:shadow-[#10b981]/35 ${sz[size]} ${className}`} {...p}>{children}</button>;
 }
 function Card({ children, className = '', delay = 0, glow = false }) {
   return (
-    <div className={`group rounded-2xl bg-[var(--bg-card)] border border-[var(--border)] shadow-sm hover:shadow-2xl hover:shadow-black/[0.08] dark:hover:shadow-black/30 hover:border-[#10b981]/20 transition-all duration-500 hover:-translate-y-1.5 reveal relative overflow-hidden ${delay ? `delay-${delay}` : ''} ${className}`}>
-      {glow && <div className="absolute inset-0 bg-gradient-to-br from-[#10b981]/[0.03] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />}
+    <div className={`group rounded-xl bg-[var(--bg-card)] border border-[var(--border)] shadow-[var(--shadow-sm)] hover:shadow-[var(--shadow-lg)] hover:border-[#10b981]/20 transition-all duration-200 hover:-translate-y-1 reveal relative overflow-hidden ${delay ? `delay-${delay}` : ''} ${className}`}>
+      {glow && <div className="absolute inset-0 bg-gradient-to-br from-[#10b981]/[0.02] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />}
       {children}
     </div>
   );
@@ -150,8 +150,8 @@ export default function HomePage() {
     <div className="bg-[var(--bg)] min-h-screen text-[var(--text)]">
 
       {/* ====== HEADER ====== */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-[var(--bg-alt)]/95 backdrop-blur-xl border-b-2 border-[var(--border-strong)]">
-        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-[68px]">
+      <header className="fixed top-0 left-0 right-0 z-50 bg-[var(--bg-alt)]/80 backdrop-blur-2xl border-b border-[var(--border)]">
+        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-[60px]">
           <Logo />
           <nav className="hidden lg:flex items-center gap-1">
             {NAV.map(link => link.children ? (
@@ -211,7 +211,7 @@ export default function HomePage() {
           {/* RIGHT - Form Card (larger, more prominent) */}
           <div className="flex justify-center lg:justify-end">
             <div className="w-full max-w-[420px]">
-              <div className="relative rounded-2xl bg-[var(--bg-card)] border border-[var(--border-strong)] p-7 sm:p-8 shadow-2xl shadow-black/20 dark:shadow-black/50">
+              <div className="relative rounded-2xl bg-[var(--bg-card)] border border-[var(--border)] p-6 shadow-[var(--shadow-xl)]">
                 {/* Glow behind card */}
                 <div className="absolute -top-10 right-10 w-40 h-40 bg-[#10b981]/[0.06] dark:bg-[#10b981]/[0.04] rounded-full blur-2xl pointer-events-none"/>
                 <h2 className="text-xl font-bold text-[var(--text)] text-center mb-1">{FORM_CONTENT.headline}</h2>
@@ -278,12 +278,9 @@ export default function HomePage() {
           <p className="text-[var(--text-secondary)] text-base lg:text-lg leading-relaxed text-center mb-12 max-w-3xl mx-auto">{ABOUT_CONTENT.description}</p>
 
           {/* Inflation Highlight Card */}
-          <div className="relative rounded-3xl bg-gradient-to-br from-[var(--bg-card)] via-[var(--bg-card)] to-[#10b981]/[0.02] border border-[var(--border)] p-8 lg:p-12 mb-12 overflow-hidden shadow-xl shadow-black/[0.03] dark:shadow-black/20">
-            <div className="absolute top-0 right-0 w-64 h-64 bg-[#10b981]/[0.04] rounded-full blur-3xl pointer-events-none" />
-            <div className="absolute bottom-0 left-10 w-40 h-40 bg-[#10b981]/[0.02] rounded-full blur-2xl pointer-events-none" />
-            {/* Decorative corner */}
-            <div className="absolute top-6 right-6 w-8 h-8 border-t-2 border-r-2 border-[#10b981]/20 rounded-tr-lg pointer-events-none" />
-            <h3 className="text-xl lg:text-2xl font-bold text-[var(--text)] mb-8 relative z-10">{ABOUT_CONTENT.inflation_headline}</h3>
+          <div className="relative rounded-2xl bg-gradient-to-br from-[var(--bg-card)] via-[var(--bg-card)] to-[#10b981]/[0.02] border border-[var(--border)] p-6 lg:p-9 mb-10 overflow-hidden shadow-[var(--shadow-md)]">
+            <div className="absolute top-0 right-0 w-64 h-64 bg-[#10b981]/[0.03] rounded-full blur-3xl pointer-events-none" />
+            <h3 className="text-xl lg:text-2xl font-bold text-[var(--text)] mb-6 relative z-10">{ABOUT_CONTENT.inflation_headline}</h3>
             <div className="grid sm:grid-cols-3 gap-5 mb-8 relative z-10">
               <div className="text-center p-6 rounded-2xl bg-[var(--bg)] border border-red-400/10 hover:border-red-400/30 transition-all group">
                 <div className="w-12 h-12 rounded-xl bg-red-400/10 flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform">
@@ -353,7 +350,7 @@ export default function HomePage() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5">
           {FEATURES.map((f,i)=>(
             <Card key={i} className="p-6 text-center" glow>
-              <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#10b981]/15 via-[#10b981]/10 to-[#10b981]/5 flex items-center justify-center mb-5 group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-[#10b981]/20 transition-all duration-300 mx-auto">
+              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#10b981]/15 via-[#10b981]/10 to-[#10b981]/5 flex items-center justify-center mb-4 group-hover:scale-110 transition-all duration-200 mx-auto">
                 {(()=>{const ico={ChartBar:<HiChartBar className="w-7 h-7 text-[#10b981]"/>,Chip:<HiChip className="w-7 h-7 text-[#10b981]"/>,ViewGrid:<HiDatabase className="w-7 h-7 text-[#10b981]"/>,ShieldCheck:<HiShieldCheck className="w-7 h-7 text-[#10b981]"/>,Beaker:<HiLightBulb className="w-7 h-7 text-[#10b981]"/>,DeviceMobile:<HiDesktopComputer className="w-7 h-7 text-[#10b981]"/>,LockClosed:<HiLockClosed className="w-7 h-7 text-[#10b981]"/>,Support:<HiSupport className="w-7 h-7 text-[#10b981]"/>,UserGroup:<HiUserGroup className="w-7 h-7 text-[#10b981]"/>,DesktopComputer:<HiDesktopComputer className="w-7 h-7 text-[#10b981]"/>};return ico[f.icon]||<HiSparkles className="w-7 h-7 text-[#10b981]"/>})()}
               </div>
               <h3 className="text-[15px] font-semibold text-[var(--text)] mb-2">{f.title}</h3>
@@ -371,7 +368,7 @@ export default function HomePage() {
           <div className="hidden lg:block absolute top-12 left-[12%] right-[12%] h-0.5 bg-gradient-to-r from-[#10b981]/20 via-[#10b981]/40 to-[#10b981]/20 z-0" />
           {HOW_IT_WORKS.steps.map((s,i)=>(
             <Card key={i} className="p-6 text-center relative z-10" glow>
-              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#10b981] to-[#059669] text-white flex items-center justify-center text-xl font-bold mx-auto mb-5 shadow-lg shadow-[#10b981]/25 group-hover:shadow-xl group-hover:shadow-[#10b981]/40 group-hover:scale-110 transition-all duration-300">{s.step}</div>
+              <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-[#10b981] to-[#059669] text-white flex items-center justify-center text-lg font-bold mx-auto mb-4 shadow-lg shadow-[#10b981]/25 group-hover:shadow-xl group-hover:shadow-[#10b981]/40 group-hover:scale-110 transition-all duration-200">{s.step}</div>
               <h3 className="text-[15px] font-bold text-[var(--text)] mb-2">{s.title}</h3>
               <p className="text-[var(--text-secondary)] text-[13px] leading-relaxed">{s.description}</p>
             </Card>
@@ -428,10 +425,10 @@ export default function HomePage() {
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-12">
           {WHO_IS_IT_FOR.personas.map((p,i)=>(
             <Card key={i} className="p-7 text-center" glow>
-              <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#10b981]/15 to-[#10b981]/5 flex items-center justify-center mx-auto mb-5 group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-[#10b981]/20 transition-all duration-300">
-                {i===0?<HiAcademicCap className="w-8 h-8 text-[#10b981]" />:i===1?<HiTrendingUp className="w-8 h-8 text-[#10b981]" />:i===2?<HiCode className="w-8 h-8 text-[#10b981]" />:<HiBriefcase className="w-8 h-8 text-[#10b981]" />}
+              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#10b981]/15 to-[#10b981]/5 flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-all duration-200">
+                {i===0?<HiAcademicCap className="w-6 h-6 text-[#10b981]" />:i===1?<HiTrendingUp className="w-6 h-6 text-[#10b981]" />:i===2?<HiCode className="w-6 h-6 text-[#10b981]" />:<HiBriefcase className="w-6 h-6 text-[#10b981]" />}
               </div>
-              <span className="inline-block px-3 py-0.5 rounded-full bg-[#10b981]/10 text-[#10b981] text-[10px] font-semibold mb-3">0{i+1}</span>
+              <span className="inline-block px-2.5 py-0.5 rounded-full bg-[#10b981]/10 text-[#10b981] text-[10px] font-semibold mb-2.5">0{i+1}</span>
               <h3 className="text-base font-bold text-[var(--text)] mb-2.5">{p.title}</h3>
               <p className="text-[var(--text-secondary)] text-[13px] leading-relaxed">{p.description}</p>
             </Card>
@@ -481,8 +478,8 @@ export default function HomePage() {
           {WHY_CHOOSE_US.items.map((item,i)=>(
             <Card key={i} className="p-6" glow>
               <div className="flex items-start gap-5">
-                <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#10b981]/15 to-[#10b981]/5 flex items-center justify-center flex-shrink-0 mt-0.5 group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-[#10b981]/10 transition-all duration-300">
-                  {i===0?<HiChip className="w-6 h-6 text-[#10b981]" />:i===1?<HiEmojiHappy className="w-6 h-6 text-[#10b981]" />:i===2?<HiDatabase className="w-6 h-6 text-[#10b981]" />:i===3?<HiCog className="w-6 h-6 text-[#10b981]" />:i===4?<HiScale className="w-6 h-6 text-[#10b981]" />:<HiBadgeCheck className="w-6 h-6 text-[#10b981]" />}
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#10b981]/15 to-[#10b981]/5 flex items-center justify-center flex-shrink-0 mt-0.5 group-hover:scale-110 transition-all duration-200">
+                  {i===0?<HiChip className="w-5 h-5 text-[#10b981]" />:i===1?<HiEmojiHappy className="w-5 h-5 text-[#10b981]" />:i===2?<HiDatabase className="w-5 h-5 text-[#10b981]" />:i===3?<HiCog className="w-5 h-5 text-[#10b981]" />:i===4?<HiScale className="w-5 h-5 text-[#10b981]" />:<HiBadgeCheck className="w-5 h-5 text-[#10b981]" />}
                 </div>
                 <div>
                   <h3 className="text-[15px] font-bold text-[var(--text)] mb-2">{item.title}</h3>
@@ -500,10 +497,9 @@ export default function HomePage() {
         <Head headline={THINGS_TO_KEEP_IN_MIND.headline} />
         <div className="grid sm:grid-cols-3 gap-6">
           {THINGS_TO_KEEP_IN_MIND.items.map((item,i)=>(
-            <div key={i} className="group p-8 rounded-2xl bg-[var(--bg-card)] border border-[var(--border)] hover:border-[#10b981]/20 hover:shadow-xl hover:shadow-[#10b981]/[0.03] dark:hover:shadow-black/30 hover:-translate-y-1.5 transition-all duration-500 text-center relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-24 h-24 bg-[#10b981]/[0.02] rounded-full blur-2xl pointer-events-none group-hover:bg-[#10b981]/[0.05] transition-colors" />
-              <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#10b981]/15 to-[#10b981]/5 flex items-center justify-center mx-auto mb-5 group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-[#10b981]/20 transition-all duration-300">
-                {i===0?<HiExclamation className="w-8 h-8 text-[#10b981]" />:i===1?<HiClipboardList className="w-8 h-8 text-[#10b981]" />:<HiKey className="w-8 h-8 text-[#10b981]" />}
+            <div key={i} className="group p-5 rounded-xl bg-[var(--bg-card)] border border-[var(--border)] hover:border-[#10b981]/20 hover:shadow-[var(--shadow-md)] hover:-translate-y-1 transition-all duration-200 text-center relative overflow-hidden">
+              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#10b981]/15 to-[#10b981]/5 flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-all duration-200">
+                {i===0?<HiExclamation className="w-6 h-6 text-[#10b981]" />:i===1?<HiClipboardList className="w-6 h-6 text-[#10b981]" />:<HiKey className="w-6 h-6 text-[#10b981]" />}
               </div>
               <h3 className="text-base font-bold text-[var(--text)] mb-3">{item.title}</h3>
               <p className="text-[var(--text-secondary)] text-sm leading-relaxed">{item.desc}</p>
@@ -526,14 +522,8 @@ export default function HomePage() {
 
       {/* ====== CTA ====== */}
       <Sec><Bg dark={dark} /><Con>
-        <div className="relative rounded-3xl bg-gradient-to-br from-[var(--bg-card)] via-[var(--bg-card)] to-[#10b981]/[0.03] border border-[var(--border)] p-12 sm:p-16 lg:p-20 text-center overflow-hidden shadow-2xl shadow-black/[0.05] dark:shadow-black/30">
-          {/* Decorative glows */}
-          <div className="absolute top-0 right-0 w-72 h-72 bg-[#10b981]/[0.04] rounded-full blur-3xl pointer-events-none" />
-          <div className="absolute bottom-0 left-10 w-48 h-48 bg-[#10b981]/[0.02] rounded-full blur-3xl pointer-events-none" />
-          <div className="absolute top-20 left-1/4 w-20 h-20 bg-[#10b981]/[0.05] rounded-full blur-2xl pointer-events-none" />
-          {/* Corner accents */}
-          <div className="absolute top-8 left-8 w-6 h-6 border-t-2 border-l-2 border-[#10b981]/15 rounded-tl-lg pointer-events-none" />
-          <div className="absolute bottom-8 right-8 w-6 h-6 border-b-2 border-r-2 border-[#10b981]/15 rounded-br-lg pointer-events-none" />
+        <div className="relative rounded-2xl bg-gradient-to-br from-[var(--bg-card)] via-[var(--bg-card)] to-[#10b981]/[0.02] border border-[var(--border)] p-10 sm:p-12 lg:p-16 text-center overflow-hidden shadow-[var(--shadow-lg)]">
+          <div className="absolute top-0 right-0 w-72 h-72 bg-[#10b981]/[0.03] rounded-full blur-3xl pointer-events-none" />
           {/* Content */}
           <div className="relative z-10">
             <div className="flex items-center justify-center gap-2 mb-5">
@@ -557,12 +547,12 @@ export default function HomePage() {
       </Con></Sec>
 
       {/* ====== FOOTER ====== */}
-      <footer className="border-t-2 border-[var(--border-strong)] bg-[var(--bg-alt)] relative">
+      <footer className="border-t border-[var(--border)] bg-[var(--bg-alt)] relative">
         {/* Gradient top line */}
-        <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-[#10b981]/30 to-transparent" />
-        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#10b981]/30 to-transparent" />
+        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-12">
           {/* Top: Logo + Contact + Follow */}
-          <div className="grid grid-cols-1 sm:grid-cols-[40%_30%_30%] gap-10 lg:gap-14 pb-14 border-b border-[var(--border)]">
+          <div className="grid grid-cols-1 sm:grid-cols-[40%_30%_30%] gap-10 lg:gap-14 pb-12 border-b border-[var(--border)]">
             <div>
               <Logo />
               <p className="text-[var(--text-secondary)] text-sm mt-5 leading-relaxed max-w-sm">The AI Trader makes ai trading easier and smarter. Analyze markets in real-time, automate strategies safely, stay fully in control.</p>
@@ -611,13 +601,13 @@ export default function HomePage() {
             </div>
           </div>
           {/* Disclaimer */}
-          <div className="py-10 border-b border-[var(--border)] space-y-4">
+          <div className="py-8 border-b border-[var(--border)] space-y-4">
             <p className="text-[12px] text-[var(--text-secondary)] leading-relaxed"><strong className="text-[var(--text)] font-semibold">HIGH RISK WARNING:</strong> Dealing or Trading FX, CFDs and Cryptocurrencies is highly speculative, carries a level of non-negligible risk and may not be suitable for all investors. You may lose some or all of your invested capital, therefore you should not speculate with capital that you cannot afford to lose. Please refer to the risk disclosure below. traderai.ai does not gain or lose profits based on your activity and operates as a services company. traderai.ai is not a financial services firm and is not eligible of providing financial advice. traderai.ai shall not be liable for any losses occurred via or in relation to this informational website.</p>
             <p className="text-[12px] text-[var(--text-secondary)] leading-relaxed"><strong className="text-[var(--text)] font-semibold">SITE RISK DISCLOSURE:</strong> traderai.ai does not accept any liability for loss or damage as a result of reliance on the information contained within this website; this includes education material, price quotes and charts, and analysis. Please be aware of and seek professional advice for the risks associated with trading the financial markets; never invest more money than you can risk losing. The risks involved in FX, CFDs and Cryptocurrencies may not be suitable for all investors. traderai.ai doesn't retain responsibility for any trading losses you might face as a result of using or inferring from the data hosted on this site.</p>
             <p className="text-[12px] text-[var(--text-secondary)] leading-relaxed"><strong className="text-[var(--text)] font-semibold">LEGAL RESTRICTIONS:</strong> Without limiting the above mentioned provisions, you understand that laws regarding financial activities vary throughout the world, and it is your responsibility to make sure you properly comply with any law, regulation or guideline in your country of residence regarding the use of the Site. To avoid any doubt, the ability to access our Site does not necessarily mean that our Services and/or your activities through the Site are legal under the laws, regulations or directives relevant to your country of residence. It is against the law to solicit US individuals to buy and sell commodity options, even if they are called 'prediction' contracts, unless they are listed for trading and traded on a CFTC-registered exchange unless legally exempt. The UK Financial Conduct Authority has issued a policy statement PS20/10, which prohibits the sale, promotion, and distribution of CFD on Crypto assets. It prohibits the dissemination of marketing materials relating to distribution of CFDs and other financial products based on Cryptocurrencies that addressed to UK residents. The provision of trading services involving any MiFID II financial instruments is prohibited in the EU, unless when authorized/licensed by the applicable authorities and/or regulator(s). Please note that we may receive advertising fees for users opted to open an account with our partner advertisers via advertisers' websites. We have placed cookies on your computer to help improve your experience when visiting this website. You can change cookie settings on your computer at any time. Use of this website indicates your acceptance of this website.</p>
           </div>
           {/* Bottom bar */}
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-10">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-8">
             <div className="flex items-center gap-6 text-[13px] text-[var(--text-secondary)]">
               <Link to="/privacy-policy" className="hover:text-[var(--text)] transition-colors">Privacy Policy</Link>
               <Link to="/terms-conditions" className="hover:text-[var(--text)] transition-colors">Terms &amp; Conditions</Link>
@@ -651,14 +641,14 @@ function FaqItem({ question, answer, open: defaultOpen }) {
   const [open, setOpen] = useState(defaultOpen);
   return (
     <div className={`rounded-2xl border transition-all duration-500 ${open ? 'bg-[var(--bg-card)] border-[#10b981]/20 shadow-lg shadow-[#10b981]/[0.03]' : 'bg-[var(--bg-card)]/50 border-[var(--border)] hover:border-[#10b981]/10 hover:shadow-md'}`}>
-      <button onClick={()=>setOpen(!open)} className="w-full flex items-center justify-between gap-4 px-6 py-5 text-left">
+      <button onClick={()=>setOpen(!open)} className="w-full flex items-center justify-between gap-4 px-5 py-4 text-left">
         <span className={`text-[15px] font-semibold transition-colors duration-300 ${open ? 'text-[var(--text)]' : 'text-[var(--text-secondary)] hover:text-[var(--text)]'}`}>{question}</span>
         <div className={`w-8 h-8 rounded-xl flex items-center justify-center flex-shrink-0 transition-all duration-300 ${open ? 'bg-[#10b981] text-white shadow-md shadow-[#10b981]/20' : 'bg-[var(--bg)] text-[var(--text-muted)] border border-[var(--border)]'}`}>
           <svg className={`w-4 h-4 transition-transform duration-300 ${open?'rotate-180':''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7"/></svg>
         </div>
       </button>
       <div className={`overflow-hidden transition-all duration-500 ${open ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'}`}>
-        <p className="px-6 pb-6 text-sm text-[var(--text-secondary)] leading-relaxed">{answer}</p>
+        <p className="px-5 pb-5 text-sm text-[var(--text-secondary)] leading-relaxed">{answer}</p>
       </div>
     </div>
   );

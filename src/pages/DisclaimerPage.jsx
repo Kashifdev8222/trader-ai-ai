@@ -1,8 +1,8 @@
 function Section({ title, children, i = 0 }) {
   return (
-    <div className="group rounded-2xl bg-[var(--bg-card)] border border-[var(--border)] p-6 sm:p-8 mb-4 hover:border-[#10b981]/10 hover:shadow-md transition-all duration-300">
-      <div className="flex items-start gap-4">
-        <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#10b981]/15 to-[#10b981]/5 flex items-center justify-center flex-shrink-0 mt-0.5 group-hover:bg-[#10b981] group-hover:shadow-md group-hover:shadow-[#10b981]/20 transition-all duration-300">
+    <div className="group rounded-xl bg-[var(--bg-card)] border border-[var(--border)] p-5 mb-3 hover:border-[#10b981]/20 hover:shadow-[var(--shadow-sm)] transition-all duration-200">
+      <div className="flex items-start gap-3">
+        <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-[#10b981]/15 to-[#10b981]/5 flex items-center justify-center flex-shrink-0 mt-0.5 group-hover:bg-[#10b981] group-hover:shadow-md group-hover:shadow-[#10b981]/20 transition-all duration-200">
           <span className="text-sm font-bold text-[#10b981] group-hover:text-white transition-colors">{String(i+1).padStart(2,'0')}</span>
         </div>
         <div>
@@ -18,12 +18,12 @@ function Head({ headline, description }) {
   return (
     <div className="text-center mb-10">
       <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[var(--text)] mb-4">{headline}</h1>
-      <div className="flex items-center justify-center gap-2 mb-4">
-        <div className="h-0.5 w-8 rounded-full bg-gradient-to-r from-transparent to-[#10b981]/60" />
-        <div className="h-1.5 w-1.5 rounded-full bg-[#10b981]" />
-        <div className="h-0.5 w-16 rounded-full bg-gradient-to-r from-[#10b981]/60 via-[#10b981] to-[#10b981]/60" />
-        <div className="h-1.5 w-1.5 rounded-full bg-[#10b981]" />
-        <div className="h-0.5 w-8 rounded-full bg-gradient-to-l from-transparent to-[#10b981]/60" />
+      <div className="flex items-center justify-center gap-1.5 mb-3">
+        <div className="h-px w-6 rounded-full bg-gradient-to-r from-transparent to-[#10b981]/40" />
+        <div className="h-1 w-1 rounded-full bg-[#10b981]" />
+        <div className="h-px w-12 rounded-full bg-gradient-to-r from-[#10b981]/40 via-[#10b981] to-[#10b981]/40" />
+        <div className="h-1 w-1 rounded-full bg-[#10b981]" />
+        <div className="h-px w-6 rounded-full bg-gradient-to-l from-transparent to-[#10b981]/40" />
       </div>
       {description && <p className="text-[var(--text-secondary)] max-w-3xl mx-auto leading-relaxed">{description}</p>}
     </div>

@@ -13,12 +13,12 @@ export default function ThankYouPage() {
             </div>
           </div>
           <h1 className="text-3xl sm:text-4xl font-extrabold text-[var(--text)] mb-3">Thank You!</h1>
-          <div className="flex items-center justify-center gap-2 mb-4">
-            <div className="h-0.5 w-6 rounded-full bg-gradient-to-r from-transparent to-[#10b981]/60" />
-            <div className="h-1.5 w-1.5 rounded-full bg-[#10b981]" />
-            <div className="h-0.5 w-12 rounded-full bg-gradient-to-r from-[#10b981]/60 via-[#10b981] to-[#10b981]/60" />
-            <div className="h-1.5 w-1.5 rounded-full bg-[#10b981]" />
-            <div className="h-0.5 w-6 rounded-full bg-gradient-to-l from-transparent to-[#10b981]/60" />
+          <div className="flex items-center justify-center gap-1.5 mb-3">
+            <div className="h-px w-6 rounded-full bg-gradient-to-r from-transparent to-[#10b981]/40" />
+            <div className="h-1 w-1 rounded-full bg-[#10b981]" />
+            <div className="h-px w-12 rounded-full bg-gradient-to-r from-[#10b981]/40 via-[#10b981] to-[#10b981]/40" />
+            <div className="h-1 w-1 rounded-full bg-[#10b981]" />
+            <div className="h-px w-6 rounded-full bg-gradient-to-l from-transparent to-[#10b981]/40" />
           </div>
           <p className="text-[var(--text-secondary)] text-lg mb-2">Your registration has been submitted successfully.</p>
           <p className="text-[var(--text-secondary)] text-sm mb-8">Our team will contact you shortly to get you started.</p>

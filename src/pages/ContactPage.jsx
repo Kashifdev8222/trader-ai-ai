@@ -43,19 +43,19 @@ export default function ContactPage() {
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-14">
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[var(--text)] mb-4">Contact Us</h1>
-          <div className="flex items-center justify-center gap-2 mb-4">
-            <div className="h-0.5 w-8 rounded-full bg-gradient-to-r from-transparent to-[#10b981]/60" />
-            <div className="h-1.5 w-1.5 rounded-full bg-[#10b981]" />
-            <div className="h-0.5 w-16 rounded-full bg-gradient-to-r from-[#10b981]/60 via-[#10b981] to-[#10b981]/60" />
-            <div className="h-1.5 w-1.5 rounded-full bg-[#10b981]" />
-            <div className="h-0.5 w-8 rounded-full bg-gradient-to-l from-transparent to-[#10b981]/60" />
+          <div className="flex items-center justify-center gap-1.5 mb-3">
+            <div className="h-px w-6 rounded-full bg-gradient-to-r from-transparent to-[#10b981]/40" />
+            <div className="h-1 w-1 rounded-full bg-[#10b981]" />
+            <div className="h-px w-12 rounded-full bg-gradient-to-r from-[#10b981]/40 via-[#10b981] to-[#10b981]/40" />
+            <div className="h-1 w-1 rounded-full bg-[#10b981]" />
+            <div className="h-px w-6 rounded-full bg-gradient-to-l from-transparent to-[#10b981]/40" />
           </div>
           <p className="text-lg text-[var(--text-secondary)]">Explore Trading Opportunities — Get in touch with our team.</p>
         </div>
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 max-w-5xl mx-auto">
           {/* Form */}
-          <div className="relative rounded-2xl bg-[var(--bg-card)] border border-[var(--border)] p-7 sm:p-8 shadow-xl shadow-black/[0.03] dark:shadow-black/20 overflow-hidden">
-            <div className="absolute -top-10 right-10 w-40 h-40 bg-[#10b981]/[0.04] rounded-full blur-2xl pointer-events-none" />
+          <div className="relative rounded-xl bg-[var(--bg-card)] border border-[var(--border)] p-6 shadow-[var(--shadow-md)] overflow-hidden">
+            <div className="absolute -top-10 right-10 w-40 h-40 bg-[#10b981]/[0.03] rounded-full blur-2xl pointer-events-none" />
             <h2 className="text-xl font-bold text-[var(--text)] mb-6 relative z-10">Send us a message</h2>
             {status === 'success' ? (
               <div className="text-center py-10 relative z-10">
@@ -85,7 +85,7 @@ export default function ContactPage() {
           </div>
           {/* Info */}
           <div className="space-y-6">
-            <div className="rounded-2xl bg-[var(--bg-card)] border border-[var(--border)] p-7 sm:p-8 shadow-md hover:shadow-lg transition-shadow">
+            <div className="rounded-xl bg-[var(--bg-card)] border border-[var(--border)] p-6 shadow-[var(--shadow-sm)] hover:shadow-[var(--shadow-md)] transition-shadow">
               <h3 className="text-lg font-bold text-[var(--text)] mb-6">Contact Information</h3>
               <div className="space-y-5">
                 {[{ l: 'AU Phone', v: '+61 284 889 800' }, { l: 'UK Phone', v: '+44 203 927 2999' }, { l: 'Email', v: 'info@traderai.ai' }].map((item, i) => (
