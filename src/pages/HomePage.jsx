@@ -159,7 +159,8 @@ export default function HomePage() {
       </header>
 
       {/* ====== HERO ====== */}
-      <section id="reg-form" className="relative pt-16 pb-0 lg:pt-20 lg:pb-0"><Con>
+      <section id="reg-form" className="relative"><Con wide>
+        <div className="pt-16 lg:pt-20 pb-12 lg:pb-16">
         <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-start">
           {/* LEFT — Headline */}
           <div className="text-center lg:text-left pt-0 lg:pt-4">
@@ -217,6 +218,7 @@ export default function HomePage() {
               </div>
             </div>
           </div>
+        </div>
         </div>
       </Con></section>
 
