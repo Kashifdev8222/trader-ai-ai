@@ -45,11 +45,11 @@ function HdDropdown({ label, items }) {
     </div>
   );
 }
-function Sec({ children, id, className = '' }) {
-  return <section id={id} className={`relative reveal ${className}`}>{children}</section>;
+function Sec({ children, id, className = '', alt = false }) {
+  return <section id={id} className={`relative reveal ${alt ? 'bg-[var(--bg-alt)]' : 'bg-[var(--bg)]'} ${className}`}>{children}</section>;
 }
-function Con({ children }) {
-  return <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16 relative z-10">{children}</div>;
+function Con({ children, wide = false }) {
+  return <div className={`mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16 relative z-10 ${wide ? 'max-w-[1440px]' : 'max-w-[1280px]'}`}>{children}</div>;
 }
 function Head({ headline, subheadline }) {
   return (
@@ -67,7 +67,7 @@ function Btn({ children, variant = 'primary', size = 'md', className = '', ...p 
 }
 function Card({ children, className = '', delay = 0, glow: _glow = false }) {
   return (
-    <div className={`group rounded-lg bg-[var(--bg-card)] border border-[var(--border)] hover:border-[var(--border-strong)] transition-all duration-150 reveal relative ${delay ? `delay-${delay}` : ''} ${className}`}>
+    <div className={`group rounded-lg bg-[var(--bg-card)] border border-[var(--border)] hover:border-[var(--accent)]/30 hover:shadow-[var(--shadow-md)] hover:-translate-y-0.5 transition-all duration-200 reveal relative ${delay ? `delay-${delay}` : ''} ${className}`}>
       {children}
     </div>
   );
@@ -137,7 +137,7 @@ export default function HomePage() {
     <div className="bg-[var(--bg)] min-h-screen text-[var(--text)]">
 
       {/* ====== HEADER ====== */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-[var(--bg)]/70 backdrop-blur-xl">
+      <header className="fixed top-0 left-0 right-0 z-50 bg-[var(--bg)]/80 backdrop-blur-xl border-b border-[var(--border)]">
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-[56px]">
           <Logo />
           <nav className="hidden lg:flex items-center gap-1">
@@ -163,16 +163,11 @@ export default function HomePage() {
         <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-start">
           {/* LEFT — Headline */}
           <div className="text-center lg:text-left pt-0 lg:pt-4">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--accent-light)] border border-[var(--border)] text-[11px] font-medium text-[var(--accent)] mb-6">
-              <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent)] animate-pulse" />
-              AI-Powered Trading Platform
-            </div>
-            <h1 className="text-[2rem] sm:text-[2.5rem] lg:text-[3rem] xl:text-[3.5rem] font-semibold tracking-[-0.03em] leading-[1.08] text-[var(--text)] mb-4">
-              Trade smarter with<br />
-              <span className="text-[var(--accent)]">AI-powered</span> analysis
+            <h1 className="text-[2rem] sm:text-[2.5rem] lg:text-[3rem] xl:text-[3.5rem] font-bold tracking-[-0.025em] leading-[1.1] text-[var(--text)] mb-4">
+              {HERO_CONTENT.headline}
             </h1>
-            <p className="text-[15px] text-[var(--text-secondary)] leading-relaxed mb-8 max-w-[500px] lg:max-w-none">
-              Real-time market analysis, automated strategies, and risk management — all in one platform. Trade stocks, crypto, forex, and commodities with confidence.
+            <p className="text-[15px] lg:text-base text-[var(--text-secondary)] leading-relaxed mb-8 max-w-[520px] lg:max-w-none">
+              {HERO_CONTENT.description}
             </p>
             <div className="flex flex-wrap items-center gap-3 justify-center lg:justify-start mb-8">
               <a href="#reg-form"><Btn size="lg">Get Started Free<HiArrowRight className="w-4 h-4"/></Btn></a>
@@ -231,14 +226,14 @@ export default function HomePage() {
       <MarketOverview />
 
       {/* ====== TRADING CHARTS ====== */}
-      <Sec><Bg dark={dark} /><Con>
+      <Sec alt><Bg dark={dark} /><Con wide>
         <Head headline="Live Trading Charts" subheadline="Real-time candlestick charts with drawing tools and indicators. Click any symbol to switch." />
         <TradingChart />
         <div className="mt-6"><CompanyProfile /></div>
       </Con></Sec>
 
       {/* ====== MORE MARKET CHARTS ====== */}
-      <Sec><Bg dark={dark} variant="green" /><Con>
+      <Sec alt><Bg dark={dark} /><Con wide>
         <Head headline="Track More Markets" subheadline="Follow Bitcoin, Ethereum, S&P 500 and more with live mini charts." />
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
           <TVMiniChart symbol="BINANCE:BTCUSDT" title="Bitcoin (BTC/USD)" />
@@ -250,7 +245,7 @@ export default function HomePage() {
       {/* ====== FOREX RATES ====== */}
       <ForexRates />
       {/* ====== ABOUT ====== */}
-      <Sec><Bg dark={dark} /><Con>
+      <Sec alt><Bg dark={dark} /><Con>
         <Head headline={ABOUT_CONTENT.headline} />
         <p className="text-[var(--text-secondary)] text-[15px] leading-relaxed text-center mb-10 max-w-3xl mx-auto">{ABOUT_CONTENT.description}</p>
         <div className="rounded-xl bg-[var(--bg-card)] border border-[var(--border)] p-6 lg:p-8 mb-10">
@@ -295,7 +290,7 @@ export default function HomePage() {
 
 
       {/* ====== FEATURES ====== */}
-      <Sec><Bg dark={dark} /><Con>
+      <Sec alt><Bg dark={dark} /><Con>
         <Head headline="What You Get with The AI Trader" subheadline="Everything you need to trade smarter, faster, and with more confidence." />
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-3">
           {FEATURES.map((f,i)=>(
@@ -326,7 +321,7 @@ export default function HomePage() {
       </Con></Sec>
 
       {/* ====== WHY AI + MARKETS ====== */}
-      <Sec><Bg dark={dark} /><Con>
+      <Sec alt><Bg dark={dark} /><Con>
         <div className="grid lg:grid-cols-2 gap-10 lg:gap-16">
           <div>
             <h2 className="text-xl lg:text-2xl font-semibold text-[var(--text)] tracking-tight mb-4">{WHY_AI.headline}</h2>
@@ -377,7 +372,7 @@ export default function HomePage() {
       </Con></Sec>
 
       {/* ====== APP SECTION ====== */}
-      <Sec><Bg dark={dark} /><Con>
+      <Sec alt><Bg dark={dark} /><Con>
         <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
           <div className="flex justify-center order-2 lg:order-1">
             <div className="p-2 rounded-xl border border-[var(--border)] bg-[var(--bg-card)]">
@@ -424,9 +419,9 @@ export default function HomePage() {
       </Con></Sec>
 
       {/* ====== THINGS TO KNOW ====== */}
-      <Sec><Bg dark={dark} /><Con>
+      <Sec alt><Bg dark={dark} /><Con>
         <Head headline={THINGS_TO_KEEP_IN_MIND.headline} />
-        <div className="grid sm:grid-cols-3 gap-3 max-w-3xl mx-auto">
+        <div className="grid sm:grid-cols-3 gap-4">
           {THINGS_TO_KEEP_IN_MIND.items.map((item,i)=>(
             <div key={i} className="p-4 rounded-lg bg-[var(--bg-card)] border border-[var(--border)] text-center">
               <div className="w-9 h-9 rounded-lg bg-[var(--accent-light)] flex items-center justify-center mx-auto mb-3">
@@ -452,7 +447,7 @@ export default function HomePage() {
       </Con></Sec>
 
       {/* ====== CTA ====== */}
-      <Sec><Bg dark={dark} /><Con>
+      <Sec alt><Bg dark={dark} /><Con>
         <div className="rounded-xl bg-[var(--bg-card)] border border-[var(--border)] p-10 lg:p-14 text-center">
           <h2 className="text-2xl lg:text-3xl font-semibold text-[var(--text)] tracking-tight mb-3">
             Ready to trade <span className="text-[var(--accent)]">smarter?</span>
