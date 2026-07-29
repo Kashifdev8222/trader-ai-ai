@@ -16,8 +16,8 @@
   --bg-overlay: rgba(0,0,0,0.02);
 
   --text: #0d1117;
-  --text-secondary: #4a5568;
-  --text-muted: #8896a6;
+  --text-secondary: #374151;
+  --text-muted: #6b7280;
 
   --accent: #0ea571;
   --accent-hover: #078c5c;
@@ -45,8 +45,8 @@
   --bg-overlay: rgba(255,255,255,0.02);
 
   --text: #e6edf3;
-  --text-secondary: #7d8590;
-  --text-muted: #4a5560;
+  --text-secondary: #8b949e;
+  --text-muted: #5d6670;
 
   --accent: #0ea571;
   --accent-hover: #0cc078;

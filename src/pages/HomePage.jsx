@@ -301,8 +301,8 @@ export default function HomePage() {
               <div className="w-9 h-9 rounded-lg bg-[var(--accent-light)] flex items-center justify-center mx-auto mb-3">
                 {(()=>{const ico={ChartBar:<HiChartBar className="w-4 h-4 text-[var(--accent)]"/>,Chip:<HiChip className="w-4 h-4 text-[var(--accent)]"/>,ViewGrid:<HiDatabase className="w-4 h-4 text-[var(--accent)]"/>,ShieldCheck:<HiShieldCheck className="w-4 h-4 text-[var(--accent)]"/>,Beaker:<HiLightBulb className="w-4 h-4 text-[var(--accent)]"/>,DeviceMobile:<HiDesktopComputer className="w-4 h-4 text-[var(--accent)]"/>,LockClosed:<HiLockClosed className="w-4 h-4 text-[var(--accent)]"/>,Support:<HiSupport className="w-4 h-4 text-[var(--accent)]"/>,UserGroup:<HiUserGroup className="w-4 h-4 text-[var(--accent)]"/>,DesktopComputer:<HiDesktopComputer className="w-4 h-4 text-[var(--accent)]"/>};return ico[f.icon]||<HiSparkles className="w-4 h-4 text-[var(--accent)]"/>})()}
               </div>
-              <h3 className="text-[13px] font-semibold text-[var(--text)] mb-1.5">{f.title}</h3>
-              <p className="text-[12px] text-[var(--text-secondary)] leading-relaxed">{f.description}</p>
+              <h3 className="text-sm font-semibold text-[var(--text)] mb-1.5">{f.title}</h3>
+              <p className="text-[13px] text-[var(--text-secondary)] leading-relaxed">{f.description}</p>
             </Card>
           ))}
         </div>
@@ -315,8 +315,8 @@ export default function HomePage() {
           {HOW_IT_WORKS.steps.map((s,i)=>(
             <Card key={i} className="p-4 text-center">
               <div className="w-9 h-9 rounded-lg bg-[var(--accent)] text-white flex items-center justify-center text-sm font-semibold mx-auto mb-3">{s.step}</div>
-              <h3 className="text-[13px] font-semibold text-[var(--text)] mb-1.5">{s.title}</h3>
-              <p className="text-[12px] text-[var(--text-secondary)] leading-relaxed">{s.description}</p>
+              <h3 className="text-sm font-semibold text-[var(--text)] mb-1.5">{s.title}</h3>
+              <p className="text-[13px] text-[var(--text-secondary)] leading-relaxed">{s.description}</p>
             </Card>
           ))}
         </div>
@@ -366,8 +366,8 @@ export default function HomePage() {
               <div className="w-9 h-9 rounded-lg bg-[var(--accent-light)] flex items-center justify-center mx-auto mb-3">
                 {i===0?<HiAcademicCap className="w-4 h-4 text-[var(--accent)]" />:i===1?<HiTrendingUp className="w-4 h-4 text-[var(--accent)]" />:i===2?<HiCode className="w-4 h-4 text-[var(--accent)]" />:<HiBriefcase className="w-4 h-4 text-[var(--accent)]" />}
               </div>
-              <h3 className="text-[13px] font-semibold text-[var(--text)] mb-1.5">{p.title}</h3>
-              <p className="text-[12px] text-[var(--text-secondary)] leading-relaxed">{p.description}</p>
+              <h3 className="text-sm font-semibold text-[var(--text)] mb-1.5">{p.title}</h3>
+              <p className="text-[13px] text-[var(--text-secondary)] leading-relaxed">{p.description}</p>
             </Card>
           ))}
         </div>
@@ -411,8 +411,8 @@ export default function HomePage() {
                   {i===0?<HiChip className="w-4 h-4 text-[var(--accent)]" />:i===1?<HiEmojiHappy className="w-4 h-4 text-[var(--accent)]" />:i===2?<HiDatabase className="w-4 h-4 text-[var(--accent)]" />:i===3?<HiCog className="w-4 h-4 text-[var(--accent)]" />:i===4?<HiScale className="w-4 h-4 text-[var(--accent)]" />:<HiBadgeCheck className="w-4 h-4 text-[var(--accent)]" />}
                 </div>
                 <div>
-                  <h3 className="text-[13px] font-semibold text-[var(--text)] mb-1">{item.title}</h3>
-                  <p className="text-[12px] text-[var(--text-secondary)] leading-relaxed">{item.description}</p>
+                  <h3 className="text-sm font-semibold text-[var(--text)] mb-1">{item.title}</h3>
+                  <p className="text-[13px] text-[var(--text-secondary)] leading-relaxed">{item.description}</p>
                 </div>
               </div>
             </Card>
@@ -430,8 +430,8 @@ export default function HomePage() {
               <div className="w-9 h-9 rounded-lg bg-[var(--accent-light)] flex items-center justify-center mx-auto mb-3">
                 {i===0?<HiExclamation className="w-4 h-4 text-[var(--accent)]" />:i===1?<HiClipboardList className="w-4 h-4 text-[var(--accent)]" />:<HiKey className="w-4 h-4 text-[var(--accent)]" />}
               </div>
-              <h3 className="text-[13px] font-semibold text-[var(--text)] mb-1.5">{item.title}</h3>
-              <p className="text-[12px] text-[var(--text-secondary)] leading-relaxed">{item.desc}</p>
+              <h3 className="text-sm font-semibold text-[var(--text)] mb-1.5">{item.title}</h3>
+              <p className="text-[13px] text-[var(--text-secondary)] leading-relaxed">{item.desc}</p>
             </div>
           ))}
         </div>
