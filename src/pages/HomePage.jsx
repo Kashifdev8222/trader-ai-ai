@@ -137,22 +137,22 @@ export default function HomePage() {
     <div className="bg-[var(--bg)] min-h-screen text-[var(--text)]">
 
       {/* ====== HEADER ====== */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-[var(--bg)]/80 backdrop-blur-xl border-b border-[var(--border)]">
-        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-[56px]">
+      <header className="fixed top-0 left-0 right-0 z-50 bg-[var(--bg)]/85 backdrop-blur-xl border-b border-[var(--border)]">
+        <div className="max-w-[1440px] mx-auto px-5 sm:px-6 lg:px-8 flex items-center justify-between h-[64px]">
           <Logo />
-          <nav className="hidden lg:flex items-center gap-1">
+          <nav className="hidden lg:flex items-center gap-0.5">
             {NAV.map(link => link.children ? (
               <HdDropdown key={link.label} label={link.label} items={link.children} />
             ) : (
-              <Link key={link.to} to={link.to} className={`px-3 py-2 text-[13px] font-medium rounded-lg transition-colors ${loc.pathname===link.to?'text-[#10b981] bg-[#10b981]/[0.08]':'text-[var(--text-secondary)] hover:text-[var(--text)] hover:bg-white/[0.03]'}`}>{link.label}</Link>
+              <Link key={link.to} to={link.to} className={`px-3.5 py-2 text-sm font-medium rounded-lg transition-colors ${loc.pathname===link.to?'text-[var(--accent)] bg-[var(--accent-light)]':'text-[var(--text-secondary)] hover:text-[var(--text)] hover:bg-[var(--bg-overlay)]'}`}>{link.label}</Link>
             ))}
             <button onClick={() => setDark(!dark)} title="Toggle theme"
-              className="ml-2 w-9 h-9 rounded-lg border border-[var(--border-strong)] flex items-center justify-center text-[var(--text-secondary)] hover:text-[#10b981] hover:border-[#10b981]/20 transition-colors">
+              className="ml-2 w-8 h-8 rounded-lg border border-[var(--border)] flex items-center justify-center text-[var(--text-muted)] hover:text-[var(--accent)] hover:border-[var(--accent)]/30 transition-colors">
               {dark ? <HiSun className="w-4 h-4" /> : <HiMoon className="w-4 h-4" />}
             </button>
           </nav>
           <div className="hidden lg:block">
-            <a href="#reg-form" className="cursor-pointer inline-flex px-5 py-2.5 text-[14px] font-semibold rounded-lg text-white transition-all shadow-lg shadow-[#10b981]/20" className="cursor-pointer inline-flex px-5 py-2.5 text-[14px] font-semibold rounded-lg bg-[#10b981] hover:bg-[#059669] text-white transition-all shadow-lg shadow-[#10b981]/20">Start Trading</a>
+            <a href="#reg-form"><Btn size="sm">Start Trading</Btn></a>
           </div>
           <button className="lg:hidden p-2 text-[var(--text-secondary)]" aria-label="Open menu"><svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16"/></svg></button>
         </div>
