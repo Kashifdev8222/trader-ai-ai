@@ -109,29 +109,13 @@ export default function ContactPage() {
               <div className="absolute top-0 right-0 w-24 h-24 bg-[#10b981]/[0.04] rounded-full blur-2xl pointer-events-none" />
               <h3 className="text-lg font-bold text-[var(--text)] mb-2 relative z-10">We are here for you 24/5</h3>
               <p className="text-[var(--text-secondary)] text-sm mb-5 relative z-10">Our support team is available Monday to Friday, around the clock.</p>
-              <button type="button" onClick={() => {
-                // Find the Replain widget button (fixed positioned, bottom of page)
-                const all = document.querySelectorAll('button, [role="button"], div[style*="fixed"]');
-                for (const el of all) {
-                  const cls = el.className?.toString() || '';
-                  const id = el.id || '';
-                  const style = el.getAttribute('style') || '';
-                  if (cls.includes('replain') || id.includes('replain') || style.includes('replain')) {
-                    el.click(); return;
-                  }
-                }
-                // Try clicking ANY fixed-positioned element that's not our own UI
-                const fixed = document.querySelectorAll('div[style*="fixed"], button[style*="fixed"]');
-                for (const el of fixed) {
-                  const rect = el.getBoundingClientRect();
-                  if (rect.bottom > window.innerHeight - 120 && (rect.right > window.innerWidth - 120 || rect.left < 120)) {
-                    el.click(); return;
-                  }
-                }
-              }} className="relative z-10 inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white font-semibold text-sm transition-all">
-                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
-                Launch Live Chat
-              </button>
+              <div className="relative z-10 text-center">
+                <p className="text-[var(--text-secondary)] text-sm mb-4">Click the chat icon at the bottom-right of your screen to start a live conversation instantly.</p>
+                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[var(--accent-light)] border border-[var(--accent)]/20 text-[var(--accent)] text-[13px] font-semibold">
+                  <span className="w-2 h-2 rounded-full bg-[var(--accent)] animate-pulse" />
+                  Chat available 24/5
+                </div>
+              </div>
             </div>
           </div>
         </div>
