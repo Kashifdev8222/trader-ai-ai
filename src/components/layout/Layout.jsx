@@ -137,7 +137,7 @@ export default function Layout({ children }) {
               <Link to="/terms-conditions" className="hover:text-[var(--text)] transition-colors">Terms &amp; Conditions</Link>
               <Link to="/disclaimer" className="hover:text-[var(--text)] transition-colors">Disclaimer</Link>
             </div>
-            <p className="text-[12px] text-[var(--text-muted)]">Copyright © 2026 The AI Trader | All Rights Reserved.</p>
+            <p className="text-[13px] text-[var(--text-muted)]">Copyright © 2026 The AI Trader | All Rights Reserved.</p>
           </div>
         </div>
       </footer>

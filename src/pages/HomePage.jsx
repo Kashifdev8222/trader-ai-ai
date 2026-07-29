@@ -223,7 +223,7 @@ export default function HomePage() {
                       {formStatus==='loading'?'Processing...':<>{FORM_CONTENT.submitText}<HiArrowRight className="w-4 h-4"/></>}
                     </button>
                     {errorMsg && <p className="text-center text-[13px] text-[var(--red)] bg-[var(--red)]/5 rounded-lg py-2">{errorMsg}</p>}
-                    <p className="text-center text-[12px] text-[var(--text-muted)]">{FORM_CONTENT.footnote2}</p>
+                    <p className="text-center text-[13px] text-[var(--text-muted)]">{FORM_CONTENT.footnote2}</p>
                   </form>
                 )}
               </div>
@@ -268,7 +268,7 @@ export default function HomePage() {
             {[{v:'−20%',l:'Real value lost',c:'text-[var(--red)]',bg:'bg-[var(--red)]/5'},{v:'+400%',l:'Nasdaq 100 growth',c:'text-[var(--accent)]',bg:'bg-[var(--accent-light)]'},{v:'<1%',l:'Bank interest/year',c:'text-[var(--amber)]',bg:'bg-[var(--amber)]/5'}].map((s,i)=>(
               <div key={i} className={`text-center p-4 rounded-lg ${s.bg} border border-[var(--border)]`}>
                 <div className={`text-2xl lg:text-3xl font-semibold ${s.c} tracking-tight`}>{s.v}</div>
-                <div className="text-[12px] text-[var(--text-secondary)] mt-1">{s.l}</div>
+                <div className="text-[13px] text-[var(--text-secondary)] mt-1">{s.l}</div>
               </div>
             ))}
           </div>
@@ -279,7 +279,7 @@ export default function HomePage() {
             <div key={i} className="p-4 rounded-lg bg-[var(--bg-card)] border border-[var(--border)] text-center">
               <item.Icon className="w-5 h-5 text-[var(--accent)] mx-auto mb-2" />
               <h4 className="text-[13px] font-semibold text-[var(--text)]">{item.n}</h4>
-              <p className="text-[12px] text-[var(--text-muted)]">{item.d}</p>
+              <p className="text-[13px] text-[var(--text-muted)]">{item.d}</p>
             </div>
           ))}
         </div>
@@ -295,7 +295,7 @@ export default function HomePage() {
               <div className="w-2.5 h-2.5 rounded-full bg-[var(--red)]/40"/>
               <div className="w-2.5 h-2.5 rounded-full bg-[var(--amber)]/40"/>
               <div className="w-2.5 h-2.5 rounded-full bg-[var(--green)]/40"/>
-              <span className="ml-2 text-[11px] text-[var(--text-muted)]">theaitrader.ai</span>
+              <span className="ml-2 text-[13px] text-[var(--text-muted)]">theaitrader.ai</span>
             </div>
             <div className="aspect-video"><YouTubeEmbed /></div>
           </div>
@@ -313,7 +313,7 @@ export default function HomePage() {
                 {(()=>{const ico={ChartBar:<HiChartBar className="w-4 h-4 text-[var(--accent)]"/>,Chip:<HiChip className="w-4 h-4 text-[var(--accent)]"/>,ViewGrid:<HiDatabase className="w-4 h-4 text-[var(--accent)]"/>,ShieldCheck:<HiShieldCheck className="w-4 h-4 text-[var(--accent)]"/>,Beaker:<HiLightBulb className="w-4 h-4 text-[var(--accent)]"/>,DeviceMobile:<HiDesktopComputer className="w-4 h-4 text-[var(--accent)]"/>,LockClosed:<HiLockClosed className="w-4 h-4 text-[var(--accent)]"/>,Support:<HiSupport className="w-4 h-4 text-[var(--accent)]"/>,UserGroup:<HiUserGroup className="w-4 h-4 text-[var(--accent)]"/>,DesktopComputer:<HiDesktopComputer className="w-4 h-4 text-[var(--accent)]"/>};return ico[f.icon]||<HiSparkles className="w-4 h-4 text-[var(--accent)]"/>})()}
               </div>
               <h3 className="text-sm font-semibold text-[var(--text)] mb-1.5">{f.title}</h3>
-              <p className="text-[13px] text-[var(--text-secondary)] leading-relaxed">{f.description}</p>
+              <p className="text-sm text-[var(--text-secondary)] leading-relaxed">{f.description}</p>
             </Card>
           ))}
         </div>
@@ -327,7 +327,7 @@ export default function HomePage() {
             <Card key={i} className="p-4 text-center">
               <div className="w-9 h-9 rounded-lg bg-[var(--accent)] text-white flex items-center justify-center text-sm font-semibold mx-auto mb-3">{s.step}</div>
               <h3 className="text-sm font-semibold text-[var(--text)] mb-1.5">{s.title}</h3>
-              <p className="text-[13px] text-[var(--text-secondary)] leading-relaxed">{s.description}</p>
+              <p className="text-sm text-[var(--text-secondary)] leading-relaxed">{s.description}</p>
             </Card>
           ))}
         </div>
@@ -355,7 +355,7 @@ export default function HomePage() {
                   </div>
                   <div>
                     <h4 className="text-[13px] font-semibold text-[var(--text)]">{b.t}</h4>
-                    <p className="text-[12px] text-[var(--text-secondary)]">{b.d}</p>
+                    <p className="text-[13px] text-[var(--text-secondary)]">{b.d}</p>
                   </div>
                 </div>
               ))}
@@ -372,7 +372,7 @@ export default function HomePage() {
                   </div>
                   <div>
                     <h4 className="text-[13px] font-semibold text-[var(--text)]">{m.name}</h4>
-                    <p className="text-[12px] text-[var(--text-secondary)]">{m.description}</p>
+                    <p className="text-[13px] text-[var(--text-secondary)]">{m.description}</p>
                   </div>
                 </div>
               ))}
@@ -391,7 +391,7 @@ export default function HomePage() {
                 {i===0?<HiAcademicCap className="w-4 h-4 text-[var(--accent)]" />:i===1?<HiTrendingUp className="w-4 h-4 text-[var(--accent)]" />:i===2?<HiCode className="w-4 h-4 text-[var(--accent)]" />:<HiBriefcase className="w-4 h-4 text-[var(--accent)]" />}
               </div>
               <h3 className="text-sm font-semibold text-[var(--text)] mb-1.5">{p.title}</h3>
-              <p className="text-[13px] text-[var(--text-secondary)] leading-relaxed">{p.description}</p>
+              <p className="text-sm text-[var(--text-secondary)] leading-relaxed">{p.description}</p>
             </Card>
           ))}
         </div>
@@ -436,7 +436,7 @@ export default function HomePage() {
                 </div>
                 <div>
                   <h3 className="text-sm font-semibold text-[var(--text)] mb-1">{item.title}</h3>
-                  <p className="text-[13px] text-[var(--text-secondary)] leading-relaxed">{item.description}</p>
+                  <p className="text-sm text-[var(--text-secondary)] leading-relaxed">{item.description}</p>
                 </div>
               </div>
             </Card>
@@ -455,7 +455,7 @@ export default function HomePage() {
                 {i===0?<HiExclamation className="w-4 h-4 text-[var(--accent)]" />:i===1?<HiClipboardList className="w-4 h-4 text-[var(--accent)]" />:<HiKey className="w-4 h-4 text-[var(--accent)]" />}
               </div>
               <h3 className="text-sm font-semibold text-[var(--text)] mb-1.5">{item.title}</h3>
-              <p className="text-[13px] text-[var(--text-secondary)] leading-relaxed">{item.desc}</p>
+              <p className="text-sm text-[var(--text-secondary)] leading-relaxed">{item.desc}</p>
             </div>
           ))}
         </div>
@@ -484,7 +484,7 @@ export default function HomePage() {
             <a href="#reg-form"><Btn size="xl">Create Free Account <HiArrowRight className="w-3.5 h-3.5"/></Btn></a>
             <Link to="/about-us"><Btn variant="secondary" size="xl">Learn More</Btn></Link>
           </div>
-          <p className="text-[12px] text-[var(--text-muted)]">Free to start. $250 minimum deposit. No hidden fees.</p>
+          <p className="text-[13px] text-[var(--text-muted)]">Free to start. $250 minimum deposit. No hidden fees.</p>
         </div>
       </Con></Sec>
 
@@ -542,9 +542,9 @@ export default function HomePage() {
           </div>
           {/* Disclaimer */}
           <div className="py-8 border-b border-[var(--border)] space-y-4">
-            <p className="text-[12px] text-[var(--text-secondary)] leading-relaxed"><strong className="text-[var(--text)] font-semibold">HIGH RISK WARNING:</strong> Dealing or Trading FX, CFDs and Cryptocurrencies is highly speculative, carries a level of non-negligible risk and may not be suitable for all investors. You may lose some or all of your invested capital, therefore you should not speculate with capital that you cannot afford to lose. Please refer to the risk disclosure below. traderai.ai does not gain or lose profits based on your activity and operates as a services company. traderai.ai is not a financial services firm and is not eligible of providing financial advice. traderai.ai shall not be liable for any losses occurred via or in relation to this informational website.</p>
-            <p className="text-[12px] text-[var(--text-secondary)] leading-relaxed"><strong className="text-[var(--text)] font-semibold">SITE RISK DISCLOSURE:</strong> traderai.ai does not accept any liability for loss or damage as a result of reliance on the information contained within this website; this includes education material, price quotes and charts, and analysis. Please be aware of and seek professional advice for the risks associated with trading the financial markets; never invest more money than you can risk losing. The risks involved in FX, CFDs and Cryptocurrencies may not be suitable for all investors. traderai.ai doesn't retain responsibility for any trading losses you might face as a result of using or inferring from the data hosted on this site.</p>
-            <p className="text-[12px] text-[var(--text-secondary)] leading-relaxed"><strong className="text-[var(--text)] font-semibold">LEGAL RESTRICTIONS:</strong> Without limiting the above mentioned provisions, you understand that laws regarding financial activities vary throughout the world, and it is your responsibility to make sure you properly comply with any law, regulation or guideline in your country of residence regarding the use of the Site. To avoid any doubt, the ability to access our Site does not necessarily mean that our Services and/or your activities through the Site are legal under the laws, regulations or directives relevant to your country of residence. It is against the law to solicit US individuals to buy and sell commodity options, even if they are called 'prediction' contracts, unless they are listed for trading and traded on a CFTC-registered exchange unless legally exempt. The UK Financial Conduct Authority has issued a policy statement PS20/10, which prohibits the sale, promotion, and distribution of CFD on Crypto assets. It prohibits the dissemination of marketing materials relating to distribution of CFDs and other financial products based on Cryptocurrencies that addressed to UK residents. The provision of trading services involving any MiFID II financial instruments is prohibited in the EU, unless when authorized/licensed by the applicable authorities and/or regulator(s). Please note that we may receive advertising fees for users opted to open an account with our partner advertisers via advertisers' websites. We have placed cookies on your computer to help improve your experience when visiting this website. You can change cookie settings on your computer at any time. Use of this website indicates your acceptance of this website.</p>
+            <p className="text-sm text-[var(--text-secondary)] leading-relaxed"><strong className="text-[var(--text)] font-semibold">HIGH RISK WARNING:</strong> Dealing or Trading FX, CFDs and Cryptocurrencies is highly speculative, carries a level of non-negligible risk and may not be suitable for all investors. You may lose some or all of your invested capital, therefore you should not speculate with capital that you cannot afford to lose. Please refer to the risk disclosure below. traderai.ai does not gain or lose profits based on your activity and operates as a services company. traderai.ai is not a financial services firm and is not eligible of providing financial advice. traderai.ai shall not be liable for any losses occurred via or in relation to this informational website.</p>
+            <p className="text-sm text-[var(--text-secondary)] leading-relaxed"><strong className="text-[var(--text)] font-semibold">SITE RISK DISCLOSURE:</strong> traderai.ai does not accept any liability for loss or damage as a result of reliance on the information contained within this website; this includes education material, price quotes and charts, and analysis. Please be aware of and seek professional advice for the risks associated with trading the financial markets; never invest more money than you can risk losing. The risks involved in FX, CFDs and Cryptocurrencies may not be suitable for all investors. traderai.ai doesn't retain responsibility for any trading losses you might face as a result of using or inferring from the data hosted on this site.</p>
+            <p className="text-sm text-[var(--text-secondary)] leading-relaxed"><strong className="text-[var(--text)] font-semibold">LEGAL RESTRICTIONS:</strong> Without limiting the above mentioned provisions, you understand that laws regarding financial activities vary throughout the world, and it is your responsibility to make sure you properly comply with any law, regulation or guideline in your country of residence regarding the use of the Site. To avoid any doubt, the ability to access our Site does not necessarily mean that our Services and/or your activities through the Site are legal under the laws, regulations or directives relevant to your country of residence. It is against the law to solicit US individuals to buy and sell commodity options, even if they are called 'prediction' contracts, unless they are listed for trading and traded on a CFTC-registered exchange unless legally exempt. The UK Financial Conduct Authority has issued a policy statement PS20/10, which prohibits the sale, promotion, and distribution of CFD on Crypto assets. It prohibits the dissemination of marketing materials relating to distribution of CFDs and other financial products based on Cryptocurrencies that addressed to UK residents. The provision of trading services involving any MiFID II financial instruments is prohibited in the EU, unless when authorized/licensed by the applicable authorities and/or regulator(s). Please note that we may receive advertising fees for users opted to open an account with our partner advertisers via advertisers' websites. We have placed cookies on your computer to help improve your experience when visiting this website. You can change cookie settings on your computer at any time. Use of this website indicates your acceptance of this website.</p>
           </div>
           {/* Bottom bar */}
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-8">
@@ -553,7 +553,7 @@ export default function HomePage() {
               <Link to="/terms-conditions" className="hover:text-[var(--text)] transition-colors">Terms &amp; Conditions</Link>
               <Link to="/disclaimer" className="hover:text-[var(--text)] transition-colors">Disclaimer</Link>
             </div>
-            <p className="text-[12px] text-[var(--text-muted)]">Copyright © 2026 The AI Trader | All Rights Reserved.</p>
+            <p className="text-[13px] text-[var(--text-muted)]">Copyright © 2026 The AI Trader | All Rights Reserved.</p>
           </div>
         </div>
       </footer>
