@@ -117,8 +117,17 @@ body {
 .delay-7 { transition-delay: 0.21s; } .delay-8 { transition-delay: 0.24s; }
 
 /* ── Replain Chat Widget ── */
-/* Prevent white rectangle — make outer container transparent */
-div[class*="replain"] { background: transparent !important; }
+/* Make any Replain-related elements transparent to prevent white bg */
+[class*="replain"],
+[id*="replain"],
+body > div[style*="position: fixed"][style*="bottom"] {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+/* Override any inline white bg on bottom-right widgets */
+body > div[style*="z-index"] {
+  background-color: transparent !important;
+}
 
 /* ── Phone Input ── */
 .react-tel-input .form-control {
