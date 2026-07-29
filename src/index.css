@@ -116,6 +116,9 @@ body {
 .delay-5 { transition-delay: 0.15s; } .delay-6 { transition-delay: 0.18s; }
 .delay-7 { transition-delay: 0.21s; } .delay-8 { transition-delay: 0.24s; }
 
+/* ── Replain: transparent iframe container ── */
+iframe[src*="replain"] { background: transparent !important; }
+
 /* ── Phone Input ── */
 .react-tel-input .form-control {
   width: 100% !important; height: auto !important;
