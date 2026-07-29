@@ -1,0 +1,1252 @@
+/* Deposit tab — aligned with Dashboard / Home: --cz-* tokens, grey panels, purple accents */
+
+.view-deposit {
+  /* Aliases so existing rules keep working; values track dashboard.css */
+  --dep-panel: var(--cz-card);
+  --dep-purple: var(--cz-accent-bright);
+  --dep-purple-hover: var(--cz-accent-hover);
+  background: var(--cz-content);
+  background-image: none;
+}
+
+#mainContent .view-deposit {
+  padding-bottom: 1.5rem;
+  padding-top: 0.25rem;
+}
+
+.dep-fig {
+  max-width: none;
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  padding: 0 0 1.75rem;
+  font-family: inherit;
+  font-size: 14px;
+  color: var(--cz-text);
+}
+
+.dep-fig-left {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.dep-fig-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  gap: 24px;
+  align-items: start;
+}
+@media (max-width: 1440px) {
+  form#cryptoPayForm,
+  form#lemuxForm {
+    padding: 18px 16px 16px;
+  }
+  .dep-fig-side {
+    padding: 14px 14px 14px;
+  }
+  .dep-fig-side-table thead th {
+    font-size: 12px;
+  }
+
+  .dep-fig-side-table tbody td {
+    font-size: 13px;
+  }
+
+  .view-deposit .dep-fig-panel .form-control {
+    padding: 0.65rem 0.75rem;
+  }
+
+  .dep-fig-form-card .dep-fig-panel .dep-select-wrap2 .form-select,
+  .dep-fig-panel .dep-select-wrap2 select,
+  .dep-fig-form-card .dep-fig-panel .dep-select-wrap .form-select,
+  .dep-fig-panel .dep-select-wrap select {
+    padding: 0.65rem 2.25rem 0.65rem 0.75rem !important;
+  }
+}
+/* Stack Deposit History under the form below 1280px — avoids cramped two columns + horizontal scroll */
+@media (max-width: 1279.98px) {
+  .dep-fig-grid {
+    grid-template-columns: 1fr;
+    min-width: 0;
+    max-width: 100%;
+  }
+}
+
+.dep-fig-label {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--cz-text-dim);
+  margin-bottom: 6px;
+  font-family: inherit;
+  line-height: 1.4;
+}
+
+.dep-fig-balance {
+  font-size: clamp(1.5rem, 3vw, 1.75rem);
+  font-weight: 700;
+  color: var(--cz-text);
+  font-family: inherit;
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+  font-variant-numeric: tabular-nums;
+}
+
+
+.dep-fig-toprow {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px 24px;
+  margin-bottom: 24px;
+  min-width: 0;
+}
+
+.dep-fig-toprow > div:first-child {
+  min-width: 200px;
+  max-width: 100%;
+}
+
+.dep-fig-tp-wrap {
+  flex: 0 1 360px;
+  min-width: 0;
+  max-width: 100%;
+}
+@media (max-width: 575.98px) {
+  .dep-fig-balance {
+    font-size: clamp(1.35rem, 5vw, 1.65rem);
+  }
+   .dep-fig-toprow {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
+  }
+}
+
+/* #mainContent uses overflow-x: hidden — keep Balance + TP on one row only when there is room */
+@media (max-width: 991.98px) {
+ 
+
+  .dep-fig-tp-wrap {
+    flex: 1 1 auto;
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+.dep-fig-tp-wrap > .dep-fig-label {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--cz-text-dim);
+}
+
+/* TP select — same control language as Home .dash-tp-selected / Trading .ta-type-btn */
+.dep-fig-tp-wrap select#depTpSelect,
+.dep-fig-tp-wrap select.dep-select {
+  width: 100%;
+  border: 1px solid var(--cz-rule);
+  border-radius: 8px;
+  padding: 10px 38px 10px 14px;
+  background: var(--cz-page);
+  color: var(--cz-text);
+  font-weight: 600;
+  font-size: 14px;
+  font-family: inherit;
+  appearance: none;
+  cursor: pointer;
+  box-shadow: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.dep-fig-tp-wrap select#depTpSelect:focus,
+.dep-fig-tp-wrap select.dep-select:focus {
+  outline: none;
+  border-color: var(--cz-accent-border-soft);
+  box-shadow: 0 0 0 3px var(--cz-accent-hover-bg);
+}
+
+.dep-fig-tp-inner {
+  position: relative;
+}
+
+.dep-fig-tp-inner .dep-fig-tp-caret {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--cz-text-dim);
+  pointer-events: none;
+  font-size: 0.85rem;
+}
+
+/* Method dropdown — full width of left column (Figma) */
+.dep-fig-method-section {
+  position: relative;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.dep-tp-error {
+  margin-top: 8px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #b91c1c;
+}
+
+.dep-fig-tp-wrap.dep-tp-wrap--error .dep-fig-tp-inner .dep-select,
+.dep-fig-tp-wrap.dep-tp-wrap--error select#depTpSelect {
+  outline: 2px solid #ef4444;
+  outline-offset: 1px;
+}
+
+.dep-fig-method-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(135deg, var(--cz-accent) 0%, var(--cz-accent-bright) 100%);
+  color: #fff;
+  font-weight: 600;
+  font-size: 14px;
+  font-family: inherit;
+  cursor: pointer;
+  text-align: left;
+  box-shadow: 0 2px 8px rgba(114, 90, 238, 0.18);
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s ease, filter 0.2s ease;
+}
+
+.dep-fig-method-bar {
+  box-shadow: 0 2px 8px rgba(114, 90, 238, 0.18);
+}
+
+.dep-fig-method-bar-chevron {
+  font-size: 1rem;
+  opacity: 0.95;
+}
+
+.dep-fig-method-btn:hover,
+.dep-fig-method-btn:focus-visible {
+  filter: brightness(1.03);
+  box-shadow: 0 4px 16px rgba(114, 90, 238, 0.28);
+  color: #fff;
+  transform: translateY(-1px);
+  outline: none;
+}
+
+/* Figma: method choice is ONLY the dropdown — no tile row */
+
+.dep-fig-method-menu {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(100% + 6px);
+  background: var(--cz-page);
+  border: 1px solid var(--cz-card-border);
+  border-radius: 12px;
+  box-shadow: 0 12px 32px rgba(39, 47, 55, 0.12);
+  padding: 8px;
+  z-index: 40;
+  max-height: 280px;
+  overflow-y: auto;
+}
+
+.dep-fig-method-menu[hidden] {
+  display: none !important;
+}
+
+.dep-fig-method-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 12px 14px;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  cursor: pointer;
+  text-align: left;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--cz-accent);
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.dep-fig-method-item:hover {
+  background: var(--cz-accent-hover-bg);
+}
+
+.dep-fig-method-item.is-active {
+  background: linear-gradient(135deg, var(--cz-accent) 0%, var(--cz-accent-bright) 100%);
+  color: #fff;
+}
+
+.dep-fig-method-item.is-active .dep-fig-method-item-sub {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.dep-fig-method-item img {
+  height: 22px;
+  width: auto;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.dep-fig-method-item-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.dep-fig-method-item-title {
+  font-weight: 600;
+}
+
+.dep-fig-method-item-sub {
+  font-size: 12px;
+  color: var(--cz-text-dim);
+}
+
+.dep-fig-method-item.is-active .dep-fig-method-item-sub {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+form#lemuxForm {
+  padding: 22px 22px 20px;
+}
+
+form#cryptoPayForm {
+  padding: 22px 22px 20px;
+}
+
+/* Form card */
+.dep-fig-form-card {
+  background: var(--cz-card);
+  border: 1px solid var(--cz-card-border);
+  border-radius: 20px;
+  min-height: 120px;
+  min-width: 0;
+  overflow: hidden;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.view-deposit .dep-fig-form-card:hover {
+  border-color: var(--cz-accent-border-soft);
+  box-shadow: 0 8px 28px rgba(114, 90, 238, 0.08);
+}
+
+.dep-fig-panel {
+  display: none;
+}
+
+.dep-fig-panel.is-visible {
+  display: block;
+}
+
+#depPanelCard.dep-fig-panel {
+  padding: 18px 20px 22px;
+}
+
+.dep-fig-panel-empty {
+  color: var(--cz-text-dim);
+  text-align: center;
+  padding: 28px 16px;
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+/* Card / Visa strip */
+.dep-fig-card-brands {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 14px;
+  background: var(--cz-subtle);
+  border: 1px solid var(--cz-card-border);
+  border-radius: 12px;
+  margin-bottom: 16px;
+}
+
+.dep-fig-card-brands-caption {
+  font-weight: 800;
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  color: var(--cz-text);
+  font-family: inherit;
+}
+
+.dep-fig-card-brands img {
+  height: 22px;
+  width: auto;
+}
+
+.dep-fig-field-label {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--cz-accent);
+  margin-bottom: 8px;
+  font-family: inherit;
+}
+
+.dep-fig-input {
+  width: 100%;
+  border: 1px solid var(--cz-rule);
+  border-radius: 8px;
+  padding: 12px 14px;
+  background: var(--cz-page);
+  font-size: 14px;
+  color: var(--cz-text);
+}
+
+.dep-fig-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.dep-fig-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border-radius: 8px;
+  background: var(--cz-page);
+  color: var(--cz-text);
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+  border: 1px solid var(--cz-card-border);
+  transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease;
+}
+
+.dep-fig-chip:hover {
+  border-color: var(--cz-accent-border-soft);
+  background: var(--cz-accent-hover-bg);
+}
+
+.dep-fig-chip svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+.dep-fig-chip.is-selected {
+  background: linear-gradient(135deg, var(--cz-accent) 0%, var(--cz-accent-bright) 100%);
+  color: #fff;
+  border-color: var(--cz-accent);
+}
+
+.dep-fig-chip.is-selected svg path {
+  fill: #fff;
+}
+
+/* Inline Lemux / Crypto forms */
+.dep-fig-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px 16px;
+}
+@media (max-width: 767.98px) {
+    .view-deposit .dep-hist-footer {
+        flex-direction: column;
+        align-items: stretch !important;
+    }
+}
+@media (max-width: 767px) {
+  .dep-fig-form-grid {
+    grid-template-columns: 1fr;
+    gap: 10px 10px;
+  }
+}
+@media (max-width: 639px) {
+  .dep-fig-tp-inner {
+   padding-right:3px;
+    padding-left:3px;
+}
+}
+.dep-fig-form-grid .dep-fig-field-full {
+  grid-column: 1 / -1;
+}
+
+.dep-fig-panel .form-label {
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--cz-text);
+}
+
+.view-deposit .dep-fig-panel .form-control,
+.view-deposit .dep-fig-panel .form-select {
+  border-radius: 8px;
+  border: 1px solid var(--cz-field-border);
+  background: var(--cz-page);
+  color: var(--cz-text);
+  font-size: 14px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.view-deposit .dep-fig-panel .form-control:focus,
+.view-deposit .dep-fig-panel .form-select:focus {
+  border-color: var(--cz-accent-border-soft);
+  box-shadow: 0 0 0 3px var(--cz-accent-hover-bg);
+  outline: none;
+}
+
+.view-deposit .dep-fig-panel .form-control {
+  display: block;
+  width: 100%;
+  padding: 0.65rem 0.85rem;
+}
+.dep-fig-panel .dep-select-wrap2,
+.dep-fig-panel .dep-select-wrap {
+  position: relative;
+}
+.dep-fig-panel .dep-select-wrap2 .form-select,
+.dep-fig-panel .dep-select-wrap2 select,
+.dep-fig-panel .dep-select-wrap .form-select,
+.dep-fig-panel .dep-select-wrap select {
+  padding-right: 2.25rem;
+  padding: 0.8rem;
+}
+
+.dep-fig-panel .dep-select-wrap2 .dep-caret,
+.dep-fig-panel .dep-select-wrap .dep-caret {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: var(--cz-text-dim);
+  font-size: 0.75rem;
+}
+
+.dep-fig-panel .portal-btn,
+.dep-fig-panel .btn.portal-btn {
+  border-radius: 8px;
+  background: linear-gradient(135deg, var(--cz-accent) 0%, var(--cz-accent-bright) 100%);
+  border: none;
+  font-weight: 600;
+  font-family: inherit;
+  padding: 12px 18px;
+  color: #fff !important;
+  box-shadow: 0 2px 8px rgba(114, 90, 238, 0.18);
+  transition: filter 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.dep-fig-panel .portal-btn .btn-text,
+.dep-fig-panel .btn.portal-btn {
+  color: #fff !important;
+}
+
+.dep-fig-panel .portal-btn:hover,
+.dep-fig-panel .btn.portal-btn:hover {
+  filter: brightness(1.03);
+  box-shadow: 0 4px 16px rgba(114, 90, 238, 0.28);
+  color: #fff !important;
+  transform: translateY(-1px);
+}
+
+.dep-fig-brand-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 18px 20px;
+  background: var(--cz-subtle);
+  border-bottom: 1px solid var(--cz-card-border);
+  border-radius: 20px 20px 0 0;
+}
+
+.dep-fig-brand-name {
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--cz-text);
+  letter-spacing: -0.02em;
+}
+
+.view-deposit .dep-fig-panel .form-label {
+  margin-bottom: 0.35rem;
+  padding-left: 2px;
+}
+
+.dep-fig-brand-head img {
+  height: 24px;
+  width: auto;
+}
+
+/* Side: Deposit History — grey panel + inset table (same rhythm as Home panels) */
+.dep-fig-side {
+  min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
+  background: var(--cz-card);
+  border: 1px solid var(--cz-card-border);
+  border-radius: 20px;
+  padding: 16px 18px 16px;
+  box-shadow: none;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.view-deposit .dep-fig-side:hover {
+  border-color: var(--cz-accent-border-soft);
+  box-shadow: 0 8px 28px rgba(114, 90, 238, 0.08);
+}
+
+.dep-fig-side-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 0;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--cz-rule);
+}
+
+.dep-fig-side-title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--cz-text);
+}
+
+.dep-fig-viewall {
+  border-radius: 6px;
+  padding: 8px 14px;
+  background: rgba(114, 90, 238, 0.12);
+  border: 1px solid var(--cz-accent-border-soft);
+  color: var(--cz-accent-hover);
+  font-weight: 600;
+  font-size: 0.8125rem;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.dep-fig-viewall:hover {
+  background: rgba(114, 90, 238, 0.18);
+  border-color: var(--cz-accent-border);
+  color: var(--cz-accent-hover);
+}
+
+/* Inset table — white well on grey card (readable rows) */
+.dep-fig-side-table-wrap {
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+  border-radius: 14px;
+  border: 1px solid var(--cz-card-border);
+  margin-top: 4px;
+  background: var(--cz-page);
+}
+
+.dep-fig-side-table {
+  width: 100%;
+  min-width: max(100%, 460px);
+  table-layout: auto;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 13px;
+  font-family: inherit;
+}
+
+/* Match Home .dash-table header treatment */
+.dep-fig-side-table thead th {
+  text-align: left;
+  padding: 12px 14px;
+  color: var(--cz-accent);
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 1.3;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--cz-rule);
+  background: var(--cz-page);
+  white-space: nowrap;
+}
+
+/* Column hints: no ellipsis — full labels/dates; nowrap keeps one line per row; scroll .dep-fig-side-table-wrap on small screens */
+.dep-fig-side-table thead th:nth-child(1),
+.dep-fig-side-table tbody td:nth-child(1) {
+  min-width: 160px;
+  white-space: nowrap;
+}
+
+.dep-fig-side-table thead th:nth-child(2),
+.dep-fig-side-table tbody td:nth-child(2) {
+  min-width: 112px;
+  white-space: nowrap;
+}
+
+.dep-fig-side-table thead th:nth-child(3),
+.dep-fig-side-table tbody td:nth-child(3) {
+  min-width: 72px;
+  white-space: nowrap;
+}
+
+.dep-fig-side-table thead th:nth-child(4),
+.dep-fig-side-table tbody td:nth-child(4) {
+  min-width: 96px;
+  white-space: nowrap;
+  text-align: right;
+}
+
+.dep-fig-side-table tbody td {
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--cz-rule);
+  color: var(--cz-text-dim);
+  vertical-align: middle;
+  background: transparent;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.dep-fig-side-table tbody tr:hover td {
+  background: var(--cz-accent-hover-bg);
+  color: var(--cz-text);
+}
+
+.dep-fig-side-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.dep-fig-tx-icon {
+  display: inline-flex;
+  vertical-align: middle;
+  margin-right: 6px;
+}
+
+.dep-fig-tx-name {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  white-space: nowrap;
+  max-width: none;
+}
+
+.dep-fig-side-empty {
+  text-align: center;
+  color: var(--cz-text-dim);
+  padding: 24px 12px;
+  font-size: 14px;
+}
+
+/* Crypto alert note */
+.dep-fig-note {
+  margin-top: 14px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #b91c1c;
+  font-size: 0.8125rem;
+}
+
+/* ===== Full-page Deposit History (subview) — same tokens as Dashboard ===== */
+.view-deposit .history-wrap {
+  padding-top: 4px;
+  max-width: 100%;
+}
+
+.view-deposit .dep-hist-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px 20px;
+  background: var(--cz-card);
+  border: 1px solid var(--cz-card-border);
+  border-radius: 20px;
+  margin-bottom: 16px;
+  box-shadow: none;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.view-deposit .dep-hist-toolbar:hover {
+  border-color: var(--cz-accent-border-soft);
+  box-shadow: 0 8px 28px rgba(114, 90, 238, 0.08);
+}
+
+.view-deposit .dep-hist-toolbar-main {
+  flex: 1;
+  min-width: 220px;
+}
+
+.view-deposit .dep-hist-toolbar-title-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.view-deposit .dep-hist-toolbar-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: var(--cz-accent-hover-bg);
+  color: var(--cz-accent);
+  font-size: 1.25rem;
+}
+
+.view-deposit .dep-hist-toolbar-title {
+  display: block;
+  font-family: inherit;
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--cz-text);
+}
+
+.view-deposit .dep-hist-toolbar-desc {
+  margin: 4px 0 0;
+  font-size: 0.8125rem;
+  color: var(--cz-text-dim);
+  max-width: 520px;
+  line-height: 1.45;
+}
+
+.view-deposit .dep-hist-toolbar-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+/* All Accounts: custom chevron (native select has no reliable arrow in all browsers). */
+.view-deposit .dep-hist-select-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: stretch;
+  max-width: 100%;
+}
+
+.view-deposit .dep-hist-select-wrap .dep-hist-select {
+  min-width: 160px;
+  max-width: 100%;
+  border-radius: 8px;
+  border: 1px solid var(--cz-field-border);
+  background: var(--cz-page);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  padding: 8px 2.25rem 8px 12px;
+  color: var(--cz-text);
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  cursor: pointer;
+}
+
+.view-deposit .dep-hist-select-chevron {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--cz-text-dim);
+  font-size: 0.875rem;
+  line-height: 1;
+  pointer-events: none;
+}
+
+.view-deposit .dep-hist-filters .dep-hist-filter {
+  border: 1px solid var(--cz-rule);
+  background: var(--cz-page);
+  color: var(--cz-text-dim);
+  font-weight: 500;
+  padding: 6px 12px;
+}
+
+.view-deposit .dep-hist-filters .dep-hist-filter.active {
+  background: linear-gradient(135deg, var(--cz-accent) 0%, var(--cz-accent-bright) 100%);
+  border-color: var(--cz-accent);
+  color: #fff;
+}
+
+/* All → Rejected: outer shell 20px radius on all sides (inner grid handles seams). Additive. */
+/* Horizontal scroll if needed (narrow desktop) — never clip labels with overflow:hidden. */
+.view-deposit .dep-hist-filters-wrap {
+  flex: 1 1 260px;
+  min-width: 0;
+  max-width: 100%;
+  border: 1px solid #e2e8f0;
+  border-radius: 20px;
+  background: #e2e8f0;
+  padding: 0;
+  box-sizing: border-box;
+  align-self: center;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+}
+
+.view-deposit .dep-hist-filters-wrap .dep-hist-filters.btn-group {
+  display: grid;
+  /* min-content keeps “Approved” / “Rejected” readable; bar scrolls if the row is still too tight */
+  grid-template-columns: repeat(4, minmax(min-content, 1fr));
+  width: 100%;
+  min-width: min-content;
+  max-width: 100%;
+  gap: 1px;
+  border: none;
+  margin: 0;
+  padding: 0;
+  vertical-align: unset;
+  background: #e2e8f0;
+  box-sizing: border-box;
+}
+
+.view-deposit .dep-hist-filters-wrap .dep-hist-filters .dep-hist-filter {
+  border: none !important;
+  border-radius: 0 !important;
+  margin: 0 !important;
+  width: 100%;
+  max-width: 100%;
+  min-width: min-content;
+  min-height: 38px;
+  box-shadow: none;
+  box-sizing: border-box;
+  white-space: nowrap;
+}
+
+.view-deposit .dep-hist-filters-wrap .dep-hist-filters .dep-hist-filter:focus {
+  z-index: 1;
+  position: relative;
+}
+
+.view-deposit .dep-hist-filters-wrap .dep-hist-filters .dep-hist-filter.active {
+  border-color: transparent !important;
+}
+
+/* Tablet & down (~768px): full-width filter strip + 2×2 grid — no clipped tab labels */
+@media (max-width: 991.98px) {
+  .view-deposit .dep-hist-filters-wrap {
+    flex: 1 1 100%;
+    width: 100%;
+  }
+
+  .view-deposit .dep-hist-filters-wrap .dep-hist-filters.btn-group {
+    grid-template-columns: repeat(2, minmax(min-content, 1fr));
+    min-width: 0;
+  }
+}
+
+/* Tighter labels on very narrow viewports */
+@media (max-width: 360px) {
+  .view-deposit .dep-hist-filters-wrap .dep-hist-filters .dep-hist-filter {
+    padding-left: 8px;
+    padding-right: 8px;
+    font-size: 0.75rem;
+  }
+}
+
+/* Refresh / PDF / Back — match filter strip height (38px) and weight */
+.view-deposit .dep-hist-toolbar-actions > .dep-hist-btn-ghost.btn-sm,
+.view-deposit .dep-hist-toolbar-actions > .dep-hist-btn-primary.btn-sm,
+.view-deposit .dep-hist-toolbar-actions > .dep-hist-btn-dark.btn-sm {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  min-height: 38px;
+  padding: 6px 12px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.view-deposit .dep-hist-toolbar-actions > .dep-hist-btn-ghost.btn-sm {
+  font-weight: 500;
+}
+
+.view-deposit .dep-hist-btn-ghost {
+  border-radius: 8px;
+  border: 1px solid var(--cz-rule);
+  background: var(--cz-page);
+  color: var(--cz-text-dim);
+}
+
+.view-deposit .dep-hist-btn-primary {
+  border-radius: 8px;
+  border: none;
+  background: linear-gradient(135deg, var(--cz-accent) 0%, var(--cz-accent-bright) 100%);
+  color: #fff;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(114, 90, 238, 0.18);
+  transition: filter 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.view-deposit .dep-hist-btn-primary:hover {
+  filter: brightness(1.03);
+  box-shadow: 0 4px 16px rgba(114, 90, 238, 0.28);
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+.view-deposit .dep-hist-btn-dark {
+  border-radius: 8px;
+  border: none;
+  background: #1e293b;
+  color: #fff;
+  font-weight: 600;
+}
+
+.view-deposit .dep-hist-btn-dark:hover {
+  background: #334155;
+  color: #fff;
+}
+
+.view-deposit .dep-hist-table-shell {
+  background: var(--cz-card);
+  border: 1px solid var(--cz-card-border);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: none;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.view-deposit .dep-hist-table-shell:hover {
+  border-color: var(--cz-accent-border-soft);
+  box-shadow: 0 8px 28px rgba(114, 90, 238, 0.08);
+}
+
+.view-deposit .dep-hist-table-scroll {
+  overflow-x: auto;
+  background: var(--cz-page);
+}
+
+.view-deposit .dep-hist-table {
+  font-family: inherit;
+  font-size: 14px;
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: transparent;
+  --bs-table-bg: transparent;
+  --bs-table-border-color: var(--cz-rule);
+}
+
+.view-deposit .dep-hist-table thead {
+  display: table-header-group;
+}
+
+/* Same header language as Home .dash-table (purple labels, row dividers below) */
+.view-deposit #histTable.dep-hist-table thead th {
+  background-color: var(--cz-page) !important;
+  color: var(--cz-accent) !important;
+  font-family: inherit !important;
+  font-weight: 600 !important;
+  font-size: 12px !important;
+  line-height: 1.3;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 12px 14px !important;
+  border: none !important;
+  border-bottom: 1px solid var(--cz-rule) !important;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+.view-deposit #histTable.dep-hist-table thead th:first-child,
+.view-deposit .dep-hist-table tbody td:first-child {
+  width: 1%;
+  max-width: 6rem;
+  white-space: nowrap;
+}
+
+.view-deposit .dep-hist-table tbody td {
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--cz-rule);
+  vertical-align: middle;
+  color: var(--cz-text-dim);
+  background: transparent;
+  white-space: nowrap;
+  font-weight: 500;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.view-deposit .table.dep-hist-table > :not(caption) > * > * {
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  border-bottom-color: var(--cz-rule);
+}
+
+.view-deposit .table.dep-hist-table > tbody > tr:last-child > * {
+  border-bottom: none;
+}
+
+.view-deposit .dep-hist-table tbody tr:hover td {
+  background: var(--cz-accent-hover-bg);
+  color: var(--cz-text);
+}
+
+/* Status pills — strong contrast (Bootstrap subtle badges were hard to read) */
+.view-deposit .dep-status {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.38em 0.75em;
+  font-size: 0.75rem;
+  font-weight: 700;
+  line-height: 1.2;
+  border-radius: 999px;
+  white-space: nowrap;
+  letter-spacing: 0.02em;
+}
+
+.view-deposit .dep-status--approved {
+  background: #dcfce7;
+  color: #14532d;
+  border: 1px solid #22c55e;
+}
+
+.view-deposit .dep-status--pending {
+  background: #fef3c7;
+  color: #92400e;
+  border: 1px solid #f59e0b;
+}
+
+.view-deposit .dep-status--rejected {
+  background: #fee2e2;
+  color: #991b1b;
+  border: 1px solid #ef4444;
+}
+
+.view-deposit .dep-status--neutral {
+  background: #f1f5f9;
+  color: #334155;
+  border: 1px solid #cbd5e1;
+}
+
+.view-deposit .dep-hist-loading {
+  color: var(--cz-text-dim);
+}
+
+.view-deposit .dep-hist-footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 18px;
+  border-top: 1px solid var(--cz-rule);
+  background: var(--cz-subtle);
+}
+
+.view-deposit .dep-hist-summary {
+  color: var(--cz-text-dim);
+}
+
+/* Deposit history: same dash-pagination as home / support (home.tab.css loads last for .dash-page-btn tokens) */
+.view-deposit .dep-hist-pager-wrap {
+  flex-shrink: 0;
+  min-width: 0;
+}
+
+.view-deposit .dep-hist-dpagination.dash-pagination {
+  padding-top: 0;
+  padding-bottom: 0;
+  justify-content: center;
+}
+
+/* ~laptop widths: toolbar row was too tight — stack + full-width description avoids clipped / odd wraps */
+@media (max-width: 1440px) {
+  .view-deposit .dep-hist-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 14px;
+  }
+
+  .view-deposit .dep-hist-toolbar-main {
+    flex: none;
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .view-deposit .dep-hist-toolbar-desc {
+    max-width: 100%;
+  }
+
+  .view-deposit .dep-hist-toolbar-actions {
+    width: 100%;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  .view-deposit .dep-hist-select-wrap .dep-hist-select {
+    min-width: 0;
+    width: min(100%, 280px);
+  }
+
+  .view-deposit .dep-hist-filters-wrap {
+    flex: 1 1 220px;
+    min-width: 0;
+  }
+}
+
+/* CryptoPay inline hints (match Lemux `.invalid` pattern) */
+.view-deposit #depPanelCrypto .invalid-hint {
+  display: none;
+  font-size: 0.8125rem;
+  color: var(--cz-danger);
+  margin-top: 0.25rem;
+  font-family: inherit;
+}
+.view-deposit #depPanelCrypto .invalid-hint.show-hint {
+  display: block;
+}
+.view-deposit #depPanelCrypto .dep-select.is-invalid,
+.view-deposit #depPanelCrypto .form-control.portal-input.is-invalid {
+  border-color: #dc3545;
+}
+
+/* -------------------------------------------------------------------------
+   ≤~640px: symmetric horizontal inset + stop content bleeding past #mainContent
+   (fixes missing right gap and header looking misaligned). Additive only.
+   ------------------------------------------------------------------------- */
+@media (max-width: 639.98px) {
+  #mainContent > section.view.view-deposit {
+    box-sizing: border-box;
+    min-width: 0;
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .view-deposit #depositMainWrap.dep-fig {
+    box-sizing: border-box;
+    min-width: 0;
+    max-width: 100%;
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  .view-deposit .dep-fig-grid,
+  .view-deposit .dep-fig-left,
+  .view-deposit .dep-fig-side {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  /* When Deposit is open, clip page-level horizontal overflow (scrollbar bleed) */
+  body.cp-dashboard-body:has(#mainContent .view-deposit.show) .cp-layout {
+    max-width: 100%;
+    overflow-x: hidden;
+    overflow-x: clip;
+  }
+}

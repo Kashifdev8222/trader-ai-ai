@@ -1,0 +1,301 @@
+<div id="wdMainWrap" class="wd-fig">
+  <div class="wd-fig-grid">
+    <div class="wd-fig-left">
+      <div class="wd-acc-card" id="wdAccCard">
+        <div class="wd-acc-id" id="wdAccId">Account : #—</div>
+        <div class="wd-acc-balance" id="wdAccBalance">$0</div>
+        <div class="wd-acc-meta" id="wdAccMeta">
+          <span class="wd-metric">
+            <span class="wd-metric__label">Equity :</span>
+            <span class="wd-metric__value" id="wdAccEquity">—</span>
+          </span>
+          <span class="wd-metric">
+            <span class="wd-metric__label">P/L :</span>
+            <span class="wd-metric__value wd-metric__value--pl" id="wdAccPlVal">—</span>
+          </span>
+          <span class="wd-metric">
+            <span class="wd-metric__label">Margin :</span>
+            <span class="wd-metric__value" id="wdAccMargin">—</span>
+          </span>
+        </div>
+        <div class="wd-acc-chart" id="wdAccChart" aria-hidden="true"></div>
+      </div>
+    </div>
+
+    <div class="wd-fig-right">
+      <div class="wd-fig-right-inner">
+        <div class="wd-fig-label">Select Tp Number</div>
+        <div class="wd-tp-inner">
+          <select id="wdTpSelect" class="wd-select" aria-label="Select trading platform number">
+            <option value="" selected>Select tp number</option>
+          </select>
+          <i class="bi bi-caret-down-fill wd-caret" aria-hidden="true"></i>
+        </div>
+        <div class="wd-actions-row">
+          <button type="button" class="wd-btn wd-btn--ghost" id="wdBtnCreateRequest">
+            <i class="bi bi-box-arrow-up"></i>
+            <span>Create New Withdrawal Request</span>
+          </button>
+          <button type="button" class="wd-btn wd-btn--primary" id="wdBtnAccounts">
+            <i class="bi bi-bank"></i>
+            <span>Withdrawal Account</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wd-tx-stack">
+    <div class="wd-table-panel">
+      <div class="wd-table-head">
+        <h2 class="wd-table-title">Withdrawal Transactions</h2>
+        <button type="button" class="wd-view-all" id="wdViewAll">View All</button>
+      </div>
+      <div class="wd-table-scroll">
+        <table class="wd-table" id="wdTable">
+          <colgroup>
+            <col class="wd-col--name" />
+            <col class="wd-col--created" />
+            <col class="wd-col--amount" />
+            <col class="wd-col--status" />
+            <col class="wd-col--reason" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">Created On</th>
+              <th scope="col" class="text-end">Amount</th>
+              <th scope="col" class="wd-th-status">Status</th>
+              <th scope="col">Rejection Reason</th>
+            </tr>
+          </thead>
+          <tbody id="wdTBody">
+            <tr><td colspan="5" class="wd-loading">Loading…</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="wd-table-footer">
+        <div class="wd-summary small text-muted" id="wdSummary">—</div>
+        <nav class="wd-pager-wrap" aria-label="Withdrawal pagination">
+          <div class="wd-pager" id="wdPager"></div>
+        </nav>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Create withdrawal request — Figma: gray header band + white body + filled gray inputs -->
+<div class="modal fade" id="wdModalRequest" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-wd-request">
+    <div class="modal-content wd-modal wd-modal--request">
+      <div class="wd-modal-request__head wd-modal-request__head--request-modal">
+        <button type="button" class="btn-close wd-modal-request__close wd-modal-request__close--inhead" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div class="wd-modal-request__head-text">
+          <h5 class="wd-modal-request__title">Create New withdrawal Request</h5>
+          <p class="wd-modal-request__tp" id="wdModalTpSubtitle">TP Number- —</p>
+        </div>
+      </div>
+      <div class="wd-modal-request__body">
+          <form id="wdFormRequest" autocomplete="off">
+            <div class="wd-modal-request__field">
+              <label class="wd-modal-request__label" for="wdReqSource">Select withdrawal Account Type</label>
+              <div class="wd-modal-request__control-wrap">
+                <select id="wdReqSource" class="wd-modal-request__select" required>
+                  <option value="" selected disabled>Choose account</option>
+                </select>
+                <i class="bi bi-caret-down-fill wd-modal-request__caret" aria-hidden="true"></i>
+              </div>
+            </div>
+            <div class="wd-modal-request__field">
+              <label class="wd-modal-request__label" for="wdReqAmount">Amount</label>
+              <input type="text" inputmode="decimal" class="wd-modal-request__input" id="wdReqAmount" placeholder="00000000" required />
+              <div class="wd-modal-request__hint" id="wdReqMaxHint">Max Withdrawal : —</div>
+            </div>
+            <div id="wdReqMsg" class="wd-modal-request__msg" role="alert"></div>
+            <button type="submit" class="btn wd-modal-request__submit w-100" id="wdReqSubmit">Submit</button>
+          </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Withdrawal accounts: list + add (matches request/edit modal styling) -->
+<div class="modal fade" id="wdModalAccounts" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-wd-accounts">
+    <div class="modal-content wd-modal wd-modal--accounts">
+      <div class="wd-modal-request__head wd-modal-accounts__head">
+        <div class="wd-modal-request__head-text">
+          <h5 class="wd-modal-request__title mb-0">Withdrawal Accounts</h5>
+          <p class="wd-modal-request__tp mb-0">Manage saved crypto, bank, and SurePay methods for withdrawals.</p>
+        </div>
+        <button type="button" class="btn-close wd-modal-request__close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="wd-modal-accounts__body">
+        <section class="wd-modal-accounts__section" aria-label="Saved accounts">
+          <div class="wd-modal-accounts__section-head">
+            <span class="wd-modal-accounts__section-label">Saved accounts</span>
+            <span class="wd-modal-accounts__section-hint" id="wdSrcCountHint"></span>
+          </div>
+          <div class="wd-src-list wd-modal-accounts__list" id="wdSrcList">
+            <div class="wd-modal-accounts__loading text-muted small">Loading…</div>
+          </div>
+        </section>
+
+        <div class="wd-modal-accounts__divider" role="presentation"></div>
+
+        <section class="wd-modal-accounts__section wd-modal-accounts__section--add" aria-label="Add account">
+          <div class="wd-modal-accounts__section-head">
+            <span class="wd-modal-accounts__section-label" id="wdSrcFormTitle">Add new account</span>
+          </div>
+          <form id="wdFormSource" class="wd-modal-accounts__form" autocomplete="off">
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="wd-modal-request__label" for="wdSrcType">Source</label>
+                <div class="wd-modal-request__control-wrap">
+                  <select id="wdSrcType" class="wd-modal-request__select">
+                    <option value="Crypto">Cryptocurrency</option>
+                    <option value="BankAccount">Bank Account</option>
+                    <option value="SurePay">SurePay</option>
+                  </select>
+                  <i class="bi bi-caret-down-fill wd-modal-request__caret" aria-hidden="true"></i>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <label class="wd-modal-request__label" for="wdSrcLabel">Label / Name</label>
+                <input type="text" class="wd-modal-request__input" id="wdSrcLabel" placeholder="e.g. My wallet" required />
+              </div>
+              <div class="col-md-6 wd-crypto-only">
+                <label class="wd-modal-request__label" for="wdSrcCoin">Cryptocurrency</label>
+                <div class="wd-modal-request__control-wrap">
+                  <select id="wdSrcCoin" class="wd-modal-request__select" aria-label="Cryptocurrency"></select>
+                  <i class="bi bi-caret-down-fill wd-modal-request__caret" aria-hidden="true"></i>
+                </div>
+              </div>
+              <div class="col-md-6 wd-crypto-only">
+                <label class="wd-modal-request__label" for="wdSrcNetwork">Network</label>
+                <div class="wd-modal-request__control-wrap">
+                  <select id="wdSrcNetwork" class="wd-modal-request__select" aria-label="Network"></select>
+                  <i class="bi bi-caret-down-fill wd-modal-request__caret" aria-hidden="true"></i>
+                </div>
+              </div>
+              <div class="col-12 wd-crypto-only">
+                <label class="wd-modal-request__label" for="wdSrcWallet">Wallet address</label>
+                <input type="text" class="wd-modal-request__input" id="wdSrcWallet" placeholder="Enter wallet address" autocomplete="off" />
+              </div>
+              <div class="col-md-6 wd-bank-only" style="display: none">
+                <label class="wd-modal-request__label" for="wdSrcBankName">Bank name</label>
+                <input type="text" class="wd-modal-request__input" id="wdSrcBankName" placeholder="Bank name" />
+              </div>
+              <div class="col-md-6 wd-bank-only" style="display: none">
+                <label class="wd-modal-request__label" for="wdSrcBankAcct">IBAN / Account number</label>
+                <input type="text" class="wd-modal-request__input" id="wdSrcBankAcct" placeholder="Account / IBAN" />
+              </div>
+              <div class="col-md-6 wd-surepay-only" style="display: none">
+                <label class="wd-modal-request__label" for="wdSrcSpProvider">Provider / label</label>
+                <input type="text" class="wd-modal-request__input" id="wdSrcSpProvider" placeholder="SurePay provider" />
+              </div>
+              <div class="col-md-6 wd-surepay-only" style="display: none">
+                <label class="wd-modal-request__label" for="wdSrcSpAcct">Account / reference</label>
+                <input type="text" class="wd-modal-request__input" id="wdSrcSpAcct" placeholder="Reference" />
+              </div>
+            </div>
+            <div id="wdSrcMsg" class="wd-modal-request__msg" role="alert"></div>
+            <button type="submit" class="btn wd-modal-request__submit w-100 mt-1">Save account</button>
+          </form>
+        </section>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Edit withdrawal account — gray header + filled fields (matches request modal) -->
+<div class="modal fade" id="wdModalEditSource" tabindex="-1" aria-hidden="true" data-bs-backdrop="static">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-wd-edit">
+    <div class="modal-content wd-modal wd-modal--edit">
+      <div class="wd-modal-request__head">
+        <div class="wd-modal-request__head-text">
+          <h5 class="wd-modal-request__title">Edit withdrawal account</h5>
+          <p class="wd-modal-request__tp mb-0">Update your saved bank or crypto details.</p>
+        </div>
+        <button type="button" class="btn-close wd-modal-request__close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="wd-modal-request__body">
+        <form id="wdFormEditSource" autocomplete="off">
+          <input type="hidden" id="wdEditSrcId" value="" />
+          <div class="wd-modal-request__field">
+            <label class="wd-modal-request__label" for="wdEditSrcType">Source</label>
+            <div class="wd-modal-request__control-wrap">
+              <select id="wdEditSrcType" class="wd-modal-request__select" required>
+                <option value="Crypto">Cryptocurrency</option>
+                <option value="BankAccount">Bank Account</option>
+                <option value="SurePay">SurePay</option>
+              </select>
+              <i class="bi bi-caret-down-fill wd-modal-request__caret" aria-hidden="true"></i>
+            </div>
+          </div>
+          <div class="wd-modal-request__field">
+            <label class="wd-modal-request__label" for="wdEditSrcLabel">Label / Name</label>
+            <input type="text" class="wd-modal-request__input" id="wdEditSrcLabel" placeholder="My wallet" required />
+          </div>
+          <div class="wd-modal-request__field wd-edit-crypto-only">
+            <label class="wd-modal-request__label" for="wdEditSrcCoin">Cryptocurrency</label>
+            <div class="wd-modal-request__control-wrap">
+              <select id="wdEditSrcCoin" class="wd-modal-request__select" aria-label="Cryptocurrency"></select>
+              <i class="bi bi-caret-down-fill wd-modal-request__caret" aria-hidden="true"></i>
+            </div>
+          </div>
+          <div class="wd-modal-request__field wd-edit-crypto-only">
+            <label class="wd-modal-request__label" for="wdEditSrcNetwork">Network</label>
+            <div class="wd-modal-request__control-wrap">
+              <select id="wdEditSrcNetwork" class="wd-modal-request__select" aria-label="Network"></select>
+              <i class="bi bi-caret-down-fill wd-modal-request__caret" aria-hidden="true"></i>
+            </div>
+          </div>
+          <div class="wd-modal-request__field wd-edit-crypto-only">
+            <label class="wd-modal-request__label" for="wdEditSrcWallet">Wallet address</label>
+            <input type="text" class="wd-modal-request__input" id="wdEditSrcWallet" placeholder="Enter wallet address" autocomplete="off" />
+          </div>
+          <div class="wd-modal-request__field wd-edit-bank-only" style="display: none">
+            <label class="wd-modal-request__label" for="wdEditSrcBankName">Bank name</label>
+            <input type="text" class="wd-modal-request__input" id="wdEditSrcBankName" placeholder="Bank name" />
+          </div>
+          <div class="wd-modal-request__field wd-edit-bank-only" style="display: none">
+            <label class="wd-modal-request__label" for="wdEditSrcBankAcct">IBAN / Account number</label>
+            <input type="text" class="wd-modal-request__input" id="wdEditSrcBankAcct" placeholder="Account / IBAN" />
+          </div>
+          <div class="wd-modal-request__field wd-edit-surepay-only" style="display: none">
+            <label class="wd-modal-request__label" for="wdEditSrcSpProvider">Provider / label</label>
+            <input type="text" class="wd-modal-request__input" id="wdEditSrcSpProvider" placeholder="SurePay provider" />
+          </div>
+          <div class="wd-modal-request__field wd-edit-surepay-only" style="display: none">
+            <label class="wd-modal-request__label" for="wdEditSrcSpAcct">Account / reference</label>
+            <input type="text" class="wd-modal-request__input" id="wdEditSrcSpAcct" placeholder="Reference" />
+          </div>
+          <div id="wdEditSrcMsg" class="wd-modal-request__msg" role="alert"></div>
+          <button type="submit" class="btn wd-modal-request__submit w-100" id="wdEditSrcSubmit">Save changes</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Confirm delete -->
+<div class="modal fade" id="wdModalDeleteSource" tabindex="-1" aria-hidden="true" data-bs-backdrop="static">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-wd-confirm">
+    <div class="modal-content wd-modal wd-modal--confirm">
+      <div class="wd-modal-confirm__body">
+        <div class="wd-modal-confirm__icon" aria-hidden="true">
+          <i class="bi bi-trash3"></i>
+        </div>
+        <h5 class="wd-modal-confirm__title">Remove withdrawal account?</h5>
+        <p class="wd-modal-confirm__text">This will remove the account from your saved withdrawal methods. You can add it again later.</p>
+        <p class="wd-modal-confirm__target" id="wdDeleteSrcLabel"></p>
+        <p class="wd-modal-confirm__err" id="wdDeleteErr" role="alert" hidden></p>
+        <div class="wd-modal-confirm__actions">
+          <button type="button" class="btn wd-modal-confirm__btn wd-modal-confirm__btn--ghost" data-bs-dismiss="modal">Cancel</button>
+          <button type="button" class="btn wd-modal-confirm__btn wd-modal-confirm__btn--danger" id="wdDeleteConfirmBtn">Remove account</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

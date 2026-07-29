@@ -1,0 +1,144 @@
+<div id="ai-setting-view-root" class="ai-fig">
+  <div class="ai-settings-container">
+    <!-- Balance + asset tabs (matches ai-settings.html) -->
+    <div class="settings-section">
+      <div class="balance-section">
+        <div class="balance-info">
+          <div class="balance-label">Total Balance</div>
+          <div class="balance-amount" id="aiCurrentBalance">$0.00</div>
+          <div class="balance-tp">
+            <select id="aiTpSelect" class="ai-tp-select" aria-label="Select trading account"></select>
+          </div>
+          <div class="balance-note" id="aiBalanceNote" hidden></div>
+        </div>
+        <div class="asset-tabs" role="tablist" aria-label="Asset class">
+          <button type="button" class="asset-tab active" data-market="forex" data-popover="forex" aria-selected="true">
+            <span class="asset-icon" aria-hidden="true">📊</span>
+            <span>Forex</span>
+          </button>
+          <button type="button" class="asset-tab" data-market="crypto" data-popover="crypto" aria-selected="false">
+            <span class="asset-icon" aria-hidden="true">₿</span>
+            <span>Crypto</span>
+          </button>
+          <button type="button" class="asset-tab locked" data-market="commodities" data-popover="commodities" aria-selected="false">
+            <span class="asset-icon" aria-hidden="true">🔒</span>
+            <span>Commodities</span>
+          </button>
+          <button type="button" class="asset-tab locked" data-market="stocks" data-popover="stocks" aria-selected="false">
+            <span class="asset-icon" aria-hidden="true">🔒</span>
+            <span>Stock</span>
+          </button>
+          <button type="button" class="asset-tab locked" data-market="indices" data-popover="indices" aria-selected="false">
+            <span class="asset-icon" aria-hidden="true">🔒</span>
+            <span>Indices</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Range + Risk two-column section -->
+    <div class="range-section">
+      <div class="range-item">
+        <h3 class="range-title">Range</h3>
+        <div class="range-slider-container ai-range-wrap">
+          <div class="range-value-badge" id="aiRangeTooltip">$0</div>
+          <input type="range" id="aiRange" class="range-slider ai-range-input" min="0" max="0" step="1" value="0" />
+          <div class="range-labels ai-range-scale">
+            <span id="aiRangeMinLabel" class="range-label-min ai-range-scale__min">0</span>
+            <span class="ai-range-scale__value-wrap ai-range-scale__value-wrap--redundant" aria-hidden="true">
+              <span id="aiRangeValueLabel" class="ai-range-scale__value">$0</span>
+            </span>
+            <span id="aiRangeMaxLabel" class="range-label-max">$0</span>
+          </div>
+          <p id="aiRangeZeroMsg" class="ai-range-balance-hint" role="status" aria-live="polite" aria-hidden="true"></p>
+        </div>
+      </div>
+      <div class="range-item">
+        <h3 class="range-title">Risk</h3>
+        <div class="risk-buttons" role="group" aria-label="Risk level">
+          <button type="button" class="risk-btn active" data-risk="low">Low</button>
+          <button type="button" class="risk-btn" data-risk="medium">Medium</button>
+          <button type="button" class="risk-btn" data-risk="high">High</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Potential monthly profit -->
+    <div class="profit-section">
+      <div class="profit-card">
+        <h3 class="profit-title">Potential Monthly Profit</h3>
+        <div class="profit-value" id="aiProfitBadge">upto 5%($0.00) with low Risk</div>
+        <div class="profit-success" id="aiSuccessRate">
+          Success rate <span class="success-rate ai-profit-rate__pct">77.1% – 88.1%</span>
+        </div>
+        <p id="aiProfitDetail" class="profit-detail" aria-live="polite"></p>
+        <p id="aiMarginText" class="profit-margin"></p>
+      </div>
+    </div>
+
+    <!-- Terms + live events + invest -->
+    <div class="terms-section">
+      <div class="live-events-block">
+        <label class="ai-radio-option">
+          <span class="ai-radio-circle" aria-hidden="true">
+            <span class="ai-radio-dot"></span>
+          </span>
+          <span class="ai-radio-text">
+            Make 20% + potentially on live events let us know and we will contact you
+          </span>
+          <input type="radio" name="ai_live_events" value="yes" class="ai-radio-native" tabindex="-1" />
+        </label>
+      </div>
+      <div class="terms-checkbox">
+        <input type="checkbox" id="aiTerms" class="checkbox-input" />
+        <label for="aiTerms" class="terms-text">
+          I agree to the <a href="#" class="terms-link" id="aiTermsLink">terms</a> and understand the risks involved.
+        </label>
+      </div>
+      <button type="button" class="invest-btn" id="aiInvestBtn">Invest</button>
+    </div>
+    <div id="aiInvestMsg" class="invest-msg" aria-live="polite"></div>
+
+    <!-- Asset info modal (same structure as ai-settings.html #assetModal) -->
+    <div class="modal-overlay" id="aiMarketModal" aria-hidden="true">
+      <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="aiMarketModalTitleText">
+        <div class="modal-title" id="aiMarketModalTitle">
+          <span class="modal-icon" id="aiMarketModalIcon" aria-hidden="true">📊</span>
+          <span id="aiMarketModalTitleText">Forex</span>
+        </div>
+        <div class="modal-body" id="aiMarketPopoverBody"></div>
+        <div class="modal-buttons">
+          <button type="button" class="modal-btn modal-btn-primary" id="aiMarketPopoverOk">OK</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Terms modal (same overlay + content pattern as reference) -->
+    <div class="modal-overlay" id="aiTermsModal" aria-hidden="true">
+      <div class="modal-content modal-content--terms" role="dialog" aria-modal="true" aria-labelledby="aiTermsModalHeading">
+        <button type="button" class="modal-close" id="aiTermsClose" aria-label="Close">&times;</button>
+        <div class="modal-title" id="aiTermsModalHeading">Trading involves substantial risks</div>
+        <div class="modal-body ai-terms-scroll">
+          <p>
+            It is important to understand and acknowledge the following before engaging in any trading activities:
+          </p>
+          <h6>Financial Loss Risk</h6>
+          <p>
+            Trading in financial markets carries the risk of financial loss. Prices of assets can fluctuate, and it is possible to lose some or all of your invested capital.
+          </p>
+          <h6>Market Volatility Risk</h6>
+          <p>
+            Financial markets are subject to volatility, which can result in rapid and significant price movements.
+          </p>
+          <h6>Liquidity Risk</h6>
+          <p>
+            Some markets may experience limited liquidity, which can impact the execution of trades.
+          </p>
+          <p>
+            Trading involves risks, and you should only trade with funds that you can afford to lose.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

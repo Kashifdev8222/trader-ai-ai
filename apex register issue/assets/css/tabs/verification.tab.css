@@ -1,0 +1,1668 @@
+/* Verification tab — aligned with Dashboard / Deposit / Withdraw (--cz-* tokens) */
+
+.view-verification {
+  background: var(--cz-content);
+  --ver-purple: var(--cz-accent);
+  --ver-purple-deep: var(--cz-accent-hover);
+  --ver-purple-soft: var(--cz-accent-hover-bg);
+  --ver-purple-hover: var(--cz-accent-hover);
+  --ver-border: var(--cz-rule);
+  --ver-panel: var(--cz-card);
+}
+
+#mainContent .view-verification {
+  padding-bottom: 1.5rem;
+  padding-top: 0.25rem;
+}
+
+.ver-fig {
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+  padding: 0 0 1.75rem;
+  font-family: 'Space Grotesk', 'Poppins', system-ui, sans-serif;
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--cz-text);
+  -webkit-font-smoothing: antialiased;
+}
+
+.ver-panel--hidden {
+  display: none !important;
+}
+
+/* Card shell — same language as Withdraw / Deposit panels */
+.ver-panel {
+  background: var(--cz-page);
+  border: 1px solid var(--cz-rule);
+  border-radius: 12px;
+  padding: 20px 20px 22px;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06);
+  min-width: 0;
+}
+
+/* —— Upload header (icon + title | Doc History) —— */
+.ver-upload-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 22px;
+}
+
+.ver-upload-title-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.ver-upload-title-icon {
+  font-size: 1.65rem;
+  color: var(--ver-purple);
+  line-height: 1;
+}
+
+.ver-upload-heading {
+  font-family: inherit;
+  font-size: clamp(1.125rem, 2.5vw, 1.5rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin: 0;
+  color: var(--cz-text);
+}
+
+/* Doc History — gradient CTA (matches Withdraw View All) */
+.ver-btn-doc-history {
+  padding: 10px 18px;
+  border-radius: 8px;
+  border: none;
+  background: linear-gradient(135deg, var(--cz-accent) 0%, var(--cz-accent-bright) 100%);
+  color: #fff;
+  font-weight: 600;
+  font-size: 14px;
+  font-family: inherit;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(114, 90, 238, 0.18);
+  transition: filter 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.ver-btn-doc-history:hover {
+  filter: brightness(1.03);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(114, 90, 238, 0.28);
+  color: #fff;
+}
+
+/* —— Category + radios —— */
+.ver-cat-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px 28px;
+  margin-bottom: 20px;
+}
+
+.ver-dropdown-wrap {
+  position: relative;
+}
+
+.ver-cat-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  border-radius: 8px;
+  border: none;
+  background: linear-gradient(135deg, var(--cz-accent) 0%, var(--cz-accent-bright) 100%);
+  color: #fff;
+  font-weight: 600;
+  font-size: 14px;
+  font-family: inherit;
+  cursor: pointer;
+  min-width: 200px;
+  justify-content: space-between;
+  box-shadow: 0 2px 8px rgba(114, 90, 238, 0.18);
+  transition: filter 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.ver-cat-pill:hover {
+  filter: brightness(1.03);
+  box-shadow: 0 4px 14px rgba(114, 90, 238, 0.25);
+}
+
+.ver-cat-pill__check {
+  font-size: 1.05rem;
+  opacity: 0.95;
+}
+
+.ver-cat-pill__caret {
+  font-size: 0.85rem;
+  opacity: 0.9;
+}
+
+.ver-cat-menu {
+  position: absolute;
+  z-index: 40;
+  top: calc(100% + 8px);
+  left: 0;
+  min-width: 260px;
+  margin: 0;
+  padding: 10px;
+  list-style: none;
+  background: var(--cz-page);
+  border-radius: 12px;
+  box-shadow: 0 12px 32px rgba(39, 47, 55, 0.12);
+  border: 1px solid var(--cz-rule);
+}
+
+.ver-cat-menu li + li {
+  margin-top: 4px;
+}
+
+.ver-cat-option {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 14px;
+  width: 100%;
+  text-align: left;
+  padding: 12px 14px;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  font-size: 14px;
+  font-family: inherit;
+  cursor: pointer;
+  color: var(--cz-accent);
+  font-weight: 500;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.ver-cat-option__label {
+  flex: 1;
+  min-width: 0;
+  color: inherit;
+}
+
+.ver-cat-option__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 32px;
+  height: 22px;
+  color: var(--ver-purple);
+}
+
+/* Match visual weight to 32×22 SVG row: BI glyphs sit smaller in the em box than our SVGs. */
+.ver-cat-option__icon--bi {
+  font-size: 22px;
+  line-height: 1;
+}
+
+.ver-cat-option__icon--bi .bi {
+  display: block;
+  line-height: 1;
+}
+
+/* Same on-screen box for every custom SVG (viewBox scales uniformly). */
+.ver-cat-option__icon .ver-cat-svg {
+  width: 32px;
+  height: 22px;
+  display: block;
+  flex-shrink: 0;
+}
+
+.ver-cat-option--active .ver-cat-option__icon {
+  color: var(--cz-accent);
+}
+
+.ver-cat-svg {
+  display: block;
+}
+
+#verCatLabel {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+#verCatLabel .ver-cat-pill__label {
+  color: #fff;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#verCatLabel .ver-cat-pill__label--solo {
+  font-weight: 500;
+}
+
+.ver-cat-pill__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 32px;
+  height: 22px;
+  color: #fff;
+}
+
+.ver-cat-pill__icon--bi {
+  font-size: 22px;
+  line-height: 1;
+}
+
+.ver-cat-pill__icon--bi .bi {
+  display: block;
+  line-height: 1;
+}
+
+.ver-cat-pill__icon .ver-cat-svg {
+  width: 32px;
+  height: 22px;
+  display: block;
+}
+
+.ver-cat-option--active {
+  background: var(--cz-accent-selected-bg);
+  color: var(--cz-accent-hover);
+  font-weight: 600;
+}
+
+.ver-radio-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 24px;
+  align-items: center;
+}
+
+.ver-radio {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  color: var(--cz-text-dim);
+  font-weight: 500;
+  font-family: inherit;
+}
+
+.ver-radio:has(input:checked) {
+  color: var(--cz-text);
+}
+
+.ver-radio input {
+  accent-color: var(--ver-purple);
+  width: 1.05rem;
+  height: 1.05rem;
+}
+
+/* ID Front/Back: which side is this single-file upload */
+.ver-id-side-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 20px;
+  margin: 0 0 18px;
+  padding: 12px 16px;
+  background: var(--cz-accent-hover-bg);
+  border-radius: 12px;
+  border: 1px solid var(--cz-rule);
+}
+
+.ver-id-side-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--cz-text-dim);
+  margin-right: 4px;
+  font-family: inherit;
+}
+
+.ver-radio--side {
+  margin: 0;
+}
+
+.ver-address-card {
+  background: var(--cz-subtle);
+  border-radius: 12px;
+  padding: 16px 18px;
+  margin-bottom: 16px;
+  border: 1px solid var(--cz-rule);
+}
+
+.ver-address-title {
+  font-weight: 700;
+  font-size: 13px;
+  margin-bottom: 12px;
+  color: var(--cz-text);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.ver-address-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px 16px;
+}
+
+.ver-field--full {
+  grid-column: 1 / -1;
+}
+
+/* Only the direct label text wrapper is block; nested .ver-hint stays inline (single-line "Description (optional)"). */
+.ver-field > span {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--cz-text-dim);
+  margin-bottom: 4px;
+  font-family: inherit;
+}
+
+.ver-hint {
+  font-weight: 400;
+  color: var(--cz-text-dim);
+}
+
+.ver-input,
+.ver-textarea,
+.ver-select {
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid var(--cz-field-border);
+  padding: 10px 12px;
+  font-size: 14px;
+  font-family: inherit;
+  background: var(--cz-page);
+  color: var(--cz-text);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.ver-input:focus,
+.ver-textarea:focus,
+.ver-select:focus {
+  outline: none;
+  border-color: var(--cz-accent-border-soft);
+  box-shadow: 0 0 0 3px var(--cz-accent-hover-bg);
+}
+
+.ver-optional-meta {
+  display: grid;
+  grid-template-columns: 1fr minmax(0, 200px);
+  gap: 12px 16px;
+  margin-bottom: 16px;
+}
+
+/* —— Drop zones —— */
+.ver-drop-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 18px;
+  margin-bottom: 22px;
+}
+
+.ver-drop-grid--split {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.ver-drop-zone-wrap--half {
+  min-width: 0;
+}
+
+.ver-drop-zone {
+  position: relative;
+  border: 2px dashed var(--cz-accent-border-soft);
+  border-radius: 12px;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 20px 16px 14px;
+  background: linear-gradient(180deg, var(--cz-page) 0%, var(--cz-subtle) 100%);
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.ver-drop-zone:hover,
+.ver-drop-zone:focus-visible {
+  background: var(--cz-accent-hover-bg);
+  border-color: var(--cz-accent-border-soft);
+  outline: none;
+}
+
+.ver-drop-zone.dragover {
+  background: var(--cz-accent-selected-bg);
+  border-color: var(--cz-accent);
+}
+
+.ver-file-input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+}
+
+.ver-drop-icon {
+  font-size: 2.25rem;
+  color: var(--ver-purple);
+  margin-bottom: 10px;
+}
+
+.ver-drop-label {
+  font-weight: 600;
+  color: var(--cz-text);
+  text-align: center;
+  font-size: 15px;
+  font-family: inherit;
+}
+
+.ver-drop-filename {
+  font-size: 0.78rem;
+  color: var(--ver-purple);
+  margin-top: 6px;
+  word-break: break-all;
+  text-align: center;
+}
+
+.ver-drop-note {
+  margin: 14px 0 0;
+  font-size: 12px;
+  line-height: 1.45;
+  color: var(--cz-text-dim);
+  text-align: center;
+  max-width: 100%;
+  font-family: inherit;
+}
+
+/* —— Preview (Figma: dashed box + sample ID) —— */
+.ver-preview-box {
+  margin-top: 12px;
+  border: 1px solid var(--cz-rule);
+  border-radius: 12px;
+  padding: 12px;
+  background: var(--cz-page);
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+}
+
+.ver-preview-caption {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--cz-text);
+  margin-bottom: 10px;
+  letter-spacing: 0.02em;
+  text-align: center;
+  font-family: inherit;
+}
+
+.ver-preview-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 132px;
+  max-height: 240px;
+  overflow: hidden;
+  border-radius: 8px;
+  background: var(--cz-subtle);
+}
+
+.ver-preview-img {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  max-height: 220px;
+  height: auto;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.ver-preview-img--default {
+  opacity: 1;
+}
+
+.ver-actions {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.ver-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 28px;
+  border-radius: 8px;
+  border: none;
+  background: linear-gradient(135deg, var(--cz-accent) 0%, var(--cz-accent-bright) 100%);
+  color: #fff;
+  font-weight: 600;
+  font-size: 14px;
+  font-family: inherit;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(114, 90, 238, 0.18);
+  transition: filter 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.ver-btn-primary:hover:not(:disabled) {
+  filter: brightness(1.03);
+  box-shadow: 0 4px 16px rgba(114, 90, 238, 0.28);
+  transform: translateY(-1px);
+  color: #fff;
+}
+
+.ver-btn-primary:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.ver-alert {
+  margin-top: 14px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  font-size: 0.9rem;
+}
+
+.ver-alert--error {
+  background: #fef2f2;
+  color: #b91c1c;
+  border: 1px solid #fecaca;
+}
+
+.ver-alert--ok {
+  background: #ecfdf5;
+  color: #047857;
+  border: 1px solid #a7f3d0;
+}
+
+/* —— Doc History —— */
+.ver-history-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.ver-history-heading {
+  font-family: inherit;
+  font-size: clamp(1.125rem, 2.5vw, 1.5rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin: 0;
+  color: var(--cz-text);
+}
+
+.ver-btn-upload-back {
+  padding: 10px 18px;
+  border-radius: 8px;
+  border: 1px solid var(--cz-accent-border-soft);
+  background: var(--cz-page);
+  color: var(--cz-accent);
+  font-weight: 600;
+  font-size: 14px;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.ver-btn-upload-back:hover {
+  background: var(--cz-accent-hover-bg);
+  border-color: var(--cz-accent-border);
+  color: var(--cz-accent-hover);
+}
+
+.ver-history-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 16px;
+  align-items: stretch;
+  margin-bottom: 18px;
+}
+
+.ver-history-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: stretch;
+}
+
+.ver-search-wrap {
+  flex: 1 1 280px;
+  min-width: 0;
+  isolation: isolate;
+}
+
+/* Inner box: height tracks the input only so the absolute icon never centers in a stretched outer wrap */
+.ver-search-field {
+  position: relative;
+  width: 100%;
+  min-width: 0;
+}
+
+.ver-history-toolbar .ver-search-wrap {
+  flex: 1 1 320px;
+  /* Row toolbar: do not stretch to sibling height (filters column); else top:50% on the icon misses the input */
+  align-self: flex-start;
+}
+
+/* Icon anchored to .ver-search-field (same height as input), not the flex-sized .ver-search-wrap */
+.ver-history-toolbar .ver-search-field .bi-search {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--cz-text-dim);
+  pointer-events: none;
+  font-size: 1rem;
+  z-index: 1;
+  line-height: 1;
+  display: block;
+}
+
+.ver-search-input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px 14px 12px 42px;
+  border-radius: 10px;
+  border: 1px solid var(--cz-rule);
+  font-size: 14px;
+  font-family: inherit;
+  background: var(--cz-subtle);
+  color: var(--cz-text);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.ver-search-input::placeholder {
+  color: var(--cz-text-dim);
+  font-size: 14px;
+  opacity: 1;
+}
+
+.ver-search-input:focus {
+  outline: none;
+  border-color: var(--cz-accent-border-soft);
+  box-shadow: 0 0 0 3px var(--cz-accent-hover-bg);
+  background: var(--cz-page);
+}
+
+.ver-filter-wrap {
+  position: relative;
+  min-width: 190px;
+}
+
+.ver-history-filters .ver-filter-wrap {
+  min-width: 200px;
+}
+
+.ver-select {
+  appearance: none;
+  padding-right: 36px;
+  cursor: pointer;
+  background: var(--cz-page);
+  border: 1px solid var(--cz-field-border);
+  border-radius: 8px;
+  color: var(--cz-text);
+  font-size: 14px;
+  font-family: inherit;
+  font-weight: 500;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.ver-select:focus {
+  outline: none;
+  border-color: var(--cz-accent-border-soft);
+  box-shadow: 0 0 0 3px var(--cz-accent-hover-bg);
+}
+
+/* Doc History filters: option row spacing (supported on many Chromium builds + Firefox). */
+.ver-history-filters .ver-select option {
+  padding: 0.55em 1rem;
+  line-height: 1.45;
+}
+
+.ver-select-caret {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: var(--cz-text-dim);
+}
+
+/* Doc History — uses same tokens as the rest of the tab (--ver-border, --ver-panel, --ver-purple, --ver-purple-soft) */
+.ver-table-shell {
+  background: var(--cz-page);
+  border-radius: 12px;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid var(--cz-rule);
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06);
+  min-width: 0;
+  max-width: 100%;
+}
+
+/* Horizontal scroll on small viewports (#mainContent is overflow-x: hidden — scroll lives here) */
+.ver-table-scroll {
+  overflow-x: auto;
+  overflow-y: visible;
+  -webkit-overflow-scrolling: touch;
+  width: 100%;
+  max-width: 100%;
+  overscroll-behavior-x: contain;
+  /* Remove touch-action: pan-x that blocks vertical scroll */
+  touch-action: pan-y pinch-zoom; /* Allow vertical scroll + pinch */
+}
+
+.ver-table {
+  width: 100%;
+  min-width: 760px;
+  border-collapse: collapse;
+  font-size: 13px;
+  font-family: inherit;
+  table-layout: fixed;
+}
+
+.ver-table thead {
+  background: var(--cz-subtle);
+}
+
+.ver-table th {
+  padding: 16px 25px;
+  font-weight: 600;
+  color: var(--cz-accent);
+  white-space: nowrap;
+  font-family: inherit;
+  font-size: 12px;
+  line-height: 1.3;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  border-bottom: 1px solid var(--cz-rule);
+}
+
+.ver-th--doc {
+  text-align: left;
+  min-width: 200px;
+  width: 36%;
+  max-width: 320px;
+}
+
+.ver-th--uploaded,
+.ver-th--status {
+  text-align: center;
+}
+
+/* With table-layout:fixed, narrow min-width tables squeeze % columns; floors keep Uploaded/Status readable (see withdraw .wd-table comment). */
+.ver-th--uploaded,
+.ver-td--uploaded {
+  min-width: 176px;
+}
+
+.ver-th--status,
+.ver-td--status {
+  min-width: 112px;
+}
+
+.ver-th--action {
+  text-align: right;
+}
+
+.ver-history-row {
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.ver-history-row:last-child {
+  border-bottom: none;
+}
+
+.ver-table .ver-td {
+  padding: 14px 25px;
+  vertical-align: middle;
+  font-family: inherit;
+  color: var(--cz-text-dim);
+}
+
+.view-verification .ver-table tbody tr:hover .ver-td {
+  background: var(--cz-subtle);
+  color: var(--cz-text);
+}
+
+.ver-td--doc {
+  text-align: left;
+  min-width: 200px;
+  width: 38%;
+  overflow: hidden;
+}
+
+.ver-td--uploaded,
+.ver-td--status {
+  text-align: center;
+  white-space: nowrap;
+}
+
+.ver-td--status .ver-badge {
+  display: inline-block;
+}
+
+.ver-td--action {
+  text-align: right;
+  white-space: nowrap;
+  min-width: 4.5rem;
+}
+
+.ver-doc-cell {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.ver-thumb-wrap {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ver-thumb, .ver-thumb.ver-thumb--empty {
+    width: 90px;
+    height: 60px;
+    border-radius: 10px;
+    border: 1.5px solid var(--cz-accent-border-soft);
+    box-sizing: border-box;
+    flex-shrink: 0;
+    padding: 10px;
+}
+.ver-thumb {
+  object-fit: cover;
+  background: var(--cz-accent-hover-bg);
+  display: block;
+}
+
+.ver-thumb.ver-thumb--empty {
+  background: var(--cz-accent-hover-bg);
+}
+
+/* Table cell label: short text from JS; long copy in Bootstrap tooltip (.ver-doc-name--tip) */
+.ver-doc-name {
+  font-weight: 600;
+  color: var(--cz-accent);
+  font-size: 13px;
+  font-family: inherit;
+  line-height: 1.35;
+  flex: 1 1 auto;
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
+  word-break: break-word;
+}
+
+.ver-doc-name--tip {
+  cursor: help;
+  text-decoration: underline;
+  text-decoration-style: dotted;
+  text-underline-offset: 3px;
+  text-decoration-color: rgba(114, 90, 238, 0.45);
+}
+
+/* Bootstrap tooltip — full document description (table cell) */
+.tooltip.ver-doc-name-tooltip {
+  z-index: 1085;
+}
+
+.tooltip.ver-doc-name-tooltip .tooltip-inner {
+  max-width: min(20rem, calc(100vw - 1.5rem));
+  max-height: min(46vh, 260px);
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  text-align: left;
+  white-space: pre-wrap;
+  word-break: break-word;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.5;
+  font-family: inherit;
+  padding: 10px 12px;
+  border-radius: 10px;
+  color: white;
+  background: black;
+  border: 1px solid var(--cz-rule);
+  box-shadow: 0 10px 28px rgba(15, 23, 42, 0.12);
+}
+
+/* Card-style tooltip: hide default arrow (arrow + border rarely line up cleanly). */
+.tooltip.ver-doc-name-tooltip .tooltip-arrow {
+  display: none;
+}
+
+.ver-td--uploaded {
+  color: var(--cz-text);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.ver-action-dash {
+  color: var(--cz-text-dim);
+  font-weight: 500;
+}
+
+.ver-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: capitalize;
+  font-family: inherit;
+  line-height: 1.25;
+  border: 1px solid transparent;
+}
+
+.ver-badge--approved {
+  background: #dcfce7;
+  color: #16a34a;
+  border-color: transparent;
+}
+
+.ver-badge--pending {
+  background: #fed7aa;
+  color: #d97706;
+  border-color: transparent;
+}
+
+.ver-badge--rejected {
+  background: #fee2e2;
+  color: #dc2626;
+  border-color: transparent;
+}
+
+.ver-loading {
+  text-align: center;
+  color: var(--cz-text-dim);
+  padding: 28px !important;
+}
+
+.ver-table-footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  padding: 14px 16px;
+  background: var(--cz-page);
+  border-top: 1px solid var(--cz-rule);
+}
+
+/* Pagination moved outside the white table card (Figma) */
+.ver-pager-wrap {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  overflow-x: visible;
+}
+
+.ver-pager-wrap--outside {
+  margin-top: 14px;
+  padding: 4px 2px 8px;
+  justify-content: flex-end;
+  min-width: 0;
+  max-width: 100%;
+}
+
+.ver-pager {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  max-width: 100%;
+  width: 100%;
+  justify-content: flex-end;
+}
+
+.ver-pager .ver-dash-pagination.dash-pagination {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  min-width: 0;
+  max-width: 100%;
+}
+
+@media (max-width: 767.98px) {
+    .ver-table-scroll {
+    overflow-x: auto;
+    overflow-y: visible;
+    -webkit-overflow-scrolling: touch;
+    touch-action: auto; /* Let the browser handle both directions naturally */
+  }
+  
+  /* Ensure table cells don't prevent scroll propagation */
+  .ver-table td,
+  .ver-table th {
+    touch-action: auto;
+  }
+  .view-verification .ver-pager-wrap,
+  .view-verification .ver-pager-wrap--outside {
+    justify-content: center;
+    overflow-x: visible;
+  }
+  .view-verification .ver-pager {
+    flex-wrap: wrap;
+    justify-content: center;
+    row-gap: 8px;
+  }
+  .view-verification .ver-pager .ver-dash-pagination.dash-pagination {
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    row-gap: 8px;
+  }
+  .view-verification .ver-pager .dash-pagination .dash-page-btn {
+    min-width: 26px;
+    height: 28px;
+    padding: 0 5px;
+    font-size: 12px;
+  }
+  .view-verification .ver-pager .dash-pagination .dash-page-ellipsis {
+    padding: 0 2px;
+    font-size: 0.85rem;
+  }
+}
+
+.ver-page-btn {
+  min-width: 36px;
+  height: 36px;
+  border-radius: 5px;
+  border: 1px solid var(--cz-rule);
+  background: var(--cp-panel-soft);
+  color: var(--cz-text-dim);
+  font-weight: 600;
+  font-size: 13px;
+  font-family: inherit;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease;
+}
+
+.ver-page-btn:hover:not(:disabled):not(.ver-page-btn--nav):not(.ver-page-btn--active) {
+  border-color: var(--cz-accent-border-soft);
+  background: var(--cz-accent-hover-bg);
+  color: var(--cz-accent);
+}
+
+.ver-page-btn--active {
+  background: linear-gradient(135deg, var(--cz-accent) 0%, var(--cz-accent-bright) 100%) !important;
+  border-color: var(--cz-accent) !important;
+  color: #fff !important;
+}
+
+.ver-page-btn--active:hover:not(:disabled),
+.ver-page-btn--active:focus-visible {
+  filter: brightness(1.03);
+  color: #fff !important;
+}
+
+/* Prev / Next: gradient (Withdraw pager) */
+.ver-page-btn--nav {
+  background: linear-gradient(135deg, var(--cz-accent) 0%, var(--cz-accent-bright) 100%) !important;
+  border: none !important;
+  color: #fff !important;
+  padding: 0 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ver-page-btn--nav:hover:not(:disabled) {
+  filter: brightness(1.03);
+  color: #fff !important;
+}
+
+.ver-page-btn--nav:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  background: linear-gradient(135deg, var(--cz-accent) 0%, var(--cz-accent-bright) 100%) !important;
+  color: #fff !important;
+}
+
+.ver-page-nav-ico {
+  font-size: 1.15rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.ver-page-btn:disabled:not(.ver-page-btn--nav) {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.ver-link-action {
+  background: none;
+  border: none;
+  color: var(--ver-purple);
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: underline;
+  padding: 0;
+  font-size: inherit;
+}
+
+.ver-link-action--doc {
+  color: var(--cz-accent);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.ver-link-action--doc:hover {
+  color: var(--cz-accent-hover);
+}
+
+.ver-pager .ver-page-ellipsis {
+  padding: 0 3px;
+  color: var(--cz-text-dim);
+  font-weight: 600;
+  user-select: none;
+  flex-shrink: 0;
+}
+
+/* —— Doc view modal (same-page preview) —— */
+body.cp-dashboard-body .modal .modal-content.ver-doc-modal {
+  font-family: 'Space Grotesk', 'Poppins', system-ui, sans-serif;
+  color: var(--cz-text);
+  -webkit-font-smoothing: antialiased;
+}
+
+.ver-doc-modal {
+  border-radius: 16px;
+  border: 1px solid var(--cz-rule);
+  overflow: hidden;
+  box-shadow: 0 16px 48px rgba(15, 23, 42, 0.12);
+  background: var(--cz-page);
+}
+
+/* Single-line title: full text stays in DOM for screen readers / aria-labelledby; visual truncates with ellipsis. */
+#verDocViewModal .modal-header {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 0;
+}
+
+#verDocViewModal .modal-header .btn-close {
+  flex-shrink: 0;
+}
+
+.ver-doc-modal-title {
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 1.05rem;
+  line-height: 1.35;
+  color: var(--cz-text);
+  flex: 1 1 auto;
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  word-break: normal;
+  overflow-wrap: normal;
+  padding-right: 0.35rem;
+  margin-bottom: 0;
+}
+
+@media (max-width: 992px) {
+  .ver-doc-modal-title {
+    font-size: 0.95rem;
+    line-height: 1.3;
+  }
+}
+
+.ver-doc-modal-body {
+  padding: 0 1rem 1.25rem !important;
+  min-height: 120px;
+  background: var(--cz-subtle);
+  margin-top:10px;
+}
+
+.ver-doc-modal-img {
+  max-width: 100%;
+  max-height: min(75vh, 720px);
+  width: auto;
+  height: auto;
+  margin: 0 auto;
+  display: block;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.ver-doc-modal-frame {
+  width: 100%;
+  min-height: min(75vh, 720px);
+  border: 0;
+  border-radius: 8px;
+  background: var(--cz-page);
+}
+
+.ver-doc-modal-fallback {
+  padding: 1rem;
+  text-align: center;
+}
+
+/* =============================================================================
+   Responsive overrides — one cascade, max-width descending (desktop → phone).
+   Breakpoints: 768px tablet · 640px narrow · 576px mobile · 480px small · 375px tiny
+   ============================================================================= */
+
+@media (max-width: 768px) {
+  .ver-panel {
+    padding: 18px 16px 20px;
+    border-radius: 12px;
+  }
+
+  .ver-upload-title-row {
+    justify-content: flex-start;
+  }
+
+  .ver-btn-doc-history {
+    min-height: 44px;
+  }
+
+  .ver-cat-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .ver-drop-grid--split {
+    grid-template-columns: 1fr;
+  }
+
+  /* Keep a wide floor so fixed columns never overlap; horizontal scroll is preferable */
+  .ver-table {
+    min-width: 760px;
+  }
+
+  .ver-table th,
+  .ver-table .ver-td {
+    padding: 12px 25px;
+  }
+
+  .ver-table th {
+    font-size: 11px;
+  }
+
+  .ver-doc-name {
+    font-size: 12px;
+  }
+
+  .ver-thumb,
+  .ver-thumb.ver-thumb--empty {
+    width: 42px;
+    height: 42px;
+  }
+
+  .ver-doc-cell {
+    gap: 10px;
+  }
+
+  .ver-pager-wrap--outside {
+    justify-content: center;
+    overflow-x: visible;
+    padding-left: 6px;
+    padding-right: 6px;
+  }
+
+  .ver-pager-wrap--outside .ver-pager {
+    flex-wrap: nowrap;
+    justify-content: center;
+    width: 100%;
+    max-width: 100%;
+    gap: 5px;
+    padding: 4px 2px 8px;
+    box-sizing: border-box;
+  }
+
+  .ver-pager-wrap--outside .ver-page-btn,
+  .ver-pager-wrap--outside .ver-page-ellipsis {
+    flex-shrink: 0;
+  }
+
+  .ver-pager-wrap--outside .ver-page-btn {
+    min-width: 32px;
+    height: 32px;
+    font-size: 12px;
+    border-radius: 6px;
+    padding: 0 2px;
+    box-sizing: border-box;
+  }
+
+  .ver-pager-wrap--outside .ver-page-btn--nav {
+    padding: 0 7px;
+    min-width: 32px;
+  }
+
+  .ver-pager-wrap--outside .ver-page-nav-ico {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .ver-pager-wrap--outside .ver-pager {
+    gap: 3px;
+  }
+
+  .ver-pager-wrap--outside .ver-page-btn {
+    min-width: 28px;
+    height: 30px;
+    font-size: 11px;
+    border-radius: 5px;
+  }
+
+  .ver-pager-wrap--outside .ver-page-btn--nav {
+    min-width: 28px;
+    padding: 0 5px;
+  }
+
+  .ver-pager-wrap--outside .ver-page-nav-ico {
+    font-size: 0.95rem;
+  }
+
+  .ver-pager-wrap--outside .ver-page-ellipsis {
+    padding: 0 1px;
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 640px) {
+  .ver-address-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ver-optional-meta {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 576px) {
+  .ver-history-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .ver-history-heading {
+    font-size: 1.125rem;
+    line-height: 1.3;
+  }
+
+  .ver-btn-upload-back {
+    width: 100%;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+  }
+
+  .ver-history-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .ver-history-filters {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+  }
+
+  .ver-history-toolbar .ver-search-wrap {
+    flex: 0 0 auto;
+    align-self: stretch;
+    width: 100%;
+    min-width: 0;
+  }
+
+  .ver-search-input {
+    min-height: 44px;
+    font-size: 16px;
+    line-height: 1.35;
+  }
+
+  .ver-search-input::placeholder {
+    font-size: 16px;
+    line-height: 1.35;
+    opacity: 1;
+  }
+
+  .ver-filter-wrap {
+    min-width: 0;
+    width: 100%;
+  }
+
+  .ver-select {
+    min-height: 44px;
+    width: 100%;
+    font-size: 1rem;
+    box-sizing: border-box;
+  }
+
+  .tooltip.ver-doc-name-tooltip .tooltip-inner {
+    max-width: calc(100vw - 1.5rem);
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  #verDocViewModal .modal-dialog {
+    margin: 0.5rem auto;
+    max-width: calc(100% - 1rem);
+    max-height: calc(100vh - 1rem);
+  }
+
+  #verDocViewModal .modal-content {
+    max-height: calc(100vh - 1rem);
+    display: flex;
+    flex-direction: column;
+  }
+
+  #verDocViewModal .modal-body.ver-doc-modal-body {
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    min-height: 0;
+    flex: 1 1 auto;
+  }
+
+  .ver-doc-modal-img {
+    max-height: min(62vh, 480px);
+  }
+
+  .ver-doc-modal-frame {
+    min-height: min(58vh, 420px);
+  }
+}
+
+@media (max-width: 480px) {
+  .ver-upload-heading {
+    font-size: 1.125rem;
+  }
+  
+  .ver-cat-pill{
+      width:100%;
+  }
+  #verCatLabel {
+    justify-content: left;
+}
+
+  .ver-upload-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+  .ver-btn-doc-history {
+    font-size: 13px;
+    padding: 9px 14px;
+  }
+
+  .ver-table {
+    min-width: 720px;
+  }
+
+  .ver-actions {
+    width: 100%;
+  }
+
+  .ver-btn-primary {
+    width: 100%;
+    justify-content: center;
+    box-sizing: border-box;
+    min-height: 48px;
+  }
+}
+
+@media (max-width: 375px) {
+  .ver-upload-heading {
+    font-size: 1rem;
+  }
+
+  .ver-btn-doc-history {
+    font-size: 12px;
+    padding: 8px 12px;
+  }
+
+  .ver-radio {
+    font-size: 13px;
+  }
+
+  .ver-drop-label {
+    font-size: 14px !important;
+  }
+
+  .ver-preview-caption {
+    font-size: 14px !important;
+  }
+}
+/* Add these rules to style date inputs consistently */
+
+.ver-input[type="date"] {
+  position: relative;
+  display: block;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+/* Style the date input icon - works across browsers */
+.ver-input[type="date"]::-webkit-calendar-picker-indicator {
+  background: var(--ver-purple);
+  color: white;
+  border-radius: 6px;
+  padding: 4px 8px;
+  cursor: pointer;
+  opacity: 0.8;
+  transition: opacity 0.2s ease, background 0.2s ease;
+}
+
+.ver-input[type="date"]::-webkit-calendar-picker-indicator:hover {
+  opacity: 1;
+  background: var(--ver-purple-hover);
+}
+
+/* For Firefox and other browsers that don't support -webkit-calendar-picker-indicator */
+.ver-input[type="date"] {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%237B61FF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='4' width='18' height='18' rx='2' ry='2'%3E%3C/rect%3E%3Cline x1='16' y1='2' x2='16' y2='6'%3E%3C/line%3E%3Cline x1='8' y1='2' x2='8' y2='6'%3E%3C/line%3E%3Cline x1='3' y1='10' x2='21' y2='10'%3E%3C/line%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 18px;
+  padding-right: 38px;
+}
+
+/* Remove the custom background when the browser's native picker is visible */
+.ver-input[type="date"]::-webkit-calendar-picker-indicator {
+  position: absolute;
+  right: 0;
+  width: 38px;
+  height: 100%;
+  background: transparent;
+  opacity: 0;
+  cursor: pointer;
+}
+
+/* Ensure the custom background shows through */
+.ver-input[type="date"] {
+  background-color: var(--cz-page);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%237B61FF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='4' width='18' height='18' rx='2' ry='2'%3E%3C/rect%3E%3Cline x1='16' y1='2' x2='16' y2='6'%3E%3C/line%3E%3Cline x1='8' y1='2' x2='8' y2='6'%3E%3C/line%3E%3Cline x1='3' y1='10' x2='21' y2='10'%3E%3C/line%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 18px;
+}
+
+.ver-input[type="date"]::-webkit-calendar-picker-indicator {
+  background: transparent;
+  opacity: 1;
+  width: 38px;
+  height: 100%;
+  position: absolute;
+  right: 0;
+  top: 0;
+  cursor: pointer;
+  z-index: 1;
+}
+
+/* Also style the date picker dialog on supported browsers */
+.ver-input[type="date"]::-webkit-datetime-edit {
+  padding: 0 4px;
+}
+
+.ver-input[type="date"]::-webkit-datetime-edit-fields-wrapper {
+  padding: 0;
+}
+
+.ver-input[type="date"]::-webkit-datetime-edit-text {
+  padding: 0 2px;
+}
+
+.ver-input[type="date"]::-webkit-datetime-edit-month-field,
+.ver-input[type="date"]::-webkit-datetime-edit-day-field,
+.ver-input[type="date"]::-webkit-datetime-edit-year-field {
+  padding: 0 2px;
+  border-radius: 3px;
+}
+
+.ver-input[type="date"]::-webkit-datetime-edit-month-field:focus,
+.ver-input[type="date"]::-webkit-datetime-edit-day-field:focus,
+.ver-input[type="date"]::-webkit-datetime-edit-year-field:focus {
+  background: var(--ver-purple-soft);
+  color: var(--cz-text);
+}
+
+/* For iOS/Safari to show a proper date picker */
+@supports (-webkit-touch-callout: none) {
+  .ver-input[type="date"] {
+    font-size: 16px; /* Prevents zoom on focus in iOS */
+  }
+  
+  .ver-input[type="date"]::-webkit-calendar-picker-indicator {
+    opacity: 0;
+    width: 100%;
+  }
+  
+  /* Add custom calendar icon for iOS */
+  .ver-input[type="date"] {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%237B61FF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='4' width='18' height='18' rx='2' ry='2'%3E%3C/rect%3E%3Cline x1='16' y1='2' x2='16' y2='6'%3E%3C/line%3E%3Cline x1='8' y1='2' x2='8' y2='6'%3E%3C/line%3E%3Cline x1='3' y1='10' x2='21' y2='10'%3E%3C/line%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 18px;
+  }
+}

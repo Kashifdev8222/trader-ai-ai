@@ -1,0 +1,91 @@
+/* Reset password — plain white page + compact card (no shadow, minimal spacing) */
+
+.auth-body--resetpass {
+  background: #fff !important;
+}
+
+.auth-page-stage--resetpass {
+  min-height: auto;
+  padding: 16px 14px !important;
+}
+
+.portal-shell--resetpass {
+  max-width: min(400px, calc(100vw - 28px));
+}
+
+.auth-card--resetpass {
+  background: #fff !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  padding: 20px 18px 18px !important;
+}
+
+.auth-card--resetpass::before {
+  display: none !important;
+}
+
+.rp-brand {
+  text-align: center;
+  margin-bottom: 12px;
+}
+
+.rp-brand img {
+  max-width: min(130px, 60vw);
+  max-height: 44px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
+.rp-title {
+  margin: 0 0 4px;
+  font-size: 1.25rem;
+  font-weight: 700;
+  text-align: center;
+  color: var(--color-text, #272f37);
+  font-family: 'Space Grotesk', 'Poppins', system-ui, sans-serif;
+}
+
+.rp-sub {
+  margin: 0 0 14px;
+  font-size: 0.875rem;
+  line-height: 1.4;
+  text-align: center;
+  color: var(--color-text-muted, #64748b);
+}
+
+.auth-card--resetpass .rp-form .mb-2 {
+  margin-bottom: 0.55rem !important;
+}
+
+.auth-card--resetpass .auth-form.compact .mb-2,
+.auth-card--resetpass .auth-form.compact .mb-3 {
+  margin-bottom: 0.55rem !important;
+}
+
+.auth-card--resetpass .portal-form .auth-label {
+  margin-bottom: 2px;
+  font-size: 14px;
+}
+
+.auth-card--resetpass .auth-form-feedback {
+  margin-top: 0.35rem;
+  margin-bottom: 0.5rem;
+  min-height: 1rem;
+}
+
+.auth-card--resetpass .auth-form-submit {
+  margin-top: 0.35rem;
+  margin-bottom: 0;
+}
+
+.rp-login-link {
+  margin: 10px 0 0;
+  font-size: 0.875rem;
+}
+.portal-shell.portal-shell--resetpass {
+    border: 1px solid #6346e8;
+    padding: 25px 20px;
+    border-radius: 25px;
+}

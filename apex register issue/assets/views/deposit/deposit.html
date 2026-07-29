@@ -1,0 +1,225 @@
+<div id="depositMainWrap" class="dep-fig">
+  <div class="dep-fig-grid">
+    <div class="dep-fig-left">
+      <div class="dep-fig-toprow">
+        <div>
+          <div class="dep-fig-label">Total Balance</div>
+          <div id="depTotal" class="dep-fig-balance">$0.00</div>
+        </div>
+        <div class="dep-fig-tp-wrap" id="depTpWrap">
+          <div class="dep-fig-label">Select Tp Number</div>
+          <div class="dep-fig-tp-inner">
+            <select id="depTpSelect" class="dep-select" aria-label="Select a Tp number" aria-invalid="false" aria-describedby="depTpError">
+              <option value="" selected disabled>Select a Tp number</option>
+            </select>
+            <i class="bi bi-caret-down-fill dep-fig-tp-caret dep-caret" aria-hidden="true"></i>
+          </div>
+          <div id="depTpError" class="dep-tp-error" role="alert" hidden>Please select a TP number.</div>
+        </div>
+      </div>
+
+      <div class="dep-fig-method-section">
+        <button type="button" id="depMethodBtn" class="dep-fig-method-btn dep-fig-method-bar" aria-expanded="false" aria-haspopup="listbox">
+          <span id="depMethodBtnLabel">Select Deposit with</span>
+          <i class="bi bi-chevron-down dep-fig-method-bar-chevron" aria-hidden="true"></i>
+        </button>
+        <div id="depMethodMenu" class="dep-fig-method-menu" role="listbox" hidden></div>
+      </div>
+
+      <div class="dep-fig-form-card">
+        <div id="depPanelEmpty" class="dep-fig-panel dep-fig-panel-empty is-visible">
+          Select a deposit method above.
+        </div>
+
+        <div id="depPanelCard" class="dep-fig-panel">
+          <div class="dep-fig-card-brands" aria-hidden="true">
+            <img src="https://c20900-backend.dataconect.com/api/v1/signal-market-product/asset/documents/download/05b3ee22-5849-4ff6-8f27-fb119236ca4b/SignalMarketProductAsset_DisplayImage_1757330636486.png" alt="Visa" />
+            <span class="dep-fig-card-brands-caption">Mastercard</span>
+          </div>
+          <div class="dep-fig-field-label">Deposit with</div>
+          <input type="text" id="depCardAmountMirror" class="dep-fig-input" readonly placeholder="Select an amount below" aria-label="Selected deposit amount" />
+          <div id="depCardChips" class="dep-fig-chips" role="group" aria-label="Quick amounts"></div>
+        </div>
+
+        <div id="depPanelLemux" class="dep-fig-panel">
+          <div class="dep-fig-brand-head">
+            <img src="/assets/images/LemuxionPay.jpg" alt="LEMUXION" />
+            <strong class="dep-fig-brand-name">LEMUXION</strong>
+          </div>
+          <form id="lemuxForm" autocomplete="off">
+            <div class="dep-fig-form-grid">
+              <div class="dep-fig-field-full d-none">
+                <label class="form-label fw-semibold">Account <span class="text-danger">*</span></label>
+                <div class="dep-select-wrap2">
+                  <select id="lemuxTp" class="form-select portal-input" aria-hidden="true" tabindex="-1">
+                    <option value="" selected disabled>Select a Tp number</option>
+                  </select>
+                  <i class="bi bi-caret-down-fill dep-caret" aria-hidden="true"></i>
+                </div>
+                <div class="invalid small text-danger" style="display:none">Field is required</div>
+              </div>
+
+              <div>
+                <label class="form-label fw-semibold">Currency <span class="text-danger">*</span></label>
+                <div class="dep-select-wrap2 mb-0">
+                  <select id="lemuxCurrency" class="form-select portal-input">
+                    <option value="" selected disabled>Select Currency</option>
+                  </select>
+                  <i class="bi bi-caret-down-fill dep-caret" aria-hidden="true"></i>
+                </div>
+                <div class="invalid small text-danger" style="display:none">Field is required</div>
+              </div>
+              <div>
+                <label class="form-label fw-semibold">Amount <span class="text-danger">*</span></label>
+                <input id="lemuxAmount" type="number" min="1" step="any" class="form-control portal-input" placeholder="Amount" />
+                <div class="invalid small text-danger" style="display:none">Field is required</div>
+              </div>
+
+              <div class="dep-fig-field-full">
+                <label class="form-label fw-semibold">Description <span class="text-danger">*</span></label>
+                <input id="lemuxDesc" type="text" class="form-control portal-input" placeholder="Description" autocomplete="off" aria-required="true" />
+                <div class="invalid small text-danger" style="display:none">Field is required</div>
+              </div>
+
+              <div>
+                <label class="form-label fw-semibold">Country <span class="text-danger">*</span></label>
+                <div class="dep-select-wrap2 mb-0">
+                  <select id="lemuxCountry" class="form-select portal-input">
+                    <option value="" selected disabled>Select Country</option>
+                  </select>
+                  <i class="bi bi-caret-down-fill dep-caret" aria-hidden="true"></i>
+                </div>
+                <div class="invalid small text-danger" style="display:none">Field is required</div>
+              </div>
+              <div>
+                <label class="form-label fw-semibold">State <span class="text-danger">*</span></label>
+                <div class="dep-select-wrap2 mb-0">
+                  <select id="lemuxState" class="form-select portal-input">
+                    <option value="" selected disabled>Select State</option>
+                  </select>
+                  <i class="bi bi-caret-down-fill dep-caret" aria-hidden="true"></i>
+                </div>
+                <div class="invalid small text-danger" style="display:none">Field is required</div>
+              </div>
+
+              <div class="dep-fig-field-full">
+                <label class="form-label fw-semibold">City <span class="text-danger">*</span></label>
+                <div class="dep-select-wrap2 mb-0">
+                  <select id="lemuxCitySel" class="form-select portal-input">
+                    <option value="" selected disabled>Select City</option>
+                  </select>
+                  <i class="bi bi-caret-down-fill dep-caret" aria-hidden="true"></i>
+                </div>
+                <input id="lemuxCity" type="text" class="form-control portal-input mt-2" placeholder="City" style="display:none" />
+                <div class="invalid small text-danger" style="display:none">Field is required</div>
+              </div>
+
+              <div>
+                <label class="form-label fw-semibold">Street name <span class="text-danger">*</span></label>
+                <input id="lemuxStreet" type="text" class="form-control portal-input" placeholder="Street name" />
+                <div class="invalid small text-danger" style="display:none">Field is required</div>
+              </div>
+              <div>
+                <label class="form-label fw-semibold">Zip <span class="text-danger">*</span></label>
+                <input id="lemuxZip" type="text" class="form-control portal-input" placeholder="Zip" />
+                <div class="invalid small text-danger" style="display:none">Field is required</div>
+              </div>
+            </div>
+
+            <button type="submit" id="lemuxSubmit" class="btn portal-btn w-100 mt-3">
+              <span class="btn-text">Submit</span>
+              <span class="spinner-border spinner-border-sm ms-2 d-none" role="status" aria-hidden="true"></span>
+            </button>
+            <div id="lemuxMsg" class="small mt-2 text-center"></div>
+          </form>
+        </div>
+
+        <div id="depPanelCrypto" class="dep-fig-panel">
+          <div class="dep-fig-brand-head">
+            <img src="/assets/images/CryptoPay.jpg" alt="CRYPTOPAY" />
+            <strong class="dep-fig-brand-name">CRYPTOPAY</strong>
+          </div>
+          <form id="cryptoPayForm" autocomplete="off">
+            <div class="dep-fig-form-grid">
+              <div class="dep-fig-field-full d-none">
+                <label class="form-label fw-semibold">Account <span class="text-danger">*</span></label>
+                <div class="dep-select-wrap w-100">
+                  <select id="cpTpSelect" class="form-select dep-select" aria-required="true">
+                    <option value="" selected disabled>Select a Tp number</option>
+                  </select>
+                  <i class="bi bi-caret-down-fill dep-caret" aria-hidden="true"></i>
+                </div>
+                <div class="invalid-hint" id="cpTpHint">Field is required</div>
+              </div>
+
+              <div>
+                <label class="form-label fw-semibold">Fiat Currencies <span class="text-danger">*</span></label>
+                <div class="dep-select-wrap w-100">
+                  <select id="cpFiat" class="form-select dep-select" aria-required="true"></select>
+                  <i class="bi bi-caret-down-fill dep-caret" aria-hidden="true"></i>
+                </div>
+                <div class="invalid-hint" id="cpFiatHint">Field is required</div>
+              </div>
+              <div>
+                <label class="form-label fw-semibold">Amount <span class="text-danger">*</span></label>
+                <input id="cpAmount" type="number" min="0" step="any" class="form-control portal-input" value="" placeholder="Amount" aria-required="true" />
+                <div class="invalid-hint" id="cpAmountHint">Enter a valid amount greater than 0</div>
+              </div>
+
+              <div>
+                <label class="form-label fw-semibold">Crypto <span class="text-danger">*</span></label>
+                <div class="dep-select-wrap w-100">
+                  <select id="cpCrypto" class="form-select dep-select" aria-required="true">
+                    <option value="" selected disabled>Select Crypto</option>
+                  </select>
+                  <i class="bi bi-caret-down-fill dep-caret" aria-hidden="true"></i>
+                </div>
+                <div class="invalid-hint" id="cpCryptoHint">Field is required</div>
+              </div>
+
+              <div class="dep-fig-field-full">
+                <label class="form-label fw-semibold">Network <span class="text-danger" id="cpNetworkRequiredStar">*</span></label>
+                <div class="dep-select-wrap w-100">
+                  <select id="cpNetwork" class="form-select dep-select" aria-required="true">
+                    <option value="" selected disabled>Network</option>
+                  </select>
+                  <i class="bi bi-caret-down-fill dep-caret" aria-hidden="true"></i>
+                </div>
+                <div class="invalid-hint" id="cpNetworkHint">Field is required</div>
+              </div>
+            </div>
+
+            <button type="submit" class="btn portal-btn w-100 mt-3">Submit</button>
+            <div id="cpMsg" class="small mt-2 text-center"></div>
+          </form>
+          <!--<div class="dep-fig-note" role="note">-->
+          <!--  <i class="bi bi-exclamation-circle me-1"></i>-->
+          <!--  When sending funds with crypto please send us the transaction ID-->
+          <!--</div>-->
+        </div>
+      </div>
+    </div>
+
+    <aside class="dep-fig-side" aria-labelledby="depSideTitle">
+      <div class="dep-fig-side-head">
+        <h2 id="depSideTitle" class="dep-fig-side-title">Deposit History</h2>
+        <button type="button" id="depViewAllTx" class="dep-fig-viewall">View All</button>
+      </div>
+      <div class="dep-fig-side-table-wrap">
+        <table class="dep-fig-side-table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Created On</th>
+              <th>Time</th>
+              <th>Amount</th>
+            </tr>
+          </thead>
+          <tbody id="depTxPreviewBody">
+            <tr><td colspan="4" class="dep-fig-side-empty">Loading…</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </aside>
+  </div>
+</div>

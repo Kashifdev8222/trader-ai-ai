@@ -1,0 +1,40 @@
+{
+    "time": "2026-06-02T08:37:04+00:00",
+    "source": "session_ping",
+    "email": "a@a.com",
+    "http_status": 200,
+    "ok": true,
+    "request": {
+        "method": "POST",
+        "path": "clientzone/account/last-visit",
+        "payload": {
+            "userDevice": {
+                "appVersion": "0.0.28",
+                "uniqueId": "3128448908",
+                "device": "Android",
+                "useragent": "Mozilla/5.0 (Linux; Android 8.0.0; SM-G955U Build/R16NW) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Mobile Safari/537.36",
+                "type": "android",
+                "brand": "Chrome",
+                "systemVersion": "8.0.0",
+                "token": ""
+            }
+        }
+    },
+    "response_body": {
+        "id": "04829bae-084f-4336-b591-5715af5eee49",
+        "lastVisit": "2026-06-02T08:37:05.677Z"
+    },
+    "server": {
+        "HTTP_USER_AGENT": "Mozilla/5.0 (Linux; Android 8.0.0; SM-G955U Build/R16NW) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Mobile Safari/537.36",
+        "HTTP_SEC_CH_UA_PLATFORM": "Android",
+        "REMOTE_ADDR": "62.192.125.2"
+    },
+    "client_overrides": {
+        "device": "Android",
+        "useragent": "Mozilla/5.0 (Linux; Android 8.0.0; SM-G955U Build/R16NW) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Mobile Safari/537.36",
+        "type": "android",
+        "brand": "Chrome",
+        "systemVersion": "8.0.0"
+    },
+    "crm_account_probe": null
+}

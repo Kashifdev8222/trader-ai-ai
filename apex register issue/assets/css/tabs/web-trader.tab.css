@@ -1,0 +1,339 @@
+/* ===== WEB TRADER TAB — direct partner iframe + compact toolbar ===== */
+
+.view[data-view='web-trader'] {
+  padding: 0;
+  min-height: calc(100vh - var(--cp-header-height, 72px));
+}
+
+.wt-root {
+  position: relative;
+  min-height: calc(100vh - var(--cp-header-height, 72px));
+  font-family: 'Space Grotesk', 'Poppins', system-ui, sans-serif;
+  background: var(--cp-bg, #fff);
+}
+
+.wt-toolbar-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.wt-toolbar-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--cp-muted, #64748b);
+  letter-spacing: 0.02em;
+}
+
+.wt-toolbar-select {
+  min-width: min(280px, 100%);
+  max-width: min(420px, 100%);
+  padding: 9px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--cp-border, #e2e8f0);
+  background: var(--cp-panel, #fff);
+  font-family: inherit;
+  font-size: 0.875rem;
+  color: var(--cp-text, #272f37);
+}
+
+.wt-toolbar-error {
+  color: #dc2626;
+  font-size: 0.8125rem;
+  margin: 0 0 8px;
+  width: 100%;
+}
+
+.wt-toolbar-btn--accent {
+  background: var(--cp-panel-soft, #f1f5f9) !important;
+  border: 1px solid var(--cp-border, #e2e8f0) !important;
+  color: var(--cp-text, #272f37) !important;
+}
+
+.wt-toolbar-btn--accent:hover {
+  background: var(--cz-accent-hover-bg, rgba(114, 90, 238, 0.08)) !important;
+  border-color: var(--cz-accent-border-soft, rgba(114, 90, 238, 0.28)) !important;
+}
+
+/* ----- Gate: dark chart background + centered card (Figma-style) ----- */
+.wt-gate {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - var(--cp-header-height, 72px));
+  overflow: hidden;
+}
+
+.wt-gate-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, #0d1421 0%, #0a1628 40%, #0b1220 100%),
+    radial-gradient(ellipse 80% 50% at 50% 20%, rgba(26, 115, 232, 0.12), transparent 55%),
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 48px,
+      rgba(255, 255, 255, 0.03) 48px,
+      rgba(255, 255, 255, 0.03) 49px
+    ),
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 32px,
+      rgba(255, 255, 255, 0.025) 32px,
+      rgba(255, 255, 255, 0.025) 33px
+    );
+}
+
+/* Soft “chart” glow lines */
+.wt-gate-bg::before {
+  content: '';
+  position: absolute;
+  inset: 18% 8% 22%;
+  background: linear-gradient(
+    105deg,
+    transparent 0%,
+    rgba(251, 146, 60, 0.35) 25%,
+    transparent 45%,
+    rgba(52, 211, 153, 0.25) 60%,
+    transparent 80%,
+    rgba(59, 130, 246, 0.3) 100%
+  );
+  opacity: 0.45;
+  filter: blur(28px);
+  pointer-events: none;
+}
+
+.wt-gate-inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  padding: 12px 0 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.wt-gate-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+  padding-bottom: 8px;
+}
+
+.wt-gate-center {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 0;
+  padding: 12px 0 32px;
+}
+
+.wt-gate-brand {
+  display: flex;
+  align-items: center;
+  line-height: 0;
+}
+
+/* Wordmark asset — no duplicate title text next to it */
+.wt-gate-logo {
+  display: block;
+  height: 36px;
+  width: auto;
+  max-width: min(220px, 50vw);
+  object-fit: contain;
+  border-radius: 6px;
+}
+
+.wt-gate-lang {
+  color: #cbd5e1;
+  font-size: 0.9rem;
+  font-weight: 500;
+  padding: 6px 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.wt-gate-card {
+  width: 100%;
+  max-width: 420px;
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 28px 26px 26px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+  box-sizing: border-box;
+}
+
+.wt-gate-label {
+  display: block;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #334155;
+  margin-bottom: 10px;
+}
+
+.wt-gate-req {
+  color: #ef4444;
+  font-weight: 700;
+  margin-right: 2px;
+}
+
+.wt-select {
+  width: 100%;
+  appearance: none;
+  -webkit-appearance: none;
+  font-family: inherit;
+  font-size: 0.9375rem;
+  color: #0f172a;
+  padding: 12px 40px 12px 14px;
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  background-color: #fff;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%2394a3b8' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10l-5 5z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  cursor: pointer;
+  margin-bottom: 8px;
+}
+
+.wt-select:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.wt-gate-error {
+  font-size: 0.8125rem;
+  color: #dc2626;
+  margin: 0 0 12px;
+  min-height: 1.25em;
+}
+
+/* Same purple CTA system as dashboard (--cz-accent from dashboard.css) */
+.wt-continue-btn {
+  width: 100%;
+  margin-top: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 20px;
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: inherit;
+  color: #fff;
+  background: var(--cz-accent, #725aee);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.05s;
+}
+
+.wt-continue-btn:hover:not(:disabled) {
+  background: var(--cz-accent-hover, #5f48d8);
+}
+
+.wt-continue-btn:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.wt-continue-arrow {
+  font-size: 1.1em;
+  line-height: 1;
+}
+
+/* ----- Trader embed (full area) ----- */
+.wt-trader {
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - var(--cp-header-height, 72px));
+  padding: 8px 0 10px;
+  box-sizing: border-box;
+}
+
+.wt-trader-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: flex-end;
+  justify-content: flex-start;
+  margin-bottom: 10px;
+}
+
+.wt-trader-toolbar--minimal {
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.wt-toolbar-btn {
+  font-family: inherit;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: 1px solid var(--cp-border, #e2e8f0);
+  background: var(--cp-panel, #fff);
+  color: var(--cp-text, #272f37);
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.wt-toolbar-btn:hover {
+  background: var(--cz-accent-hover-bg, rgba(114, 90, 238, 0.08));
+  border-color: var(--cz-accent-border-soft, rgba(114, 90, 238, 0.28));
+}
+
+.wt-toolbar-btn--primary {
+  border-color: var(--cz-accent, #725aee);
+  background: var(--cz-accent, #725aee);
+  color: #fff;
+}
+
+.wt-toolbar-btn--primary:hover {
+  background: var(--cz-accent-hover, #5f48d8);
+  border-color: var(--cz-accent-hover, #5f48d8);
+}
+
+.wt-embed-hint {
+  font-size: 0.78rem;
+  line-height: 1.45;
+  color: var(--cp-muted, #64748b);
+  margin: 0 0 8px;
+  max-width: 52rem;
+  margin-left: auto;
+  text-align: right;
+}
+
+.wt-frame-wrap {
+  flex: 1;
+  min-height: min(calc(100vh - var(--cp-header-height, 72px) - 56px), 900px);
+  width: 100%;
+  border-radius: 18px;
+  border: 1px solid var(--cp-primary, #7b61ff);
+  overflow: hidden;
+  background: #000;
+}
+
+.wt-frame {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: min(calc(100vh - var(--cp-header-height, 72px) - 56px), 900px);
+  border: 0;
+}
+
+.wt-status {
+  font-size: 0.8rem;
+  color: var(--cp-muted, #64748b);
+  margin-top: 6px;
+  min-height: 1.2em;
+}

@@ -1,0 +1,43 @@
+
+# Clean URLs — auth, dashboard, legacy redirects
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # Optional: redirect old bookmark /dashboard.php to /dashboard
+  RewriteCond %{THE_REQUEST} \s/+dashboard\.php[\s?]
+  RewriteRule ^dashboard\.php$ /dashboard [R=301,L]
+
+  # Skip real files and directories
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
+
+  # Logout
+  RewriteRule ^logout/?$ logout.php [L,QSA]
+
+  # Public help link → login page (chat opens via #help in app.js)
+  RewriteRule ^help/?$ index.php [L,QSA]
+
+  # Password reset form (token + lang query params)
+  RewriteRule ^resetpass/?$ resetpass.php [L,QSA]
+
+  # Auth (also /auth/* aliases like appzone.clientzone.me)
+  RewriteRule ^login/?$ index.php [L,QSA]
+  RewriteRule ^register/?$ index.php [L,QSA]
+  RewriteRule ^forgot-password/?$ index.php [L,QSA]
+  RewriteRule ^auth/login/?$ index.php [L,QSA]
+  RewriteRule ^auth/register/?$ index.php [L,QSA]
+  RewriteRule ^auth/forgot-password/?$ index.php [L,QSA]
+
+  # Dashboard + tab slugs (parsed in lib/cp_routes.php)
+  RewriteRule ^dashboard(?:/.*)?$ dashboard.php [L,QSA]
+</IfModule>
+SetEnv CP_AUTOLOGIN_SECRET "my-super-long-random-secret-123"
+
+# php -- BEGIN cPanel-generated handler, do not edit
+# Set the “ea-php81” package as the default “PHP” programming language.
+<IfModule mime_module>
+  AddHandler application/x-httpd-ea-php81 .php .php8 .phtml
+</IfModule>
+# php -- END cPanel-generated handler, do not edit

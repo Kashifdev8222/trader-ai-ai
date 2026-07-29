@@ -1,0 +1,261 @@
+<div id="supRoot" class="sup-fig">
+  <div class="sup-page-head">
+    <span class="sup-page-head-icon" aria-hidden="true">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M4.913 2.658c2.075-.27 4.19-.408 6.337-.408 2.147 0 4.262.139 6.337.408 1.922.25 3.291 1.861 3.405 3.727a4.403 4.403 0 00-1.032-.211 50.89 50.89 0 00-8.42 0c-2.358.196-4.04 2.19-4.04 4.434v4.286a4.47 4.47 0 002.433 3.984L7.28 21.53A.75.75 0 016 21v-4.03a48.527 48.527 0 01-1.087-.128C2.905 16.58 1.5 14.833 1.5 12.862V6.638c0-1.97 1.405-3.718 3.413-3.979z" fill="currentColor"/>
+        <path d="M15.75 7.5c-1.376 0-2.739.057-4.086.169C10.124 7.797 9 9.103 9 10.609v4.285c0 1.506 1.128 2.814 2.67 2.94 1.243.102 2.5.157 3.768.165l2.087 2.093a.75.75 0 001.28-.53v-2.39l.33-.026c1.542-.126 2.67-1.433 2.67-2.94v-4.286c0-1.505-1.125-2.811-2.664-2.94A49.392 49.392 0 0015.75 7.5z" fill="currentColor"/>
+      </svg>
+    </span>
+    <div class="sup-page-head-text">
+      <h1 class="sup-page-title" id="supPageTitle">Support</h1>
+      <p class="sup-page-lead">Contact us by email, open support tickets, or schedule a meeting with your agent.</p>
+    </div>
+  </div>
+
+  <p class="sup-global-msg d-none" id="supGlobalMsg" role="status"></p>
+
+  <div class="sup-card">
+    <div class="sup-tabs" role="tablist" aria-label="Support sections">
+      <button type="button" class="sup-tab sup-tab--active" role="tab" aria-selected="true" data-sup-tab="contacts" id="supTabContacts">
+        <i class="bi bi-telephone" aria-hidden="true"></i>
+        <span>Contacts</span>
+      </button>
+      <button type="button" class="sup-tab" role="tab" aria-selected="false" data-sup-tab="tickets" id="supTabTickets">
+        <i class="bi bi-chat-dots" aria-hidden="true"></i>
+        <span>Tickets</span>
+      </button>
+      <button type="button" class="sup-tab" role="tab" aria-selected="false" data-sup-tab="meetings" id="supTabMeetings">
+        <i class="bi bi-calendar-event" aria-hidden="true"></i>
+        <span>Schedule a Meeting</span>
+      </button>
+    </div>
+
+    <!-- Contacts -->
+    <div class="sup-panel" id="supPanelContacts" role="tabpanel" aria-labelledby="supPanelContactsHeading">
+      <h2 class="sup-panel-kicker" id="supPanelContactsHeading">Contact</h2>
+      <p class="sup-panel-lead">Opens your email app with our support address. We typically reply within one business day.</p>
+      <a class="sup-contact-card" id="supMailtoCard" href="mailto:support@apexaiexperts.com?subject=Support%20request" aria-label="Email support@apexaiexperts.com">
+        <span class="sup-contact-icon" aria-hidden="true"><i class="bi bi-envelope-fill"></i></span>
+        <span class="sup-contact-label">Email</span>
+      </a>
+    </div>
+
+    <!-- Tickets -->
+    <div class="sup-panel d-none" id="supPanelTickets" role="tabpanel" hidden>
+      <div class="sup-tickets-toolbar">
+        <div class="sup-filter" role="radiogroup" aria-label="Ticket status">
+          <label class="sup-radio">
+            <input type="radio" name="supTicketFilter" value="open" checked />
+            <span>Open Tickets</span>
+          </label>
+          <label class="sup-radio">
+            <input type="radio" name="supTicketFilter" value="closed" />
+            <span>Closed Tickets</span>
+          </label>
+        </div>
+        <button type="button" class="sup-btn-primary" id="supBtnAddTicket">
+          <i class="bi bi-plus-lg" aria-hidden="true"></i>
+          Add New Ticket
+        </button>
+      </div>
+      <div class="sup-tickets-loading d-none" id="supTicketsLoading">Loading tickets…</div>
+      <div class="sup-tickets-empty d-none" id="supTicketsEmpty">No tickets in this view yet.</div>
+      <div class="sup-tickets-list" id="supTicketsList"></div>
+      <nav class="sup-tickets-pager d-none" id="supTicketsPager" aria-label="Ticket pages"></nav>
+    </div>
+
+    <!-- Meetings -->
+    <div class="sup-panel d-none" id="supPanelMeetings" role="tabpanel" hidden>
+      <div class="sup-meet-toolbar">
+        <div class="sup-meet-toolbar-spacer"></div>
+        <button type="button" class="sup-btn-primary sup-btn-schedule" id="supBtnOpenSchedule">
+          <i class="bi bi-plus-lg" aria-hidden="true"></i>
+          Schedule a meeting
+        </button>
+      </div>
+      <div class="sup-meet-loading d-none" id="supMeetLoading">Loading meetings…</div>
+      <div class="sup-meet-empty d-none text-center py-4 text-muted" id="supMeetEmpty">No meetings yet. Schedule one to get started.</div>
+      <div class="sup-meet-table-wrap d-none" id="supMeetTableWrap" role="region" aria-label="Meetings table">
+        <table class="table table-bordered sup-meet-table mb-0">
+          <thead>
+            <tr>
+              <th scope="col" class="text-center">Status</th>
+              <th scope="col">Date created</th>
+              <th scope="col">Description</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody id="supMeetTableBody"></tbody>
+        </table>
+      </div>
+      <nav class="sup-tickets-pager sup-meet-pager d-none" id="supMeetPager" aria-label="Meeting pages"></nav>
+    </div>
+  </div>
+</div>
+
+<!-- Create ticket modal (matches lead/ticket API: category, departmentId, title, userTicketComments) -->
+<div class="modal fade" id="supModalNewTicket" tabindex="-1" aria-labelledby="supModalNewTicketTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
+    <div class="modal-content sup-modal sup-modal--create-ticket">
+      <div class="modal-header border-0">
+        <h5 class="modal-title sup-modal-title" id="supModalNewTicketTitle">Create New Ticket</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="supFormNewTicket">
+          <label class="sup-field">
+              <span>Ticket type</span>
+              <select class="sup-input sup-input--muted" id="supNewCategory" required>
+                <option value="" selected>Select The Ticket Type</option>
+                <option value="Withdrawal">Withdrawal</option>
+                <option value="Deposits">Deposits</option>
+                <option value="Verification">Verification</option>
+                <option value="Accounts">Accounts</option>
+                <option value="Credentials">Credentials</option>
+                <option value="AgentSupport">AgentSupport</option>
+                <option value="Other">Other</option>
+              </select>
+            </label>
+          <label class="sup-field">
+            <span>Department</span>
+            <select class="sup-input sup-input--muted" id="supNewDepartment" required>
+              <option value="">Select A department</option>
+            </select>
+          </label>
+          <label class="sup-field">
+            <span>Title</span>
+            <input type="text" class="sup-input sup-input--muted" id="supNewTitle" required maxlength="200" placeholder="Ticket title" autocomplete="off" />
+          </label>
+          <label class="sup-field">
+            <span>Comment</span>
+            <textarea class="sup-textarea sup-input--muted" id="supNewBody" rows="4" required placeholder="Your comment"></textarea>
+          </label>
+          <p class="sup-modal-hint text-muted small mb-0">Your user ID is sent securely with this request.</p>
+          <div class="d-flex justify-content-end gap-2 align-items-center mt-3 pt-2 border-top border-light">
+            <button type="button" class="btn btn-link text-decoration-none fw-semibold px-2 cancel-button" data-bs-dismiss="modal">Cancel</button>
+            <button type="submit" class="sup-btn-primary sup-btn-submit-ticket" id="supNewSubmit">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Schedule / reschedule meeting -->
+<div class="modal fade" id="supModalSchedule" tabindex="-1" aria-labelledby="supModalScheduleTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-xl modal-dialog-scrollable">
+    <div class="modal-content sup-modal sup-modal--meet">
+      <div class="modal-header border-0 pb-0">
+        <h5 class="modal-title sup-modal-title" id="supModalScheduleTitle">Schedule a meeting with your Agent</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body pt-2">
+        <form id="supFormSchedule" class="sup-schedule-form">
+          <p class="sup-global-msg sup-sched-form-msg d-none mb-3" id="supSchedFormMsg" role="alert" aria-live="polite"></p>
+          <div class="row g-4 align-items-start sup-schedule-layout">
+            <div class="col-12 col-md-5 sup-schedule-calendar-col">
+              <p class="sup-cal-label fw-semibold mb-2">Please choose a date</p>
+              <div class="sup-cal-card">
+                <div class="sup-cal-nav">
+                  <button type="button" class="sup-cal-nav-btn" id="supCalPrevM" aria-label="Previous month"><i class="bi bi-chevron-left"></i></button>
+                  <span class="sup-cal-month" id="supCalMonthLabel"></span>
+                  <button type="button" class="sup-cal-nav-btn" id="supCalNextM" aria-label="Next month"><i class="bi bi-chevron-right"></i></button>
+                </div>
+                <div class="sup-cal-weekdays">
+                  <span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
+                </div>
+                <div class="sup-cal-grid" id="supCalGrid" role="grid"></div>
+              </div>
+            </div>
+            <div class="col-12 col-md-7 sup-schedule-form-col">
+              <p class="sup-selected-date fw-bold mb-3" id="supMeetSelectedLabel">—</p>
+              <div class="row g-3 align-items-end mb-3">
+                <div class="col-md-6">
+                  <label class="sup-field mb-0">
+                    <span>Duration</span>
+                    <select class="sup-input" id="supSchedDuration">
+                      <option value="30">30 minutes</option>
+                      <option value="60" selected>1 hour</option>
+                    </select>
+                  </label>
+                </div>
+                <div class="col-md-6">
+                  <div class="sup-import-row">
+                    <span class="sup-import-row__label">Importance</span>
+                    <div class="sup-import-row__switch">
+                      <div class="form-check form-switch sup-import-switch mb-0">
+                        <input class="form-check-input" type="checkbox" id="supSchedUrgent" />
+                        <label class="form-check-label" for="supSchedUrgent" id="supSchedUrgentLabel">Normal</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <label class="sup-field">
+                <span>Please select meeting time</span>
+                <select class="sup-input" id="supSchedSlot" required>
+                  <option value="">Please Select Meeting Time</option>
+                </select>
+              </label>
+              <label class="sup-field">
+                <span>Title</span>
+                <input type="text" class="sup-input" id="supSchedTitle" required maxlength="200" placeholder="Please enter meeting title here" autocomplete="off" />
+              </label>
+              <label class="sup-field mb-0">
+                <span>Description</span>
+                <textarea class="sup-textarea" id="supSchedDesc" rows="4" required placeholder="Please enter meeting description here"></textarea>
+              </label>
+            </div>
+          </div>
+          <div class="d-flex justify-content-end mt-4 pt-2 border-top">
+            <button type="submit" class="sup-btn-primary sup-btn-submit-navy px-5" id="supSchedSubmit">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="supModalMeetPreview" tabindex="-1" aria-labelledby="supPreviewTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content sup-modal">
+      <div class="modal-header border-0 sup-preview-header">
+        <div class="sup-preview-head-left">
+          <span class="sup-preview-badge" id="supPreviewStatus"></span>
+          <h5 class="modal-title sup-modal-title sup-preview-title mb-0" id="supPreviewTitle"></h5>
+        </div>
+        <button type="button" class="btn-close flex-shrink-0 align-self-start" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body sup-preview-body">
+        <p class="mb-3 sup-preview-text" id="supPreviewDesc"></p>
+        <p class="small text-muted mb-2" id="supPreviewWhen"></p>
+        <p class="mb-0">
+          <span class="text-muted">Meeting importance:</span>
+          <span class="badge sup-badge-imp" id="supPreviewImp"></span>
+        </p>
+      </div>
+      <div class="modal-footer border-0">
+        <button type="button" class="sup-btn-submit-navy" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="supModalMeetCancel" tabindex="-1" aria-labelledby="supModalMeetCancelTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content sup-modal sup-modal--confirm">
+      <div class="modal-header border-0">
+        <h5 class="modal-title sup-modal-title visually-hidden" id="supModalMeetCancelTitle">Confirm</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-center py-4">
+        <div class="sup-confirm-icon mb-3"><i class="bi bi-exclamation-triangle"></i></div>
+        <p class="fw-semibold mb-4">Are you sure you want to cancel this meeting?</p>
+        <div class="d-flex justify-content-center gap-3">
+          <button type="button" class="sup-btn-no" data-bs-dismiss="modal">No</button>
+          <button type="button" class="sup-btn-yes" id="supCancelConfirmYes">Yes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

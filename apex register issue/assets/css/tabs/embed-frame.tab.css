@@ -1,0 +1,139 @@
+/* External embeds: Analysis sub-tabs + Help (full width under header, like Web Trader) */
+
+.view[data-view^="analysis-"],
+.view[data-view="help"] {
+  padding: 0;
+  min-height: calc(100vh - var(--cp-header-height, 72px));
+}
+
+.cp-embed-wrap {
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - var(--cp-header-height, 72px));
+  padding: 6px 0 8px;
+  box-sizing: border-box;
+}
+
+.cp-embed-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+}
+
+.cp-embed-title {
+  font-family: 'Play', system-ui, sans-serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--cz-text, #0f172a);
+}
+
+.cp-embed-external {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--cz-accent, #7b61ff);
+  text-decoration: none;
+}
+
+.cp-embed-external:hover {
+  text-decoration: underline;
+}
+
+.cp-embed-frame-wrap {
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+  border-radius: 18px;
+  border: 1px solid rgba(123, 97, 255, 0.35);
+  overflow: hidden;
+  background: #0f172a;
+}
+
+.cp-embed-frame {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: min(70vh, calc(100vh - var(--cp-header-height, 72px) - 88px));
+  border: 0;
+}
+
+/* Help tab only: beat .cp-embed-frame-wrap dark iframe shell (#0f172a) + readable card */
+.view[data-view="help"] .cp-embed-wrap--help {
+  background: var(--cz-content, #f1f5f9);
+}
+
+.view[data-view="help"] .cp-embed-frame-wrap.cp-embed-frame-wrap--help-launch {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 20px 40px;
+  background: linear-gradient(180deg, #f1f5f9 0%, #e8edf5 100%);
+  border-color: rgba(123, 97, 255, 0.3);
+}
+
+.view[data-view="help"] .cp-help-launch-card {
+  width: 100%;
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 28px 32px 30px;
+  text-align: center;
+  background: #ffffff;
+  color: #0f172a;
+  border-radius: 16px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 10px 40px rgba(15, 23, 42, 0.08);
+  box-sizing: border-box;
+}
+
+.view[data-view="help"] .cp-help-launch__heading {
+  margin: 0 0 14px;
+  font-family: 'Play', system-ui, sans-serif;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #0f172a;
+  letter-spacing: -0.02em;
+}
+
+.view[data-view="help"] .cp-help-launch__lead {
+  margin: 0 0 14px;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: #334155;
+}
+
+.view[data-view="help"] .cp-help-launch__lead strong {
+  color: #0f172a;
+  font-weight: 700;
+}
+
+.view[data-view="help"] .cp-help-launch__open {
+  margin-top: 4px;
+  margin-bottom: 0;
+  padding: 0.65rem 1.75rem;
+  font-weight: 600;
+  border-radius: 12px;
+}
+
+.view[data-view="help"] .cp-help-launch__status {
+  min-height: 1.25rem;
+  margin: 10px 0 0;
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  color: #b45309;
+}
+
+.view[data-view="help"] .cp-help-launch__status:empty {
+  margin: 6px 0 0;
+  min-height: 0;
+}
+
+.view[data-view="help"] .cp-help-launch__hint {
+  margin: 16px 0 0;
+  padding-top: 16px;
+  font-size: 0.875rem;
+  line-height: 1.55;
+  color: #64748b;
+  border-top: 1px solid #f1f5f9;
+}

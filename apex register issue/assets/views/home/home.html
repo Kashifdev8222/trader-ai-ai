@@ -1,0 +1,77 @@
+<div class="dash-home">
+  <!-- Hero: greeting + quick actions (Figma) -->
+  <div class="dash-hero">
+    <div class="dash-hero-text">
+      <h1 class="dash-greeting">Hi, <span id="dashUserName">John Doe</span> !</h1>
+      <p class="dash-subtitle">Welcome Back to your Dashboard.</p>
+    </div>
+    <div class="dash-hero-actions">
+      <button type="button" class="dash-btn-pill" id="homeDepositBtn">
+        <span class="dash-btn-pill-icon" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M12 5v14"/><path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M5 12h14"/></svg>
+      </span>
+        Deposit
+    </button>
+      <button type="button" class="dash-btn-pill" id="homeWithdrawBtn">
+        <span class="dash-btn-pill-icon" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" points="17 8 12 3 7 8"/><line x1="12" x2="12" y1="3" y2="15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </span>
+        Withdraw
+    </button>
+    </div>
+  </div>
+
+  
+
+  <!-- Up to 3 summary cards + sparkline -->
+  <div class="dash-cards-row" id="dashAccountCards" aria-live="polite"></div>
+
+<!-- Account picker (compact) -->
+  <div class="dash-tp-bar">
+    <span class="dash-tp-label">Trading account</span>
+    <div class="home-tp-select" id="homeTpSelect">
+      <button type="button" class="dash-tp-selected" id="homeTpSelected">
+        <span id="homeTpSelectedText">—</span>
+        <i class="bi bi-chevron-down"></i>
+      </button>
+      <div class="dash-tp-dropdown" id="homeTpDropdown"></div>
+        </div>
+      </div>
+  <!-- Recent transactions: card (table only) + pagination outside (Figma) -->
+  <div class="dash-section dash-section--transactions">
+    <div class="dash-panel dash-panel-table">
+      <div class="dash-panel-header">
+        <h2 class="dash-panel-title">Recent Transactions</h2>
+        <button type="button" class="dash-btn-viewall-solid dash-btn-viewall--tx" id="homeTxViewAll">View All</button>
+      </div>
+      <div class="table-responsive dash-table-wrap">
+        <table class="table dash-table mb-0">
+          <thead>
+            <tr>
+              <th scope="col">Date</th>
+              <th scope="col">Transaction ID</th>
+              <th scope="col">Amount</th>
+              <th scope="col">Status</th>
+              <th scope="col">Rejection Reason</th>
+            </tr>
+          </thead>
+          <tbody id="homeTransactionsList"></tbody>
+        </table>
+      </div>
+    </div>
+    <div class="dash-pagination dash-pagination--outside dash-pagination--transactions" id="dashTxPagination" aria-label="Transactions pagination"></div>
+  </div>
+
+  <!-- Latest news: card + pagination outside (Figma) -->
+  <div class="dash-section dash-section--news">
+    <div class="dash-panel dash-panel-news">
+      <div class="dash-panel-header dash-panel-header-news">
+        <h2 class="dash-panel-title dash-panel-title--news" id="homeNewsTitle">Latest News</h2>
+        <button type="button" class="dash-btn-viewall-solid" id="homeNewsMore">View All</button>
+      </div>
+      <div class="dash-news-grid" id="homeNewsList"></div>
+      <div id="homeNewsSentinel" class="dash-news-sentinel" aria-hidden="true"></div>
+    </div>
+    <div class="dash-pagination dash-pagination--news dash-pagination--outside dash-news-pagination--legacy" id="dashNewsPaginationBottom" aria-label="News pagination" hidden></div>
+  </div>
+</div>

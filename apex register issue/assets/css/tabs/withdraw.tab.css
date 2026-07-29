@@ -1,0 +1,1532 @@
+/* Withdraw tab — aligned with Dashboard: --cz-* tokens, grey panels, purple accents */
+
+.view-withdraw {
+  background: var(--cz-content);
+  --wd-purple: var(--cz-accent-bright);
+  --wd-purple-hover: var(--cz-accent-hover);
+  --wd-panel: var(--cz-card);
+}
+
+#mainContent .view-withdraw {
+  padding-bottom: 1.5rem;
+  padding-top: 0.25rem;
+}
+
+.wd-fig {
+  max-width: none;
+  width: 100%;
+  padding: 0 0 1.75rem;
+  font-family: inherit;
+  font-size: 14px;
+  color: var(--cz-text);
+}
+
+/* Left column ≈ one Dashboard account card (home uses 3 equal columns); was 1.15fr/1fr and felt too wide. */
+.wd-fig-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+  gap: 20px;
+  align-items: stretch;
+  margin-bottom: 22px;
+}
+
+.wd-fig-left {
+  min-width: 0;
+}
+
+@media (max-width: 1440px) {
+  .wd-fig-grid {
+    grid-template-columns: minmax(0, 2fr) minmax(0, 2fr);
+}
+}
+
+/* Phones: slightly taller tap targets (layout is already stacked from .wd-actions-row). */
+
+.wd-acc-card {
+  position: relative;
+  background: var(--wd-panel);
+  border: 1px solid var(--cz-card-border);
+  border-radius: 20px;
+  padding: 18px 20px 12px;
+  overflow: hidden;
+  min-height: 160px;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.view-withdraw .wd-acc-card:hover {
+  border-color: var(--cz-accent-border-soft);
+  box-shadow: 0 8px 28px rgba(114, 90, 238, 0.08);
+}
+
+.wd-acc-id {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--cz-accent);
+  font-family: inherit;
+  margin-bottom: 6px;
+  letter-spacing: -0.02em;
+}
+
+.wd-acc-balance {
+  font-size: clamp(1.5rem, 3vw, 1.75rem);
+  font-weight: 700;
+  font-family: inherit;
+  letter-spacing: -0.03em;
+  color: var(--cz-text);
+  font-variant-numeric: tabular-nums;
+  line-height: 1.15;
+}
+
+.wd-acc-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 18px;
+  margin-top: 12px;
+  margin-bottom: 14px; /* same rhythm as Dashboard .dash-acc-meta → .dash-acc-chart */
+  font-size: 14px;
+  color: var(--cz-accent);
+  font-family: inherit;
+}
+
+.wd-pl--neg {
+  color: var(--cz-pl-negative, #dc2626);
+}
+
+.wd-pl--pos {
+  color: #16a34a;
+}
+
+.wd-margin {
+  color: var(--wd-purple);
+}
+
+.wd-margin strong {
+  color: var(--cz-text);
+  font-weight: 600;
+}
+
+/* Sparkline: match Dashboard home `.dash-acc-chart` (56px, radius, no negative margins — those + card overflow:hidden clipped the curve). */
+.wd-acc-chart {
+  height: 56px;
+  width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.wd-acc-chart svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.wd-fig-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  min-height: 100%;
+  min-width: 0;
+}
+
+.wd-fig-right-inner {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Wide 2-column layout: don’t stretch TP select + buttons across the full 2fr column (looked empty / oversized). */
+@media (min-width: 1200px) {
+  .wd-fig-right {
+    align-items: flex-start;
+  }
+
+  .wd-fig-right-inner {
+    max-width: min(100%, 440px);
+  }
+}
+
+.wd-fig-label {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--cz-text-dim);
+  font-family: inherit;
+}
+
+.wd-tp-inner {
+  position: relative;
+}
+
+/* TP select — same as Deposit / Trading account picker */
+.wd-select {
+  width: 100%;
+  border: 1px solid var(--cz-rule);
+  border-radius: 8px;
+  padding: 10px 38px 10px 14px;
+  background: var(--cz-page);
+  color: var(--cz-text);
+  font-weight: 600;
+  font-size: 14px;
+  font-family: inherit;
+  appearance: none;
+  cursor: pointer;
+  box-shadow: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.wd-select:focus {
+  outline: none;
+  border-color: var(--cz-accent-border-soft);
+  box-shadow: 0 0 0 3px var(--cz-accent-hover-bg);
+}
+
+.wd-caret {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.65rem;
+  color: var(--cz-text-dim);
+  pointer-events: none;
+}
+
+/* Stacked actions: each button gets full row width so long labels stay one line (side‑by‑side + equal flex forced wrapping). */
+.wd-actions-row {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: stretch;
+  gap: 10px;
+  margin-top: 8px;
+  width: 100%;
+}
+
+.wd-actions-row .wd-btn {
+  flex: 0 0 auto;
+  width: 100%;
+  justify-content: center;
+  white-space: nowrap;
+}
+
+.wd-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-radius: 8px;
+  padding: 12px 16px;
+  font-weight: 600;
+  font-size: 14px;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease, transform 0.2s ease;
+  line-height: 1.25;
+}
+
+.wd-btn--ghost {
+  background: rgba(114, 90, 238, 0.12);
+  color: var(--cz-accent-hover);
+  border: 1px solid var(--cz-accent-border-soft);
+}
+
+.wd-btn--ghost:hover:not(:disabled) {
+  background: rgba(114, 90, 238, 0.18);
+  border-color: var(--cz-accent-border);
+  color: var(--cz-accent-hover);
+}
+
+.wd-btn--primary {
+  background: linear-gradient(135deg, var(--cz-accent) 0%, var(--cz-accent-bright) 100%);
+  color: #fff;
+  border: none;
+  box-shadow: 0 2px 8px rgba(114, 90, 238, 0.18);
+}
+
+.wd-btn--primary:hover:not(:disabled) {
+  filter: brightness(1.03);
+  box-shadow: 0 4px 16px rgba(114, 90, 238, 0.28);
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+/* Transactions block — mirrors withdraw.html `.transactions-section` (white card + table band) */
+.wd-tx-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.wd-table-panel {
+  min-width: 0;
+  background: var(--cz-page);
+  border: 1px solid var(--cz-rule);
+  border-radius: 12px;
+  padding: 20px 20px 16px;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.view-withdraw .wd-table-panel:hover {
+  border-color: var(--cz-accent-border-soft);
+  box-shadow: 0 4px 18px rgba(114, 90, 238, 0.07);
+}
+
+.wd-table-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 20px;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.wd-table-title {
+  font-size: 16px;
+  font-weight: 700;
+  font-family: inherit;
+  margin: 0;
+  color: var(--cz-text);
+  letter-spacing: -0.02em;
+}
+
+/* Reference `.view-all-btn` — solid accent CTA */
+.wd-view-all {
+  border-radius: 6px;
+  padding: 8px 16px;
+  border: none;
+  background: linear-gradient(135deg, var(--cz-accent) 0%, var(--cz-accent-bright) 100%);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(114, 90, 238, 0.15);
+  transition: filter 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.wd-view-all:hover {
+  filter: brightness(1.03);
+  color: #fff;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(114, 90, 238, 0.22);
+}
+
+.wd-table-scroll {
+  overflow-x: auto;
+  overflow-y: visible;
+  -webkit-overflow-scrolling: touch;
+  margin: 0;
+  padding: 0 0 8px;
+  scrollbar-gutter: stable;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  /* Remove touch-action: pan-x which was blocking vertical scroll */
+  touch-action: pan-y pinch-zoom; /* Allow vertical scroll + pinch */
+}
+
+/*
+ * Narrow viewports: fixed % columns collapse on top of each other without a floor width.
+ * Enforce a minimum table width so the row scrolls horizontally instead of overlapping.
+ */
+.wd-table {
+  width: 100%;
+  min-width: 760px;
+  margin: 0;
+  font-size: 13px;
+  border-collapse: collapse;
+  table-layout: fixed;
+  font-family: inherit;
+}
+
+.view-withdraw .wd-table-panel .wd-table col.wd-col--name {
+  width: 26%;
+}
+
+.view-withdraw .wd-table-panel .wd-table col.wd-col--created {
+  width: 20%;
+}
+
+.view-withdraw .wd-table-panel .wd-table col.wd-col--amount {
+  width: 14%;
+}
+
+.view-withdraw .wd-table-panel .wd-table col.wd-col--status {
+  width: 14%;
+}
+
+.view-withdraw .wd-table-panel .wd-table col.wd-col--reason {
+  width: 26%;
+}
+
+.view-withdraw .wd-table-panel .wd-name-cell {
+  white-space: nowrap;
+}
+
+.view-withdraw .wd-table-panel .wd-col-amount {
+  white-space: nowrap;
+}
+
+.wd-table thead th {
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--cz-accent);
+  text-align: left;
+  border-bottom: 1px solid var(--cz-rule);
+  padding: 14px 12px;
+  white-space: nowrap;
+  background: var(--cz-subtle);
+}
+
+.wd-table thead th.wd-th-status {
+  text-align: center;
+}
+
+.wd-table thead th.text-end {
+  text-align: right;
+}
+
+/* Icon + label — reference `.tx-icon` + `.tx-name` */
+.wd-name-cell {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+}
+
+.wd-name-cell .wd-tx-icon {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(114, 90, 238, 0.12) 0%, rgba(124, 58, 237, 0.1) 100%);
+  color: var(--cz-accent);
+}
+
+.wd-name-cell .wd-tx-icon svg {
+  width: 18px;
+  height: 18px;
+  display: block;
+}
+
+.wd-name-text {
+  min-width: 0;
+  margin-left: 10px;
+  font-weight: 500;
+  color: var(--cz-text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.wd-col-created {
+  color: var(--cz-text-dim);
+  font-weight: 500;
+}
+
+.wd-amount-text {
+  font-weight: 600;
+  color: var(--cz-text);
+  font-variant-numeric: tabular-nums;
+}
+
+.wd-reason-text {
+  display: block;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--cz-text-dim);
+  line-height: 1.35;
+}
+
+
+.wd-table tbody td {
+  padding: 12px;
+  vertical-align: middle;
+  border-bottom: 1px solid #f1f5f9;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--cz-text-dim);
+  background: transparent;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.wd-table tbody td.wd-col-status {
+  text-align: center;
+}
+
+.wd-table tbody td.wd-col-reason {
+  min-width: 140px;
+  max-width: 220px;
+  vertical-align: middle;
+}
+
+.wd-table thead th:nth-child(1),
+.wd-table tbody td:nth-child(1) {
+  min-width: 140px;
+}
+
+.wd-table thead th:nth-child(2),
+.wd-table tbody td:nth-child(2) {
+  min-width: 128px;
+}
+
+.wd-table thead th:nth-child(3),
+.wd-table tbody td:nth-child(3) {
+  min-width: 88px;
+}
+
+.wd-table thead th:nth-child(4),
+.wd-table tbody td:nth-child(4) {
+  min-width: 96px;
+}
+
+.wd-table tbody tr:hover td {
+  background: var(--cz-subtle);
+  color: var(--cz-text);
+}
+
+.wd-table tbody tr:hover .wd-reason-text,
+.wd-table tbody tr:hover .wd-col-created {
+  color: var(--cz-text);
+}
+
+.wd-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.wd-loading,
+.wd-empty {
+  text-align: center;
+  padding: 2rem 12px !important;
+  color: var(--cz-text-dim);
+  font-size: 14px;
+  border-bottom: none !important;
+}
+
+.wd-tx-icon {
+  display: inline-flex;
+  vertical-align: middle;
+}
+
+/* Reference `.badge` — compact rounded rect, not pill */
+.wd-status {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  font-family: inherit;
+  white-space: nowrap;
+  letter-spacing: 0.02em;
+  line-height: 1.25;
+}
+
+.wd-status--blocked {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+.wd-status--verified {
+  background: #dcfce7;
+  color: #16a34a;
+}
+
+.wd-status--pending {
+  background: #fed7aa;
+  color: #d97706;
+}
+
+.wd-status--neutral {
+  background: rgba(100, 116, 139, 0.12);
+  color: var(--cz-text-dim);
+}
+
+/* Bootstrap 5 — full rejection text (see initWdReasonTooltips in withdraw.tab.js) */
+.tooltip.wd-reason-tooltip .tooltip-inner {
+  max-width: min(92vw, 340px);
+  text-align: left;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.45;
+  font-family: 'Space Grotesk', 'Poppins', system-ui, sans-serif;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: var(--cz-page);
+  color: var(--cz-text);
+  border: 1px solid var(--cz-rule);
+  box-shadow: 0 10px 28px rgba(15, 23, 42, 0.12);
+  background:black;
+  color:white;
+}
+
+.wd-table-footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 0;
+  padding: 0 4px;
+}
+
+.wd-table-panel > .wd-table-footer {
+  margin-top: 8px;
+  padding: 16px 0 0;
+  border-top: 1px solid var(--cz-rule);
+}
+
+.wd-summary {
+  font-family: inherit;
+  color: var(--cz-text-dim) !important;
+  font-size: 0.8125rem;
+  flex: 0 1 auto;
+  min-width: 0;
+}
+
+/* Pager: fill cell (no width:max-content — that forced horizontal scroll on phones). */
+.wd-pager-wrap {
+  flex: 1 1 auto;
+  min-width: 0;
+  max-width: 100%;
+  overflow-x: visible;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+}
+
+.wd-pager {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 6px;
+  justify-content: flex-end;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  margin-left: auto;
+}
+
+/* Withdraw: same dash pager row as Home / Deposit (cp-pagination.js + home.tab.css tokens). */
+.wd-pager .wd-dash-pagination.dash-pagination {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 6px;
+  justify-content: flex-end;
+  margin: 0;
+  padding: 0;
+  min-width: 0;
+  max-width: 100%;
+}
+
+/* Phones / small tablets: wrap pager (no horizontal strip) + stack footer. */
+@media (max-width: 767.98px) {
+     .wd-table-scroll {
+    overflow-x: auto;
+    overflow-y: visible;
+    -webkit-overflow-scrolling: touch;
+    touch-action: auto; /* Let the browser handle both directions naturally */
+  }
+  
+  /* Ensure table cells don't prevent scroll propagation */
+  .wd-table tbody td,
+  .wd-table thead th {
+    touch-action: auto;
+  }
+    .wd-table-panel {
+    padding: 16px 16px 12px;
+  }
+     .wd-actions-row .wd-btn {
+    text-align: center;
+    min-height: 52px;
+  }
+   .wd-fig-grid {
+    grid-template-columns: 1fr;
+  }
+  .wd-actions-row .wd-btn span {
+    text-align: center;
+  }
+  .wd-table-footer {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .wd-pager-wrap {
+    margin-left: 0;
+    max-width: 100%;
+    overflow-x: visible;
+    scrollbar-gutter: auto;
+  }
+  .wd-pager {
+    justify-content: center;
+    margin-left: 0;
+    margin-right: 0;
+    flex-wrap: wrap;
+    row-gap: 8px;
+  }
+  .wd-pager .wd-dash-pagination.dash-pagination {
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    row-gap: 8px;
+  }
+  .view-withdraw .wd-pager .dash-pagination .dash-page-btn {
+    min-width: 26px;
+    height: 28px;
+    padding: 0 5px;
+    font-size: 12px;
+  }
+  .view-withdraw .wd-pager .dash-pagination .dash-page-ellipsis {
+    padding: 0 2px;
+    font-size: 0.85rem;
+  }
+}
+
+
+
+/* Page numbers: white + border; active = purple fill */
+.wd-page-btn {
+  box-sizing: border-box;
+  min-width: 36px;
+  height: 36px;
+  padding: 0 10px;
+  border-radius: 5px;
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+  font-family: inherit;
+  line-height: 1;
+  transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease, filter 0.2s ease;
+}
+
+.wd-page-btn:not(.wd-page-btn--nav) {
+  border: 1px solid var(--cz-rule);
+  background: var(--cp-panel-soft);
+  color: var(--cz-text-dim);
+}
+
+.wd-page-btn:not(.wd-page-btn--nav):hover:not(:disabled):not(.is-active) {
+  background: var(--cz-accent-hover-bg);
+  border-color: var(--cz-accent-border-soft);
+  color: var(--wd-purple);
+}
+
+.wd-page-btn.is-active:not(.wd-page-btn--nav) {
+  background: linear-gradient(135deg, var(--cz-accent) 0%, var(--cz-accent-bright) 100%) !important;
+  color: #fff !important;
+  border-color: var(--cz-accent) !important;
+}
+
+.wd-page-btn.is-active:not(.wd-page-btn--nav):hover:not(:disabled),
+.wd-page-btn.is-active:not(.wd-page-btn--nav):focus-visible {
+  filter: brightness(1.03);
+  color: #fff !important;
+}
+
+/* Prev / next */
+.wd-page-btn--nav {
+  border: none !important;
+  background: linear-gradient(135deg, var(--cz-accent) 0%, var(--cz-accent-bright) 100%) !important;
+  color: #fff !important;
+  min-width: 40px;
+  padding: 0 12px;
+  font-size: 1rem;
+  box-shadow: 0 2px 8px rgba(114, 90, 238, 0.18);
+}
+
+.wd-page-btn--nav:hover:not(:disabled) {
+  filter: brightness(1.03);
+  color: #fff !important;
+}
+
+.wd-page-btn--nav:focus-visible {
+  outline: 2px solid var(--cz-accent-border-soft);
+  outline-offset: 2px;
+}
+
+.wd-page-btn--nav:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* Ellipsis between page numbers (compact pagination on narrow viewports) */
+.wd-page-ellipsis {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 24px;
+  padding: 0 4px;
+  color: var(--cz-text-dim);
+  font-weight: 700;
+  font-size: 0.9rem;
+  user-select: none;
+  pointer-events: none;
+  flex-shrink: 0;
+}
+
+/*
+ * Modals mount under body (Bootstrap) — inherit does not pick up #mainContent fonts.
+ * Lock the same stack as dashboard.php main shell + tokens for color/size.
+ */
+body.cp-dashboard-body .modal .modal-content.wd-modal {
+  font-family: 'Space Grotesk', 'Poppins', system-ui, sans-serif;
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--cz-text);
+  -webkit-font-smoothing: antialiased;
+  border: 1px solid var(--cz-rule);
+  box-shadow: 0 16px 48px rgba(15, 23, 42, 0.12);
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+body.cp-dashboard-body .modal .modal-content.wd-modal .btn,
+body.cp-dashboard-body .modal .modal-content.wd-modal .form-control,
+body.cp-dashboard-body .modal .modal-content.wd-modal label,
+body.cp-dashboard-body .modal .modal-content.wd-modal small {
+  font-family: inherit;
+}
+
+/* Withdrawal request modal — Figma: gray header + white body + filled gray fields */
+.modal-dialog-wd-request {
+  max-width: 440px;
+}
+
+.wd-modal--request {
+  padding: 0;
+  overflow: hidden;
+  border-radius: 16px;
+}
+
+.wd-modal-request__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  background: var(--cz-subtle);
+  border-bottom: 1px solid var(--cz-card-border);
+  padding: 1.2rem 1.25rem 1.05rem;
+  border-radius: 16px 16px 0 0;
+  text-align: left;
+}
+
+/* Accounts + Edit: title block left, close aligned top-right */
+.wd-modal-accounts__head.wd-modal-request__head,
+#wdModalEditSource .wd-modal-request__head {
+  align-items: flex-start;
+}
+
+.wd-modal-accounts__head .wd-modal-request__head-text,
+#wdModalEditSource .wd-modal-request__head-text {
+  text-align: left;
+  flex: 1;
+  min-width: 0;
+  padding-right: 0.5rem;
+}
+
+.wd-modal-request__title {
+  margin: 0 0 0.35rem;
+  font-family: inherit;
+  font-size: 1.0625rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--cz-text);
+  line-height: 1.3;
+}
+
+body.cp-dashboard-body .modal .wd-modal h5.wd-modal-request__title {
+  font-family: inherit;
+  font-size: 1.0625rem;
+  font-weight: 700;
+  color: var(--cz-text);
+}
+
+.wd-modal-request__tp {
+  margin: 0;
+  font-family: inherit;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--cz-text-dim);
+  line-height: 1.4;
+}
+
+.wd-modal-request__close {
+  opacity: 0.55;
+  margin-top: 0.15rem;
+  flex-shrink: 0;
+}
+
+.wd-modal-request__body {
+  background: var(--cz-page);
+  padding: 1.45rem 1.35rem 1.5rem;
+  border-radius: 0 0 16px 16px;
+}
+
+.wd-modal-request__field {
+  margin-bottom: 1.15rem;
+}
+
+.wd-modal-request__field:last-of-type {
+  margin-bottom: 0.5rem;
+}
+
+.wd-modal-request__label {
+  display: block;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--cz-text);
+  margin-bottom: 0.5rem;
+}
+
+.wd-modal-request__control-wrap {
+  position: relative;
+}
+
+.wd-modal-request__select,
+.wd-modal-request__input {
+  width: 100%;
+  border: 1px solid var(--cz-field-border);
+  border-radius: 8px;
+  background: var(--cz-page) !important;
+  padding: 12px 40px 12px 14px;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--cz-text);
+  appearance: none;
+  box-shadow: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.wd-modal-request__input {
+  padding-right: 14px;
+}
+
+.wd-modal-request__select:focus,
+.wd-modal-request__input:focus {
+  outline: none;
+  border-color: var(--cz-accent-border-soft);
+  box-shadow: 0 0 0 3px var(--cz-accent-hover-bg);
+}
+
+.wd-modal-request__input::placeholder {
+  color: var(--cz-text-dim);
+}
+
+.wd-modal-request__caret {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.7rem;
+  color: var(--cz-text-dim);
+  pointer-events: none;
+}
+
+.wd-modal-request__hint {
+  margin-top: 0.4rem;
+  font-family: inherit;
+  font-size: 0.8125rem;
+  color: var(--cz-text-dim);
+}
+
+.wd-modal-request__msg {
+  min-height: 1.25rem;
+  text-align: center;
+  font-family: inherit;
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  margin: 0.75rem 0 0.25rem;
+}
+
+.wd-modal-request__submit {
+  margin-top: 0.85rem;
+  background: linear-gradient(135deg, var(--cz-accent) 0%, var(--cz-accent-bright) 100%) !important;
+  color: #fff !important;
+  border: none !important;
+  border-radius: 8px !important;
+  padding: 12px 16px !important;
+  font-weight: 600 !important;
+  font-size: 14px !important;
+  font-family: inherit !important;
+  box-shadow: 0 2px 8px rgba(114, 90, 238, 0.18);
+  transition: filter 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease !important;
+}
+
+.wd-modal-request__submit:hover {
+  filter: brightness(1.03);
+  box-shadow: 0 4px 16px rgba(114, 90, 238, 0.28);
+  color: #fff !important;
+}
+
+/* Legacy modal inputs (Withdrawal Accounts modal) */
+.wd-input {
+  border-radius: 8px !important;
+  border: 1px solid var(--cz-field-border) !important;
+  padding: 10px 14px !important;
+  background: var(--cz-page) !important;
+}
+
+.wd-select-wrap {
+  position: relative;
+}
+
+.wd-select-wrap .wd-input {
+  padding-right: 36px !important;
+  appearance: none;
+}
+
+.wd-select-wrap .wd-caret {
+  color: var(--cz-text-dim);
+  right: 12px;
+}
+
+.wd-submit-btn {
+  background: linear-gradient(135deg, var(--cz-accent) 0%, var(--cz-accent-bright) 100%) !important;
+  color: #fff !important;
+  border: none !important;
+  border-radius: 8px !important;
+  padding: 12px !important;
+  font-weight: 600 !important;
+  font-family: inherit !important;
+  box-shadow: 0 2px 8px rgba(114, 90, 238, 0.18);
+}
+
+.wd-submit-btn:hover {
+  filter: brightness(1.03);
+  box-shadow: 0 4px 16px rgba(114, 90, 238, 0.28);
+}
+
+/* Withdrawal Accounts modal — matches request/edit: header band + scroll list + add form */
+.modal-dialog-wd-accounts {
+  max-width: 520px;
+}
+
+@media (min-width: 576px) {
+  .modal-dialog-wd-accounts {
+    max-width: 560px;
+  }
+}
+
+/* Tighter tap targets on very small phones so more fits before horizontal scroll */
+@media (max-width: 419.98px) {
+    .wd-view-all {
+    padding: 8px 10px;
+    font-size: 10px;
+}
+.wd-table-title {
+    font-size: 14px;
+}
+  .wd-pager {
+    gap: 4px;
+  }
+  .wd-page-btn {
+    min-width: 32px;
+    height: 34px;
+    padding: 0 8px;
+    font-size: 0.75rem;
+  }
+  .wd-page-btn--nav {
+    min-width: 36px;
+    padding: 0 10px;
+    font-size: 0.9rem;
+  }
+  .wd-page-ellipsis {
+    min-width: 20px;
+    padding: 0 2px;
+    font-size: 0.85rem;
+  }
+}
+.wd-modal--accounts {
+  padding: 0;
+  overflow: hidden;
+  border-radius: 16px;
+  box-shadow: 0 16px 48px rgba(15, 23, 42, 0.12);
+}
+
+.wd-modal-accounts__body {
+  background: var(--cz-page);
+  padding: 0 1.25rem 1.35rem;
+  border-radius: 0 0 16px 16px;
+}
+
+.wd-modal-accounts__section {
+  padding-top: 1.05rem;
+}
+
+.wd-modal-accounts__section--add {
+  padding-top: 0.35rem;
+}
+
+.wd-modal-accounts__section-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 0.6rem;
+}
+
+.wd-modal-accounts__section-label {
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--cz-accent);
+}
+
+.wd-modal-accounts__section-hint {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--wd-purple);
+  font-family: inherit;
+  line-height: 1.3;
+}
+
+.wd-modal-accounts__list {
+  max-height: min(240px, 42vh);
+  overflow-y: auto;
+  padding: 2px 4px 2px 2px;
+  margin: 0 -4px 0 -2px;
+  scrollbar-gutter: stable;
+}
+
+.wd-modal-accounts__list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.wd-modal-accounts__list::-webkit-scrollbar-thumb {
+  background: rgba(114, 90, 238, 0.35);
+  border-radius: 99px;
+}
+
+.wd-modal-accounts__list::-webkit-scrollbar-track {
+  background: rgba(15, 23, 42, 0.04);
+  border-radius: 99px;
+}
+
+.wd-modal-accounts__divider {
+  height: 1px;
+  margin: 0.85rem 0 0.35rem;
+  background: linear-gradient(90deg, transparent, rgba(114, 90, 238, 0.18), transparent);
+}
+
+.wd-modal-accounts__loading {
+  padding: 1.1rem 0.5rem;
+  text-align: center;
+  font-family: inherit;
+}
+
+.wd-modal-accounts__empty {
+  text-align: center;
+  padding: 1.35rem 1rem 1rem;
+  background: linear-gradient(165deg, var(--cz-accent-hover-bg) 0%, rgba(255, 255, 255, 0) 55%);
+  border-radius: 16px;
+  border: 1px dashed var(--cz-accent-border-soft);
+}
+
+.wd-modal-accounts__empty-icon {
+  width: 52px;
+  height: 52px;
+  margin: 0 auto 0.65rem;
+  border-radius: 50%;
+  background: var(--cz-accent-hover-bg);
+  color: var(--cz-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+}
+
+.wd-modal-accounts__empty-title {
+  margin: 0 0 0.35rem;
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 0.9375rem;
+  color: var(--cz-text);
+}
+
+.wd-modal-accounts__empty-text {
+  margin: 0;
+  font-size: 0.8125rem;
+  color: var(--cz-text-dim);
+  line-height: 1.45;
+  max-width: 260px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.wd-src-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 14px 12px 16px;
+  background: var(--cz-page);
+  border-radius: 12px;
+  margin-bottom: 8px;
+  border: 1px solid var(--cz-card-border);
+  border-left: 3px solid transparent;
+  transition: box-shadow 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+}
+
+.wd-src-item:last-child {
+  margin-bottom: 0;
+}
+
+.wd-src-item:hover {
+  box-shadow: 0 4px 16px rgba(39, 47, 55, 0.08);
+  border-color: var(--cz-accent-border-soft);
+}
+
+.wd-src-item--crypto {
+  border-left-color: var(--wd-purple);
+}
+
+.wd-src-item--bank {
+  border-left-color: #2563eb;
+}
+
+.wd-src-item--surepay {
+  border-left-color: #7c3aed;
+}
+
+.wd-src-item__body {
+  min-width: 0;
+  flex: 1;
+}
+
+.wd-src-item__title-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.wd-src-item__name {
+  font-family: inherit;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--cz-text);
+}
+
+.wd-src-item__badge {
+  display: inline-block;
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 3px 9px;
+  border-radius: 999px;
+  font-family: inherit;
+  line-height: 1.2;
+}
+
+.wd-src-item__badge--crypto {
+  background: var(--cz-accent-hover-bg);
+  color: var(--cz-accent-hover);
+}
+
+.wd-src-item__badge--bank {
+  background: rgba(37, 99, 235, 0.14);
+  color: #1d4ed8;
+}
+
+.wd-src-item__badge--surepay {
+  background: rgba(124, 58, 237, 0.14);
+  color: #6d28d9;
+}
+
+.wd-src-item__actions {
+  display: flex;
+  flex-shrink: 0;
+  gap: 8px;
+  align-items: center;
+}
+
+.wd-src-btn {
+  font-size: 0.75rem !important;
+  padding: 6px 12px !important;
+  border-radius: 10px !important;
+  font-weight: 600 !important;
+  font-family: inherit !important;
+  line-height: 1.2 !important;
+}
+
+.wd-src-btn--edit {
+  border: 1px solid var(--cz-accent-border-soft) !important;
+  color: var(--cz-accent) !important;
+  background: var(--cz-page) !important;
+}
+
+.wd-src-btn--edit:hover {
+  background: var(--cz-accent-hover-bg) !important;
+  border-color: var(--cz-accent-border) !important;
+  color: var(--wd-purple-hover) !important;
+}
+
+.wd-src-btn--del {
+  border: 1px solid rgba(220, 38, 38, 0.38) !important;
+  color: #dc2626 !important;
+  background: #fff !important;
+}
+
+.wd-src-btn--del:hover {
+  background: rgba(220, 38, 38, 0.08) !important;
+  color: #b91c1c !important;
+}
+
+.wd-src-meta {
+  font-size: 0.75rem;
+  color: var(--cz-text-dim);
+  line-height: 1.35;
+  word-break: break-word;
+}
+
+/* Edit account — same shell as request modal */
+.modal-dialog-wd-edit {
+  max-width: 440px;
+}
+
+.wd-modal--edit {
+  padding: 0;
+  overflow: hidden;
+  border-radius: 16px;
+}
+
+/* Confirm delete — compact, on-brand */
+.modal-dialog-wd-confirm {
+  max-width: 400px;
+}
+
+.wd-modal--confirm {
+  border-radius: 16px;
+  padding: 0;
+  overflow: hidden;
+  border: none;
+  box-shadow: 0 16px 48px rgba(15, 23, 42, 0.14);
+}
+
+.wd-modal-confirm__body {
+  padding: 1.75rem 1.5rem 1.5rem;
+  text-align: center;
+  background: linear-gradient(180deg, #faf9ff 0%, #ffffff 42%);
+}
+
+.wd-modal-confirm__icon {
+  width: 56px;
+  height: 56px;
+  margin: 0 auto 1rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--cz-accent-hover-bg);
+  color: var(--cz-accent);
+  font-size: 1.5rem;
+}
+
+.wd-modal-confirm__title {
+  margin: 0 0 0.5rem;
+  font-family: inherit;
+  font-size: 1.0625rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--cz-text);
+}
+
+body.cp-dashboard-body .modal .wd-modal h5.wd-modal-confirm__title {
+  font-family: inherit;
+  font-size: 1.0625rem;
+  font-weight: 700;
+  color: var(--cz-text);
+}
+
+.wd-modal-confirm__text {
+  margin: 0 0 0.75rem;
+  font-family: inherit;
+  font-size: 0.8125rem;
+  color: var(--cz-text-dim);
+  line-height: 1.45;
+}
+
+.wd-modal-confirm__target {
+  margin: 0 0 0.5rem;
+  font-family: inherit;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--cz-text);
+  word-break: break-word;
+}
+
+.wd-modal-confirm__err {
+  margin: 0 0 1rem;
+  font-family: inherit;
+  font-size: 0.8125rem;
+  color: #dc2626;
+  min-height: 0;
+}
+
+.wd-modal-confirm__err:not([hidden]) {
+  min-height: 1.25rem;
+}
+
+.wd-modal-confirm__actions {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.wd-modal-confirm__btn {
+  min-width: 120px;
+  border-radius: 12px;
+  padding: 10px 16px;
+  font-weight: 600;
+  font-size: 0.8125rem;
+  font-family: inherit;
+}
+
+.wd-modal-confirm__btn--ghost {
+  background: var(--cz-page);
+  color: var(--cz-text-dim);
+  border: 1px solid var(--cz-rule);
+}
+
+.wd-modal-confirm__btn--ghost:hover {
+  background: var(--cz-subtle);
+  color: var(--cz-text);
+}
+
+.wd-modal-confirm__btn--danger {
+  background: var(--cz-danger);
+  color: #fff;
+  border: none;
+}
+
+.wd-modal-confirm__btn--danger:hover {
+  filter: brightness(0.95);
+  color: #fff;
+  background: #b90000;
+}
+
+/* -------------------------------------------------------------------------
+   Account card metrics (withdraw.html): Equity / P/L / Margin as label+value
+   spans. This block is ADDITIVE only — it does not edit rules above.
+   Scoped under .view-withdraw so it layers on top of your live card styles.
+   ------------------------------------------------------------------------- */
+.view-withdraw .wd-metric {
+  display: inline-flex;
+  align-items: baseline;
+  flex-wrap: nowrap;
+  gap: 6px;
+}
+
+.view-withdraw .wd-metric__label {
+  color: var(--cz-text-dim);
+  font-weight: 500;
+  font-family: inherit;
+  white-space: nowrap;
+}
+
+.view-withdraw .wd-metric__value {
+  color: var(--cz-text);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  font-family: inherit;
+}
+
+.view-withdraw .wd-metric__value--pl.wd-metric__value--loss {
+  color: var(--cz-pl-negative, #e00f0f);
+}
+
+.view-withdraw .wd-metric__value--pl.wd-metric__value--gain {
+  color: #16a34a;
+}
+
+/* Create New Withdrawal Request: disabled = keep faded ghost look; no hover shift */
+.view-withdraw #wdBtnCreateRequest.wd-btn--ghost:disabled {
+  cursor: not-allowed;
+  opacity: 0.92;
+}
+.view-withdraw #wdBtnCreateRequest.wd-btn--ghost:disabled:hover {
+  background: rgba(114, 90, 238, 0.12);
+  border-color: var(--cz-accent-border-soft);
+}
+
+/* Enabled (TP selected): gradient primary */
+.view-withdraw #wdBtnCreateRequest.wd-btn--primary:not(:disabled) {
+  background: linear-gradient(135deg, var(--cz-accent) 0%, var(--cz-accent-bright) 100%) !important;
+  border: none;
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(114, 90, 238, 0.18);
+}
+
+.view-withdraw #wdBtnCreateRequest.wd-btn--primary:not(:disabled):hover {
+  filter: brightness(1.03);
+  box-shadow: 0 4px 16px rgba(114, 90, 238, 0.28);
+  color: #fff;
+}
+
+/* Create withdrawal request modal: centered title/subtitle; close inside header, top-right, no overlap */
+#wdModalRequest .wd-modal-request__head--request-modal {
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding-top: 1.35rem;
+  padding-right: 2.75rem;
+  padding-left: 2.75rem;
+}
+
+#wdModalRequest .wd-modal-request__close--inhead {
+  position: absolute;
+  top: 0.85rem;
+  right: 0.85rem;
+  margin: 0;
+  flex-shrink: 0;
+  opacity: 0.65;
+  z-index: 2;
+}
+
+#wdModalRequest .wd-modal-request__close--inhead:hover {
+  opacity: 1;
+}
+
+#wdModalRequest .wd-modal-request__head-text {
+  width: 100%;
+  max-width: 100%;
+  text-align: center;
+  margin: 0 auto;
+}
+
+#wdModalRequest .wd-modal-request__title,
+#wdModalRequest .wd-modal-request__tp {
+  text-align: center;
+}
+@media (max-width: 575.98px) { /* Standard tablet breakpoint */
+  .modal-dialog-wd-accounts {
+    max-width: 100% !important;
+  }
+  .modal-dialog-wd-request {
+    max-width: 100% !important;
+  }
+  .modal-dialog-wd-edit{
+      max-width: 100% !important;
+  }
+  .modal-dialog-wd-confirm{
+       max-width: 100% !important;
+  }
+}

@@ -39,20 +39,7 @@
     <script type="module" src="/src/main.jsx"></script>
     <!-- Replain Live Chat -->
     <script>
-      // Watch for Replain widget and fix white background
-      const observer = new MutationObserver(() => {
-        document.querySelectorAll('body > div[style*="fixed"], body > div[style*="position"]').forEach(el => {
-          if (el.dataset.replainFixed) return;
-          if (el.querySelector('iframe[src*="replain"]') || (el.className && typeof el.className === 'string' && el.className.includes('replain'))) {
-            el.style.setProperty('background', 'transparent', 'important');
-            el.style.setProperty('background-color', 'transparent', 'important');
-            el.dataset.replainFixed = '1';
-          }
-        });
-      });
-      observer.observe(document.body, { childList: true, subtree: true });
-
-      window.replainSettings = { id: 'c6366b02-2531-4ee7-b3e1-7cc6f93d7e57', color: '#10b981', backgroundColor: '#10b981', position: 'right' };
+      window.replainSettings = { id: 'c6366b02-2531-4ee7-b3e1-7cc6f93d7e57' };
       (function(u){var s=document.createElement('script');s.async=true;s.src=u;
       var x=document.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);
       })('https://widget.replain.cc/dist/client.js');

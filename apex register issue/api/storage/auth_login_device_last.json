@@ -1,0 +1,40 @@
+{
+    "time": "2026-06-02T09:33:19+00:00",
+    "source": "login",
+    "email": "vpetriiski@gmail.com",
+    "http_status": 200,
+    "ok": true,
+    "request_payload": {
+        "email": "vpetriiski@gmail.com",
+        "password": "***",
+        "userDevice": {
+            "appVersion": "3.0.25",
+            "uniqueId": "437337350",
+            "device": "Windows",
+            "systemName": "Desktop",
+            "useragent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36",
+            "type": "web",
+            "brand": "Chrome",
+            "systemVersion": "x86_64",
+            "language": "ru"
+        }
+    },
+    "response_body": {
+        "userId": "1b57c00d-b5b7-4280-b26a-ddb4453cceae",
+        "subId": "6f22cc08-c710-4ee3-99b7-91913dc18437",
+        "lpw": "2026-05-26T14:42:22.455Z",
+        "agentId": "5f7c7a6e-4f61-42eb-b50d-ec082cc7a3a3",
+        "lastVisit": "2026-06-01T23:02:34.298Z",
+        "firstName": "Veronica",
+        "lastName": "Petriiski",
+        "email": "vpetriiski@gmail.com",
+        "isMainPasswordSecure": false,
+        "secureMainPassword": null,
+        "accessToken": "***"
+    },
+    "server": {
+        "HTTP_USER_AGENT": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36",
+        "HTTP_SEC_CH_UA_PLATFORM": "Windows",
+        "REMOTE_ADDR": "51.195.242.238"
+    }
+}

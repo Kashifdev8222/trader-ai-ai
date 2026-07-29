@@ -112,17 +112,8 @@ export default function ContactPage() {
               <div className="relative z-10 text-center">
                 <p className="text-[var(--text-secondary)] text-sm mb-4">Need instant help? Our support team is ready to assist you.</p>
                 <button type="button" onClick={() => {
-                  // Try multiple approaches to open Replain chat
-                  const replainIframe = document.querySelector('iframe[src*="replain"]');
-                  if (replainIframe && replainIframe.contentWindow) {
-                    replainIframe.contentWindow.postMessage({ type: 'open', action: 'open' }, '*');
-                    replainIframe.contentWindow.postMessage('open', '*');
-                    replainIframe.contentWindow.postMessage('toggle', '*');
-                  }
-                  // Try clicking visible Replain elements outside iframe
-                  const btns = document.querySelectorAll('[class*="replain"] button, [id*="replain"] button, [class*="replain"] [role="button"]');
-                  btns.forEach(b => b.click());
-                }} className="relative z-10 inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white font-semibold text-sm transition-all shadow-lg shadow-[var(--accent)]/20 hover:shadow-xl hover:shadow-[var(--accent)]/30">
+                  if (typeof window.ReplainAPI === 'function') window.ReplainAPI('open');
+                }} className="relative z-10 inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white font-semibold text-sm transition-all">
                   <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
                   Launch Live Chat
                 </button>

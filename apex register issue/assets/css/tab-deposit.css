@@ -1,0 +1,217 @@
+/* Deposit tab (light + dark), matching your screenshot */
+
+.cp-deposit { padding: 6px 4px 24px; }
+
+/* header */
+.deposit-head{
+  display:flex; align-items:center; justify-content:space-between;
+  gap:12px; padding:16px; border-radius:16px;
+  background:#eef5fa; border:2px solid var(--cp-border);
+}
+.deposit-head .title{ display:flex; align-items:center; gap:.8rem; }
+.deposit-head .title i{ font-size:1.7rem; }
+.deposit-head .title-text{ font-size:1.25rem; font-weight:800; }
+.deposit-head .muted{ color:#6b7b8c; font-size:.95rem; margin-top:-2px; }
+.deposit-head .balance{ font-size:1.8rem; font-weight:800; }
+.dep-pill{ border-radius:12px; font-weight:700; display:inline-flex; align-items:center; gap:.45rem; }
+
+/* section titles */
+.dep-section-title{
+  font-size:1.05rem; font-weight:800; margin-bottom:12px;
+}
+
+/* table-like rows */
+.dep-table{ width:100%; }
+.dep-thead, .dep-row{
+  display:grid; 
+  grid-template-columns: 200px 1fr 750px; 
+  align-items:center;
+}
+.dep-box-title {
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 26px;
+}
+.text-muted.small {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 22px;
+}
+.dep-thead{
+  padding:.6rem .8rem; color:#6b7b8c; font-weight:700; text-transform:uppercase; letter-spacing:.02em;
+  border-bottom:1px solid #eef4f8;
+}
+.dep-row{
+  padding:14px 10px; border-bottom:1px solid #eef4f8;
+}
+.dep-identity .brand{width:100px; max-width:100%; height:auto; margin-right:10px;}
+.dep-identity .brand-sm{width:150px;}   /* for crypto/lemux logos to match screenshot */
+
+.dep-method{ font-weight:600; color:var(--cp-text); }
+.dep-actions{ display:flex; flex-wrap:wrap; gap:.55rem; justify-content:flex-start; }
+
+/* amount chips */
+.dep-chip{
+  background:#2e9d5b; color:#fff; border:none; border-radius:14px;
+  padding:.15rem .8rem; font-weight:600; display:inline-flex; align-items:center; gap:.4rem;
+  cursor:pointer; box-shadow: 0 2px 0 rgba(0,0,0,.10);
+}
+.dep-chip i{ font-size:1rem; }
+.dep-chip:active{ transform: translateY(1px); }
+
+/* CTA buttons (Crypto/Lemuxion) */
+.dep-cta{
+  background:rgb(86,165,201); border:2px solid rgb(86,165,201); color:#fff;
+  border-radius:12px; padding:.15rem .9rem; font-weight:600;
+  display:inline-flex; align-items:center; gap:.45rem;
+}
+.dep-cta:hover{ filter:brightness(1.03); }
+
+/* Payment methods bar (title/notes left, TP select right) */
+.dep-methods-bar{
+  display:flex; align-items:center; justify-content:space-between;
+  gap:18px;
+}
+.dep-methods-copy{ line-height:1.1; }
+
+/* TP select */
+.dep-select-wrap{
+  position:relative;
+  min-width: 360px;      /* gives the large pill feel like in screenshot */
+  max-width: 440px;
+  margin-left:auto;
+}
+.dep-select{
+  background:#eef4f9; border:1.5px solid #e0edf6; border-radius:12px;
+  padding:.75rem 2.2rem .75rem .9rem; font-weight:600;
+}
+.dep-caret{
+  position:absolute; right:1.65rem; top:50%; transform:translateY(-50%);
+  pointer-events:none; color:#6b7b8c;
+}
+.portal-btn{
+    color:white;
+}
+/* responsive */
+@media (max-width: 1200px){
+  .dep-thead, .dep-row{ grid-template-columns: 160px 1fr 1fr; }
+}
+@media (max-width: 991.98px){
+  .dep-select-wrap{ min-width:300px; }
+}
+@media (max-width: 767.98px){
+  .deposit-head{ flex-direction:column; align-items:flex-start; }
+  .dep-thead{ display:none; }
+  .dep-row{
+    grid-template-columns: 1fr;
+    gap:.4rem;
+  }
+  .dep-actions{ justify-content:flex-start; }
+  .dep-methods-bar{ flex-direction:column; align-items:flex-start; }
+  .dep-select-wrap{ width:100%; max-width:none; min-width:0; }
+}
+
+/* modal field validation hint */
+.invalid-hint {
+  display:none;
+  color:#e55353;
+  font-size:.85rem;
+  margin-top:6px;
+}
+
+/* show red border + hint when invalid */
+.is-invalid {
+  border-color:#e55353 !important;
+  box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 0 .25rem rgba(229,83,83,.15);
+}
+.show-hint { display:block; }
+
+
+/* dark mode */
+body.dark .deposit-head{ background:#1b2430; border-color:var(--cp-line); }
+body.dark .dep-thead{ border-bottom-color:var(--cp-line); color:var(--cp-muted); }
+body.dark .dep-row{ border-bottom-color:var(--cp-line); }
+body.dark .dep-chip{ background:#2f8e54; }
+body.dark .dep-cta{ background:#2f6aa8; border-color:#2f6aa8; }
+body.dark .dep-select{ background:#101722; border-color:#233042; color:var(--cp-text); }
+body.dark .dep-caret{ color:#90a0b3; }
+
+
+/* ===== Deposit › History table (match Wallet tab look) ===== */
+
+.history-wrap { padding: 6px 4px 24px; }
+
+/* header card like wallet-head */
+.history-head{
+  display:flex; align-items:flex-start; justify-content:space-between;
+  gap:12px; padding:16px; border-radius:16px;
+  background:#eef5fa; border:2px solid var(--cp-border);
+}
+.history-head .balance{ font-size:1.6rem; font-weight:800; }
+.history-head .select-pill .form-select{
+  background:#eef4f9; border:1.5px solid #e0edf6; border-radius:12px;
+  padding:.55rem 2.0rem .55rem .7rem; font-weight:600;
+  min-width: 220px;
+}
+
+/* table looks like Wallet’s .table-accounts */
+#histTable.table-accounts{ width:100%; background:#fff; border-collapse:separate; border-spacing:0; }
+#histTable.table-accounts thead th{
+  background: rgb(86,165,201); color:#fff; border:0; font-weight:700; white-space:nowrap;
+}
+#histTable.table-accounts th,
+#histTable.table-accounts td{
+  padding:.9rem .9rem; vertical-align:middle; white-space:nowrap; color:var(--cp-text);
+  border-color:#eef4f8;
+}
+
+/* rounded head row */
+#histTable.table-accounts thead tr th:first-child{ border-top-left-radius: 10px; }
+#histTable.table-accounts thead tr th:last-child{ border-top-right-radius: 10px; }
+
+/* zebra like wallet */
+#histTable.table-accounts tbody tr:nth-child(odd) td{
+  background:#fbfdff;
+}
+
+/* action column */
+#histTable.table-accounts td .btn-sm{
+  padding:.35rem .6rem; border-radius:999px; font-weight:600;
+}
+
+/* badges similar palette */
+.badge.bg-success-subtle{ background:#eaf7ef !important; color:#2f8e54 !important; }
+.badge.bg-warning-subtle{ background:#fff4e0 !important; color:#b67300 !important; }
+.badge.bg-danger-subtle { background:#ffe9ea !important; color:#c84545 !important; }
+.badge.bg-secondary-subtle{ background:#eef2f6 !important; color:#4d5b6a !important; }
+
+/* pagination pills */
+.history-wrap .pagination .page-link{
+  border-radius:10px; border:1.5px solid var(--cp-border);
+}
+.history-wrap .pagination .page-item.active .page-link{
+  background:#2d3340; border-color:#2d3340; color:#fff;
+}
+
+/* dark mode */
+body.dark .history-head{ background:#1b2430; border-color:var(--cp-line); }
+body.dark #histTable.table-accounts{ background:var(--cp-panel); }
+body.dark #histTable.table-accounts thead th{ background:#2a4a5f; color:#fff; }
+body.dark #histTable.table-accounts td{
+  background:var(--cp-panel); color:var(--cp-text); border-color:var(--cp-line);
+}
+body.dark #histTable.table-accounts tbody tr:nth-child(odd) td{
+  background:#1a2330;
+}
+
+/* keep filters pill in dark */
+body.dark .history-head .select-pill .form-select{
+  background:#101722; border-color:#233042; color:var(--cp-text);
+}
+
+/* responsive */
+@media (max-width: 767.98px){
+  .history-head{ flex-direction:column; }
+  #histTable.table-accounts th, #histTable.table-accounts td{ padding:.65rem; }
+  .history-head .select-pill .form-select{ min-width: 100%; }
+}

@@ -1,0 +1,705 @@
+/* Trading Account — Clizone palette from dashboard.css (--cz-*); layout aligned with Home */
+
+.view-ta {
+  background: var(--cz-content);
+}
+
+#mainContent .view-ta {
+  padding-bottom: 1.5rem;
+  padding-top: 0.25rem;
+}
+
+.ta-page {
+  max-width: none;
+  width: 100%;
+  margin: 0;
+  padding: 0 0 1.5rem;
+  font-family: inherit;
+  font-size: 14px;
+  color: var(--cz-text);
+  --ta-purple: var(--cz-accent-bright);
+  --ta-purple-hover: var(--cz-accent-hover);
+}
+
+/*
+ * Top bar = reference trading-account.html `.page-header` (flex, space-between, nowrap).
+ * Scoped under #mainContent .view-ta so home/deposit/withdraw rules cannot flatten this row.
+ */
+#mainContent .view-ta .ta-page-header {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px 20px;
+  margin-bottom: 28px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+#mainContent .view-ta .ta-page-title {
+  flex: 1 1 auto;
+  min-width: 0;
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--cz-text);
+  line-height: 1.2;
+}
+
+#mainContent .view-ta .ta-page-actions {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+}
+button.btn.btn-light { 
+    background: #B00020; 
+    color: white; 
+    font-weight: 600;
+    }
+.ta-type-wrap {
+  position: relative;
+  display: inline-block;
+}
+
+/* Account type — gradient (reference .dropdown-trigger) */
+.ta-type-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(135deg, var(--cz-accent) 0%, var(--cz-accent-bright) 100%);
+  color: #fff;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 1.2;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(114, 90, 238, 0.15);
+  font-family: inherit;
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s ease, filter 0.2s ease;
+}
+
+.ta-type-btn:hover,
+.ta-type-btn:focus-visible {
+  filter: brightness(1.03);
+  box-shadow: 0 4px 16px rgba(114, 90, 238, 0.25);
+  transform: translateY(-1px);
+  outline: none;
+}
+
+.ta-type-btn-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.ta-type-btn-icon svg {
+  display: block;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.ta-type-chevron {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: rgba(255, 255, 255, 0.95);
+  margin-left: 2px;
+}
+
+.ta-type-chevron svg {
+  display: block;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Total balance card (reference .stats-section) */
+.ta-stats-section {
+  background: linear-gradient(135deg, var(--cz-page) 0%, var(--cz-subtle) 100%);
+  border: 1px solid var(--cz-rule);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 28px;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06);
+}
+
+.ta-stats-section .ta-balance-label {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--cz-text-dim);
+  margin-bottom: 6px;
+}
+
+.ta-stats-section .ta-balance-value {
+  font-size: clamp(1.5rem, 4vw, 1.75rem);
+  font-weight: 700;
+  color: var(--cz-text);
+  letter-spacing: -0.04em;
+  line-height: 1.15;
+  font-variant-numeric: tabular-nums;
+}
+
+.ta-type-menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  min-width: 220px;
+  max-height: min(50vh, 280px);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  background: var(--cz-page);
+  border: 1px solid var(--cz-rule);
+  border-radius: var(--cz-radius-md);
+  box-shadow: 0 8px 24px rgba(39, 47, 55, 0.1);
+  padding: 6px;
+  z-index: 1060;
+}
+
+.ta-type-option {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 10px 12px;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--cz-text);
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.ta-type-option:hover {
+  background: var(--cz-accent-selected-bg);
+  color: var(--cz-accent);
+}
+
+.ta-section--accounts {
+  margin-bottom: 0;
+}
+
+.ta-table-section-head {
+  margin-bottom: 16px;
+}
+
+.ta-table-section-title {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--cz-text-dim);
+  line-height: 1.2;
+}
+
+/* White table well (reference .table-wrapper) */
+.ta-table-shell {
+  background: var(--cz-page);
+  border: 1px solid var(--cz-rule);
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 4px;
+}
+
+/* Primary CTA — same language as .dash-btn-pill */
+.ta-btn-create {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 18px;
+  background: linear-gradient(135deg, var(--cz-accent) 0%, var(--cz-accent-bright) 100%);
+  color: #fff;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 1.2;
+  cursor: pointer;
+  font-family: inherit;
+  box-shadow: 0 2px 8px rgba(114, 90, 238, 0.18);
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s ease, filter 0.2s ease;
+}
+
+.ta-btn-create:hover,
+.ta-btn-create:focus-visible {
+  filter: brightness(1.03);
+  box-shadow: 0 4px 16px rgba(114, 90, 238, 0.28);
+  color: #fff;
+  transform: translateY(-1px);
+  outline: none;
+}
+
+.ta-table-shell .ta-table-responsive {
+  overflow-x: auto !important;
+  -webkit-overflow-scrolling: touch;
+  max-width: 100%;
+  border-radius: 0;
+  margin-top: 0;
+  background: transparent;
+  border: none;
+  overscroll-behavior-x: contain;
+}
+
+.ta-table-responsive:has(td.ta-empty) {
+  overflow-x: visible;
+}
+
+.ta-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 14px;
+  line-height: 1.4;
+  table-layout: auto;
+  min-width: 960px;
+}
+
+.ta-table:has(td.ta-empty) {
+  min-width: 0;
+}
+
+.ta-table-responsive.ta-table-wrap--empty {
+  overflow-x: visible;
+}
+
+.ta-table.ta-table--empty {
+  min-width: 0 !important;
+}
+
+/* Visible thead — reference table */
+.ta-table thead th {
+  text-align: left;
+  padding: 12px 16px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--cz-accent);
+  background: #f1f5f9;
+  border-bottom: 1px solid var(--cz-rule);
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+.ta-table thead th.ta-th-actions {
+  text-align: center;
+  width: 72px;
+}
+
+.ta-tp-num {
+  font-weight: 600;
+  color: var(--cz-accent);
+}
+
+.ta-currency {
+  font-weight: 600;
+  color: var(--cz-accent);
+}
+
+.ta-table tbody td {
+  padding: 14px 16px;
+  border-bottom: 1px solid #f1f5f9;
+  background: transparent;
+  color: var(--cz-text);
+  vertical-align: middle;
+  font-weight: 500;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.ta-table tbody tr:hover td {
+  background: #f8fafc;
+  color: var(--cz-text);
+}
+
+.ta-td--actions {
+  vertical-align: middle;
+}
+
+.ta-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.ta-th-actions {
+  width: 56px;
+}
+
+.ta-actions-cell {
+  position: relative;
+  text-align: center;
+  width: 56px;
+  vertical-align: middle;
+}
+
+.ta-kebab {
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--cz-text-dim);
+  padding: 6px;
+  border-radius: 8px;
+  cursor: pointer;
+  line-height: 1;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.ta-kebab:hover,
+.ta-kebab:focus-visible {
+  background: var(--cz-accent-hover-bg);
+  border-color: var(--cz-accent-border-soft);
+  color: var(--ta-purple);
+  outline: none;
+}
+
+.ta-kebab-icon {
+  display: block;
+}
+
+.ta-kebab-icon circle {
+  fill: currentColor;
+}
+
+.ta-row-dropdown {
+  position: relative;
+  min-width: 176px;
+  max-width: min(220px, calc(100vw - 24px));
+  background: var(--cz-page);
+  border: 1px solid var(--cz-card-border);
+  border-radius: 12px;
+  box-shadow: 0 12px 32px rgba(39, 47, 55, 0.14);
+  padding: 10px 10px 8px;
+  text-align: left;
+}
+
+.ta-row-dropdown::before {
+  content: '';
+  position: absolute;
+  top: -6px;
+  right: 14px;
+  width: 10px;
+  height: 10px;
+  background: var(--cz-page);
+  border-right: 1px solid var(--cz-card-border);
+  border-top: 1px solid var(--cz-card-border);
+  transform: rotate(-45deg);
+}
+
+.ta-row-dropdown[hidden] {
+  display: none !important;
+}
+
+.ta-drop-deposit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 10px 12px;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(135deg, var(--cz-accent) 0%, var(--cz-accent-bright) 100%);
+  color: #fff;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 1.2;
+  cursor: pointer;
+  margin-bottom: 8px;
+  font-family: inherit;
+  box-shadow: 0 2px 8px rgba(114, 90, 238, 0.18);
+  transition: filter 0.2s ease, transform 0.2s ease;
+}
+
+.ta-drop-deposit:hover {
+  filter: brightness(1.05);
+  transform: translateY(-1px);
+}
+
+.ta-svg-dash,
+.ta-svg-edit {
+  display: inline-block;
+  vertical-align: middle;
+  flex-shrink: 0;
+}
+
+.ta-svg-dash {
+  width: 18px;
+  height: 18px;
+}
+
+.ta-svg-dash path,
+.ta-svg-dash polyline,
+.ta-svg-dash line {
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.ta-drop-deposit .ta-svg-dash {
+  color: #fff;
+}
+
+.ta-drop-deposit .ta-svg-dash {
+  stroke-width: 2;
+}
+
+.ta-drop-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 10px 10px;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--ta-purple);
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 1.2;
+  cursor: pointer;
+  text-align: center;
+  font-family: inherit;
+  transition: background 0.15s ease;
+}
+
+.ta-drop-link:hover {
+  background: var(--cz-accent-hover-bg);
+}
+
+.ta-drop-link .ta-svg-dash,
+.ta-drop-link .ta-svg-edit {
+  color: var(--ta-purple);
+}
+
+.ta-drop-link .ta-svg-dash,
+.ta-drop-link .ta-svg-edit {
+  stroke-width: 2;
+}
+
+.ta-drop-link .ta-svg-edit {
+  width: 16px;
+  height: 16px;
+}
+
+.ta-svg-edit path {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.ta-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+  font-size: 12px;
+  padding: 5px 10px;
+  border-radius: 6px;
+  color: var(--cz-text);
+}
+
+.ta-status:has(.ta-status-dot--active) {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.ta-status:has(.ta-status-dot--off) {
+  background: var(--cp-panel-soft);
+  color: var(--cz-text-dim);
+}
+
+.ta-status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.ta-status-dot--active {
+  background: #22c55e;
+  box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.25);
+}
+
+.ta-status-dot--off {
+  background: var(--cz-text-dim);
+}
+
+/* Pagination — centered like reference */
+.ta-pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: nowrap;
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  padding-top: 16px;
+  padding-bottom: 8px;
+}
+
+#mainContent .view-ta .ta-pagination .ta-dash-pagination.dash-pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: nowrap;
+  margin: 0;
+  padding: 0;
+}
+
+.ta-page-btn {
+  flex-shrink: 0;
+  min-width: 28px;
+  height: 28px;
+  padding: 0 8px;
+  border: 1px solid var(--cz-rule);
+  background: var(--cp-panel-soft);
+  color: var(--cz-text-dim);
+  border-radius: 5px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease;
+}
+
+.ta-page-btn:hover:not(:disabled):not(.ta-page-btn--arrow):not(.is-active) {
+  border-color: var(--cz-accent-border-soft);
+  background: var(--cz-accent-hover-bg);
+  color: var(--ta-purple);
+}
+
+.ta-page-btn.is-active {
+  background: linear-gradient(135deg, var(--cz-accent) 0%, var(--cz-accent-bright) 100%) !important;
+  color: #fff !important;
+  border-color: var(--cz-accent) !important;
+}
+
+.ta-page-btn.is-active:hover:not(:disabled),
+.ta-page-btn.is-active:focus-visible {
+  filter: brightness(1.03);
+  color: #fff !important;
+}
+
+.ta-page-btn--arrow:not(:disabled) {
+  background: var(--cp-panel-soft);
+  color: var(--cz-text-dim);
+  border-color: var(--cz-rule);
+}
+
+.ta-page-btn--arrow:not(:disabled):hover {
+  background: var(--cz-accent-hover-bg);
+  border-color: var(--cz-accent-border-soft);
+  color: var(--ta-purple);
+}
+
+.ta-page-btn--arrow:disabled {
+  background: var(--cp-panel-soft);
+  color: var(--cz-text-dim);
+  border-color: var(--cz-rule);
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.ta-empty {
+  text-align: center;
+  color: var(--cz-text-dim);
+  padding: 28px 16px;
+  font-size: 14px;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+  word-break: normal;
+  box-sizing: border-box;
+  max-width: 100%;
+}
+
+.ta-table td.ta-empty {
+  border-bottom: none;
+  vertical-align: middle;
+}
+
+.ta-modal {
+  border-radius: 14px;
+  border: 1px solid var(--cz-rule);
+  font-family: inherit;
+}
+
+.ta-modal .modal-title {
+  font-size: 1.05rem;
+  letter-spacing: -0.02em;
+  color: var(--cz-text);
+}
+
+.ta-modal .ta-modal-submit {
+  background: linear-gradient(135deg, var(--cz-accent) 0%, var(--cz-accent-bright) 100%);
+  border: none;
+  color: #fff;
+  font-weight: 600;
+  border-radius: 8px;
+  padding: 0.5rem 1.1rem;
+  box-shadow: 0 2px 8px rgba(114, 90, 238, 0.15);
+}
+
+.ta-modal .ta-modal-submit:hover {
+  filter: brightness(1.05);
+  color: #fff;
+}
+
+/* Narrow viewports: stack header + full-width actions so nothing clips the type menu or forces horizontal scroll */
+@media (max-width: 767.98px) {
+  #mainContent .view-ta .ta-page-header {
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    gap: 12px;
+    overflow: visible;
+    margin-bottom: 20px;
+    padding-bottom: 0;
+  }
+
+  #mainContent .view-ta .ta-page-title {
+    flex: none;
+    width: 100%;
+    min-width: 0;
+  }
+
+  #mainContent .view-ta .ta-page-actions {
+    flex: none;
+    width: 100%;
+    margin-left: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .view-ta .ta-type-wrap,
+  .view-ta .ta-btn-create {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .view-ta .ta-type-btn,
+  .view-ta .ta-btn-create {
+    width: 100%;
+    justify-content: center;
+    box-sizing: border-box;
+  }
+}

@@ -1,0 +1,752 @@
+/* ===== Global palette (Figma) ===== */
+:root{
+  --color-primary: #f2f2f2;
+  --color-card: #f2f2f2;
+  --color-button: #725aee;
+  /* Card outline: 2px solid — #5B5B5B00 is fully transparent (invisible). Use #5b5b5b or #5b5b5b40 if you want a visible stroke. */
+  --color-card-border: #ffffff33;
+  --color-inputLabel: #f5f5f5;
+  --color-input-stroke: #cfd6df;
+  --color-surface: #ffffff;
+  --color-text: #272f37;
+  --color-text-muted: #64748b;
+  --color-border: #e2e8f0;
+  --color-danger: #dc2626;
+  --color-inputInner: #FFFFFF33;
+
+  /* Derived (same hue as button, darker for hover/focus affordance) */
+  --color-button-hover: #5f48d8;
+  --color-focus-ring: rgba(114, 90, 238, 0.22);
+
+  --auth-card-shadow:
+    0 1px 2px rgba(15, 23, 42, 0.04),
+    0 10px 40px rgba(39, 47, 55, 0.08),
+    0 24px 64px rgba(114, 90, 238, 0.06);
+  --auth-radius-card: 24px;
+  --auth-radius-control: 16px;
+
+  /* Form fields — aligned with dashboard control radius */
+  --auth-input-radius: var(--auth-radius-control);
+  --auth-input-border: 2px solid var(--color-input-stroke);
+}
+
+/* ===== Page base ===== */
+html,
+body.auth-body{
+  height: 100%;
+  min-height: 100%;
+}
+
+body.auth-body{
+  /* Close to login.html page wash: #f5f7fb → #f0f4ff */
+  background: linear-gradient(135deg, #f5f7fb 0%, #f0f4ff 42%, #eef2ff 100%);
+  background-attachment: fixed;
+  overflow-y: auto;
+  /* default overflow-x: visible so intl-tel-input list is not clipped */
+  font-size: 15px;
+  color: var(--color-text);
+  font-family: 'Space Grotesk', 'Poppins', system-ui, sans-serif;
+  --bs-body-font-family: 'Space Grotesk', 'Poppins', system-ui, sans-serif;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Match dashboard: every control on auth pages uses the same stack as cp-dashboard-body */
+body.auth-body .form-control,
+body.auth-body .form-label,
+body.auth-body .form-select,
+body.auth-body button,
+body.auth-body .btn,
+body.auth-body .link-button,
+body.auth-body .forgot-link,
+body.auth-body .preloader__text,
+body.auth-body .splash-title,
+body.auth-body .iti input,
+body.auth-body .iti__selected-dial-code{
+  font-family: 'Space Grotesk', 'Poppins', system-ui, sans-serif;
+}
+.form-control:focus {
+    box-shadow: none !important;
+}
+/* Auth shell: true vertical + horizontal center on all viewports (flex beats grid here for consistent centering) */
+.vp-center.auth-page-stage{
+  min-height: 100dvh;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: max(clamp(16px, 4vw, 32px), env(safe-area-inset-top, 0px))
+    max(clamp(14px, 3vw, 24px), env(safe-area-inset-right, 0px))
+    max(clamp(16px, 4vw, 32px), env(safe-area-inset-bottom, 0px))
+    max(clamp(14px, 3vw, 24px), env(safe-area-inset-left, 0px));
+  box-sizing: border-box;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+/* wrapper around card */
+.portal-shell{
+  width: 100%;
+  max-width: min(448px, calc(100vw - 2 * clamp(12px, 3vw, 24px)));
+  min-width: 0;
+  flex: 0 1 auto;
+  overflow: visible;
+}
+
+/* AUTH WRAPPER visibility (used after splash) */
+.auth-wrapper.d-none{ display:none !important; }
+/* Must match flex centering on .vp-center.auth-page-stage (same element) */
+.auth-wrapper.show{
+  display: flex !important;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ===== Login: same flow as login.html — hero robot → padded body (brand, title, form) ===== */
+.auth-login-layout{
+  position: relative;
+  width: 100%;
+}
+
+.auth-login-hero{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: clamp(26px, 5vw, 36px) clamp(16px, 4vw, 28px) clamp(18px, 4vw, 26px);
+  pointer-events: none;
+}
+
+.auth-login-hero__robot{
+  width: 128px;
+  height: auto;
+  aspect-ratio: 220 / 200;
+  max-width: min(128px, 48vw);
+  display: block;
+  object-fit: contain;
+  animation: authLoginHeroFloat 3s ease-in-out infinite;
+}
+
+@keyframes authLoginHeroFloat{
+  0%, 100%{ transform: translateY(0); }
+  50%{ transform: translateY(-10px); }
+}
+
+.auth-login-body{
+  padding: 0 clamp(22px, 5vw, 32px) clamp(22px, 4vw, 32px);
+}
+/* Forgot row: align with label / field horizontal rhythm */
+.portal-form .auth-forgot-row{
+  padding-right: 10px;
+}
+
+/* ===== Auth card — white elevated panel (dashboard / login.html polish) ===== */
+.auth-card{
+  background: #ffffff;
+  border: 1px solid rgba(226, 232, 240, 0.95);
+  border-radius: var(--auth-radius-card);
+  box-shadow: var(--auth-card-shadow);
+  padding: clamp(20px, 4vw, 28px) clamp(18px, 3.5vw, 26px) clamp(22px, 4vw, 28px);
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  overflow: visible; /* intl-tel-input dropdown */
+  position: relative;
+}
+.auth-card::before{
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+.auth-card--stack{
+  padding-top: clamp(22px, 4vw, 30px);
+}
+.auth-card--stack .brand-block{
+  margin-bottom: 1.25rem;
+}
+
+.auth-card.auth-card--login{
+  position: relative;
+  z-index: 1;
+  padding: 0;
+}
+.auth-card.auth-card--login .brand-block{
+  margin-bottom: 1rem;
+}
+.auth-card.auth-card--login .auth-view-head--login{
+  margin-bottom: 1.25rem;
+}
+.auth-card.auth-card--login .auth-view-head--login .auth-view-title{
+  font-size: 1.35rem;
+}
+.auth-card.auth-card--login .auth-view-head--login .auth-view-sub{
+  font-size: 0.875rem;
+}
+
+/* Short desktop windows: keep cards centered; only tighten login hero / padding */
+@media (max-height: 766px) and (min-width: 768px){
+  .auth-login-hero__robot{
+    width: 100px;
+    max-width: 36vw;
+  }
+  .auth-card:not(.auth-card--login){
+    padding: 20px 20px 20px !important;
+  }
+  .auth-card.auth-card--login .auth-login-body{
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+@media (max-width: 768px){
+  .auth-login-hero__robot{
+    width: 108px;
+    max-width: 42vw;
+  }
+  .splash-logo img{
+    max-width: min(300px, 70vw) !important;
+    max-height: min(200px, 40vh) !important;
+  }
+}
+/* Very short viewports only (landscape phones, tiny windows) */
+@media (max-height: 600px){
+  .auth-login-hero{
+    padding-top: 16px;
+    padding-bottom: 12px;
+  }
+  .auth-login-hero__robot{
+    width: 88px;
+    max-width: 40vw;
+  }
+  .auth-card:not(.auth-card--login){
+    padding: 22px 20px 22px !important;
+  }
+}
+
+/* ===== Splash screen ===== */
+.splash-screen{
+  position: fixed;
+  inset: 0;
+  background: var(--color-surface);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9998;
+  transition: opacity .4s ease;
+  font-family: 'Space Grotesk', 'Poppins', system-ui, sans-serif;
+}
+.splash-screen.fade-out{
+  opacity: 0;
+  pointer-events: none;
+}
+.splash-inner{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: 23px;
+  padding: 24px;
+}
+/* Natural aspect ratio — avoid fixed W×H distortion */
+.splash-logo{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.splash-logo img{
+  width: auto;
+  height: auto;
+  max-width: min(320px, 78vw);
+  max-height: min(240px, 42vh);
+  object-fit: contain;
+  vertical-align: middle;
+}
+.splash-title{
+  font-size: 60px;
+  font-weight: 700;
+  letter-spacing: .04em;
+  color: var(--color-text);
+  font-family: 'Space Grotesk', 'Poppins', system-ui, sans-serif;
+}
+/* ===== Splash animation effect ===== */
+.splash-inner {
+  animation: splashZoomOut 1.2s ease forwards;
+}
+
+@keyframes splashZoomOut {
+  0% {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  30% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  80% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.2);
+    opacity: 0;
+  }
+}
+.splash-screen.fade-out {
+  opacity: 0;
+  transform: scale(1.05);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+/* Pulse opacity only — avoids scale + fixed box distortion */
+.splash-logo img {
+  animation: logoPulseOpacity 1.2s ease-in-out infinite alternate;
+}
+@keyframes logoPulseOpacity {
+  from { opacity: 0.88; }
+  to   { opacity: 1; }
+}
+
+/* ===== Brand block (horizontal row) ===== */
+.brand-block{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 1.5rem;
+}
+
+.brand-logo-circle img{
+  width: 140px;
+  max-width:100%;
+  height: auto;
+  object-fit: contain;
+}
+.brand-name{
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--color-text);
+  font-family: 'Space Grotesk', 'Poppins', system-ui, sans-serif;
+}
+
+/* ===== Views fade swap ===== */
+.swap{
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.22s ease, transform 0.26s cubic-bezier(0.22, 1, 0.36, 1);
+  display: none;
+}
+.swap.show{
+  display: block;
+  opacity: 1;
+  transform: none;
+}
+
+/* ===== Auth view headings (login / register / forgot) ===== */
+.auth-view-head{
+  text-align: center;
+  margin-bottom: 1.35rem;
+}
+.auth-view-title{
+  margin: 0 0 0.35rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--color-text);
+  line-height: 1.25;
+  font-family: 'Space Grotesk', 'Poppins', system-ui, sans-serif;
+}
+.auth-view-sub{
+  margin: 0;
+  font-size: 0.9375rem;
+  line-height: 1.45;
+  color: var(--color-text-muted);
+  font-weight: 400;
+  max-width: min(26rem, 100%);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ===== Form layout ===== */
+.portal-form.compact .form-control{
+  height: 48px;
+  min-height: 48px;
+  padding: 10px 16px;
+  font-size: 0.9375rem;
+  font-weight: 400;
+  color: var(--color-text);
+}
+.portal-form.compact .mb-2,
+.portal-form.compact .mb-3{
+  margin-bottom: 0.6rem !important;
+}
+.auth-form.compact .mb-2,
+.auth-form.compact .mb-3{
+  margin-bottom: 0.85rem !important;
+}
+.auth-form.compact .auth-forgot-row{
+  margin-bottom: 1rem !important;
+}
+.auth-form-feedback{
+  min-height: 1.25rem;
+  margin-top: 0.65rem;
+  margin-bottom: 0.15rem;
+}
+.auth-form-feedback:empty{
+  margin-top: 0.35rem;
+  min-height: 0;
+}
+.auth-form-feedback--error{
+  color: var(--color-danger);
+  font-weight: 500;
+}
+.auth-form-submit{
+  margin-top: 0.25rem;
+}
+
+/* Labels: inset matches placeholder / typed text (Figma — 16px) */
+.portal-form .auth-label{
+  display: block;
+  font-size: 15px;
+  font-weight: 500;
+  margin-bottom: 2px;
+  padding-left: 10px;
+  color: var(--color-text);
+}
+
+/* All auth inputs + buttons: same 25px radius, 2px stroke (Figma) */
+.portal-form.compact .form-control.portal-input{
+  border-radius: var(--auth-input-radius) !important;
+  border: var(--auth-input-border) !important;
+  background: var(--color-inputLabel);
+  color: var(--color-text);
+  font-weight: 400;
+  transition: box-shadow .12s ease, border-color .12s ease, background-color .12s ease;
+}
+
+/* Sign up (Figma): fields on white surface inside grey card */
+#registerForm .form-control.portal-input,
+#registerForm .portal-input:focus{
+  background: var(--color-inputInner);
+}
+#registerForm .iti.iti--allow-dropdown.iti--separate-dial-code{
+  background: var(--color-surface);
+}
+.portal-input::placeholder{
+  color: var(--color-text-muted);
+  opacity: 1;
+  font-weight: 400;
+}
+.portal-input::-webkit-input-placeholder{
+  font-weight: 400;
+}
+.portal-input::-moz-placeholder{
+  font-weight: 400;
+  opacity: 1;
+}
+.portal-input:focus{
+  box-shadow: 0 0 0 3px var(--color-focus-ring);
+  border: 2px solid var(--color-button) !important;
+  background: var(--color-inputLabel);
+  outline: none;
+}
+
+/* Password field: single rounded field with icon inside */
+.password-group{
+  position: relative;
+  display: block;
+}
+.password-group .portal-input{
+  padding-right: 48px;
+  width: 100%;
+}
+.portal-eye-btn{
+  position: absolute;
+  right: 4px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  background: transparent;
+  color: var(--color-text-muted);
+  padding: 0 12px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  z-index: 2;
+}
+.portal-eye-btn:hover,
+.portal-eye-btn:focus{
+  color: var(--color-button);
+  outline: none;
+}
+
+/* tiny text + meta */
+.tiny{ font-size:.84rem; }
+.meta{ color: var(--color-text-muted); font-size:.78rem; }
+
+/* ===== main CTA buttons ===== */
+button.btn.portal-btn-main,
+.btn.portal-btn-main{
+  padding: 14px 22px;
+  border-radius: var(--auth-radius-control);
+  border: none;
+  background: linear-gradient(135deg, var(--color-button) 0%, #6346e8 48%, #5b3fd4 100%);
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: #ffffff;
+  font-family: 'Space Grotesk', 'Poppins', system-ui, sans-serif;
+  box-shadow: 0 4px 14px rgba(114, 90, 238, 0.28);
+  transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+}
+
+button.btn.portal-btn-main:hover,
+button.btn.portal-btn-main:focus,
+.btn.portal-btn-main:hover,
+.btn.portal-btn-main:focus{
+  background: linear-gradient(135deg, var(--color-button-hover) 0%, #5740c9 55%, #5239be 100%);
+  color: #ffffff;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 22px rgba(114, 90, 238, 0.35);
+}
+button.btn.portal-btn-main:active,
+.btn.portal-btn-main:active{
+  transform: translateY(0);
+  box-shadow: 0 3px 10px rgba(114, 90, 238, 0.22);
+}
+button.btn.portal-btn-main:focus-visible,
+.btn.portal-btn-main:focus-visible{
+  outline: 2px solid var(--color-button);
+  outline-offset: 3px;
+}
+
+/* text links */
+.forgot-link{
+  font-size: 0.9375rem;
+  color: var(--color-text-muted);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s ease;
+}
+.forgot-link:hover,
+.forgot-link:focus-visible{
+  color: var(--color-button);
+  text-decoration: underline;
+}
+
+.link-button{
+  border: none;
+  background: transparent;
+  padding: 0;
+  color: var(--color-text);
+  cursor: pointer;
+  font-size: inherit;
+  font-weight: 500;
+  font-family: 'Space Grotesk', 'Poppins', system-ui, sans-serif;
+}
+
+/* Footer switch row — register / login / forgot */
+.auth-switch--footer,
+.auth-switch--footer .link-button--inline{
+  color: var(--color-text-muted);
+  font-size: 0.9375rem;
+  font-weight: 400;
+  line-height: 1.5;
+  margin-top: 0.5rem;
+}
+.auth-switch--footer .link-button--inline{
+  color: var(--color-button);
+  text-decoration: underline;
+  font-weight: 600;
+}
+.auth-switch--footer .link-button--inline:hover,
+.auth-switch--footer .link-button--inline:focus-visible{
+  color: var(--color-button-hover);
+  text-decoration: underline;
+}
+/* Preloader overlay — aligned with dashboard shell */
+.preloader{
+  position: fixed;
+  inset: 0;
+  z-index: 10050;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.preloader__backdrop{
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.78);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+.preloader__inner{
+  position: relative;
+  z-index: 1;
+  padding: 1.5rem;
+}
+.preloader__card{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.1rem;
+  padding: 1.75rem 2rem 1.5rem;
+  border-radius: 20px;
+  background: #ffffff;
+  border: 1px solid rgba(123, 97, 255, 0.12);
+  box-shadow:
+    0 4px 24px rgba(39, 47, 55, 0.06),
+    0 20px 56px rgba(114, 90, 238, 0.1);
+  min-width: 200px;
+}
+.preloader__logo{
+  display: block;
+  max-height: 40px;
+  width: auto;
+  object-fit: contain;
+  animation: preloader-logo-pulse 2s ease-in-out infinite;
+}
+.preloader__spinner{
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 3px solid rgba(123, 97, 255, 0.22);
+  border-top-color: #7b61ff;
+  animation: preloader-spin 0.6s linear infinite;
+}
+.preloader__text{
+  margin: 0;
+  font-family: 'Space Grotesk', 'Poppins', system-ui, sans-serif;
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: #64748b;
+}
+body:has(#preloader:not(.d-none)){
+  overflow: hidden;
+}
+@keyframes preloader-spin{
+  to { transform: rotate(360deg); }
+}
+@keyframes preloader-logo-pulse{
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.9; transform: scale(0.98); }
+}
+
+@media (prefers-reduced-motion: reduce){
+  .preloader__logo,
+  .preloader__spinner{
+    animation: none;
+  }
+}
+
+/* intl-tel-input — overflow visible so country list is not clipped */
+.portal-shell,
+.vp-center.auth-page-stage,
+#registerView.swap,
+#registerView.swap.show{
+  overflow: visible;
+}
+
+.iti.iti--allow-dropdown.iti--separate-dial-code{
+  width: 100%;
+  position: relative;
+  border-radius: var(--auth-input-radius);
+  border: var(--auth-input-border);
+  background: var(--color-inputLabel);
+  overflow: visible;
+}
+.iti.iti--allow-dropdown.iti--separate-dial-code input.portal-input{
+  border: none !important;
+  background: transparent !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;  
+  font-weight: 400;
+}
+.iti__country-list{
+  max-width: min(350px, 92vw);
+  width: max-content;
+  z-index: 10060;
+  box-shadow: 0 8px 24px rgba(39, 47, 55, 0.12);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+}
+.iti__country-list.iti__country-list--dropup{
+  margin-bottom: 4px;
+}
+.iti--separate-dial-code .iti__selected-flag{
+  background: rgba(0,0,0,.04);
+  border-radius: calc(var(--auth-input-radius) - 2px) 0 0 calc(var(--auth-input-radius) - 2px);
+}
+.iti--separate-dial-code .iti__selected-dial-code{
+  color: var(--color-text);
+  font-weight: 400;
+}
+.iti__selected-flag{
+  z-index: 2;
+}
+
+/* form validation tweaks */
+.portal-input.is-invalid{
+  border: 2px solid var(--color-danger);
+}
+
+.auth-form-feedback.text-success{
+  color: #166534;
+  font-weight: 600;
+}
+
+@media (max-width: 440px){
+  .auth-view-title{
+    font-size: 1.35rem;
+  }
+  .auth-card.auth-card--login .auth-view-head--login .auth-view-title{
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 380px){
+  .vp-center.auth-page-stage{
+    padding: 12px 10px;
+  }
+}
+
+/* Very narrow phones — comfortable side padding on login body */
+@media (max-width: 360px){
+  .auth-login-hero__robot{
+    width: 92px;
+    max-width: 48vw;
+  }
+  .auth-login-body{
+    padding-left: clamp(16px, 4vw, 22px);
+    padding-right: clamp(16px, 4vw, 22px);
+  }
+  .brand-logo-circle img{
+    width: 118px;
+  }
+}
+
+/* Short landscape (phones): smaller hero */
+@media (max-height: 520px) and (orientation: landscape){
+  .auth-login-hero{
+    padding-top: 14px;
+    padding-bottom: 10px;
+  }
+  .auth-login-hero__robot{
+    width: 80px;
+    max-width: 34vw;
+  }
+}
+
+@media (prefers-reduced-motion: reduce){
+  .swap{
+    transition: none;
+  }
+  .auth-login-hero__robot{
+    animation: none !important;
+  }
+}

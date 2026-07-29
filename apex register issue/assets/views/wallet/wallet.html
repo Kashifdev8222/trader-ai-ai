@@ -1,0 +1,83 @@
+<div class="cp-wallet">
+  <!-- Header / Summary -->
+  <div class="wallet-head">
+    <div class="left">
+      <div class="title">
+        <i class="bi bi-wallet2"></i>
+        <span>Wallet</span>
+      </div>
+
+      <div class="total">
+        <div class="label">Total Balance</div>
+        <div id="walletTotal" class="value">$0.00</div>
+      </div>
+
+      <div class="filters">
+        <span class="label">Accounts</span>
+        <label class="form-check-inline">
+          <input class="form-check-input" type="radio" name="walletKind" id="walletReal" value="real" checked>
+          <span>Real Accounts</span>
+        </label>
+        <label class="form-check-inline">
+          <input class="form-check-input" type="radio" name="walletKind" id="walletDemo" value="demo">
+          <span>Demo Accounts</span>
+        </label>
+      </div>
+    </div>
+
+    <div class="right">
+      <button id="btnCreateAccount" class="portal-btn portal-btn-rounded">
+        <i class="bi bi-plus-square"></i>
+        <span>Create Account</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Accounts table -->
+  <div class="soft-card mt-3">
+    <div class="card-body p-0">
+      <div class="table-scroll" role="region" aria-label="Wallet Accounts">
+        <table class="table table-accounts mb-0" id="walletTable">
+          <thead>
+            <tr>
+              <th>TP NUMBER</th>
+              <th class="td-num">BALANCE</th>
+              <th>CURRENCY</th>
+              <th>STATUS</th>
+              <th>ACCOUNT NAME</th>
+              <th>LAST SYNC TIME</th>
+              <th>LAST META SYNC TIME</th>
+              <th>ACTION</th>
+            </tr>
+          </thead>
+          <tbody id="walletTbody">
+            <tr><td colspan="8" class="text-muted">Loading...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Edit Account Name Modal -->
+  <div class="modal fade" id="walletEditNameModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content cp-modal">
+        <div class="modal-header border-0">
+          <h5 class="modal-title fw-semibold">Update Account Name</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <div class="modal-body">
+          <form id="walletEditNameForm" autocomplete="off">
+            <input type="hidden" id="walletEditAccountId">
+            <div class="mb-3">
+              <input type="text" id="walletEditAccountName" class="form-control portal-input" placeholder="Enter account name" required>
+            </div>
+            <button type="submit" class="btn portal-btn w-100">Submit</button>
+            <div id="walletEditMsg" class="small mt-2 text-center"></div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

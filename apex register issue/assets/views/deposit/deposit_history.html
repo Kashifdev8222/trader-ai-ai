@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>Deposit History</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+  <!-- Bootstrap (use same version as portal) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Icons (Bootstrap Icons) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+  <style>
+    body { background:#eef4f9; }
+    .history-wrap { max-width: 1300px; margin: 18px auto; padding: 8px 14px 40px; }
+
+    .history-head{
+      display:flex; align-items:center; justify-content:space-between;
+      background:#e7eff6; border:2px solid #d8e6f2; border-radius:16px; padding:16px 18px;
+    }
+    .balance { font-size:28px; font-weight:800; }
+    .toolbar { display:flex; align-items:center; gap:14px; }
+
+    .select-pill{
+      position:relative; min-width:260px;
+    }
+    .select-pill select{
+      background:#f3f7fb; border:1.5px solid #e0edf6; border-radius:12px;
+      padding:.7rem 2.2rem .7rem .9rem; font-weight:600; width:100%;
+    }
+    .select-pill .bi-caret-down-fill{
+      position:absolute; right:12px; top:50%; transform: translateY(-50%);
+      color:#6b7b8c; pointer-events:none;
+    }
+
+    .filter-pill{ min-width:180px; }
+    .btn-cta{
+      display:inline-flex; align-items:center; gap:.45rem;
+      border-radius:14px; padding:.55rem 1rem; font-weight:700;
+    }
+
+    .table thead th{ background:#2e4661; color:#fff; }
+    .table tbody td { vertical-align: middle; }
+
+    .status-badge{
+      display:inline-block; padding:.35rem .7rem; border-radius:10px; font-weight:700;
+      background:#e8f2bf; color:#344600;  /* Approved */
+    }
+    .status-Pending{ background:#fff1bf; color:#4e3b00; }
+    .status-Rejected{ background:#ffd6d6; color:#8a0d0d; }
+    .status-Completed{ background:#d6f5df; color:#0b5d2a; }
+    .status-Approved{ background:#e8f2bf; color:#344600; }
+
+    @media (max-width: 992px){
+      .history-head { flex-direction: column; align-items: stretch; gap:10px; }
+      .toolbar { flex-wrap: wrap; }
+      .select-pill, .filter-pill{ width:100%; }
+    }
+  </style>
+</head>
+<body>
+  <div class="history-wrap">
+    <!-- Top bar -->
+    <div class="history-head">
+      <div>
+        <div class="fw-bold">Balance :</div>
+        <div id="hBalance" class="balance">0</div>
+      </div>
+
+      <div class="toolbar">
+        <div class="select-pill">
+          <div class="text-center fw-semibold">Select account :</div>
+          <div class="position-relative">
+            <select id="tpSelect" class="form-select">
+              <option value="">All accounts</option>
+            </select>
+            <i class="bi bi-caret-down-fill"></i>
+          </div>
+        </div>
+
+        <div class="filter-pill">
+          <div class="text-center fw-semibold">Filter :</div>
+          <div class="position-relative">
+            <select id="statusFilter" class="form-select">
+              <option value="">All</option>
+              <option value="Pending">Pending</option>
+              <option value="Approved">Approved</option>
+              <option value="Completed">Completed</option>
+              <option value="Rejected">Rejected</option>
+            </select>
+            <i class="bi bi-caret-down-fill" style="position:absolute;right:12px;top:50%;transform:translateY(-50%);color:#6b7b8c;"></i>
+          </div>
+        </div>
+
+        <button id="btnDownload" class="btn btn-primary btn-cta">
+          <i class="bi bi-download"></i> Download
+        </button>
+        <button id="btnRefresh" class="btn btn-secondary btn-cta">
+          <i class="bi bi-arrow-clockwise"></i> Refresh
+        </button>
+      </div>
+    </div>
+
+    <!-- Table -->
+    <div class="card mt-3">
+      <div class="table-responsive">
+        <table class="table align-middle mb-0">
+          <thead>
+            <tr>
+              <th>Amount</th>
+              <th>Currency</th>
+              <th>Status</th>
+              <th>Comment</th>
+              <th>Created on</th>
+              <th>Updated at</th>
+              <th class="text-center">Action</th>
+            </tr>
+          </thead>
+          <tbody id="rows">
+            <tr><td colspan="7" class="text-center py-4" id="loadingCell">Loading…</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- View modal -->
+  <div class="modal fade" id="txModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <strong>Deposit details</strong>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <div class="text-center fw-bold mb-3" id="txDate"></div>
+          <div class="list-group list-group-flush">
+            <div class="list-group-item d-flex justify-content-between">
+              <div>Amount</div><div id="txAmount" class="fw-bold"></div>
+            </div>
+            <div class="list-group-item d-flex justify-content-between">
+              <div>Comment</div><div id="txComment"></div>
+            </div>
+            <div class="list-group-item d-flex justify-content-between">
+              <div>Status</div><div id="txStatus"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JS deps -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- jsPDF + autoTable for PDF export -->
+  <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jspdf-autotable@3.8.2/dist/jspdf.plugin.autotable.min.js"></script>
+
+  <script>
+    const rowsHost = document.getElementById('rows');
+    const tpSelect = document.getElementById('tpSelect');
+    const statusFilter = document.getElementById('statusFilter');
+    const btnRefresh = document.getElementById('btnRefresh');
+    const btnDownload = document.getElementById('btnDownload');
+    const hBalance = document.getElementById('hBalance');
+
+    let accounts = [];
+    let txAll = [];
+
+    const fmtMoney = v =>
+      (v == null || v === '') ? '0.00'
+        : Number(v).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+    const fmtDate = iso => {
+      if (!iso) return '';
+      const d = new Date(iso);
+      const mm = String(d.getMonth()+1).padStart(2,'0');
+      const dd = String(d.getDate()).padStart(2,'0');
+      const yyyy = d.getFullYear();
+      return `${mm}/${dd}/${yyyy}`;
+    };
+
+    function statusBadge(s){
+      const cls = `status-badge status-${s || ''}`;
+      return `<span class="${cls}">${s || '-'}</span>`;
+    }
+
+    function renderRows(list){
+      if (!list.length) {
+        rowsHost.innerHTML = `<tr><td colspan="7" class="text-center py-4 text-muted">No records.</td></tr>`;
+        return;
+      }
+
+      const rows = list.map(x => {
+        const amount = `${Number(x.amount).toLocaleString()} (${x.currency || '-'})`;
+        const created = fmtDate(x.createdAt);
+        const updated = fmtDate(x.updatedAt || x.createdAt);
+        return `
+          <tr>
+            <td>${Number(x.amount).toLocaleString()}</td>
+            <td>${x.currency || '-'}</td>
+            <td>${statusBadge(x.status)}</td>
+            <td>${x.comment || '-'}</td>
+            <td>${created}</td>
+            <td>${updated}</td>
+            <td class="text-center">
+              <button class="btn btn-primary btn-sm" data-view="${x.id}">View</button>
+              <button class="btn btn-outline-secondary btn-sm ms-2" disabled>Update Receipt</button>
+            </td>
+          </tr>
+        `;
+      });
+      rowsHost.innerHTML = rows.join('');
+    }
+
+    function applyFilters(){
+      const tp = tpSelect.value || '';
+      const st = statusFilter.value || '';
+
+      let list = txAll.slice();
+      if (tp) list = list.filter(r => (r.tpNumber || '') === tp);
+      if (st) list = list.filter(r => (r.status || '') === st);
+
+      renderRows(list);
+    }
+
+    async function loadAccounts(){
+      try {
+        const res = await fetch('/api/accounts/get_accounts.php?userId=' + encodeURIComponent(window.CP_USER?.userId || ''));
+        const json = await res.json();
+        accounts = Array.isArray(json.data) ? json.data : (json.data?.accounts || []);
+        // fill TP select
+        tpSelect.innerHTML = `<option value="">All accounts</option>` +
+          accounts.filter(a => !!a.tpNumber).map(a => `<option value="${a.tpNumber}">${a.tpNumber}</option>`).join('');
+
+        // show total balance (non-demo)
+        const real = accounts.filter(a => !a.isDemoAccount);
+        const total = real.reduce((s,a)=> s + (Number(a.balance)||0), 0);
+        hBalance.textContent = Number(total).toLocaleString();
+      } catch (e) {
+        console.error('accounts error', e);
+      }
+    }
+
+    async function loadTransactions(){
+      document.getElementById('loadingCell')?.remove();
+      rowsHost.innerHTML = `<tr><td colspan="7" class="text-center py-4">Loading…</td></tr>`;
+      try {
+        const res = await fetch('/api/payments/get_transactions.php', { headers:{'Accept':'application/json'} });
+        const json = await res.json();
+        txAll = Array.isArray(json.data) ? json.data : [];
+        applyFilters();
+      } catch (e) {
+        console.error('transactions error', e);
+        rowsHost.innerHTML = `<tr><td colspan="7" class="text-danger text-center py-4">Failed to load transactions.</td></tr>`;
+      }
+    }
+
+    // View modal
+    const txModalEl = document.getElementById('txModal');
+    const txModal = new bootstrap.Modal(txModalEl);
+    const txDate = document.getElementById('txDate');
+    const txAmount = document.getElementById('txAmount');
+    const txComment = document.getElementById('txComment');
+    const txStatus = document.getElementById('txStatus');
+
+    rowsHost.addEventListener('click', (e)=>{
+      const btn = e.target.closest('button[data-view]');
+      if (!btn) return;
+      const id = btn.getAttribute('data-view');
+      const item = txAll.find(x => x.id === id);
+      if (!item) return;
+
+      txDate.textContent = fmtDate(item.createdAt);
+      txAmount.textContent = `${Number(item.amount).toLocaleString()} (${item.currency || '-'})`;
+      txComment.textContent = item.comment || '-';
+      txStatus.innerHTML = statusBadge(item.status);
+
+      txModal.show();
+    });
+
+    // Filters + refresh
+    tpSelect.addEventListener('change', applyFilters);
+    statusFilter.addEventListener('change', applyFilters);
+    btnRefresh.addEventListener('click', loadTransactions);
+
+    // PDF download
+    btnDownload.addEventListener('click', () => {
+      try {
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF('l','pt','a4');
+        const title = 'Deposit History';
+        doc.setFontSize(16);
+        doc.text(title, 40, 40);
+
+        // gather rows currently shown
+        const tableRows = [];
+        const tp = tpSelect.value || 'All';
+        const st = statusFilter.value || 'All';
+
+        tableRows.push(['Filter - TP', tp, 'Status', st, '', '','']);
+        tableRows.push(['','','','','','','']); // spacer
+
+        const body = [];
+        [...rowsHost.querySelectorAll('tr')].forEach(tr=>{
+          const tds = [...tr.children].map(td => td.textContent.trim());
+          if (tds.length >= 7) body.push([tds[0],tds[1],tds[2],tds[3],tds[4],tds[5]]);
+        });
+
+        doc.autoTable({
+          startY: 60,
+          head: [['Amount','Currency','Status','Comment','Created on','Updated at']],
+          body,
+          styles:{ fontSize: 10 }
+        });
+
+        doc.save('deposit-history.pdf');
+      } catch (err) {
+        console.warn('PDF failed, fallback to print', err);
+        window.print();
+      }
+    });
+
+    // boot
+    (async function init(){
+      await loadAccounts();
+      await loadTransactions();
+    })();
+  </script>
+</body>
+</html>

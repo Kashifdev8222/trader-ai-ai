@@ -1,0 +1,197 @@
+<div id="verRoot" class="ver-fig">
+  <!-- Upload (matches Figma: title + icon, Doc History top-right — no extra tab bar) -->
+  <div id="verPanelUpload" class="ver-panel">
+    <div class="ver-upload-header">
+      <div class="ver-upload-title-row">
+        <i class="bi bi-file-earmark-arrow-up ver-upload-title-icon" aria-hidden="true"></i>
+        <h2 class="ver-upload-heading">Upload Document</h2>
+      </div>
+      <button type="button" class="ver-btn-doc-history" id="verBtnGoHistory">Doc History</button>
+    </div>
+
+    <div class="ver-cat-toolbar">
+      <div class="ver-dropdown-wrap">
+        <button type="button" class="ver-cat-pill" id="verCatBtn" aria-expanded="false" aria-haspopup="listbox">
+          <i class="bi bi-check-circle-fill ver-cat-pill__check" aria-hidden="true"></i>
+          <span id="verCatLabel">Identity Card</span>
+          <i class="bi bi-chevron-down ver-cat-pill__caret" aria-hidden="true"></i>
+        </button>
+        <ul class="ver-cat-menu" id="verCatMenu" role="listbox" hidden>
+          <li><button type="button" role="option" data-cat="identity" class="ver-cat-option ver-cat-option--active">Identity Card</button></li>
+          <li><button type="button" role="option" data-cat="proof_residence" class="ver-cat-option">Proof of Residence</button></li>
+          <li><button type="button" role="option" data-cat="card_verification" class="ver-cat-option">Card Verification</button></li>
+          <li><button type="button" role="option" data-cat="other" class="ver-cat-option">Other Document</button></li>
+        </ul>
+      </div>
+
+      <div class="ver-radio-row" id="verRadioRow" aria-label="Document type"></div>
+    </div>
+
+    <!-- ID Front/Back: one file per submit — choose which side this image is -->
+    <div class="ver-id-side-row" id="verIdSideRow" hidden role="group" aria-label="ID card side for this upload">
+      <span class="ver-id-side-label">This image is for</span>
+      <label class="ver-radio ver-radio--side">
+        <input type="radio" name="verIdSide" value="front" checked />
+        <span>ID Front</span>
+      </label>
+      <label class="ver-radio ver-radio--side">
+        <input type="radio" name="verIdSide" value="back" />
+        <span>ID Back</span>
+      </label>
+    </div>
+
+    <div class="ver-address-card" id="verAddressBlock" hidden>
+      <div class="ver-address-title">Address details</div>
+      <div class="ver-address-grid">
+        <label class="ver-field">
+          <span>Country (ISO)</span>
+          <input type="text" id="verCountry" class="ver-input" maxlength="8" placeholder="e.g. PK" autocomplete="country" />
+        </label>
+        <label class="ver-field">
+          <span>City</span>
+          <input type="text" id="verCity" class="ver-input" placeholder="City" />
+        </label>
+        <label class="ver-field ver-field--full">
+          <span>Address</span>
+          <input type="text" id="verAddress" class="ver-input" placeholder="Street, building" />
+        </label>
+        <label class="ver-field">
+          <span>Postal code</span>
+          <input type="text" id="verPostal" class="ver-input" placeholder="Postal code" />
+        </label>
+        <label class="ver-field">
+          <span>Expires</span>
+          <input type="date" id="verExpires" class="ver-input" />
+        </label>
+        <label class="ver-field ver-field--full">
+          <span>Description</span>
+          <textarea id="verDescResidence" class="ver-textarea" rows="2" placeholder="Proof of residency document"></textarea>
+        </label>
+      </div>
+    </div>
+
+    <div class="ver-optional-meta" id="verOptionalMeta">
+      <label class="ver-field ver-field--full">
+        <span>Description <span class="ver-hint">(optional)</span></span>
+        <input type="text" id="verDescGeneral" class="ver-input" placeholder="Short note for reviewers" />
+      </label>
+      <label class="ver-field">
+        <span>Expires <span class="ver-hint">(optional)</span></span>
+        <input type="date" id="verExpiresGeneral" class="ver-input" />
+      </label>
+    </div>
+
+    <div class="ver-drop-grid" id="verDropGrid">
+      <div class="ver-drop-zone-wrap" id="verDropSingle">
+        <div class="ver-drop-zone" data-slot="single" tabindex="0" role="button" aria-label="Upload file">
+          <input type="file" id="verFileInput" class="ver-file-input" accept="image/*,.pdf,.jfif,.jpe" />
+          <i class="bi bi-file-earmark-arrow-up ver-drop-icon" aria-hidden="true"></i>
+          <span class="ver-drop-label" id="verDropLabel">ID Front/Back</span>
+          <span class="ver-drop-filename" id="verFileName"></span>
+          <p class="ver-drop-note">
+            Note: The document to be uploaded must be a colorized photo or scan of a current official identity card (Identity Card, Passport…)
+          </p>
+        </div>
+        <div class="ver-preview-box" id="verPreviewSingle">
+          <span class="ver-preview-caption">Preview ID Doc</span>
+          <div class="ver-preview-inner" id="verPreviewInner"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ver-actions">
+      <button type="button" class="ver-btn-primary" id="verBtnSubmit">
+        <span>Submit</span>
+        <span class="ver-btn-spinner spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+      </button>
+    </div>
+    <div class="ver-alert ver-alert--error d-none" id="verUploadError" role="alert"></div>
+    <div class="ver-alert ver-alert--ok d-none" id="verUploadOk" role="status"></div>
+  </div>
+
+  <!-- Doc History (Figma: title + Upload Document, search + filter + status, table, pagination) -->
+  <div id="verPanelHistory" class="ver-panel ver-panel--hidden" hidden>
+    <div class="ver-history-header">
+      <h2 class="ver-history-heading">Doc History</h2>
+      <button type="button" class="ver-btn-upload-back" id="verBtnGoUpload">Upload Document</button>
+    </div>
+
+    <div class="ver-history-toolbar">
+      <div class="ver-search-wrap">
+        <div class="ver-search-field">
+          <i class="bi bi-search" aria-hidden="true"></i>
+          <input type="search" id="verSearch" class="ver-search-input" placeholder="Search" autocomplete="off" />
+        </div>
+      </div>
+      <div class="ver-history-filters">
+        <div class="ver-filter-wrap">
+          <select id="verFilterType" class="ver-select" aria-label="Filter by document type">
+            <option value="">All Document Types</option>
+          </select>
+          <i class="bi bi-chevron-down ver-select-caret" aria-hidden="true"></i>
+        </div>
+        <div class="ver-filter-wrap">
+          <select id="verFilterStatus" class="ver-select" aria-label="Filter by status">
+            <option value="">All Statuses</option>
+            <option value="Approved">Approved</option>
+            <option value="Pending">Pending</option>
+            <option value="Rejected">Rejected</option>
+          </select>
+          <i class="bi bi-chevron-down ver-select-caret" aria-hidden="true"></i>
+        </div>
+      </div>
+    </div>
+
+    <div class="ver-table-shell">
+      <div class="ver-table-scroll">
+        <table class="ver-table" id="verTable">
+          <thead>
+            <tr>
+              <th class="ver-th ver-th--doc">Document</th>
+              <th class="ver-th ver-th--uploaded">Uploaded</th>
+              <th class="ver-th ver-th--status">Status</th>
+              <th class="ver-th ver-th--action">Action</th>
+            </tr>
+          </thead>
+          <tbody id="verTBody">
+            <tr><td colspan="4" class="ver-loading">Loading…</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <nav class="ver-pager-wrap ver-pager-wrap--outside" aria-label="Document history pagination">
+      <div class="ver-pager" id="verPager"></div>
+    </nav>
+  </div>
+
+  <!-- SVG sources for category dropdown (cloned into menu + pill; fill via currentColor) -->
+  <template id="verCatSvgProof">
+    <svg class="ver-cat-svg" width="31" height="23" viewBox="0 0 31 23" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M30.99 7.29399C30.9885 5.05593 28.7913 3.34104 26.8596 3.39949C23.1838 3.51068 19.5023 3.42372 15.8236 3.4394C15.1739 3.44225 14.662 3.22558 14.2146 2.78937C13.669 2.25623 13.1087 1.73592 12.5557 1.2099C12.5043 1.16286 12.4515 1.11439 12.4002 1.06735L12.3929 1.06165C12.3107 1.00463 12.2286 0.946183 12.1465 0.889163L12.0438 0.809334C11.3808 0.25481 10.5946 0.0138987 9.73803 0.0096222C7.55109 -0.0032074 5.36268 -0.0032074 3.17573 0.0096222C2.28394 0.0153242 1.51536 0.330362 0.919851 0.996076C0.733572 1.13007 0.576629 1.28688 0.506224 1.50926C0.165935 1.92408 0.00752447 2.40876 0.00605771 2.9305C0.000190654 8.48857 -0.00714316 14.0481 0.0148583 19.6061C0.0177918 20.3987 0.318478 21.1314 0.928652 21.7059C1.05626 21.9112 1.2264 22.0737 1.43909 22.1949C2.04926 22.7351 2.78117 22.9803 3.59229 22.9917C4.62783 23.0074 5.66336 22.996 6.70037 22.996C13.4856 22.996 20.2709 22.9333 27.0561 22.9917C27.967 23.0003 29.3428 22.2975 29.4572 22.1877C30.4854 21.3937 30.9768 20.3203 30.9856 19.0815C31.0134 15.1528 30.9929 11.2227 30.99 7.29399ZM13.0544 4.85066C13.1233 4.9647 13.2216 5.04595 13.3551 5.08017V5.07874C13.8934 5.53348 14.527 5.75871 15.2325 5.76014C18.9625 5.76869 22.6925 5.78009 26.4225 5.76014C27.172 5.75586 27.8115 5.88843 28.2926 6.47859H28.2911C28.407 6.78936 28.5361 7.08729 28.5346 7.43796C28.5258 11.2783 28.5287 15.1186 28.5375 18.9575C28.5375 19.3495 28.4862 19.7187 28.2941 20.0651C28.1958 20.1621 27.6545 20.614 27.2732 20.6624C26.5501 20.6667 25.8255 20.6724 25.1024 20.6781C25.0334 20.6781 24.9645 20.6781 24.8941 20.6781C22.3698 20.6781 19.847 20.6781 17.3227 20.6781C17.1848 20.6781 17.0454 20.6781 16.9076 20.6781C16.7697 20.6781 16.6304 20.6781 16.4925 20.6781C16.3546 20.6781 16.2153 20.6781 16.0774 20.6781C16.0803 20.7052 16.0847 20.7309 16.092 20.7537C16.0847 20.7309 16.0788 20.7052 16.0774 20.6781C15.9395 20.6781 15.8016 20.6781 15.6623 20.6781C15.5244 20.6781 15.3851 20.6781 15.2472 20.6781C14.0034 20.6781 12.7581 20.6781 11.5143 20.6781C11.3764 20.6781 11.2371 20.6781 11.0992 20.6781C10.6841 20.6781 10.269 20.6781 9.85537 20.6781C9.7175 20.6781 9.57815 20.6781 9.44028 20.6781C9.2672 20.6781 9.09412 20.6781 8.92251 20.6781C8.81837 20.6781 8.7157 20.6781 8.61156 20.6781C7.60976 20.6781 6.60649 20.6781 5.60323 20.6795C5.01505 20.6795 4.42835 20.6795 3.84018 20.6795C3.77417 20.6724 3.7067 20.6653 3.6407 20.6582C3.17427 20.6296 2.50249 20.4657 2.37928 19.6688L2.37635 3.13292C2.66823 2.53848 3.1464 2.30612 3.82698 2.31895C5.43308 2.34746 7.04212 2.37882 8.64529 2.31182C9.77763 2.26478 10.7545 2.4558 11.5025 3.33819C11.6756 3.51638 11.8487 3.69314 12.0218 3.87133C12.3357 4.22771 12.651 4.58266 13.0529 4.85209L13.0544 4.85066Z"/></svg>
+  </template>
+  <template id="verCatSvgCard">
+    <svg class="ver-cat-svg" width="34" height="23" viewBox="0 0 34 23" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M33.9774 3.8683C33.9696 1.64309 31.9547 0.00249192 29.3001 0.00117523C25.1714 -0.000141463 21.0426 0.00117523 16.9138 0.00117523C12.73 0.00117523 8.54463 -0.00277485 4.36084 0.00380862C2.89918 0.006442 1.74243 0.529169 0.865438 1.50089C0.10632 2.33831 0.0183067 3.31793 0.0183067 4.31466C0.0183067 7.40231 0.0104484 10.49 0.0214501 13.5776C0.0293085 15.6409 -0.0649919 17.7054 0.089032 19.7661C0.208479 21.3737 1.71414 22.6746 3.60486 22.9314C4.32626 23.0288 5.04452 22.992 5.76277 22.992C13.651 22.9959 21.5377 22.9867 29.4259 22.9946C32.1936 22.9972 33.9476 21.354 33.968 19.2776C34.0167 14.1411 33.9963 9.00472 33.9774 3.8683ZM2.61943 6.96385C2.66658 5.94078 2.62728 4.91639 2.63986 3.892C2.65086 2.8742 3.40055 2.2356 4.59816 2.23429C12.8384 2.23034 21.0772 2.23034 29.3174 2.23429C30.5072 2.23429 31.3119 2.9295 31.315 3.92756C31.3182 4.95194 31.2977 5.97633 31.326 6.9994C31.3355 7.34964 31.2459 7.46156 30.7948 7.46024C26.1851 7.44444 21.5738 7.45103 16.9625 7.45103C12.3889 7.45103 7.81538 7.44708 3.24181 7.46024C2.78602 7.46024 2.60057 7.40363 2.621 6.96517L2.61943 6.96385ZM30.7492 20.4613C30.2007 20.8141 29.5626 20.8286 28.9088 20.8286C25.5596 20.8234 22.2088 20.8286 18.8595 20.8273C14.1036 20.8234 9.34618 20.8247 4.5903 20.8049C3.29839 20.7997 2.64614 20.2137 2.63357 19.1235C2.62414 18.2861 2.65872 17.4474 2.61943 16.6113C2.60057 16.2097 2.7263 16.107 3.21352 16.1096C7.26686 16.128 11.3202 16.1175 15.3736 16.1228C15.801 16.1228 16.1751 16.0583 16.4439 15.7541C16.9138 15.2906 16.9059 14.785 16.4219 14.3044C16.414 14.2807 16.3967 14.2649 16.3668 14.2596C16.106 13.9871 15.746 13.9713 15.3673 13.9726C11.1285 13.9752 6.89123 13.9739 2.65243 13.9726C2.63829 13.9423 2.62571 13.9107 2.61314 13.8804C2.61 12.515 2.60685 11.1496 2.60528 9.78552L2.76088 9.6578C2.77974 9.6025 2.80645 9.56564 2.84103 9.54194C2.80803 9.56695 2.77974 9.60382 2.76088 9.6578C2.9259 9.66307 3.0925 9.6736 3.25752 9.6736C9.46878 9.6736 15.68 9.6736 21.8913 9.67097C24.9969 9.66965 28.101 9.66044 31.2066 9.65517C31.2427 9.66834 31.2805 9.68151 31.3166 9.69467C31.3166 12.7981 31.3087 15.9016 31.3292 19.005C31.3323 19.5225 31.2066 19.978 30.8435 20.3902C30.8121 20.4139 30.7822 20.4376 30.7508 20.46L30.7492 20.4613Z"/></svg>
+  </template>
+  <template id="verCatSvgOther">
+    <svg class="ver-cat-svg" width="22" height="23" viewBox="0 0 22 23" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M21.9999 5.9566C22.0142 4.49426 20.9484 3.40866 19.6172 3.4603C17.5572 3.5401 15.4927 3.4779 13.4305 3.48729C13.0341 3.48846 12.6619 3.42626 12.3118 3.22674L12.2425 3.15867C12.0344 2.93568 11.8263 2.7127 11.6193 2.48971C11.4288 2.25968 11.2383 2.03082 11.0478 1.80079C11.0434 1.78318 11.0335 1.77027 11.017 1.7644C10.7759 1.48508 10.592 1.14825 10.2826 0.938171C10.2342 0.904135 10.1857 0.8701 10.1373 0.836065C9.7541 0.270377 9.19147 0.0286094 8.5804 0.0215676C6.38162 -0.00659941 4.18285 -0.00777304 1.98517 0.0215676C1.34877 0.0286094 0.799354 0.332579 0.429405 0.924087C0.409586 0.933476 0.399677 0.949907 0.398576 0.972206C0.292876 1.06492 0.245532 1.19402 0.204793 1.32781C0.393071 1.30552 0.471245 1.21515 0.425001 1.04849C0.470144 1.21515 0.393071 1.30552 0.204793 1.32781C0.183873 1.38415 0.161853 1.44048 0.140933 1.49682C0.00440415 1.75619 0 2.04255 0 2.33009C0 8.42239 0.00330312 14.5159 0 20.6082C0 21.1656 0.144236 21.6586 0.473447 22.0905C0.877528 22.7277 1.47319 22.9942 2.16024 22.9953C8.00455 23.0035 13.8489 23 19.6921 22.9918C20.2855 22.9918 20.8328 22.8111 21.2688 22.3463C21.3624 22.2806 21.4493 22.209 21.4912 22.0916C21.522 22.04 21.5528 21.9884 21.5837 21.9367H21.5826C21.8237 21.6363 21.9503 21.283 21.9591 20.8945C21.9778 20.0648 21.9833 19.235 21.9844 18.4053C21.9866 14.2553 21.9602 10.1054 21.9999 5.9566ZM0.966712 0.543832C0.862113 0.638896 0.768525 0.757432 0.68925 0.905309C0.651815 0.975727 0.608874 0.996852 0.564833 0.992157C0.608874 0.996852 0.650714 0.975727 0.68925 0.905309C0.768525 0.757432 0.862113 0.638896 0.966712 0.543832C1.14948 0.377177 1.36529 0.283287 1.59651 0.232821C1.76166 0.196438 1.93673 0.183528 2.11289 0.182355C1.93673 0.183528 1.76276 0.197612 1.59651 0.232821C1.36419 0.283287 1.14838 0.377177 0.966712 0.543832ZM20.2415 20.3899C20.2415 20.8511 20.0841 21.0178 19.6613 21.0178C13.9017 21.0178 8.14218 21.0178 2.38265 21.0178C2.19988 21.0178 2.02921 20.9861 1.86736 20.9004C1.84094 20.8276 1.81341 20.7537 1.78699 20.6809C1.79029 20.5424 1.79469 20.4051 1.79469 20.2666C1.79469 14.4185 1.79469 8.57027 1.79469 2.72326C1.79469 2.0273 1.89819 1.91932 2.56102 1.91932C4.40195 1.91932 6.24289 1.92871 8.08383 1.91228C8.51874 1.90876 8.85676 2.05664 9.14303 2.39347C9.46453 2.77138 9.79484 3.13872 10.1207 3.51076C10.1736 3.61169 10.2397 3.69972 10.3388 3.7537C10.4356 3.88163 10.5336 4.01073 10.6305 4.13865C11.2967 5.01887 12.1334 5.44021 13.2191 5.41908C15.3331 5.37683 17.4482 5.40617 19.5622 5.40734C20.0708 5.40734 20.2448 5.57869 20.2448 6.11504C20.247 10.8729 20.247 15.632 20.2437 20.3899H20.2415Z"/></svg>
+  </template>
+
+  <!-- View document (same page — replaces new tab) -->
+  <div class="modal fade" id="verDocViewModal" tabindex="-1" aria-labelledby="verDocViewTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
+      <div class="modal-content ver-doc-modal">
+        <div class="modal-header border-0 pb-0">
+          <h5 class="modal-title ver-doc-modal-title" id="verDocViewTitle">Document</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body ver-doc-modal-body">
+          <img id="verDocViewImg" class="ver-doc-modal-img d-none" alt="" />
+          <iframe id="verDocViewFrame" class="ver-doc-modal-frame d-none" title="Document preview"></iframe>
+          <div id="verDocViewFallback" class="ver-doc-modal-fallback d-none">
+            <p class="text-muted mb-2">Unable to show a preview in the browser.</p>
+            <a id="verDocViewOpen" class="ver-link-action" href="#" target="_blank" rel="noopener noreferrer">Open in new tab</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

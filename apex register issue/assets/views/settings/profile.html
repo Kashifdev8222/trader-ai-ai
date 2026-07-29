@@ -1,0 +1,50 @@
+<div id="profileRoot" class="prof-fig">
+  <header class="prof-hero">
+    <div class="prof-hero-avatar" id="profAvatar" aria-hidden="true">—</div>
+    <div class="prof-hero-main">
+      <p class="prof-hero-kicker">Your account</p>
+      <h1 class="prof-hero-name" id="profDisplayName">—</h1>
+      <p class="prof-hero-email" id="profHeroEmail">—</p>
+    </div>
+  </header>
+
+  <div class="prof-grid">
+    <section class="prof-card" aria-labelledby="profDetailsHeading">
+      <h2 id="profDetailsHeading" class="prof-card-title">
+        <i class="bi bi-person-vcard prof-card-title-icon" aria-hidden="true"></i>
+        Account details
+      </h2>
+      <p class="prof-card-lead">Information from your Riseeth profile. Contact support if something looks wrong.</p>
+      <dl class="prof-dl">
+        <div class="prof-dl-row">
+          <dt>User ID</dt>
+          <dd><span id="profUserId" class="prof-mono">—</span></dd>
+        </div>
+        <div class="prof-dl-row" id="profSubWrap" hidden>
+          <dt>Sub ID</dt>
+          <dd><span id="profSubId" class="prof-mono">—</span></dd>
+        </div>
+        <div class="prof-dl-row">
+          <dt>Email</dt>
+          <dd id="profEmailRow">—</dd>
+        </div>
+        <div class="prof-dl-row">
+          <dt>Full name</dt>
+          <dd id="profFullNameRow">—</dd>
+        </div>
+      </dl>
+    </section>
+
+    <section class="prof-card" aria-labelledby="profSecurityHeading">
+      <h2 id="profSecurityHeading" class="prof-card-title">
+        <i class="bi bi-shield-lock prof-card-title-icon" aria-hidden="true"></i>
+        Security
+      </h2>
+      <p class="prof-card-lead">Keep your portal password private. We recommend a unique, strong password.</p>
+      <button type="button" class="prof-btn-primary" id="profBtnChangePass">
+        <i class="bi bi-key" aria-hidden="true"></i>
+        Set your password
+      </button>
+    </section>
+  </div>
+</div>
