@@ -11,24 +11,29 @@ export default function LiveStats() {
   ];
 
   return (
-    <section className="relative border-y border-[var(--border)] bg-[var(--bg-alt)]">
-      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-14">
-        <div className="flex flex-wrap justify-center gap-14 sm:gap-20 lg:gap-32">
-          {items.map((item,i) => {
+    <section className="border-b border-[var(--border)] bg-[var(--bg-alt)]">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-3">
+        <div className="flex flex-wrap items-center justify-center sm:justify-start gap-x-8 gap-y-2">
+          {items.map((item, i) => {
             const d = quotes[item.k];
             const v = d ? `$${d.c?.toFixed(2)}` : '---';
+            const up = d?.dp >= 0;
             return (
-              <div key={i} className="flex items-center gap-4">
-                <div className={`w-10 h-10 lg:w-12 lg:h-12 rounded-xl flex items-center justify-center flex-shrink-0 ${d?.dp>=0?'bg-green-400/10 text-green-400':'bg-red-400/10 text-red-400'}`}>
-                  <svg className="w-5 h-5 lg:w-6 lg:h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={d?.dp>=0?'M5 10l7-7m0 0l7 7m-7-7v18':'M19 14l-7 7m0 0l-7-7m7 7V3'}/></svg>
-                </div>
-                <div>
-                  <div className="text-[1.2rem] sm:text-[1.4rem] lg:text-[1.6rem] font-bold text-[var(--text)] tracking-[-0.01em]">{v}</div>
-                  <div className="text-[11px] sm:text-[12px] text-[var(--text-muted)]">{item.l}</div>
-                </div>
+              <div key={i} className="flex items-center gap-2">
+                <span className="text-[12px] font-medium text-[var(--text-muted)]">{item.l}</span>
+                <span className="text-[13px] font-semibold text-[var(--text)] tabular-nums">{v}</span>
+                {d && (
+                  <span className={`text-[11px] font-medium ${up ? 'text-[var(--green)]' : 'text-[var(--red)]'}`}>
+                    {up ? '+' : ''}{d.dp?.toFixed(2)}%
+                  </span>
+                )}
               </div>
             );
           })}
+          <span className="hidden sm:inline-flex items-center gap-1.5 text-[11px] text-[var(--text-muted)]">
+            <span className="w-1.5 h-1.5 rounded-full bg-[var(--green)] animate-pulse" />
+            Live
+          </span>
         </div>
       </div>
     </section>

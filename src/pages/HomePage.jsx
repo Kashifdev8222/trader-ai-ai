@@ -159,12 +159,14 @@ export default function HomePage() {
       </header>
 
       {/* ====== HERO ====== */}
-      <section id="reg-form" className="relative pt-24 pb-0 lg:pt-32 lg:pb-0"><Con>
+      <section id="reg-form" className="relative pt-16 pb-0 lg:pt-20 lg:pb-0"><Con>
         <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-start">
           {/* LEFT — Headline */}
           <div className="text-center lg:text-left pt-0 lg:pt-4">
             <h1 className="text-[1.75rem] sm:text-[2.2rem] lg:text-[2.6rem] xl:text-[3rem] font-bold tracking-[-0.02em] leading-[1.15] text-[var(--text)] mb-4">
-              Trader AI — Where Smart Traders Turn Market Moves{' '}
+              Trader AI{' '}
+              <span className="text-[var(--text)]">Where Smart Traders Turn Market Moves</span>
+              <br />
               <span className="text-[var(--accent)]">Into Real Returns</span>
             </h1>
             <p className="text-[15px] lg:text-base text-[var(--text-secondary)] leading-relaxed mb-8 max-w-[520px] lg:max-w-none">
