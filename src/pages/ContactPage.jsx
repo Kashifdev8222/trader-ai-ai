@@ -110,11 +110,23 @@ export default function ContactPage() {
               <h3 className="text-lg font-bold text-[var(--text)] mb-2 relative z-10">We are here for you 24/5</h3>
               <p className="text-[var(--text-secondary)] text-sm mb-5 relative z-10">Our support team is available Monday to Friday, around the clock.</p>
               <div className="relative z-10 text-center">
-                <p className="text-[var(--text-secondary)] text-sm mb-4">Click the chat icon at the bottom-right of your screen to start a live conversation instantly.</p>
-                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[var(--accent-light)] border border-[var(--accent)]/20 text-[var(--accent)] text-[13px] font-semibold">
-                  <span className="w-2 h-2 rounded-full bg-[var(--accent)] animate-pulse" />
-                  Chat available 24/5
-                </div>
+                <p className="text-[var(--text-secondary)] text-sm mb-4">Need instant help? Our support team is ready to assist you.</p>
+                <button type="button" onClick={() => {
+                  // Try multiple approaches to open Replain chat
+                  const replainIframe = document.querySelector('iframe[src*="replain"]');
+                  if (replainIframe && replainIframe.contentWindow) {
+                    replainIframe.contentWindow.postMessage({ type: 'open', action: 'open' }, '*');
+                    replainIframe.contentWindow.postMessage('open', '*');
+                    replainIframe.contentWindow.postMessage('toggle', '*');
+                  }
+                  // Try clicking visible Replain elements outside iframe
+                  const btns = document.querySelectorAll('[class*="replain"] button, [id*="replain"] button, [class*="replain"] [role="button"]');
+                  btns.forEach(b => b.click());
+                }} className="relative z-10 inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white font-semibold text-sm transition-all shadow-lg shadow-[var(--accent)]/20 hover:shadow-xl hover:shadow-[var(--accent)]/30">
+                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+                  Launch Live Chat
+                </button>
+                <p className="text-[11px] text-[var(--text-muted)] mt-3">Available 24/7</p>
               </div>
             </div>
           </div>
