@@ -118,6 +118,14 @@ body {
 
 /* ── Replain Chat Widget ── */
 .replain-widget { z-index: 45 !important; }
+#replain-button,
+[class*="replain"] button,
+[class*="replain"] [class*="button"],
+[data-replain] {
+  background: var(--accent) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 4px 16px rgba(16,185,129,0.25) !important;
+}
 
 /* ── Phone Input ── */
 .react-tel-input .form-control {
