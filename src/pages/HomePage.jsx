@@ -159,9 +159,9 @@ export default function HomePage() {
       </header>
 
       {/* ====== HERO ====== */}
-      <section id="reg-form" className="relative py-16 lg:py-20">
+      <section id="reg-form" className="relative pt-14 pb-10 lg:pt-16 lg:pb-14">
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-[1.2fr_1fr] gap-8 lg:gap-12 items-start">
+        <div className="grid lg:grid-cols-[1fr_1fr] gap-6 lg:gap-10 items-start">
           {/* LEFT — Headline */}
           <div className="text-center lg:text-left">
             <h1 className="text-[1.75rem] sm:text-[2.2rem] lg:text-[2.6rem] xl:text-[3rem] font-bold tracking-[-0.02em] leading-[1.15] text-[var(--text)] mb-4">
@@ -184,7 +184,7 @@ export default function HomePage() {
 
           {/* RIGHT — Form */}
           <div className="flex justify-center lg:justify-end">
-            <div className="w-full max-w-[380px]">
+            <div className="w-full max-w-[420px]">
               <div className="rounded-xl bg-[var(--bg-card)] border border-[var(--border)] p-6">
                 <h3 className="text-lg font-semibold text-[var(--text)] text-center mb-1">{FORM_CONTENT.headline}</h3>
                 <p className="text-[13px] text-[var(--text-secondary)] text-center mb-5">{FORM_CONTENT.subheadline}</p>
