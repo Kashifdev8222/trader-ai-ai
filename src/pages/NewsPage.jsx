@@ -20,14 +20,7 @@ export default function NewsPage({ type = 'crypto' }) {
     <div className="pt-28 pb-20">
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-10">
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[var(--text)] mb-4">{title}</h1>
-          <div className="flex items-center justify-center gap-2 mb-4">
-            <div className="h-0.5 w-8 rounded-full bg-gradient-to-r from-transparent to-[#10b981]/60" />
-            <div className="h-1.5 w-1.5 rounded-full bg-[#10b981]" />
-            <div className="h-0.5 w-16 rounded-full bg-gradient-to-r from-[#10b981]/60 via-[#10b981] to-[#10b981]/60" />
-            <div className="h-1.5 w-1.5 rounded-full bg-[#10b981]" />
-            <div className="h-0.5 w-8 rounded-full bg-gradient-to-l from-transparent to-[#10b981]/60" />
-          </div>
+          <h1 className="text-2xl lg:text-3xl font-semibold text-[var(--text)] tracking-tight mb-3">{title}</h1>
           <p className="text-lg text-[var(--text-secondary)]">Latest {type} market news and updates.</p>
         </div>
 

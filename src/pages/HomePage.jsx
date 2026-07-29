@@ -33,13 +33,8 @@ function Logo() {
   );
 }
 
-function Bg({ variant = 'default', dark }) {
-  const d = dark;
-  if (variant === 'hero') return d ? (<><div className="absolute inset-0 bg-gradient-to-b from-[#0A0D14] via-[#080A0F] to-[#080A0F]"/><div className="absolute top-0 right-0 w-[700px] h-[700px] bg-[#10b981]/[0.05] rounded-full blur-3xl pointer-events-none"/><div className="absolute bottom-0 left-1/3 w-[500px] h-[500px] bg-[#10b981]/[0.03] rounded-full blur-3xl pointer-events-none"/></>) : (<><div className="absolute inset-0 bg-gradient-to-b from-[#f8fafc] via-[#f8fafc] to-[#f1f5f9]"/><div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[#10b981]/[0.04] rounded-full blur-3xl pointer-events-none"/></>);
-  if (variant === 'green') return d ? (<><div className="absolute inset-0 bg-gradient-to-br from-[#0A0E0D] via-[#0A0C0B] to-[#0A0D0C]"/><div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#10b981]/[0.02] rounded-full blur-3xl pointer-events-none"/></>) : (<><div className="absolute inset-0 bg-gradient-to-br from-[#f0fdf4] via-[#f8fafc] to-[#ecfdf5]"/><div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#10b981]/[0.03] rounded-full blur-3xl pointer-events-none"/></>);
-  if (variant === 'warm') return d ? (<><div className="absolute inset-0 bg-gradient-to-br from-[#0C0C0A] via-[#0B0B09] to-[#0B0B0C]"/><div className="absolute top-0 right-0 w-[400px] h-[400px] bg-[#10b981]/[0.015] rounded-full blur-3xl pointer-events-none"/></>) : (<><div className="absolute inset-0 bg-gradient-to-br from-[#fff7ed] via-[#f8fafc] to-[#fffbeb]"/><div className="absolute top-0 right-0 w-[400px] h-[400px] bg-[#10b981]/[0.03] rounded-full blur-3xl pointer-events-none"/></>);
-  if (variant === 'blue') return d ? (<><div className="absolute inset-0 bg-gradient-to-br from-[#0A0C11] via-[#0A0B10] to-[#0A0C12]"/><div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-[#6366f1]/[0.01] rounded-full blur-3xl pointer-events-none"/></>) : (<><div className="absolute inset-0 bg-gradient-to-br from-[#eff6ff] via-[#f8fafc] to-[#eef2ff]"/><div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-[#6366f1]/[0.03] rounded-full blur-3xl pointer-events-none"/></>);
-  return (<><div className="absolute inset-0 bg-[var(--bg)]"/><div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-[#10b981]/[0.02] rounded-full blur-3xl pointer-events-none"/></>);
+function Bg({ dark: _dark }) {
+  return <div className="absolute inset-0 bg-[var(--bg)]" />;
 }
 function HdDropdown({ label, items }) {
   const [open, setOpen] = useState(false);
@@ -51,23 +46,16 @@ function HdDropdown({ label, items }) {
   );
 }
 function Sec({ children, id, className = '' }) {
-  return <section id={id} className={`relative border-t border-[var(--border)] reveal ${className}`}>{children}</section>;
+  return <section id={id} className={`relative reveal ${className}`}>{children}</section>;
 }
 function Con({ children }) {
-  return <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-14 lg:py-16 relative z-10">{children}</div>;
+  return <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16 relative z-10">{children}</div>;
 }
 function Head({ headline, subheadline }) {
   return (
     <div className="text-center mb-10">
-      <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[var(--text)] mb-3">{headline}</h2>
-      <div className="flex items-center justify-center gap-1.5 mb-3">
-        <div className="h-px w-6 rounded-full bg-gradient-to-r from-transparent to-[#10b981]/40" />
-        <div className="h-1 w-1 rounded-full bg-[#10b981]" />
-        <div className="h-px w-12 rounded-full bg-gradient-to-r from-[#10b981]/40 via-[#10b981] to-[#10b981]/40" />
-        <div className="h-1 w-1 rounded-full bg-[#10b981]" />
-        <div className="h-px w-6 rounded-full bg-gradient-to-l from-transparent to-[#10b981]/40" />
-      </div>
-      {subheadline && <p className="text-base lg:text-lg text-[var(--text-secondary)] max-w-2xl mx-auto leading-relaxed">{subheadline}</p>}
+      <h2 className="text-xl sm:text-2xl lg:text-[28px] font-semibold text-[var(--text)] tracking-tight mb-3">{headline}</h2>
+      {subheadline && <p className="text-sm text-[var(--text-secondary)] max-w-xl mx-auto leading-relaxed">{subheadline}</p>}
     </div>
   );
 }
@@ -77,10 +65,9 @@ function Btn({ children, variant = 'primary', size = 'md', className = '', ...p 
   if (variant === 'secondary') return <button className={`${base} bg-transparent hover:bg-[var(--bg-overlay)] text-[var(--text)] border border-[var(--border)] hover:border-[var(--border-strong)] ${sz[size]} ${className}`} {...p}>{children}</button>;
   return <button className={`${base} bg-[#10b981] hover:bg-[#059669] text-white shadow-md shadow-[#10b981]/25 hover:shadow-lg hover:shadow-[#10b981]/35 ${sz[size]} ${className}`} {...p}>{children}</button>;
 }
-function Card({ children, className = '', delay = 0, glow = false }) {
+function Card({ children, className = '', delay = 0, glow: _glow = false }) {
   return (
-    <div className={`group rounded-xl bg-[var(--bg-card)] border border-[var(--border)] shadow-[var(--shadow-sm)] hover:shadow-[var(--shadow-lg)] hover:border-[#10b981]/20 transition-all duration-200 hover:-translate-y-1 reveal relative overflow-hidden ${delay ? `delay-${delay}` : ''} ${className}`}>
-      {glow && <div className="absolute inset-0 bg-gradient-to-br from-[#10b981]/[0.02] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />}
+    <div className={`group rounded-lg bg-[var(--bg-card)] border border-[var(--border)] hover:border-[var(--border-strong)] transition-all duration-150 reveal relative ${delay ? `delay-${delay}` : ''} ${className}`}>
       {children}
     </div>
   );
@@ -150,8 +137,8 @@ export default function HomePage() {
     <div className="bg-[var(--bg)] min-h-screen text-[var(--text)]">
 
       {/* ====== HEADER ====== */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-[var(--bg-alt)]/80 backdrop-blur-2xl border-b border-[var(--border)]">
-        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-[60px]">
+      <header className="fixed top-0 left-0 right-0 z-50 bg-[var(--bg)]/70 backdrop-blur-xl">
+        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-[56px]">
           <Logo />
           <nav className="hidden lg:flex items-center gap-1">
             {NAV.map(link => link.children ? (
@@ -172,78 +159,69 @@ export default function HomePage() {
       </header>
 
       {/* ====== HERO ====== */}
-      <section id="reg-form" className="relative pt-20 pb-0 lg:pt-28 lg:pb-0"><Bg dark={dark} variant="hero" /><Con>
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-          {/* LEFT - Text + Trust */}
-          <div className="text-center lg:text-left">
-            <h1 className="text-[1.75rem] sm:text-[2.2rem] lg:text-[2.8rem] xl:text-[3.2rem] font-extrabold tracking-[-0.02em] leading-[1.12] text-[var(--text)] mb-5">
-              Trader AI - Where Smart Traders Turn Market Moves{' '}
-              <span className="text-[#10b981]">Into Real Returns</span>
+      <section id="reg-form" className="relative pt-24 pb-0 lg:pt-32 lg:pb-0"><Con>
+        <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-start">
+          {/* LEFT — Headline */}
+          <div className="text-center lg:text-left pt-0 lg:pt-4">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--accent-light)] border border-[var(--border)] text-[11px] font-medium text-[var(--accent)] mb-6">
+              <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent)] animate-pulse" />
+              AI-Powered Trading Platform
+            </div>
+            <h1 className="text-[2rem] sm:text-[2.5rem] lg:text-[3rem] xl:text-[3.5rem] font-semibold tracking-[-0.03em] leading-[1.08] text-[var(--text)] mb-4">
+              Trade smarter with<br />
+              <span className="text-[var(--accent)]">AI-powered</span> analysis
             </h1>
-            <p className="text-[var(--text-secondary)] text-base lg:text-lg leading-relaxed mb-6 max-w-[540px] lg:max-w-none">
-              {HERO_CONTENT.description}
+            <p className="text-[15px] text-[var(--text-secondary)] leading-relaxed mb-8 max-w-[500px] lg:max-w-none">
+              Real-time market analysis, automated strategies, and risk management — all in one platform. Trade stocks, crypto, forex, and commodities with confidence.
             </p>
-            {/* Trust badges */}
-            <div className="flex flex-wrap items-center gap-3 mb-7">
-              {[{Icon:HiSparkles,t:'Free Sign UP'},{Icon:HiShieldCheck,t:'Secure Connection'},{Icon:HiCash,t:'Withdraw Anytime'}].map((s,i)=>(
-                <span key={i} className="inline-flex items-center gap-2 text-xs sm:text-sm font-medium text-[var(--text-secondary)] bg-[var(--bg-card)] border border-[var(--border)] rounded-full px-4 py-2">
-                  <s.Icon className="w-4 h-4 text-[#10b981]" />{s.t}
-                </span>
-              ))}
+            <div className="flex flex-wrap items-center gap-3 justify-center lg:justify-start mb-8">
+              <a href="#reg-form"><Btn size="lg">Get Started Free<HiArrowRight className="w-4 h-4"/></Btn></a>
+              <Btn variant="secondary" size="lg" onClick={()=>document.getElementById('demo')?.scrollIntoView({behavior:'smooth'})}>Watch Demo</Btn>
             </div>
-            {/* CTAs */}
-            <div className="flex flex-col sm:flex-row items-center gap-3 justify-center lg:justify-start mb-8">
-              <a href="#reg-form"><Btn size="xl">Start Free<HiArrowRight className="w-5 h-5"/></Btn></a>
-              <Btn variant="secondary" size="xl" onClick={()=>document.getElementById('demo')?.scrollIntoView({behavior:'smooth'})}>See How It Works</Btn>
-            </div>
-            {/* Trusted By */}
-            <div className="flex flex-wrap items-center gap-x-5 gap-y-2 justify-center lg:justify-start text-sm">
-              <span className="flex items-center gap-1.5 text-[var(--text-secondary)]">
-                <span className="text-amber-400 text-base">★★★★★</span>
-                <span className="font-semibold text-[var(--text)]">4.8/5</span>
-                <span className="text-[var(--text-muted)]">rated by 2,400+ traders</span>
-              </span>
-              <span className="text-[var(--text-muted)] hidden sm:inline">•</span>
-              <span className="text-[var(--text-muted)]">Trusted by <span className="font-semibold text-[var(--text)]">100,000+</span> traders worldwide</span>
+            <div className="flex items-center gap-6 justify-center lg:justify-start text-[13px] text-[var(--text-muted)]">
+              <span className="flex items-center gap-1.5"><span className="text-amber-500 text-sm">★★★★★</span> 4.8/5</span>
+              <span>100K+ traders</span>
+              <span>50+ countries</span>
             </div>
           </div>
 
-          {/* RIGHT - Form Card (larger, more prominent) */}
+          {/* RIGHT — Form */}
           <div className="flex justify-center lg:justify-end">
-            <div className="w-full max-w-[420px]">
-              <div className="relative rounded-2xl bg-[var(--bg-card)] border border-[var(--border)] p-6 shadow-[var(--shadow-xl)]">
-                {/* Glow behind card */}
-                <div className="absolute -top-10 right-10 w-40 h-40 bg-[#10b981]/[0.06] dark:bg-[#10b981]/[0.04] rounded-full blur-2xl pointer-events-none"/>
-                <h2 className="text-xl font-bold text-[var(--text)] text-center mb-1">{FORM_CONTENT.headline}</h2>
-                <p className="text-sm text-[var(--text-secondary)] text-center mb-6">{FORM_CONTENT.subheadline}</p>
+            <div className="w-full max-w-[380px]">
+              <div className="rounded-xl bg-[var(--bg-card)] border border-[var(--border)] p-6">
+                <h3 className="text-lg font-semibold text-[var(--text)] text-center mb-1">{FORM_CONTENT.headline}</h3>
+                <p className="text-[13px] text-[var(--text-secondary)] text-center mb-5">{FORM_CONTENT.subheadline}</p>
                 {formStatus==='success'?(
                   <div className="text-center py-8">
-                    <div className="w-16 h-16 rounded-2xl bg-[#10b981]/10 flex items-center justify-center mx-auto mb-4"><svg className="w-8 h-8 text-[#10b981]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7"/></svg></div>
-                    <h4 className="text-lg font-bold text-[var(--text)] mb-1">Registration Successful!</h4>
-                    <p className="text-sm text-[var(--text-secondary)]">Welcome to The AI Trader. Check your email.</p>
+                    <div className="w-12 h-12 rounded-lg bg-[var(--accent-light)] flex items-center justify-center mx-auto mb-4">
+                      <svg className="w-6 h-6 text-[var(--accent)]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7"/></svg>
+                    </div>
+                    <h4 className="text-base font-semibold text-[var(--text)] mb-1">Registration Successful</h4>
+                    <p className="text-[13px] text-[var(--text-secondary)]">Check your email for next steps.</p>
                   </div>
                 ):(
-                  <form onSubmit={submitForm} autoComplete="off" className="space-y-4">
+                  <form onSubmit={submitForm} autoComplete="off" className="space-y-3">
                     {FORM_CONTENT.fields.map((f)=>(
                       <div key={f.id}>
-                        <label className="block text-sm font-semibold text-[var(--text)] mb-1.5">{f.label}</label>
+                        <label className="block text-[13px] font-medium text-[var(--text-secondary)] mb-1">{f.label}</label>
                         {f.name === 'phone' ? (
-                          <PhoneInput country={phoneCountry} value={form.phone} onChange={(val) => setForm(p => ({...p, phone: val}))} inputClass="w-full px-4 py-3 rounded-xl bg-[var(--bg)] border border-[var(--border-strong)] text-[var(--text)] text-sm placeholder-[var(--text-secondary)]" containerClass="w-full" buttonClass="rounded-xl bg-[var(--bg)] border border-[var(--border-strong)]" dropdownClass="bg-[#181B24] text-[var(--text)]" />
+                          <PhoneInput country={phoneCountry} value={form.phone} onChange={(val) => setForm(p => ({...p, phone: val}))} />
                         ) : (
-                          <input name={f.name} type={f.type} value={form[f.name]} onChange={hc} required placeholder={`Enter your ${f.label.toLowerCase()}`} className="w-full px-4 py-3 rounded-xl bg-[var(--bg)] border border-[var(--border-strong)] text-[var(--text)] text-sm placeholder-[var(--text-secondary)] focus:outline-none focus:border-[#10b981]/50 focus:ring-2 focus:ring-[#10b981]/10 transition-all"/>
+                          <input name={f.name} type={f.type} value={form[f.name]} onChange={hc} required placeholder={f.label} className="w-full px-3.5 py-2.5 rounded-lg bg-[var(--bg)] border border-[var(--border)] text-[var(--text)] text-[13px] placeholder-[var(--text-muted)] focus:outline-none focus:border-[var(--accent)] focus:ring-1 focus:ring-[var(--accent-light)] transition-all"/>
                         )}
                       </div>
                     ))}
-                    <button type="submit" disabled={formStatus==='loading'} className="w-full py-4 rounded-xl bg-[#10b981] hover:bg-[#059669] text-white font-bold text-[15px] transition-all shadow-lg shadow-[#10b981]/25 hover:shadow-[#10b981]/40 flex items-center justify-center gap-2 mt-2">{formStatus==='loading'?'Processing...':<>{FORM_CONTENT.submitText}<HiArrowRight className="w-5 h-5"/></>}</button>
-                    {errorMsg && <p className="text-center text-sm text-red-400 bg-red-400/5 rounded-lg py-2">{errorMsg}</p>}
-                    <p className="text-center text-xs text-[var(--text-secondary)]">{FORM_CONTENT.footnote2}</p>
+                    <button type="submit" disabled={formStatus==='loading'} className="w-full py-3 rounded-lg bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white font-semibold text-[13px] transition-all flex items-center justify-center gap-2 mt-1">
+                      {formStatus==='loading'?'Processing...':<>{FORM_CONTENT.submitText}<HiArrowRight className="w-3.5 h-3.5"/></>}
+                    </button>
+                    {errorMsg && <p className="text-center text-[12px] text-[var(--red)] bg-[var(--red)]/5 rounded-lg py-2">{errorMsg}</p>}
+                    <p className="text-center text-[11px] text-[var(--text-muted)]">{FORM_CONTENT.footnote2}</p>
                   </form>
                 )}
               </div>
             </div>
           </div>
         </div>
-
       </Con></section>
 
       {/* ====== LIVE MARKET STATS ====== */}
@@ -272,71 +250,43 @@ export default function HomePage() {
       {/* ====== FOREX RATES ====== */}
       <ForexRates />
       {/* ====== ABOUT ====== */}
-      <Sec><Bg dark={dark} variant="green" /><Con>
-        <div className="max-w-[1440px]">
-          <Head headline={ABOUT_CONTENT.headline} subheadline={null} />
-          <p className="text-[var(--text-secondary)] text-base lg:text-lg leading-relaxed text-center mb-12 max-w-3xl mx-auto">{ABOUT_CONTENT.description}</p>
-
-          {/* Inflation Highlight Card */}
-          <div className="relative rounded-2xl bg-gradient-to-br from-[var(--bg-card)] via-[var(--bg-card)] to-[#10b981]/[0.02] border border-[var(--border)] p-6 lg:p-9 mb-10 overflow-hidden shadow-[var(--shadow-md)]">
-            <div className="absolute top-0 right-0 w-64 h-64 bg-[#10b981]/[0.03] rounded-full blur-3xl pointer-events-none" />
-            <h3 className="text-xl lg:text-2xl font-bold text-[var(--text)] mb-6 relative z-10">{ABOUT_CONTENT.inflation_headline}</h3>
-            <div className="grid sm:grid-cols-3 gap-5 mb-8 relative z-10">
-              <div className="text-center p-6 rounded-2xl bg-[var(--bg)] border border-red-400/10 hover:border-red-400/30 transition-all group">
-                <div className="w-12 h-12 rounded-xl bg-red-400/10 flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform">
-                  <svg className="w-6 h-6 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 17h8m0 0V9m0 8l-8-8-4 4-6-6" /></svg>
-                </div>
-                <div className="text-[2rem] sm:text-[2.5rem] font-extrabold text-[#ef4444] tracking-tight">−20%</div>
-                <div className="text-sm font-semibold text-[var(--text-secondary)] mt-1">Real value lost</div>
-                <div className="text-[11px] text-[var(--text-muted)] mt-1">in purchasing power</div>
-              </div>
-              <div className="text-center p-6 rounded-2xl bg-[var(--bg)] border border-[#10b981]/10 hover:border-[#10b981]/30 transition-all group">
-                <div className="w-12 h-12 rounded-xl bg-[#10b981]/10 flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform">
-                  <svg className="w-6 h-6 text-[#10b981]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" /></svg>
-                </div>
-                <div className="text-[2rem] sm:text-[2.5rem] font-extrabold text-[#10b981] tracking-tight">+400%</div>
-                <div className="text-sm font-semibold text-[var(--text-secondary)] mt-1">Nasdaq 100 growth</div>
-                <div className="text-[11px] text-[var(--text-muted)] mt-1">over the same decade</div>
-              </div>
-              <div className="text-center p-6 rounded-2xl bg-[var(--bg)] border border-amber-400/10 hover:border-amber-400/30 transition-all group">
-                <div className="w-12 h-12 rounded-xl bg-amber-400/10 flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform">
-                  <svg className="w-6 h-6 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                </div>
-                <div className="text-[2rem] sm:text-[2.5rem] font-extrabold text-amber-400 tracking-tight">&lt;1%</div>
-                <div className="text-sm font-semibold text-[var(--text-secondary)] mt-1">Bank interest/year</div>
-                <div className="text-[11px] text-[var(--text-muted)] mt-1">money sleeping</div>
-              </div>
-            </div>
-            <p className="text-[var(--text-secondary)] text-sm leading-relaxed relative z-10">{ABOUT_CONTENT.inflation_text}</p>
-          </div>
-
-          {/* Market cards + CTA */}
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {[{n:'Stocks',d:'NYSE, NASDAQ, LSE',Icon:HiTrendingUp},{n:'Crypto',d:'BTC, ETH & altcoins',Icon:HiCurrencyDollar},{n:'Forex',d:'60+ currency pairs',Icon:HiGlobeAlt},{n:'Commodities',d:'Gold, Oil, Gas',Icon:HiSparkles}].map((item,i)=>(
-              <div key={i} className="group p-6 rounded-2xl bg-[var(--bg-card)] border border-[var(--border)] hover:border-[#10b981]/20 hover:shadow-xl hover:shadow-black/[0.05] dark:hover:shadow-black/20 hover:-translate-y-1.5 transition-all duration-500 text-center relative overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-b from-[#10b981]/[0.03] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#10b981]/15 to-[#10b981]/5 flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300"><item.Icon className="w-7 h-7 text-[#10b981]" /></div>
-                <h4 className="text-sm font-bold text-[var(--text)] mb-1.5">{item.n}</h4>
-                <p className="text-[12px] text-[var(--text-secondary)]">{item.d}</p>
+      <Sec><Bg dark={dark} /><Con>
+        <Head headline={ABOUT_CONTENT.headline} />
+        <p className="text-[var(--text-secondary)] text-[15px] leading-relaxed text-center mb-10 max-w-3xl mx-auto">{ABOUT_CONTENT.description}</p>
+        <div className="rounded-xl bg-[var(--bg-card)] border border-[var(--border)] p-6 lg:p-8 mb-10">
+          <h3 className="text-lg font-semibold text-[var(--text)] mb-6">{ABOUT_CONTENT.inflation_headline}</h3>
+          <div className="grid grid-cols-3 gap-4 mb-6">
+            {[{v:'−20%',l:'Real value lost',c:'text-[var(--red)]',bg:'bg-[var(--red)]/5'},{v:'+400%',l:'Nasdaq 100 growth',c:'text-[var(--accent)]',bg:'bg-[var(--accent-light)]'},{v:'<1%',l:'Bank interest/year',c:'text-[var(--amber)]',bg:'bg-[var(--amber)]/5'}].map((s,i)=>(
+              <div key={i} className={`text-center p-4 rounded-lg ${s.bg} border border-[var(--border)]`}>
+                <div className={`text-2xl lg:text-3xl font-semibold ${s.c} tracking-tight`}>{s.v}</div>
+                <div className="text-[12px] text-[var(--text-secondary)] mt-1">{s.l}</div>
               </div>
             ))}
           </div>
-          <div className="text-center mt-10"><a href="#reg-form"><Btn size="lg">Register Now <HiArrowRight className="w-4 h-4"/></Btn></a></div>
+          <p className="text-[var(--text-secondary)] text-[13px] leading-relaxed">{ABOUT_CONTENT.inflation_text}</p>
         </div>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
+          {[{n:'Stocks',d:'NYSE, NASDAQ, LSE',Icon:HiTrendingUp},{n:'Crypto',d:'BTC, ETH & altcoins',Icon:HiCurrencyDollar},{n:'Forex',d:'60+ currency pairs',Icon:HiGlobeAlt},{n:'Commodities',d:'Gold, Oil, Gas',Icon:HiSparkles}].map((item,i)=>(
+            <div key={i} className="p-4 rounded-lg bg-[var(--bg-card)] border border-[var(--border)] text-center">
+              <item.Icon className="w-5 h-5 text-[var(--accent)] mx-auto mb-2" />
+              <h4 className="text-[13px] font-semibold text-[var(--text)]">{item.n}</h4>
+              <p className="text-[12px] text-[var(--text-muted)]">{item.d}</p>
+            </div>
+          ))}
+        </div>
+        <div className="text-center mt-8"><a href="#reg-form"><Btn size="lg">Register Now <HiArrowRight className="w-3.5 h-3.5"/></Btn></a></div>
       </Con></Sec>
 
       {/* ====== VIDEO DEMO ====== */}
       <Sec id="demo"><Bg dark={dark} /><Con>
         <Head headline="See The AI Trader in Action" subheadline="Watch how our AI analyzes markets, spots opportunities, and helps you trade smarter." />
-        <div className="max-w-4xl mx-auto relative">
-          {/* Glow behind video */}
-          <div className="absolute -inset-4 bg-gradient-to-r from-[#10b981]/10 via-[#10b981]/5 to-[#10b981]/10 rounded-3xl blur-3xl pointer-events-none" />
-          <div className="relative rounded-2xl overflow-hidden border border-[var(--border)] shadow-2xl shadow-black/40 bg-[var(--bg-card)] ring-1 ring-white/[0.03]">
-            <div className="flex items-center gap-2 px-5 py-3.5 border-b border-[var(--border)] bg-[var(--bg-alt)]/50">
-              <div className="w-3 h-3 rounded-full bg-red-500/70 shadow-md shadow-red-500/20"/>
-              <div className="w-3 h-3 rounded-full bg-amber-400/70 shadow-md shadow-amber-400/20"/>
-              <div className="w-3 h-3 rounded-full bg-green-400/70 shadow-md shadow-green-400/20"/>
-              <span className="ml-3 text-[11px] text-[var(--text-secondary)] font-medium">theaitrader.ai</span>
+        <div className="max-w-4xl mx-auto">
+          <div className="rounded-lg overflow-hidden border border-[var(--border)] bg-[var(--bg-card)]">
+            <div className="flex items-center gap-1.5 px-4 py-3 border-b border-[var(--border)]">
+              <div className="w-2.5 h-2.5 rounded-full bg-[var(--red)]/40"/>
+              <div className="w-2.5 h-2.5 rounded-full bg-[var(--amber)]/40"/>
+              <div className="w-2.5 h-2.5 rounded-full bg-[var(--green)]/40"/>
+              <span className="ml-2 text-[11px] text-[var(--text-muted)]">theaitrader.ai</span>
             </div>
             <div className="aspect-video"><YouTubeEmbed /></div>
           </div>
@@ -345,16 +295,16 @@ export default function HomePage() {
 
 
       {/* ====== FEATURES ====== */}
-      <Sec><Bg dark={dark} variant="warm" /><Con>
-        <Head headline="What You Get with The AI Trader" subheadline="Here's what makes us different from old-school trading tools." />
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5">
+      <Sec><Bg dark={dark} /><Con>
+        <Head headline="What You Get with The AI Trader" subheadline="Everything you need to trade smarter, faster, and with more confidence." />
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-3">
           {FEATURES.map((f,i)=>(
-            <Card key={i} className="p-6 text-center" glow>
-              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#10b981]/15 via-[#10b981]/10 to-[#10b981]/5 flex items-center justify-center mb-4 group-hover:scale-110 transition-all duration-200 mx-auto">
-                {(()=>{const ico={ChartBar:<HiChartBar className="w-7 h-7 text-[#10b981]"/>,Chip:<HiChip className="w-7 h-7 text-[#10b981]"/>,ViewGrid:<HiDatabase className="w-7 h-7 text-[#10b981]"/>,ShieldCheck:<HiShieldCheck className="w-7 h-7 text-[#10b981]"/>,Beaker:<HiLightBulb className="w-7 h-7 text-[#10b981]"/>,DeviceMobile:<HiDesktopComputer className="w-7 h-7 text-[#10b981]"/>,LockClosed:<HiLockClosed className="w-7 h-7 text-[#10b981]"/>,Support:<HiSupport className="w-7 h-7 text-[#10b981]"/>,UserGroup:<HiUserGroup className="w-7 h-7 text-[#10b981]"/>,DesktopComputer:<HiDesktopComputer className="w-7 h-7 text-[#10b981]"/>};return ico[f.icon]||<HiSparkles className="w-7 h-7 text-[#10b981]"/>})()}
+            <Card key={i} className="p-4 text-center">
+              <div className="w-9 h-9 rounded-lg bg-[var(--accent-light)] flex items-center justify-center mx-auto mb-3">
+                {(()=>{const ico={ChartBar:<HiChartBar className="w-4 h-4 text-[var(--accent)]"/>,Chip:<HiChip className="w-4 h-4 text-[var(--accent)]"/>,ViewGrid:<HiDatabase className="w-4 h-4 text-[var(--accent)]"/>,ShieldCheck:<HiShieldCheck className="w-4 h-4 text-[var(--accent)]"/>,Beaker:<HiLightBulb className="w-4 h-4 text-[var(--accent)]"/>,DeviceMobile:<HiDesktopComputer className="w-4 h-4 text-[var(--accent)]"/>,LockClosed:<HiLockClosed className="w-4 h-4 text-[var(--accent)]"/>,Support:<HiSupport className="w-4 h-4 text-[var(--accent)]"/>,UserGroup:<HiUserGroup className="w-4 h-4 text-[var(--accent)]"/>,DesktopComputer:<HiDesktopComputer className="w-4 h-4 text-[var(--accent)]"/>};return ico[f.icon]||<HiSparkles className="w-4 h-4 text-[var(--accent)]"/>})()}
               </div>
-              <h3 className="text-[15px] font-semibold text-[var(--text)] mb-2">{f.title}</h3>
-              <p className="text-[var(--text-secondary)] text-[13px] leading-relaxed">{f.description}</p>
+              <h3 className="text-[13px] font-semibold text-[var(--text)] mb-1.5">{f.title}</h3>
+              <p className="text-[12px] text-[var(--text-secondary)] leading-relaxed">{f.description}</p>
             </Card>
           ))}
         </div>
@@ -363,53 +313,44 @@ export default function HomePage() {
       {/* ====== HOW IT WORKS ====== */}
       <Sec><Bg dark={dark} /><Con>
         <Head headline={HOW_IT_WORKS.headline} subheadline={HOW_IT_WORKS.subheadline} />
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-12 relative">
-          {/* Connector line (desktop only) */}
-          <div className="hidden lg:block absolute top-12 left-[12%] right-[12%] h-0.5 bg-gradient-to-r from-[#10b981]/20 via-[#10b981]/40 to-[#10b981]/20 z-0" />
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-8">
           {HOW_IT_WORKS.steps.map((s,i)=>(
-            <Card key={i} className="p-6 text-center relative z-10" glow>
-              <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-[#10b981] to-[#059669] text-white flex items-center justify-center text-lg font-bold mx-auto mb-4 shadow-lg shadow-[#10b981]/25 group-hover:shadow-xl group-hover:shadow-[#10b981]/40 group-hover:scale-110 transition-all duration-200">{s.step}</div>
-              <h3 className="text-[15px] font-bold text-[var(--text)] mb-2">{s.title}</h3>
-              <p className="text-[var(--text-secondary)] text-[13px] leading-relaxed">{s.description}</p>
+            <Card key={i} className="p-4 text-center">
+              <div className="w-9 h-9 rounded-lg bg-[var(--accent)] text-white flex items-center justify-center text-sm font-semibold mx-auto mb-3">{s.step}</div>
+              <h3 className="text-[13px] font-semibold text-[var(--text)] mb-1.5">{s.title}</h3>
+              <p className="text-[12px] text-[var(--text-secondary)] leading-relaxed">{s.description}</p>
             </Card>
           ))}
         </div>
-        <div className="text-center"><a href="#reg-form"><Btn size="lg">Start Trading Now <HiArrowRight className="w-4 h-4"/></Btn></a></div>
+        <div className="text-center"><a href="#reg-form"><Btn size="lg">Start Trading Now <HiArrowRight className="w-3.5 h-3.5"/></Btn></a></div>
       </Con></Sec>
 
       {/* ====== WHY AI + MARKETS ====== */}
-      <Sec><Bg dark={dark} variant="blue" /><Con>
-        <div className="grid lg:grid-cols-[1fr_1.3fr] gap-14 lg:gap-20">
-          {/* Left: Why AI */}
-          <div className="flex flex-col justify-center">
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[var(--text)] mb-6">{WHY_AI.headline}</h2>
-            <div className="space-y-4 mb-8">
-              <p className="text-[var(--text-secondary)] text-base leading-relaxed">{WHY_AI.description}</p>
-              <p className="text-[var(--text-secondary)] text-base leading-relaxed">{WHY_AI.description2}</p>
+      <Sec><Bg dark={dark} /><Con>
+        <div className="grid lg:grid-cols-2 gap-10 lg:gap-16">
+          <div>
+            <h2 className="text-xl lg:text-2xl font-semibold text-[var(--text)] tracking-tight mb-4">{WHY_AI.headline}</h2>
+            <div className="space-y-3 mb-6">
+              <p className="text-[var(--text-secondary)] text-[14px] leading-relaxed">{WHY_AI.description}</p>
+              <p className="text-[var(--text-secondary)] text-[14px] leading-relaxed">{WHY_AI.description2}</p>
             </div>
-            <div className="flex items-center gap-3 p-5 rounded-2xl bg-[#10b981]/5 border border-[#10b981]/10">
-              <div className="w-10 h-10 rounded-xl bg-[#10b981]/10 flex items-center justify-center flex-shrink-0">
-                <HiLightBulb className="w-5 h-5 text-[#10b981]" />
-              </div>
-              <p className="text-[var(--text)] text-sm font-semibold leading-relaxed">{WHY_AI.description3}</p>
+            <div className="flex items-start gap-3 p-4 rounded-lg bg-[var(--accent-light)] border border-[var(--accent-light)]">
+              <HiLightBulb className="w-4 h-4 text-[var(--accent)] mt-0.5 flex-shrink-0" />
+              <p className="text-[var(--text)] text-[13px] font-medium leading-relaxed">{WHY_AI.description3}</p>
             </div>
           </div>
-          {/* Right: Markets */}
           <div>
-            <div className="flex items-center gap-2 mb-2">
-              <div className="w-1.5 h-1.5 rounded-full bg-[#10b981]" />
-              <h3 className="text-xl font-bold text-[var(--text)]">{MARKETS.headline}</h3>
-            </div>
-            <p className="text-[var(--text-secondary)] text-sm leading-relaxed mb-6">{MARKETS.subheadline}</p>
-            <div className="space-y-3">
+            <h3 className="text-lg font-semibold text-[var(--text)] mb-2">{MARKETS.headline}</h3>
+            <p className="text-[var(--text-secondary)] text-[13px] leading-relaxed mb-4">{MARKETS.subheadline}</p>
+            <div className="space-y-2">
               {MARKETS.items.map((m,i)=>(
-                <div key={i} className="flex items-center gap-5 p-5 rounded-2xl bg-[var(--bg-card)] border border-[var(--border)] hover:border-[#10b981]/20 hover:shadow-lg hover:shadow-black/[0.04] dark:hover:shadow-black/20 hover:-translate-y-0.5 transition-all duration-300 group">
-                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#10b981]/15 to-[#10b981]/5 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300 shadow-sm">
-                    {i===0?<HiTrendingUp className="w-7 h-7 text-[#10b981]" />:i===1?<HiChartBar className="w-7 h-7 text-[#10b981]" />:i===2?<HiCurrencyDollar className="w-7 h-7 text-[#10b981]" />:i===3?<HiGlobeAlt className="w-7 h-7 text-[#10b981]" />:<HiSparkles className="w-7 h-7 text-[#10b981]" />}
+                <div key={i} className="flex items-center gap-3 p-3 rounded-lg bg-[var(--bg-card)] border border-[var(--border)]">
+                  <div className="w-9 h-9 rounded-lg bg-[var(--accent-light)] flex items-center justify-center flex-shrink-0">
+                    {i===0?<HiTrendingUp className="w-4 h-4 text-[var(--accent)]" />:i===1?<HiChartBar className="w-4 h-4 text-[var(--accent)]" />:i===2?<HiCurrencyDollar className="w-4 h-4 text-[var(--accent)]" />:i===3?<HiGlobeAlt className="w-4 h-4 text-[var(--accent)]" />:<HiSparkles className="w-4 h-4 text-[var(--accent)]" />}
                   </div>
                   <div>
-                    <h4 className="text-base font-bold text-[var(--text)] mb-1">{m.name}</h4>
-                    <p className="text-sm text-[var(--text-secondary)] leading-relaxed">{m.description}</p>
+                    <h4 className="text-[13px] font-semibold text-[var(--text)]">{m.name}</h4>
+                    <p className="text-[12px] text-[var(--text-secondary)]">{m.description}</p>
                   </div>
                 </div>
               ))}
@@ -418,139 +359,116 @@ export default function HomePage() {
         </div>
       </Con></Sec>
 
-
       {/* ====== WHO IS IT FOR ====== */}
-      <Sec><Bg dark={dark} variant="warm" /><Con>
+      <Sec><Bg dark={dark} /><Con>
         <Head headline={WHO_IS_IT_FOR.headline} subheadline={WHO_IS_IT_FOR.subheadline} />
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-12">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-8">
           {WHO_IS_IT_FOR.personas.map((p,i)=>(
-            <Card key={i} className="p-7 text-center" glow>
-              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#10b981]/15 to-[#10b981]/5 flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-all duration-200">
-                {i===0?<HiAcademicCap className="w-6 h-6 text-[#10b981]" />:i===1?<HiTrendingUp className="w-6 h-6 text-[#10b981]" />:i===2?<HiCode className="w-6 h-6 text-[#10b981]" />:<HiBriefcase className="w-6 h-6 text-[#10b981]" />}
+            <Card key={i} className="p-4 text-center">
+              <div className="w-9 h-9 rounded-lg bg-[var(--accent-light)] flex items-center justify-center mx-auto mb-3">
+                {i===0?<HiAcademicCap className="w-4 h-4 text-[var(--accent)]" />:i===1?<HiTrendingUp className="w-4 h-4 text-[var(--accent)]" />:i===2?<HiCode className="w-4 h-4 text-[var(--accent)]" />:<HiBriefcase className="w-4 h-4 text-[var(--accent)]" />}
               </div>
-              <span className="inline-block px-2.5 py-0.5 rounded-full bg-[#10b981]/10 text-[#10b981] text-[10px] font-semibold mb-2.5">0{i+1}</span>
-              <h3 className="text-base font-bold text-[var(--text)] mb-2.5">{p.title}</h3>
-              <p className="text-[var(--text-secondary)] text-[13px] leading-relaxed">{p.description}</p>
+              <h3 className="text-[13px] font-semibold text-[var(--text)] mb-1.5">{p.title}</h3>
+              <p className="text-[12px] text-[var(--text-secondary)] leading-relaxed">{p.description}</p>
             </Card>
           ))}
         </div>
-        <div className="text-center"><a href="#reg-form"><Btn size="lg">Join Now <HiArrowRight className="w-4 h-4"/></Btn></a></div>
+        <div className="text-center"><a href="#reg-form"><Btn size="lg">Join Now <HiArrowRight className="w-3.5 h-3.5"/></Btn></a></div>
       </Con></Sec>
 
       {/* ====== APP SECTION ====== */}
       <Sec><Bg dark={dark} /><Con>
-        <div className="grid lg:grid-cols-2 gap-14 lg:gap-20 items-center">
-          {/* Left: Device */}
-          <div className="flex justify-center order-2 lg:order-1 relative">
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-[#10b981]/[0.05] rounded-full blur-3xl pointer-events-none"/>
-            <div className="absolute top-1/3 right-10 w-20 h-20 bg-[#10b981]/[0.08] rounded-full blur-2xl pointer-events-none"/>
-            <div className="relative z-10 bg-gradient-to-br from-[var(--bg-card)] to-[var(--bg-card)]/80 p-2 sm:p-3 rounded-3xl border border-[var(--border)] shadow-2xl shadow-black/20">
-              <img src="/Trade AI.webp" alt="The AI Trader App - Trade From Your Pocket" loading="lazy" className="w-full h-auto rounded-2xl"/>
+        <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+          <div className="flex justify-center order-2 lg:order-1">
+            <div className="p-2 rounded-xl border border-[var(--border)] bg-[var(--bg-card)]">
+              <img src="/Trade AI.webp" alt="The AI Trader App" loading="lazy" className="w-full h-auto rounded-lg" />
             </div>
           </div>
-          {/* Right: Content */}
           <div className="order-1 lg:order-2">
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[var(--text)] mb-5">{APP_SECTION.headline}</h2>
-            <p className="text-[var(--text-secondary)] text-base leading-relaxed mb-8">{APP_SECTION.subheadline}</p>
-            <ul className="space-y-4 mb-8">
+            <h2 className="text-xl lg:text-2xl font-semibold text-[var(--text)] tracking-tight mb-3">{APP_SECTION.headline}</h2>
+            <p className="text-[var(--text-secondary)] text-[14px] leading-relaxed mb-5">{APP_SECTION.subheadline}</p>
+            <ul className="space-y-2 mb-6">
               {APP_SECTION.features.map((f,i)=>(
-                <li key={i} className="flex items-start gap-4 p-3 rounded-xl hover:bg-[var(--bg-card)] transition-colors group">
-                  <div className="w-7 h-7 rounded-lg bg-[#10b981]/10 flex items-center justify-center flex-shrink-0 mt-0.5 group-hover:bg-[#10b981] transition-colors">
-                    <svg className="w-3.5 h-3.5 text-[#10b981] group-hover:text-white transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7"/></svg>
-                  </div>
-                  <span className="text-sm text-[var(--text-secondary)] group-hover:text-[var(--text)] transition-colors leading-relaxed">{f}</span>
+                <li key={i} className="flex items-start gap-2.5 text-[13px] text-[var(--text-secondary)]">
+                  <svg className="w-4 h-4 text-[var(--accent)] mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7"/></svg>
+                  {f}
                 </li>
               ))}
             </ul>
-            <div className="grid grid-cols-4 gap-4 mb-8">
-              <LiveAppStat />
-            </div>
-            <a href="#reg-form"><Btn size="lg">Get the App <HiArrowRight className="w-4 h-4"/></Btn></a>
+            <div className="grid grid-cols-4 gap-3 mb-6"><LiveAppStat /></div>
+            <a href="#reg-form"><Btn size="lg">Get the App <HiArrowRight className="w-3.5 h-3.5"/></Btn></a>
           </div>
         </div>
       </Con></Sec>
       </MarketDataProvider>
 
       {/* ====== WHY CHOOSE US ====== */}
-      <Sec><Bg dark={dark} variant="blue" /><Con>
+      <Sec><Bg dark={dark} /><Con>
         <Head headline={WHY_CHOOSE_US.headline} subheadline={WHY_CHOOSE_US.subheadline} />
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-12">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 mb-8">
           {WHY_CHOOSE_US.items.map((item,i)=>(
-            <Card key={i} className="p-6" glow>
-              <div className="flex items-start gap-5">
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#10b981]/15 to-[#10b981]/5 flex items-center justify-center flex-shrink-0 mt-0.5 group-hover:scale-110 transition-all duration-200">
-                  {i===0?<HiChip className="w-5 h-5 text-[#10b981]" />:i===1?<HiEmojiHappy className="w-5 h-5 text-[#10b981]" />:i===2?<HiDatabase className="w-5 h-5 text-[#10b981]" />:i===3?<HiCog className="w-5 h-5 text-[#10b981]" />:i===4?<HiScale className="w-5 h-5 text-[#10b981]" />:<HiBadgeCheck className="w-5 h-5 text-[#10b981]" />}
+            <Card key={i} className="p-4">
+              <div className="flex items-start gap-3">
+                <div className="w-8 h-8 rounded-lg bg-[var(--accent-light)] flex items-center justify-center flex-shrink-0 mt-0.5">
+                  {i===0?<HiChip className="w-4 h-4 text-[var(--accent)]" />:i===1?<HiEmojiHappy className="w-4 h-4 text-[var(--accent)]" />:i===2?<HiDatabase className="w-4 h-4 text-[var(--accent)]" />:i===3?<HiCog className="w-4 h-4 text-[var(--accent)]" />:i===4?<HiScale className="w-4 h-4 text-[var(--accent)]" />:<HiBadgeCheck className="w-4 h-4 text-[var(--accent)]" />}
                 </div>
                 <div>
-                  <h3 className="text-[15px] font-bold text-[var(--text)] mb-2">{item.title}</h3>
-                  <p className="text-[var(--text-secondary)] text-[13px] leading-relaxed">{item.description}</p>
+                  <h3 className="text-[13px] font-semibold text-[var(--text)] mb-1">{item.title}</h3>
+                  <p className="text-[12px] text-[var(--text-secondary)] leading-relaxed">{item.description}</p>
                 </div>
               </div>
             </Card>
           ))}
         </div>
-        <div className="text-center"><a href="#reg-form"><Btn size="xl">Register Now <HiArrowRight className="w-4 h-4"/></Btn></a></div>
+        <div className="text-center"><a href="#reg-form"><Btn size="xl">Register Now <HiArrowRight className="w-3.5 h-3.5"/></Btn></a></div>
       </Con></Sec>
 
       {/* ====== THINGS TO KNOW ====== */}
       <Sec><Bg dark={dark} /><Con>
         <Head headline={THINGS_TO_KEEP_IN_MIND.headline} />
-        <div className="grid sm:grid-cols-3 gap-6">
+        <div className="grid sm:grid-cols-3 gap-3 max-w-3xl mx-auto">
           {THINGS_TO_KEEP_IN_MIND.items.map((item,i)=>(
-            <div key={i} className="group p-5 rounded-xl bg-[var(--bg-card)] border border-[var(--border)] hover:border-[#10b981]/20 hover:shadow-[var(--shadow-md)] hover:-translate-y-1 transition-all duration-200 text-center relative overflow-hidden">
-              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#10b981]/15 to-[#10b981]/5 flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-all duration-200">
-                {i===0?<HiExclamation className="w-6 h-6 text-[#10b981]" />:i===1?<HiClipboardList className="w-6 h-6 text-[#10b981]" />:<HiKey className="w-6 h-6 text-[#10b981]" />}
+            <div key={i} className="p-4 rounded-lg bg-[var(--bg-card)] border border-[var(--border)] text-center">
+              <div className="w-9 h-9 rounded-lg bg-[var(--accent-light)] flex items-center justify-center mx-auto mb-3">
+                {i===0?<HiExclamation className="w-4 h-4 text-[var(--accent)]" />:i===1?<HiClipboardList className="w-4 h-4 text-[var(--accent)]" />:<HiKey className="w-4 h-4 text-[var(--accent)]" />}
               </div>
-              <h3 className="text-base font-bold text-[var(--text)] mb-3">{item.title}</h3>
-              <p className="text-[var(--text-secondary)] text-sm leading-relaxed">{item.desc}</p>
+              <h3 className="text-[13px] font-semibold text-[var(--text)] mb-1.5">{item.title}</h3>
+              <p className="text-[12px] text-[var(--text-secondary)] leading-relaxed">{item.desc}</p>
             </div>
           ))}
         </div>
       </Con></Sec>
 
       {/* ====== FAQ ====== */}
-      <Sec><Bg dark={dark} variant="green" /><Con>
-        <Head headline="Frequently Asked Questions" subheadline="Everything you need to know about The AI Trader" />
-        <div className="max-w-3xl mx-auto space-y-4">
+      <Sec><Bg dark={dark} /><Con>
+        <Head headline="Frequently Asked Questions" />
+        <div className="max-w-2xl mx-auto space-y-2">
           {FAQ_ITEMS.map((item,i)=>(<FaqItem key={i} {...item} open={i===0}/>))}
         </div>
-        <div className="text-center mt-10">
-          <p className="text-sm text-[var(--text-secondary)] mb-4">Still have questions? We're here to help.</p>
-          <Link to="/contact-us"><Btn variant="secondary" size="lg">Contact Support <HiArrowRight className="w-4 h-4"/></Btn></Link>
+        <div className="text-center mt-8">
+          <p className="text-[13px] text-[var(--text-secondary)] mb-3">Still have questions?</p>
+          <Link to="/contact-us"><Btn variant="secondary" size="lg">Contact Support <HiArrowRight className="w-3.5 h-3.5"/></Btn></Link>
         </div>
       </Con></Sec>
 
       {/* ====== CTA ====== */}
       <Sec><Bg dark={dark} /><Con>
-        <div className="relative rounded-2xl bg-gradient-to-br from-[var(--bg-card)] via-[var(--bg-card)] to-[#10b981]/[0.02] border border-[var(--border)] p-10 sm:p-12 lg:p-16 text-center overflow-hidden shadow-[var(--shadow-lg)]">
-          <div className="absolute top-0 right-0 w-72 h-72 bg-[#10b981]/[0.03] rounded-full blur-3xl pointer-events-none" />
-          {/* Content */}
-          <div className="relative z-10">
-            <div className="flex items-center justify-center gap-2 mb-5">
-              <span className="text-amber-400 text-xl">★★★★★</span>
-              <span className="text-[var(--text-secondary)] text-sm font-medium">Rated 4.8/5 · by 2,400+ users</span>
-            </div>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[var(--text)] mb-4 tracking-tight">
-              Ready to Trade <span className="text-[#10b981]">Smarter?</span>
-            </h2>
-            <p className="text-[var(--text-secondary)] text-lg max-w-lg mx-auto mb-10 leading-relaxed">Join 100,000+ traders across 50+ countries who are already using AI to level up their trading game.</p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
-              <a href="#reg-form"><Btn size="xl">Create Free Account <HiArrowRight className="w-4 h-4"/></Btn></a>
-              <Link to="/about-us"><Btn variant="secondary" size="xl">Learn More</Btn></Link>
-            </div>
-            <p className="text-[13px] text-[var(--text-secondary)] flex items-center justify-center gap-2">
-              <svg className="w-4 h-4 text-[#10b981]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
-              Free to start. $250 minimum deposit. No hidden fees.
-            </p>
+        <div className="rounded-xl bg-[var(--bg-card)] border border-[var(--border)] p-10 lg:p-14 text-center">
+          <h2 className="text-2xl lg:text-3xl font-semibold text-[var(--text)] tracking-tight mb-3">
+            Ready to trade <span className="text-[var(--accent)]">smarter?</span>
+          </h2>
+          <p className="text-[var(--text-secondary)] text-[14px] max-w-md mx-auto mb-8">Join 100,000+ traders across 50+ countries using AI to level up their trading.</p>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-6">
+            <a href="#reg-form"><Btn size="xl">Create Free Account <HiArrowRight className="w-3.5 h-3.5"/></Btn></a>
+            <Link to="/about-us"><Btn variant="secondary" size="xl">Learn More</Btn></Link>
           </div>
+          <p className="text-[12px] text-[var(--text-muted)]">Free to start. $250 minimum deposit. No hidden fees.</p>
         </div>
       </Con></Sec>
 
       {/* ====== FOOTER ====== */}
-      <footer className="border-t border-[var(--border)] bg-[var(--bg-alt)] relative">
-        {/* Gradient top line */}
-        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#10b981]/30 to-transparent" />
-        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <footer className="border-t border-[var(--border)] bg-[var(--bg-alt)]">
+        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-12">
           {/* Top: Logo + Contact + Follow */}
           <div className="grid grid-cols-1 sm:grid-cols-[40%_30%_30%] gap-10 lg:gap-14 pb-12 border-b border-[var(--border)]">
             <div>

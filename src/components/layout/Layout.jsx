@@ -54,8 +54,8 @@ export default function Layout({ children }) {
   return (
     <div className="bg-[var(--bg)] min-h-screen text-[var(--text)]">
       {/* HEADER */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-[var(--bg-alt)]/80 backdrop-blur-2xl border-b border-[var(--border)]">
-        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-[60px]">
+      <header className="fixed top-0 left-0 right-0 z-50 bg-[var(--bg)]/70 backdrop-blur-xl">
+        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-[56px]">
           <Logo />
           <nav className="hidden lg:flex items-center gap-1">
             {NAV.map(link => link.children ? (
@@ -74,9 +74,8 @@ export default function Layout({ children }) {
       <main>{children}</main>
 
       {/* FOOTER - premium matching HomePage */}
-      <footer className="border-t-2 border-[var(--border-strong)] bg-[var(--bg-alt)] relative">
-        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#10b981]/30 to-transparent" />
-        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <footer className="border-t border-[var(--border)] bg-[var(--bg-alt)]">
+        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="grid grid-cols-1 sm:grid-cols-[40%_30%_30%] gap-10 lg:gap-14 pb-12 border-b border-[var(--border)]">
             <div>
               <Logo />
