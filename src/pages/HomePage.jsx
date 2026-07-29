@@ -163,8 +163,9 @@ export default function HomePage() {
         <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-start">
           {/* LEFT — Headline */}
           <div className="text-center lg:text-left pt-0 lg:pt-4">
-            <h1 className="text-[2rem] sm:text-[2.5rem] lg:text-[3rem] xl:text-[3.5rem] font-bold tracking-[-0.025em] leading-[1.1] text-[var(--text)] mb-4">
-              {HERO_CONTENT.headline}
+            <h1 className="text-[1.75rem] sm:text-[2.2rem] lg:text-[2.6rem] xl:text-[3rem] font-bold tracking-[-0.02em] leading-[1.15] text-[var(--text)] mb-4">
+              Trader AI — Where Smart Traders Turn Market Moves{' '}
+              <span className="text-[var(--accent)]">Into Real Returns</span>
             </h1>
             <p className="text-[15px] lg:text-base text-[var(--text-secondary)] leading-relaxed mb-8 max-w-[520px] lg:max-w-none">
               {HERO_CONTENT.description}
