@@ -42,9 +42,11 @@
       // Watch for Replain widget and fix white background
       const observer = new MutationObserver(() => {
         document.querySelectorAll('body > div[style*="fixed"], body > div[style*="position"]').forEach(el => {
-          if (el.querySelector('iframe[src*="replain"]') || el.innerHTML.includes('replain') || (el.className && el.className.includes && el.className.includes('replain'))) {
+          if (el.dataset.replainFixed) return;
+          if (el.querySelector('iframe[src*="replain"]') || (el.className && typeof el.className === 'string' && el.className.includes('replain'))) {
             el.style.setProperty('background', 'transparent', 'important');
             el.style.setProperty('background-color', 'transparent', 'important');
+            el.dataset.replainFixed = '1';
           }
         });
       });
