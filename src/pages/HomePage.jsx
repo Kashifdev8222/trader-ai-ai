@@ -164,9 +164,7 @@ export default function HomePage() {
           {/* LEFT — Headline */}
           <div className="text-center lg:text-left pt-0 lg:pt-4">
             <h1 className="text-[1.75rem] sm:text-[2.2rem] lg:text-[2.6rem] xl:text-[3rem] font-bold tracking-[-0.02em] leading-[1.15] text-[var(--text)] mb-4">
-              Trader AI{' '}
-              <span className="text-[var(--text)]">Where Smart Traders Turn Market Moves</span>
-              <br />
+              Trader AI{' — '}Where Smart Traders Turn Market Moves{' '}
               <span className="text-[var(--accent)]">Into Real Returns</span>
             </h1>
             <p className="text-[15px] lg:text-base text-[var(--text-secondary)] leading-relaxed mb-8 max-w-[520px] lg:max-w-none">
@@ -198,22 +196,22 @@ export default function HomePage() {
                     <p className="text-[13px] text-[var(--text-secondary)]">Check your email for next steps.</p>
                   </div>
                 ):(
-                  <form onSubmit={submitForm} autoComplete="off" className="space-y-3">
+                  <form onSubmit={submitForm} autoComplete="off" className="space-y-3.5">
                     {FORM_CONTENT.fields.map((f)=>(
                       <div key={f.id}>
-                        <label className="block text-[13px] font-medium text-[var(--text-secondary)] mb-1">{f.label}</label>
+                        <label className="block text-sm font-medium text-[var(--text)] mb-1.5">{f.label}</label>
                         {f.name === 'phone' ? (
                           <PhoneInput country={phoneCountry} value={form.phone} onChange={(val) => setForm(p => ({...p, phone: val}))} />
                         ) : (
-                          <input name={f.name} type={f.type} value={form[f.name]} onChange={hc} required placeholder={f.label} className="w-full px-3.5 py-2.5 rounded-lg bg-[var(--bg)] border border-[var(--border)] text-[var(--text)] text-[13px] placeholder-[var(--text-muted)] focus:outline-none focus:border-[var(--accent)] focus:ring-1 focus:ring-[var(--accent-light)] transition-all"/>
+                          <input name={f.name} type={f.type} value={form[f.name]} onChange={hc} required placeholder={f.label} className="w-full px-3.5 py-2.5 rounded-lg bg-[var(--bg)] border border-[var(--border)] text-[var(--text)] text-sm placeholder-[var(--text-muted)] focus:outline-none focus:border-[var(--accent)] focus:ring-1 focus:ring-[var(--accent-light)] transition-all"/>
                         )}
                       </div>
                     ))}
-                    <button type="submit" disabled={formStatus==='loading'} className="w-full py-3 rounded-lg bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white font-semibold text-[13px] transition-all flex items-center justify-center gap-2 mt-1">
-                      {formStatus==='loading'?'Processing...':<>{FORM_CONTENT.submitText}<HiArrowRight className="w-3.5 h-3.5"/></>}
+                    <button type="submit" disabled={formStatus==='loading'} className="w-full py-3 rounded-lg bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white font-semibold text-sm transition-all flex items-center justify-center gap-2 mt-1">
+                      {formStatus==='loading'?'Processing...':<>{FORM_CONTENT.submitText}<HiArrowRight className="w-4 h-4"/></>}
                     </button>
-                    {errorMsg && <p className="text-center text-[12px] text-[var(--red)] bg-[var(--red)]/5 rounded-lg py-2">{errorMsg}</p>}
-                    <p className="text-center text-[11px] text-[var(--text-muted)]">{FORM_CONTENT.footnote2}</p>
+                    {errorMsg && <p className="text-center text-[13px] text-[var(--red)] bg-[var(--red)]/5 rounded-lg py-2">{errorMsg}</p>}
+                    <p className="text-center text-[12px] text-[var(--text-muted)]">{FORM_CONTENT.footnote2}</p>
                   </form>
                 )}
               </div>
