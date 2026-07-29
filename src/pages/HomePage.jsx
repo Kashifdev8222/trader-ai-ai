@@ -159,7 +159,7 @@ export default function HomePage() {
       </header>
 
       {/* ====== HERO ====== */}
-      <section id="reg-form" className="relative pt-14 pb-10 lg:pt-16 lg:pb-14">
+      <section id="reg-form" className="relative pt-20 pb-20 lg:pt-24 lg:pb-24">
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-[1fr_1fr] gap-6 lg:gap-10 items-start">
           {/* LEFT — Headline */}
