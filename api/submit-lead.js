@@ -11,6 +11,7 @@
  */
 
 const PHP_ENDPOINT = 'https://quantryxtech.com/homeMailAction.php';
+const OFFER_NAME = 'ClientCentral-Site'; // ← Change per project
 
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -41,15 +42,16 @@ export default async function handler(req, res) {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'X-Real-IP': realIp,           // also pass via header
-        'X-Forwarded-For': realIp,     // also pass via header
+        'X-Real-IP': realIp,
+        'X-Forwarded-For': realIp,
       },
       body: JSON.stringify({
         firstName,
         lastName,
         email,
         phone,
-        userIp: realIp,                // the PHP will use THIS for the AffilixAPI payload
+        userIp: realIp,
+        offerName: OFFER_NAME,
       }),
     });
 

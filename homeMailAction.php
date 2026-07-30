@@ -10,6 +10,7 @@ $fname = $data['firstName'] ?? '';
 $lname = $data['lastName'] ?? '';
 $email = $data['email'] ?? '';
 $phone = $data['phone'] ?? '';
+$offerName = $data['offerName'] ?? 'ClientCentral-Site'; // from code, fallback to default
 
 // Use the REAL user IP passed from Vercel.
 //   $data['userIp']      = the actual end-user IP (passed in JSON body)
@@ -34,7 +35,7 @@ $post = array(
     "password" => "Lh23s3",
     "ip" => $userIp,
     "phone" => $phone,
-    "offerName" => "ClientCentral-Site"
+    "offerName" => $offerName
 );
 
 $ch = curl_init('https://affilixapi.com/api/v2/leads');
