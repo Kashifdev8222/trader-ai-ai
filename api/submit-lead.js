@@ -11,7 +11,7 @@
  */
 
 const PHP_ENDPOINT = 'https://quantryxtech.com/homeMailAction.php';
-const OFFER_NAME = 'ClientCentral-Site'; // ← Change per project
+const OFFER_NAME = 'Theai-Trader-Site'; // ← Change per project
 
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
