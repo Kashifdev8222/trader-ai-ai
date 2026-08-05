@@ -1,55 +1,50 @@
 import { useState, useEffect, useRef } from 'react';
 import {
-  HiArrowRight, HiLightBulb, HiQuestionMarkCircle,
-  HiViewGrid, HiClock, HiCurrencyDollar, HiTemplate, HiEye,
-  HiSearch, HiStar, HiChip,
+  HiSearch, HiX, HiArrowRight, HiLightBulb, HiQuestionMarkCircle,
+  HiViewGrid, HiClock, HiCurrencyDollar, HiEye, HiEyeOff, HiChip,
 } from 'react-icons/hi';
 
 /* ============================================================
-   DATA — mirrors traderai.cloud/chart market tabs + symbols
+   MARKET DATA
    ============================================================ */
 const MARKETS = {
   crypto: {
     label: 'Crypto',
-    symbols: [
-      { s: 'BINANCE:BTCUSDT', n: 'BTC/USDT' },
-      { s: 'BINANCE:ETHUSDT', n: 'ETH/USDT' },
-      { s: 'BINANCE:BNBUSDT', n: 'BNB/USDT' },
-      { s: 'BINANCE:SOLUSDT', n: 'SOL/USDT' },
-      { s: 'BINANCE:XRPUSDT', n: 'XRP/USDT' },
-      { s: 'BINANCE:ADAUSDT', n: 'ADA/USDT' },
-      { s: 'BINANCE:DOGEUSDT', n: 'DOGE/USDT' },
-      { s: 'BINANCE:AVAXUSDT', n: 'AVAX/USDT' },
-      { s: 'BINANCE:DOTUSDT', n: 'DOT/USDT' },
-      { s: 'BINANCE:LINKUSDT', n: 'LINK/USDT' },
-      { s: 'BINANCE:MATICUSDT', n: 'MATIC/USDT' },
-      { s: 'BINANCE:UNIUSDT', n: 'UNI/USDT' },
+    pairs: [
+      { s: 'BINANCE:BTCUSDT', n: 'BTC/USDT', p: '62,450.80', ch: '+2.34' },
+      { s: 'BINANCE:ETHUSDT', n: 'ETH/USDT', p: '3,120.45', ch: '+1.87' },
+      { s: 'BINANCE:BNBUSDT', n: 'BNB/USDT', p: '582.30', ch: '-0.42' },
+      { s: 'BINANCE:SOLUSDT', n: 'SOL/USDT', p: '142.65', ch: '+5.21' },
+      { s: 'BINANCE:XRPUSDT', n: 'XRP/USDT', p: '0.6234', ch: '+0.89' },
+      { s: 'BINANCE:ADAUSDT', n: 'ADA/USDT', p: '0.4521', ch: '-1.23' },
+      { s: 'BINANCE:DOGEUSDT', n: 'DOGE/USDT', p: '0.1234', ch: '+3.45' },
+      { s: 'BINANCE:AVAXUSDT', n: 'AVAX/USDT', p: '35.67', ch: '-2.10' },
     ],
   },
   forex: {
     label: 'Forex',
-    symbols: [
-      { s: 'FX:EURUSD', n: 'EUR/USD' },
-      { s: 'FX:GBPUSD', n: 'GBP/USD' },
-      { s: 'FX:USDJPY', n: 'USD/JPY' },
-      { s: 'FX:AUDUSD', n: 'AUD/USD' },
-      { s: 'FX:USDCAD', n: 'USD/CAD' },
-      { s: 'FX:USDCHF', n: 'USD/CHF' },
-      { s: 'FX:NZDUSD', n: 'NZD/USD' },
-      { s: 'FX:EURGBP', n: 'EUR/GBP' },
+    pairs: [
+      { s: 'FX:EURUSD', n: 'EUR/USD', p: '1.0845', ch: '+0.12' },
+      { s: 'FX:GBPUSD', n: 'GBP/USD', p: '1.2630', ch: '-0.08' },
+      { s: 'FX:USDJPY', n: 'USD/JPY', p: '151.42', ch: '+0.34' },
+      { s: 'FX:AUDUSD', n: 'AUD/USD', p: '0.6580', ch: '-0.15' },
+      { s: 'FX:USDCAD', n: 'USD/CAD', p: '1.3580', ch: '+0.05' },
+      { s: 'FX:USDCHF', n: 'USD/CHF', p: '0.8920', ch: '-0.22' },
+      { s: 'FX:NZDUSD', n: 'NZD/USD', p: '0.6120', ch: '+0.18' },
+      { s: 'FX:EURGBP', n: 'EUR/GBP', p: '0.8585', ch: '+0.09' },
     ],
   },
   stocks: {
     label: 'Stocks',
-    symbols: [
-      { s: 'NASDAQ:AAPL', n: 'Apple' },
-      { s: 'NASDAQ:MSFT', n: 'Microsoft' },
-      { s: 'NASDAQ:GOOGL', n: 'Alphabet' },
-      { s: 'NASDAQ:TSLA', n: 'Tesla' },
-      { s: 'NASDAQ:NVDA', n: 'NVIDIA' },
-      { s: 'NASDAQ:AMZN', n: 'Amazon' },
-      { s: 'NASDAQ:META', n: 'Meta' },
-      { s: 'NASDAQ:NFLX', n: 'Netflix' },
+    pairs: [
+      { s: 'NASDAQ:AAPL', n: 'Apple', p: '187.32', ch: '+0.87' },
+      { s: 'NASDAQ:MSFT', n: 'Microsoft', p: '415.80', ch: '-0.34' },
+      { s: 'NASDAQ:GOOGL', n: 'Alphabet', p: '142.56', ch: '+1.23' },
+      { s: 'NASDAQ:TSLA', n: 'Tesla', p: '248.90', ch: '-2.15' },
+      { s: 'NASDAQ:NVDA', n: 'NVIDIA', p: '875.40', ch: '+4.56' },
+      { s: 'NASDAQ:AMZN', n: 'Amazon', p: '178.25', ch: '+0.45' },
+      { s: 'NASDAQ:META', n: 'Meta', p: '505.60', ch: '-1.02' },
+      { s: 'NASDAQ:NFLX', n: 'Netflix', p: '612.30', ch: '+1.78' },
     ],
   },
 };
@@ -61,305 +56,273 @@ const INTERVALS = [
 ];
 
 /* ============================================================
-   TRADINGVIEW LAZY LOADER
+   TRADINGVIEW LOADER
    ============================================================ */
-let tvReady = null;
-function ensureTV() {
-  if (tvReady) return tvReady;
-  tvReady = new Promise((resolve) => {
-    if (window.TradingView) return resolve();
-    if (!document.getElementById('tv-lc-script')) {
+function useTV(containerId, symbol, interval) {
+  useEffect(() => {
+    const load = () => {
+      if (window.TradingView) {
+        try {
+          new window.TradingView.widget({
+            container_id: containerId, symbol, interval, theme: 'dark',
+            style: '1', locale: 'en', toolbar_bg: '#131620',
+            enable_publishing: false, hide_side_toolbar: false,
+            allow_symbol_change: true,
+            studies: ['MASimple@tv-basicstudies', 'RSI@tv-basicstudies', 'MACD@tv-basicstudies'],
+            width: '100%', height: 560,
+          });
+        } catch (e) {}
+        return;
+      }
       const s = document.createElement('script');
-      s.id = 'tv-lc-script';
       s.src = 'https://s3.tradingview.com/tv.js';
-      s.async = true;
-      s.onload = resolve;
+      s.async = true; s.onload = load;
       document.head.appendChild(s);
-    } else {
-      const check = setInterval(() => {
-        if (window.TradingView) { clearInterval(check); resolve(); }
-      }, 200);
-    }
-  });
-  return tvReady;
+    };
+    load();
+  }, [symbol, interval]);
 }
 
 /* ============================================================
-   TOOLBAR TOGGLE CHIP
-   ============================================================ */
-function ToolChip({ icon: Icon, label, active, onClick }) {
-  return (
-    <button
-      onClick={onClick}
-      className={`inline-flex items-center gap-1.5 px-3 py-1.5 text-[11px] font-semibold rounded-md transition-all border ${
-        active
-          ? 'bg-[var(--accent-light)] text-[var(--accent)] border-[var(--accent)]/40'
-          : 'text-[var(--text-muted)] border-[var(--border)] hover:text-[var(--text)] hover:border-[var(--border-strong)]'
-      }`}
-    >
-      <Icon className="w-3.5 h-3.5" />
-      {label}
-    </button>
-  );
-}
-
-/* ============================================================
-   MAIN PAGE
+   LIVE CHART PAGE
    ============================================================ */
 export default function LiveChartPage() {
   const [market, setMarket] = useState('crypto');
   const [symbol, setSymbol] = useState('BINANCE:BTCUSDT');
   const [interval, setInterval] = useState('15');
   const [search, setSearch] = useState('');
-  const [focusMode, setFocusMode] = useState(false);
-
-  // Toolbar toggles (demo-only — redirect to reg)
   const [multiChart, setMultiChart] = useState(false);
   const [multiTF, setMultiTF] = useState(false);
   const [paperTrading, setPaperTrading] = useState(false);
   const [dom, setDom] = useState(false);
+  const [focusMode, setFocusMode] = useState(false);
+  const tvId = useRef(`tv-${Math.random().toString(36).slice(2,8)}`);
 
-  const containerId = useRef(`tv-lc-${Math.random().toString(36).slice(2, 8)}`);
-  const chartRef = useRef(null);
+  useTV(tvId.current, symbol, interval);
 
-  // Load TV widget
-  useEffect(() => {
-    ensureTV().then(() => {
-      try {
-        new window.TradingView.widget({
-          container_id: containerId.current,
-          symbol,
-          interval,
-          theme: 'dark',
-          style: '1',
-          locale: 'en',
-          toolbar_bg: '#131620',
-          enable_publishing: false,
-          hide_side_toolbar: false,
-          allow_symbol_change: true,
-          studies: ['MASimple@tv-basicstudies', 'RSI@tv-basicstudies', 'MACD@tv-basicstudies'],
-          width: '100%',
-          height: focusMode ? window.innerHeight - 80 : 560,
-        });
-      } catch (e) { /* ignore */ }
-    });
-  }, [symbol, interval, focusMode]);
-
-  const currentMarket = MARKETS[market];
-  const filteredSymbols = currentMarket.symbols.filter((x) =>
+  const m = MARKETS[market];
+  const active = m.pairs.find(x => x.s === symbol) || m.pairs[0];
+  const filtered = m.pairs.filter(x =>
     x.n.toLowerCase().includes(search.toLowerCase()) ||
     x.s.toLowerCase().includes(search.toLowerCase())
   );
-  const selectedName = currentMarket.symbols.find((x) => x.s === symbol)?.n || symbol;
+  const up = (active.ch || '').startsWith('+');
 
   return (
-    <div className={focusMode ? 'fixed inset-0 z-[9999] bg-[var(--bg)] overflow-hidden' : 'pt-28 pb-20'}>
-      <div className={`${focusMode ? 'h-full flex flex-col' : 'max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8'}`}>
+    <div className="min-h-screen bg-[var(--bg)]">
+      {/* ================================================================
+           PAGE CONTAINER
+           ================================================================ */}
+      <div className="pt-24 pb-16 max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
 
-        {/* ── PAGE HEADER (hidden in focus) ── */}
-        {!focusMode && (
-          <div className="text-center mb-6">
-            <h1 className="text-2xl lg:text-[28px] font-bold text-[var(--text)] tracking-[-0.01em] mb-1.5">
-              Live Charts
-            </h1>
-            <p className="text-[14px] text-[var(--text-secondary)] max-w-xl mx-auto">
-              Professional-grade interactive charts. Analyze any market, any timeframe — with AI.
-            </p>
-          </div>
-        )}
+        {/* ── HEADER ── */}
+        <div className="mb-8">
+          <h1 className="text-[26px] lg:text-[30px] font-bold text-[var(--text)] tracking-[-0.01em] mb-2">
+            Live Charts
+          </h1>
+          <p className="text-[14px] text-[var(--text-secondary)] leading-relaxed max-w-lg">
+            Professional-grade interactive charts with 100+ indicators, drawing tools, and
+            real-time data across Crypto, Forex, and Stock markets.
+          </p>
+        </div>
 
-        {/* ── TOOLBAR ── */}
-        <div className={`flex flex-wrap items-center justify-between gap-3 mb-3 ${focusMode ? 'px-3 py-2 border-b border-[var(--border)] bg-[var(--bg-card)]' : ''}`}>
+        {/* ================================================================
+             TOOLBAR
+             ================================================================ */}
+        <div className="flex flex-col lg:flex-row lg:items-center gap-3 mb-4 p-3 rounded-xl bg-[var(--bg-card)] border border-[var(--border)]">
+
           {/* Market Tabs */}
-          <div className="flex items-center gap-1">
+          <div className="flex items-center gap-1 p-0.5 rounded-lg bg-[var(--bg)] border border-[var(--border)]">
             {Object.entries(MARKETS).map(([k, v]) => (
-              <button
-                key={k}
-                onClick={() => { setMarket(k); setSymbol(MARKETS[k].symbols[0].s); setSearch(''); }}
-                className={`px-4 py-2 text-[13px] font-semibold rounded-lg transition-all ${
+              <button key={k} onClick={() => { setMarket(k); setSymbol(MARKETS[k].pairs[0].s); setSearch(''); }}
+                className={`px-4 py-2 text-[12px] font-semibold rounded-md transition-all ${
                   market === k
-                    ? 'bg-[var(--accent)] text-white shadow-sm shadow-[var(--accent)]/25'
-                    : 'text-[var(--text-secondary)] hover:text-[var(--text)] hover:bg-[var(--bg-overlay)]'
-                }`}
-              >
+                    ? 'bg-[var(--accent)] text-white shadow-sm'
+                    : 'text-[var(--text-secondary)] hover:text-[var(--text)]'
+                }`}>
                 {v.label}
               </button>
             ))}
           </div>
 
-          {/* Tool Chips */}
+          {/* Divider */}
+          <div className="hidden lg:block w-px h-6 bg-[var(--border)]" />
+
+          {/* Tool Toggles */}
           <div className="flex items-center gap-1.5 flex-wrap">
-            <ToolChip icon={HiViewGrid} label="Multi-Chart" active={multiChart} onClick={() => { setMultiChart(!multiChart); window.location.href = '/#reg-form'; }} />
-            <ToolChip icon={HiClock} label="Multi-TF" active={multiTF} onClick={() => { setMultiTF(!multiTF); window.location.href = '/#reg-form'; }} />
-            <ToolChip icon={HiCurrencyDollar} label="Paper Trading" active={paperTrading} onClick={() => { setPaperTrading(!paperTrading); window.location.href = '/#reg-form'; }} />
-            <ToolChip icon={HiTemplate} label="DOM" active={dom} onClick={() => { setDom(!dom); window.location.href = '/#reg-form'; }} />
-            <button
-              onClick={() => setFocusMode(!focusMode)}
-              className={`inline-flex items-center gap-1.5 px-3 py-1.5 text-[11px] font-semibold rounded-md transition-all border ${
-                focusMode
-                  ? 'bg-[var(--accent-light)] text-[var(--accent)] border-[var(--accent)]/40'
-                  : 'text-[var(--text-muted)] border-[var(--border)] hover:text-[var(--text)]'
-              }`}
-            >
-              <HiEye className="w-3.5 h-3.5" />
-              Focus
+            {[
+              { icon: HiViewGrid, label: 'Multi-Chart', on: multiChart, set: setMultiChart },
+              { icon: HiClock, label: 'Multi-TF', on: multiTF, set: setMultiTF },
+              { icon: HiCurrencyDollar, label: 'Paper Trading', on: paperTrading, set: setPaperTrading },
+              { icon: HiViewGrid, label: 'DOM', on: dom, set: setDom },
+            ].map(t => (
+              <button key={t.label} onClick={() => { t.set(!t.on); window.location.href = '/#reg-form'; }}
+                className={`inline-flex items-center gap-1.5 px-3 py-1.5 text-[11px] font-semibold rounded-md border transition-all ${
+                  t.on
+                    ? 'bg-[var(--accent-light)] text-[var(--accent)] border-[var(--accent)]/40'
+                    : 'text-[var(--text-muted)] border-[var(--border)] hover:text-[var(--text)] hover:border-[var(--border-strong)]'
+                }`}>
+                <t.icon className="w-3.5 h-3.5" />{t.label}
+              </button>
+            ))}
+          </div>
+
+          {/* Spacer */}
+          <div className="flex-1" />
+
+          {/* Focus + AI */}
+          <div className="flex items-center gap-1.5">
+            <button onClick={() => setFocusMode(!focusMode)}
+              className={`inline-flex items-center gap-1.5 px-3 py-1.5 text-[11px] font-semibold rounded-md border transition-all ${
+                focusMode ? 'bg-[var(--accent-light)] text-[var(--accent)] border-[var(--accent)]/40' : 'text-[var(--text-muted)] border-[var(--border)] hover:text-[var(--text)]'
+              }`}>
+              {focusMode ? <HiEyeOff className="w-3.5 h-3.5"/> : <HiEye className="w-3.5 h-3.5"/>}
+              {focusMode ? 'Exit Focus' : 'Focus'}
             </button>
-            <a
-              href="/#reg-form"
-              className="inline-flex items-center gap-1.5 px-3.5 py-2 text-[11px] font-semibold rounded-lg bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white transition-all shadow-sm shadow-[var(--accent)]/25"
-            >
-              <HiChip className="w-3.5 h-3.5" />
-              Analyze with AI
+            <a href="/#reg-form"
+              className="inline-flex items-center gap-1.5 px-4 py-2 text-[11px] font-semibold rounded-lg bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white transition-all shadow-sm">
+              <HiChip className="w-3.5 h-3.5"/>Analyze with AI <HiArrowRight className="w-3 h-3"/>
             </a>
           </div>
         </div>
 
-        {/* ── Focus escape hint ── */}
-        {focusMode && (
-          <div className="absolute top-3 left-1/2 -translate-x-1/2 z-10 flex items-center gap-2 px-4 py-2 rounded-lg bg-[var(--bg-card)] border border-[var(--border)] shadow-lg text-[12px] text-[var(--text-secondary)] animate-pulse pointer-events-none">
-            Exit focus mode <kbd className="px-1.5 py-0.5 text-[11px] rounded bg-[var(--bg)] border border-[var(--border)] text-[var(--text-muted)]">Esc</kbd>
+        {/* ================================================================
+             SYMBOL SEARCH + PICKER
+             ================================================================ */}
+        <div className="flex flex-col sm:flex-row gap-3 mb-4">
+          {/* Search */}
+          <div className="relative flex-1">
+            <HiSearch className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[var(--text-muted)]"/>
+            <input value={search} onChange={e => setSearch(e.target.value)}
+              placeholder={`Search ${m.label.toLowerCase()} pairs…`}
+              className="w-full pl-9 pr-8 py-2.5 text-[13px] rounded-lg bg-[var(--bg-card)] border border-[var(--border)] text-[var(--text)] placeholder-[var(--text-muted)] focus:outline-none focus:border-[var(--accent)]/50 transition-all"/>
+            {search && (
+              <button onClick={() => setSearch('')} className="absolute right-2.5 top-1/2 -translate-y-1/2">
+                <HiX className="w-3.5 h-3.5 text-[var(--text-muted)] hover:text-[var(--text)]"/>
+              </button>
+            )}
           </div>
-        )}
-
-        {/* ── SYMBOL SEARCH + PICKER (hidden in focus) ── */}
-        {!focusMode && (
-          <>
-            {/* Search */}
-            <div className="relative mb-3">
-              <HiSearch className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[var(--text-muted)]" />
-              <input
-                type="text"
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                placeholder={`Search ${currentMarket.label} symbols…`}
-                className="w-full pl-10 pr-4 py-2.5 rounded-lg bg-[var(--bg-card)] border border-[var(--border)] text-[var(--text)] text-[13px] placeholder-[var(--text-muted)] focus:outline-none focus:border-[var(--accent)]/50 focus:ring-1 focus:ring-[var(--accent-light)] transition-all"
-              />
-            </div>
-
-            {/* Symbol chips */}
-            <div className="flex items-center gap-1.5 mb-3 flex-wrap max-h-24 overflow-y-auto">
-              {filteredSymbols.map((sym) => (
-                <button
-                  key={sym.s}
-                  onClick={() => setSymbol(sym.s)}
-                  className={`px-3 py-1.5 text-[12px] font-medium rounded-lg transition-all whitespace-nowrap ${
-                    symbol === sym.s
-                      ? 'bg-[var(--accent)] text-white shadow-sm'
-                      : 'text-[var(--text-secondary)] hover:text-[var(--text)] hover:bg-[var(--bg-card)] border border-[var(--border)]'
-                  }`}
-                >
-                  {sym.n}
-                </button>
-              ))}
-              {filteredSymbols.length === 0 && (
-                <span className="text-[12px] text-[var(--text-muted)] py-1.5">No symbols found</span>
-              )}
-            </div>
-
-            {/* Interval Selector */}
-            <div className="flex items-center gap-1 mb-4 flex-wrap">
-              {INTERVALS.map((iv) => (
-                <button
-                  key={iv.v}
-                  onClick={() => setInterval(iv.v)}
-                  className={`px-3 py-1.5 text-[12px] font-medium rounded-lg transition-all ${
-                    interval === iv.v
-                      ? 'bg-[var(--accent-light)] text-[var(--accent)] border border-[var(--accent)]/30'
-                      : 'text-[var(--text-muted)] hover:text-[var(--text)] hover:bg-[var(--bg-card)] border border-[var(--border)]'
-                  }`}
-                >
-                  {iv.l}
-                </button>
-              ))}
-            </div>
-          </>
-        )}
-
-        {/* ── CHART ── */}
-        <div ref={chartRef} className={`rounded-xl overflow-hidden border border-[var(--border)] bg-[var(--bg-card)] shadow-[var(--shadow-md)] ${focusMode ? 'flex-1 rounded-none border-0' : ''}`}>
-          {/* Chart top bar */}
-          <div className={`flex items-center justify-between px-4 py-2.5 border-b border-[var(--border)] ${focusMode ? 'bg-[var(--bg-card)]' : ''}`}>
-            <div className="flex items-center gap-2.5">
-              <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse shadow-[0_0_6px_rgba(74,222,128,0.5)]" />
-              <span className="text-xs font-bold text-[var(--text)]">{selectedName}</span>
-              <span className="text-[11px] text-[var(--text-muted)] px-1.5 py-0.5 rounded bg-[var(--bg)] border border-[var(--border)]">
-                {market.toUpperCase()}
-              </span>
-            </div>
-            <div className="flex items-center gap-1.5">
-              <span className="text-[11px] text-[var(--text-muted)]">
-                {INTERVALS.find((i) => i.v === interval)?.l || interval}
-              </span>
-              {focusMode && (
-                <button
-                  onClick={() => setFocusMode(false)}
-                  className="ml-2 px-2 py-1 text-[10px] rounded bg-[var(--bg)] border border-[var(--border)] text-[var(--text-muted)] hover:text-[var(--text)]"
-                >
-                  ✕ Exit Focus
-                </button>
-              )}
-            </div>
+          {/* Interval */}
+          <div className="flex items-center gap-1 p-0.5 rounded-lg bg-[var(--bg-card)] border border-[var(--border)]">
+            {INTERVALS.map(iv => (
+              <button key={iv.v} onClick={() => setInterval(iv.v)}
+                className={`px-2.5 py-2 text-[11px] font-semibold rounded-md transition-all whitespace-nowrap ${
+                  interval === iv.v
+                    ? 'bg-[var(--accent)] text-white shadow-sm'
+                    : 'text-[var(--text-muted)] hover:text-[var(--text)]'
+                }`}>
+                {iv.l}
+              </button>
+            ))}
           </div>
-          <div id={containerId.current} style={{ minHeight: focusMode ? '100%' : 560 }} />
         </div>
 
-        {/* ── ACTIONS (hidden in focus) ── */}
-        {!focusMode && (
-          <>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mt-5 mb-12">
-              <a
-                href="/#reg-form"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white font-semibold text-sm transition-all shadow-md shadow-[var(--accent)]/25 hover:shadow-lg hover:shadow-[var(--accent)]/40"
-              >
-                <HiChip className="w-4 h-4" /> Analyze with AI <HiArrowRight className="w-4 h-4" />
-              </a>
-              <a
-                href="/#reg-form"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-transparent hover:bg-[var(--bg-overlay)] text-[var(--text)] border border-[var(--border)] hover:border-[var(--border-strong)] font-semibold text-sm transition-all"
-              >
-                <HiStar className="w-4 h-4" /> Register to Unlock All Features
-              </a>
-            </div>
+        {/* Symbol Chips */}
+        <div className="flex flex-wrap gap-1.5 mb-4">
+          {filtered.map(p => {
+            const isUp = (p.ch || '').startsWith('+');
+            return (
+              <button key={p.s} onClick={() => setSymbol(p.s)}
+                className={`group px-3.5 py-2 rounded-lg border transition-all text-left min-w-[130px] ${
+                  symbol === p.s
+                    ? 'bg-[var(--accent-light)] border-[var(--accent)]/40 shadow-sm'
+                    : 'bg-[var(--bg-card)] border-[var(--border)] hover:border-[var(--border-strong)] hover:bg-[var(--bg-elevated)]'
+                }`}>
+                <div className="flex items-center justify-between gap-2">
+                  <span className={`text-[12px] font-bold ${symbol === p.s ? 'text-[var(--accent)]' : 'text-[var(--text)]'}`}>{p.n}</span>
+                  <span className={`text-[11px] font-semibold ${isUp ? 'text-[var(--green)]' : 'text-[var(--red)]'}`}>{p.ch}%</span>
+                </div>
+                <div className={`text-[13px] font-semibold mt-0.5 ${symbol === p.s ? 'text-[var(--accent)]' : 'text-[var(--text-secondary)]'}`}>
+                  ${p.p}
+                </div>
+              </button>
+            );
+          })}
+        </div>
 
-            {/* ── HOW TO USE ── */}
-            <div className="rounded-xl bg-[var(--bg-card)] border border-[var(--border)] p-6 lg:p-8">
-              <div className="flex items-center gap-2.5 mb-5">
-                <div className="w-8 h-8 rounded-lg bg-[var(--accent-light)] flex items-center justify-center">
-                  <HiQuestionMarkCircle className="w-4 h-4 text-[var(--accent)]" />
-                </div>
-                <h2 className="text-base font-bold text-[var(--text)]">How to use Live Charts</h2>
+        {/* ================================================================
+             CHART
+             ================================================================ */}
+        <div className="rounded-xl overflow-hidden border border-[var(--border)] bg-[var(--bg-card)] shadow-[var(--shadow-md)] mb-6">
+          {/* Chart Top Bar */}
+          <div className="flex items-center justify-between px-4 py-3 border-b border-[var(--border)] bg-[var(--bg-alt)]">
+            <div className="flex items-center gap-3">
+              <div className="flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-[var(--green)] animate-pulse shadow-[0_0_6px_rgba(14,165,113,0.5)]"/>
+                <span className="text-[13px] font-bold text-[var(--text)]">{active.n}</span>
               </div>
-              <div className="grid sm:grid-cols-3 gap-4 mb-6">
-                {[
-                  { icon: HiSearch, title: '1. Choose Market & Symbol', desc: 'Select Crypto, Forex, or Stocks — then pick a trading pair and timeframe.' },
-                  { icon: HiViewGrid, title: '2. Analyze with Tools', desc: 'Use built-in drawing tools, indicators (MA, RSI, MACD), and multi-timeframe views.' },
-                  { icon: HiChip, title: '3. AI-Powered Analysis', desc: 'Click "Analyze with AI" — our AI reads your chart and suggests Entry, SL & TP levels.' },
-                ].map((item, i) => (
-                  <div key={i} className="p-4 rounded-lg bg-[var(--bg)] border border-[var(--border)]">
-                    <item.icon className="w-5 h-5 text-[var(--accent)] mb-2.5" />
-                    <h3 className="text-[13px] font-semibold text-[var(--text)] mb-1.5">{item.title}</h3>
-                    <p className="text-[12px] text-[var(--text-secondary)] leading-relaxed">{item.desc}</p>
-                  </div>
-                ))}
-              </div>
-              <div className="p-4 rounded-lg bg-[var(--accent-light)] border border-[var(--accent)]/20 flex items-start gap-3">
-                <HiLightBulb className="w-5 h-5 text-[var(--accent)] flex-shrink-0 mt-0.5" />
-                <div>
-                  <p className="text-[13px] font-semibold text-[var(--text)] mb-1">Pro Tip: Unlock Full AI Analysis</p>
-                  <p className="text-[13px] text-[var(--text-secondary)] leading-relaxed mb-3">
-                    Register a free account to let AI analyze any chart — it detects patterns, trend direction, and auto-suggests Entry, Stop Loss & Take Profit levels.
-                  </p>
-                  <a
-                    href="/#reg-form"
-                    className="inline-flex items-center gap-1.5 text-[13px] font-semibold text-[var(--accent)] hover:underline"
-                  >
-                    Create Free Account <HiArrowRight className="w-3.5 h-3.5" />
-                  </a>
+              <span className="text-[11px] text-[var(--text-muted)] bg-[var(--bg)] border border-[var(--border)] px-2 py-0.5 rounded">
+                {m.label}
+              </span>
+              <span className="text-[11px] text-[var(--text-muted)]">
+                {INTERVALS.find(i => i.v === interval)?.l || interval}
+              </span>
+            </div>
+            <div className="flex items-center gap-3">
+              <div className="text-right">
+                <div className="text-[15px] font-bold text-[var(--text)] tabular-nums">${active.p}</div>
+                <div className={`text-[12px] font-semibold tabular-nums ${up ? 'text-[var(--green)]' : 'text-[var(--red)]'}`}>
+                  {up ? '▲' : '▼'} {active.ch}%
                 </div>
               </div>
             </div>
-          </>
-        )}
+          </div>
+          {/* TV Widget */}
+          <div id={tvId.current} style={{ minHeight: 520 }}/>
+        </div>
+
+        {/* ================================================================
+             CTA ROW
+             ================================================================ */}
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-12">
+          <a href="/#reg-form"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white font-semibold text-sm transition-all shadow-md shadow-[var(--accent)]/25 hover:shadow-lg hover:shadow-[var(--accent)]/40">
+            <HiChip className="w-4 h-4"/> Analyze with AI <HiArrowRight className="w-4 h-4"/>
+          </a>
+          <a href="/#reg-form"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-[var(--text)] font-semibold text-sm border border-[var(--border)] hover:bg-[var(--bg-overlay)] hover:border-[var(--border-strong)] transition-all">
+            Register to Unlock All Features
+          </a>
+        </div>
+
+        {/* ================================================================
+             HOW TO USE
+             ================================================================ */}
+        <div className="rounded-xl bg-[var(--bg-card)] border border-[var(--border)] p-6 lg:p-8">
+          <div className="flex items-center gap-3 mb-6">
+            <div className="w-9 h-9 rounded-lg bg-[var(--accent-light)] flex items-center justify-center">
+              <HiQuestionMarkCircle className="w-5 h-5 text-[var(--accent)]"/>
+            </div>
+            <h2 className="text-base font-bold text-[var(--text)]">How to use Live Charts</h2>
+          </div>
+
+          <div className="grid sm:grid-cols-3 gap-4 mb-6">
+            {[
+              { t: '1. Choose Market & Symbol', d: 'Pick Crypto, Forex, or Stocks — then select your trading pair and preferred timeframe.', i: HiSearch },
+              { t: '2. Analyze with Tools', d: '100+ built-in indicators (MA, RSI, MACD, Bollinger Bands), drawing tools, and multi-timeframe views.', i: HiViewGrid },
+              { t: '3. Get AI Insights', d: 'Click "Analyze with AI" — our AI reads the chart, detects patterns, and suggests Entry / SL / TP levels.', i: HiChip },
+            ].map((s, i) => (
+              <div key={i} className="p-4 rounded-lg bg-[var(--bg)] border border-[var(--border)]">
+                <s.i className="w-5 h-5 text-[var(--accent)] mb-2.5"/>
+                <h3 className="text-[13px] font-semibold text-[var(--text)] mb-2">{s.t}</h3>
+                <p className="text-[12px] text-[var(--text-secondary)] leading-relaxed">{s.d}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className="flex items-start gap-3 p-4 rounded-lg bg-[var(--accent-light)] border border-[var(--accent)]/20">
+            <HiLightBulb className="w-5 h-5 text-[var(--accent)] flex-shrink-0 mt-0.5"/>
+            <div>
+              <p className="text-[14px] font-semibold text-[var(--text)] mb-1.5">Unlock Full AI-Powered Chart Analysis</p>
+              <p className="text-[13px] text-[var(--text-secondary)] leading-relaxed mb-3">
+                Register your free account — AI auto-detects patterns, trend direction, and generates optimal Entry, Stop Loss & Take Profit levels from your chart.
+              </p>
+              <a href="/#reg-form" className="inline-flex items-center gap-1.5 text-[13px] font-semibold text-[var(--accent)] hover:underline">
+                Create Free Account <HiArrowRight className="w-3.5 h-3.5"/>
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
