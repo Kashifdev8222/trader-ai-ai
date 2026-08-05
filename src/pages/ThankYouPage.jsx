@@ -4,7 +4,7 @@ import { HiArrowRight } from 'react-icons/hi';
 export default function ThankYouPage() {
   return (
     <div className="pt-28 pb-20">
-      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-lg mx-auto text-center">
           <div className="relative">
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-40 h-40 bg-[#10b981]/[0.06] rounded-full blur-3xl pointer-events-none" />

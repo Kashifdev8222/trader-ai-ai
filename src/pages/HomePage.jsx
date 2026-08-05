@@ -138,7 +138,7 @@ export default function HomePage() {
 
       {/* ====== HEADER ====== */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-[var(--bg)]/85 backdrop-blur-xl border-b border-[var(--border)]">
-        <div className="max-w-[1440px] mx-auto px-5 sm:px-6 lg:px-8 flex items-center justify-between h-[64px]">
+        <div className="max-w-[1280px] mx-auto px-5 sm:px-6 lg:px-8 flex items-center justify-between h-[64px]">
           <Logo />
           <nav className="hidden lg:flex items-center gap-0.5">
             {NAV.map(link => link.children ? (

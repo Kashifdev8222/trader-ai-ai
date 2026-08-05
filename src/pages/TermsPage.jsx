@@ -49,7 +49,7 @@ const SECTIONS = [
 export default function TermsPage() {
   return (
     <div className="pt-28 pb-20">
-      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto">
           <Head headline="Terms and Conditions" description="Welcome to Trader AI, your premier destination for automated robot trading signals. By using our services, you agree to be bound by the following Terms and Conditions. Please read them carefully before proceeding with any transactions or subscriptions." />
           {SECTIONS.map((s,i) => <Section key={i} title={s.title} i={i}>{s.text}</Section>)}

@@ -43,7 +43,7 @@ const SECTIONS = [
 export default function DisclaimerPage() {
   return (
     <div className="pt-28 pb-20">
-      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto">
           <Head headline="Disclaimer" description="The information provided by Trader AI, its affiliates, contributors, authors, or partners (collectively, 'we', 'us', or 'our') on this website is for general informational and educational purposes only." />
           {SECTIONS.map((s,i) => <Section key={i} title={s.title} i={i}>{s.text}</Section>)}

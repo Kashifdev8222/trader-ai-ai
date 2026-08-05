@@ -22,7 +22,7 @@ function Head({ headline, subheadline }) {
 export default function AboutPage() {
   return (
     <div className="pt-28 pb-20">
-      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
         {/* Hero */}
         <div className="text-center mb-14">
           <h1 className="text-2xl lg:text-3xl font-semibold text-[var(--text)] tracking-tight mb-3">About The AI Trader</h1>

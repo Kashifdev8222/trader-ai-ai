@@ -40,7 +40,7 @@ export default function ContactPage() {
 
   return (
     <div className="pt-28 pb-20">
-      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-14">
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[var(--text)] mb-4">Contact Us</h1>
           <div className="flex items-center justify-center gap-1.5 mb-3">

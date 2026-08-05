@@ -48,7 +48,7 @@ const SECTIONS = [
 export default function PrivacyPage() {
   return (
     <div className="pt-28 pb-20">
-      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto">
           <Head headline="Privacy Policy" description="At Trader AI, accessible from traderai.ai, one of our main priorities is the privacy of our visitors. This Privacy Policy document contains types of information that is collected and recorded by Trader AI and how we use it." />
           <div className="rounded-2xl bg-[var(--bg-card)] border border-[var(--border)] p-6 sm:p-8 mb-6">
