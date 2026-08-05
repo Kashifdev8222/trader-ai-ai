@@ -12,7 +12,7 @@ export default function LiveStats() {
 
   return (
     <section className="border-b border-[var(--border)] bg-[var(--bg-alt)]">
-      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-5">
+      <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-5">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
           {items.map((item, i) => {
             const d = quotes[item.k];

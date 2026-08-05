@@ -48,8 +48,8 @@ function HdDropdown({ label, items }) {
 function Sec({ children, id, className = '', alt = false }) {
   return <section id={id} className={`relative reveal ${alt ? 'bg-[var(--bg-alt)]' : 'bg-[var(--bg)]'} ${className}`}>{children}</section>;
 }
-function Con({ children, wide = false }) {
-  return <div className={`mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16 relative z-10 ${wide ? 'max-w-[1440px]' : 'max-w-[1280px]'}`}>{children}</div>;
+function Con({ children }) {
+  return <div className="mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16 relative z-10 max-w-[1280px]">{children}</div>;
 }
 function Head({ headline, subheadline }) {
   return (
@@ -162,7 +162,7 @@ export default function HomePage() {
       <section id="reg-form" className="relative mt-16 py-16 lg:py-20 overflow-hidden">
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[var(--accent)]/[0.03] rounded-full blur-3xl pointer-events-none" />
         <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-[var(--accent)]/[0.02] rounded-full blur-3xl pointer-events-none" />
-        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid lg:grid-cols-[1fr_1fr] gap-6 lg:gap-10 items-center">
           {/* LEFT — Headline */}
           <div className="text-center lg:text-left">
@@ -233,28 +233,18 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ====== LIVE MARKET STATS ====== */}
-      <MarketDataProvider>
-      <LiveStats />
-      <LiveTicker />
-      <MarketOverview />
-
       {/* ====== TRADING CHARTS ====== */}
-      <Sec alt><Bg dark={dark} /><Con wide>
+      <Sec alt><Bg dark={dark} /><Con>
         <Head headline="Live Trading Charts" subheadline="Real-time candlestick charts with drawing tools and indicators. Click any symbol to switch." />
         <TradingChart />
         <div className="mt-6"><CompanyProfile /></div>
       </Con></Sec>
 
-      {/* ====== MORE MARKET CHARTS ====== */}
-      <Sec alt><Bg dark={dark} /><Con wide>
-        <Head headline="Track More Markets" subheadline="Follow Bitcoin, Ethereum, S&P 500 and more with live mini charts." />
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-          <TVMiniChart symbol="BINANCE:BTCUSDT" title="Bitcoin (BTC/USD)" />
-          <TVMiniChart symbol="BINANCE:ETHUSDT" title="Ethereum (ETH/USD)" />
-          <TVMiniChart symbol="SPY" title="S&P 500 (SPY)" />
-        </div>
-      </Con></Sec>
+      {/* ====== LIVE MARKET STATS ====== */}
+      <MarketDataProvider>
+      <LiveStats />
+      <LiveTicker />
+      <MarketOverview />
 
       {/* ====== FOREX RATES ====== */}
       <ForexRates />
@@ -316,6 +306,16 @@ export default function HomePage() {
               <p className="text-sm text-[var(--text-secondary)] leading-relaxed">{f.description}</p>
             </Card>
           ))}
+        </div>
+      </Con></Sec>
+
+      {/* ====== MORE MARKET CHARTS ====== */}
+      <Sec alt><Bg dark={dark} /><Con>
+        <Head headline="Track More Markets" subheadline="Follow Bitcoin, Ethereum, S&P 500 and more with live mini charts." />
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          <TVMiniChart symbol="BINANCE:BTCUSDT" title="Bitcoin (BTC/USD)" />
+          <TVMiniChart symbol="BINANCE:ETHUSDT" title="Ethereum (ETH/USD)" />
+          <TVMiniChart symbol="SPY" title="S&P 500 (SPY)" />
         </div>
       </Con></Sec>
 

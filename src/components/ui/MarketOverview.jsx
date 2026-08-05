@@ -13,7 +13,7 @@ export default function MarketOverview() {
 
   return (
     <section className="border-b border-[var(--border)] bg-[var(--bg)]">
-      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-6">
+      <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-6">
         <div className="flex items-center gap-2 mb-4">
           <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse"/>
           <h3 className="text-sm font-semibold text-[var(--text)]">Market Overview</h3>
