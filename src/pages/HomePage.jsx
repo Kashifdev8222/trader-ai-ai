@@ -79,6 +79,7 @@ const NAV = [
   { label: 'About Us', to: '/about-us' },
   { label: 'Blog', to: '/blog' },
   { label: 'News', to: '#', children: [{ label: 'Crypto News', to: '/crypto-news' },{ label: 'Stock News', to: '/stock-news' },{ label: 'Forex News', to: '/forex-news' }] },
+  { label: 'Product', to: '#', children: [{ label: 'Live Chart', to: '/product/live-chart' },{ label: 'AI Chart Analyser', to: '/product/ai-chart-analyser' }] },
   { label: 'Contact Us', to: '/contact-us' },
 ];
 

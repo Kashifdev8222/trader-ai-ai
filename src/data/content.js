@@ -43,6 +43,14 @@ export const NAV_LINKS = [
     ],
   },
   { label: 'Blog', href: '/blog' },
+  {
+    label: 'Product',
+    href: '#',
+    children: [
+      { label: 'Live Chart', href: '/product/live-chart' },
+      { label: 'AI Chart Analyser', href: '/product/ai-chart-analyser' },
+    ],
+  },
   { label: 'Contact Us', href: '/contact-us' },
 ];
 
